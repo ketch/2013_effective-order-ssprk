@@ -1,0 +1,176 @@
+\section{A barrier on explicit Runge-Kutta methods}\label{sec:ExRK_barrier}
+
+\indent As Table~\ref{tab:Effective_oc} shows, if we consider an $s$-stage RK($s$,$5$,$2$) method, then the coefficients of the main method depend on $\beta_2$. In particular, the main method must satisfy
+\begin{equation}\label{eq:2nd_order_con}
+    \frac{1}{2}\alpha_3 - \frac{1}{6} = \beta_2 \; \text{ and } \; \frac{1}{4}\alpha_9 - \alpha_{10} + \alpha_{13} = (\beta_2)^2.
+\end{equation}
+For classical order $p \geq 3$ an $s$-stage RK($s$,$5$,$p$) method must satisfy
+\begin{equation}\label{eq:higher_order_con}
+    \frac{1}{4}\alpha_9- \alpha_{10} + \alpha_{13} = 0,
+\end{equation}
+since $\beta_2 = 0$. As we will prove later in Theorem \ref{thm:RKSSP_fifth_effective_order}, if we require positive weights the equations \eqref{eq:2nd_order_con}, $\alpha_4 = \frac{1}{6}$ and $\alpha_1 = 1$ can not be solved simultaneously. Also the equation \eqref{eq:higher_order_con} is not compatible with the main method having stage order one. This immediately suggests the non existence of fifth-effective order explicit Runge-Kutta methods with positive weights.
+
+%\begin{table}[t!]
+%    \centering
+%    \begin{tabular}{c}
+%        \underline{Order conditions for the main method} \\
+%        $\alpha_1 = 1, \quad \alpha_2 = \frac{1}{2}, \quad \alpha_4 = \frac{1}{6}$, \\
+%        $\alpha_8 = \frac{1}{24}, \quad \alpha_{17} = \frac{1}{120}$, \\
+%        $\frac{1}{4} - \alpha_3 + \alpha_5 - 2\alpha_6 + \alpha_7 = 0$, \\
+%        $\frac{1}{4}\alpha_9 - \alpha_{10} + \alpha_{13} = \beta_2^{2}$, \\
+%        $\frac{3}{10} - \frac{3}{2}\alpha_3 + \alpha_5 + \frac{1}{2}\alpha_9 - 3\alpha_{10} + 3\alpha_{11} - \alpha_{14} = 6\beta_2^{2}$, \\
+%        $\frac{1}{15} - \frac{1}{2}\alpha_3 + \alpha_6 + \frac{1}{2}\alpha_9 - 2\alpha_{10} + \alpha_{11} + \alpha_{12} - \alpha_{15} = 2\beta_2^{2}$ \\
+%        $\frac{19}{60} - \alpha_3 + \alpha_5 - 2\alpha_6 + \alpha_{11} - 2\alpha_{12} + \alpha_{16} = 4\beta_2^{2}$.
+%    \end{tabular}
+%
+%    \vspace{1ex}
+%
+%    \begin{tabular}{c}
+%        \underline{Order conditions for the starting method} \\
+%        $\beta_1 = 0$, \quad
+%        $\beta_2 = - \frac{1}{6} + \frac{1}{2}\alpha_3$, \\
+%        $\beta_3 = \frac{1}{12} - \frac{1}{2}\alpha_3 + \frac{1}{3}\alpha_5$, \\
+%        $\beta_4 = -\frac{1}{24} - \frac{1}{3}\alpha_5 + \alpha_6$, \\
+%        $\beta_5 = -\frac{1}{120} + \frac{1}{4}\alpha_3 - \frac{1}{2}\alpha_5 + \frac{1}{4}\alpha_9$, \\
+%        $\beta_6 = \frac{7}{720} + \beta_2^{2} + \frac{1}{12}\alpha_3 - \frac{1}{2}\alpha_6 - \frac{1}{8}\alpha_9 + \frac{1}{2}\alpha_{10}$, \\
+%        $\beta_7 = \frac{8}{45} - 2\beta_2^{2} - \frac{7}{12}\alpha_3 + \frac{1}{2}\alpha_5 - \alpha_6 + \frac{1}{4}\alpha_9 - \alpha_{10} + \alpha_{11}$, \\
+%        $\beta_8 = -\frac{1}{120} + \beta_2^{2} + \frac{1}{8}\alpha_9 - \frac{1}{2}\alpha_{10} + \alpha_{12}$.
+%    \end{tabular}
+%    \caption{Five-effective order conditions on $ \alpha $ and $ \beta $ for main method of classical order two.}
+%    \label{table4.1}
+%\end{table}
+
+Before we state formally this result we provide the following lemma. Proofs of Lemma \ref{Davids_lemma} and Theorem \ref{thm:RKSSP_fifth_effective_order} can be found in the Appendix.
+\begin{lemma}\label{Davids_lemma}
+	Given $b,v \in \mathbb{R}^{n}$, suppose that
+    \begin{subequations}\label{eq:DavidsLemma}
+    		\begin{align}
+    			b_i & > 0 \mbox{ for all } i, \label{eq:DavidsLemma_a} \\
+    			\sum_{i=1}^n b_i & = 1, \label{eq:DavidsLemma_b} \\
+    			\sum_{i=1}^n b_i v_i^2 & = \left(\sum_{i=1}^n b_i v_i \right)^2. \label{eq:DavidsLemma_c}
+    		\end{align}
+    	\end{subequations}
+    	Then all $v_i$ are equal but at most one; in other words, there exists $\alpha \in \mathbb{R}$ and an integer $k$ such that $v_i = \alpha$ for all $i \ne k$.
+\end{lemma}
+%\begin{proof}
+%    Let $k$ be an arbitrary integer between $1$ and $n$. Then by collecting terms in powers of $v_k$, \eqref{eq4.3c} can be written
+%\begin{equation*}
+%    %b_k v_k^2 + \sum_{i\ne k} b_i v_i^2 - b_k^2 v_k^2 - 2 b_k v_k \sum_{i\ne k} b_i v_i
+%    %        - \left(\sum_{i\ne k} b_i v_i \right)^2 = 0 \\
+%    b_{k}(1-b_{k})v_{k}^{2} - 2b_{k}v_{k}\sum_{i \neq k}b_{i}v_{i} + \sum_{i \neq k}b_{i}v_{i}^{2} - \left(\sum_{i \neq k}b_{i}v_{i}\right)^{2} = 0.
+%\end{equation*}
+%This is a quadratic equation in $v_{k}$ whose roots are real if and only if
+%\begin{equation*}
+%    4b_{k}^{2}\left(\sum_{i \neq k}b_{i}v_{i}\right)^{2} - 4b_{k}(1-b_{k})\left(\sum_{i \neq k}b_{i}v_{i}^{2} - \left(\sum_{i \neq k}b_{i}v_{i}\right)^{2}\right) \geq 0.
+%\end{equation*}
+%Expanding and canceling terms yields
+%\begin{equation*}
+%    (1-b_{k})\sum_{i \neq k}b_{i}v_{i}^{2} - \left(\sum_{i \neq k}b_{i}v_{i} \right)^{2} \leq 0.
+%\end{equation*}
+%By \eqref{eq4.3b}, $1-b_{k} = \sum_{j \ne k}b_{j}$, so we have
+%\begin{equation*}
+%    \sum_{j \neq k}b_{j}\sum_{i \neq k}b_{i}v_{i}^{2} - \sum_{j \neq k}b_{j}v_{j}\sum_{i \neq k}b_{i}v_{i}.
+%\end{equation*}
+%Noting that the terms corresponding to $i = j$ in the two double sums cancel gives
+%\begin{equation*}
+%    \sum_{j \neq k}b_{j}\sum_{i \neq k,j}b_{i}v_{i}^{2} - \sum_{j \neq k}b_{j}v_{j}\sum_{i \neq j,k}b_{i}v_{i} \leq 0,
+%\end{equation*}
+%or
+%\begin{equation*}
+%    \sum_{j \neq k}b_{j}\sum_{i \neq k,j}b_{i}v_{i}(v_{i} - v_{j}) \leq 0.
+%\end{equation*}
+%Adding the left hand side to itself, but with $i,j$ reversed, yields
+%\begin{equation*}
+%    \sum_{j \neq k}b_{j}\sum_{i \neq k,j}b_{i}v_{i}(v_{i} - v_{j}) - \sum_{i \neq k}b_{i}\sum_{j \neq k,i}b_{j}v_{j}(v_{i} - v_{j}) \leq 0.
+%\end{equation*}
+%This simplifies to
+%\begin{equation*}
+%    \sum_{j \neq k}\sum_{i \neq k,j}b_{j}b_{i}(v_{i} - v_{j})^{2} \leq 0.
+%\end{equation*}
+%By \eqref{eq4.3a}, this can only hold if $v_{i} = v_{j}$ for all $i,j \neq k$.
+%\end{proof}
+
+\begin{theorem}\label{thm:RKSSP_fifth_effective_order}
+    Any explicit five-effective order Runge-Kutta method $(A,\bm{b}^{T},\bm{c})$ has $b_{i} \leq 0$ for some $i$.
+\end{theorem}
+%\begin{proof}
+%    Consider the fifth-effective order conditions of classical order two for the main method, listed in Table \ref{table4.1}. We declare $\beta_2$ as a free parameter and we treat the case that $\beta_2$ is nonzero separately from the one that is zero. Among others the order conditions must satisfy the following equations:
+%    \begin{subequations}\label{eq4.4}
+%        \begin{align}
+%            \bm{b}^{T}\bm{e} &= 1 \label{eq4.4a} \\
+%            \bm{b}^{T}A\bm{c} &= \frac{1}{6} \label{eq4.4b} \\
+%            \frac{1}{2}\bm{b}^{T}\bm{c}^{2} - \frac{1}{6} &= \beta_2 \label{eq4.4c} \\
+%            \frac{1}{4}\bm{b}^{T}\bm{c}^{4} - \bm{b}^{T}C^{2}A\bm{c} + \bm{b}^{T}(A\bm{c})^{2} &= \beta_2^{2}, \label{eq4.4d}
+%        \end{align}
+%    \end{subequations}
+%    where the powers on vectors are understood component-wise. Supposing that the above equations can be solved simultaneously, then substituting \eqref{eq4.4b} in \eqref{eq4.4c} and collecting terms gives $\beta_2 = \bm{b}^{T}\bm{v}$, where $\bm{v} = \frac{1}{2}\bm{c}^{2} - A\bm{c}$. Squaring yields
+%    \begin{equation}\label{eq4.5}
+%        \beta_2^{2} = \bm{b}^{T}\Bigl(\frac{1}{2}\bm{b}^{T}\bm{c}^{2} - \frac{1}{6}\Bigr)\Bigl(\frac{1}{2}\bm{c}^{2} - A\bm{c}\Bigr).
+%    \end{equation}
+%    Rewriting \eqref{eq4.4d} and subtracting from \eqref{eq4.5} gives
+%    \begin{equation}\label{eq4.6}
+%        \bm{b}^{T}\biggl(\Bigl(\frac{1}{2}\bm{c}^{2} - A\bm{c}\Bigr)^{2} - \Bigl(\frac{1}{2}\bm{b}^{T}\bm{c}^{2} - \frac{1}{6}\Bigr)\Bigl(\frac{1}{2}\bm{c}^{2} - A\bm{c}\Bigr)\biggr) = 0.
+%    \end{equation}
+%    Letting $\bm{w} = \bm{v}^{2} - \beta_2\bm{v}$, then equation \eqref{eq4.5} can be written as
+%    \begin{equation}\label{eq4.6}
+%        \bm{b}^{T}\bm{w} = 0.
+%    \end{equation}
+%    Now, if we require $b_{i} > 0$ for all $i \in \{1,\dots, s\}$, then equation \eqref{eq4.6} is satisfied if $\bm{w} = 0$, or if there is a least one negative and at least one positive element in $\bm{w}$. We will show that none of these two cases can be true.
+%    \newline
+%
+%    \noindent \textbf{Case 1: $\bm{w} = 0$.}
+%
+%    Then, $v_{i}^{2} - \beta_2v_{i} = 0$ for all $i \in \{1,\dots,s\}$, so either $v_{i} = 0$ or $v_{i} = \beta_2$. The case that $\bm{v} = 0$ is equivalent with a Runge-Kutta method to have stage order two. This means that for a particular time $t = t^{n} + c_{i}\Delta t$, for $i \in \{1, \dots, s\}$, the stage $\textbf{Y}_{i}$ will be at least a second order approximation to the solution at that time. Obviously, for an explicit Runge-Kutta method, the stage $\textbf{Y}_2 = \bm{u}^{n} + \Dt\bm{F}(\bm{u}^{n})$ can not have stage order more than one, hence not all the components of $\bm{v}$ are zero. Also, $v_1 = 0$ because the first row of matrix $A$ has only zeros. Let $I = \{ i \;|\; v_{i} = \beta_2, \; i = 1,\dots,s \}$ and $v_{j} = 0$ if $j \neq I$. Then, by using \eqref{eq4.4a} $\beta_2 = \sum_{i=1}^{s}b_{i}v_{i} = \sum_{i \in I}b_{i}\beta_2 = \beta_2\sum_{i \in I}b_{i} < \beta_2$. Therefore a contradiction.
+%    \newline
+%
+%    \noindent \textbf{Case 2: $\bm{w} \neq 0$.}
+%
+%    Then, there exists at least one component $w_{i} = v_{i}^{2} - \beta_2v_{i}$ such that $w_{i} < 0$ and at least one component $w_{j} = v_{j}^{2} - \beta_2v_{j}$ such that $w_{j} > 0$. We will show that $0 < v_{i} < \beta_2 < v_{j}$.
+%
+%    Consider first the component $w_{i}$. If $w_{i} < 0$, then $v_{i}^{2} < \beta_2v_{i}$. Therefore,
+%    \begin{equation}\label{eq4.7}
+%        (\beta_2)^{2} = \sum_{j=1}^{s}b_{j}v_{j}^{2} < \sum_{j \neq i}^{s}b_{j}v_{j}^{2} + b_{i}\beta_2v_{i}.
+%    \end{equation}
+%    The inequality \eqref{eq4.7} can be written as
+%    \begin{equation}\label{eq4.8}
+%        \begin{split}
+%            \beta_2\sum_{j=1}^{s}b_{j}v_{j} &< \sum_{j \neq i}^{s}b_{j}v_{j}^{2} + \beta_2b_{i}v_{i} \\
+%            \beta_2\sum_{j \neq i}^{s}b_{j}v_{j} &< \sum_{j \neq i}^{s}b_{j}v_{j}^{2} \\
+%            \beta_2\sum_{j \neq i}^{s}b_{j}v_{j} &< (\beta_2)^{2}.
+%        \end{split}
+%    \end{equation}
+%    Suppose that $v_{i} < 0$. Then
+%    \begin{equation*}
+%        \beta_2 = \sum_{j=1}^{s}b_{j}v_{j} < \sum_{j \neq i}^{s}b_{j}v_{j}
+%    \end{equation*}
+%    From \eqref{eq4.8} we have
+%    \begin{equation*}
+%            \beta_2\beta_2 < \beta_2\sum_{j \neq i}^{s}b_{j}v_{j} < (\beta_2)^{2},
+%    \end{equation*}
+%    which gives a contradiction. Since $v_{i} \neq 0$, then $v_{i} > 0$ and in this case $0 < v_{i} < \beta_2$.
+%
+%    Now consider the component $w_{j} = v_{j}^{2} - \beta_2v_{j}$. Since $w_{j} > 0$, then $v_{j}^{2} > \beta_2v_{j}$. If $v_{j} < 0$, then $v_{j} < \beta_2$ and $v_{j} < 0 < v_{i} < \beta_2$. Hence $\beta_2$ is larger than all components of $\bm{v}$. This leads to a contradiction since
+%    \begin{equation*}
+%            \beta_2 = \sum_{k=1}^{s}b_{k}v_{k} < \sum_{k=1}^{s}b_{k}\beta_2 < \beta_2.
+%    \end{equation*}
+%    As before $v_{j}$ can no be zero, therefore $v_{j} > 0$ which gives $v_{j} > \beta_2$.
+%
+%    In total we have
+%    \begin{equation}\label{eq4.9}
+%        v_1 = 0 \quad \text{ and } \quad 0 < v_{i} < \beta_2 < v_{j}, \text{ for } i,j \in \{2,\dots,s\}.
+%    \end{equation}
+%    However, based on Lemma \ref{lem4.1} all $v_{i}$ must be equal except form one. Let that component be $v_{k}$. If $k = 1$, then $v_{i} = \delta$ for $i,j \in \{2,\dots,s\}$. If $k \neq 1$, then $v_{i} = 0$ for $i \in \{2,\dots,s\}\setminus\{k\}$. Both cases contradict with \eqref{eq4.9}. Thus, the equations \eqref{eq4.4} can not be solved simultaneously and no five-effective order Runge-Kutta of classical order two exists with positive weights.
+%    \newline
+%
+%    In the case that $\beta_2 = 0$ then equation \eqref{eq4.4d} becomes
+%    \begin{equation*}
+%        \frac{1}{4}\bm{b}^{T}\bm{c}^{4} - \bm{b}^{T}C^{2}A\bm{c} + \bm{b}^{T}(A\bm{c})^{2} = 0,
+%    \end{equation*}
+%    or equivalently
+%    \begin{equation*}
+%        \bm{b}^{T}\bm{v}^{2} = 0.
+%    \end{equation*}
+%    Since $\bm{v}$ can not be identical equal to zero, it must have a nonzero component. But since $\bm{b} > 0$, then $\bm{b}^{T}\bm{v}^{2} > 0$. Immediately this prevents the existence of five-effective order Runge-Kutta of classical order greater than two if we require positive weights.
+%\end{proof}
+
+In the next section we will show how based on the effective order conditions one can construct an SSP main method and its corresponding starting and finishing perturbation methods. We then explain how the resulting scheme can be modified so as it becomes an SSP scheme. 

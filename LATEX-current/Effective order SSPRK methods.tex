@@ -1,0 +1,194 @@
+\documentclass[10pt,a4paper,oneside,draft]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	Preamble	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% packages %%%
+\usepackage{amsmath,amssymb,amsthm,amsfonts,enumerate,cite}
+\usepackage[toc,page]{appendix}
+%\usepackage{diagrams}
+%\usepackage[pdftex]{graphicx}
+\usepackage{multirow}
+\usepackage{url}
+%\usepackage{nomencl}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{array}
+\usepackage{arydshln}
+\usepackage[dvips]{graphicx}
+\usepackage{pstricks,pst-node,pst-tree}
+%\usepackage{cm-super}
+\usepackage{ifthen}
+\usepackage{subfig}
+\usepackage{caption}
+\usepackage{verbatim}
+%\usepackage{maplestd2e}
+\usepackage{slashbox}
+%\usepackage[numbered]{mcode}
+\usepackage{rotating}
+\usepackage{booktabs}
+%\usepackage[font=small,format=plain,labelfont=bf,up,textfont=it,up]{caption}
+\usepackage{epsfig}
+\usepackage{bm}
+%\usepackage{calc}
+%\usepackage{pbox}
+\usepackage{multicol}
+\usepackage{xkeyval}
+\usepackage[textsize=footnotesize]{todonotes}
+
+%%% Page layout %%%
+\setlength{\textwidth}{157mm}   
+\setlength{\textheight}{225mm}
+\setlength{\oddsidemargin}{-15mm} 
+\setlength{\evensidemargin}{-2mm}
+\setlength{\topmargin}{0mm}
+\setlength{\marginparwidth}{35mm}
+\setlength{\footskip}{20mm}
+\setlength\footnotesep{10mm}
+\setlength{\belowcaptionskip}{10pt}
+\setlength{\parindent}{15pt}
+
+%%% Page style %%%
+\pagestyle{plain}
+
+%%% New environments %%%
+\newenvironment{biggertrees}{%
+    \psset{treesep=4ex,levelsep=4ex,treemode=U,showbbox=false}
+    \renewcommand\psedge{\ncline[linewidth=1.0pt]}
+    \renewcommand{\Ts}{\Tdot[dotstyle=*,dotscale=1.3]}
+}{}
+
+%%% New commands %%%
+\newcommand{\pd}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\pdseconda}[2]{\frac{\partial^2{#1}}{\partial{{#2}^2}}}
+\newcommand{\pdsecondb}[3]{\frac{\partial^2{#1}}{\partial{#2}\partial{#3}}}
+\newcommand{\Dt}{\Delta t}
+\newcommand{\rowscell}[2]{\parbox{21pt}{\centering #1 \\ #2}}
+\newcommand{\treecell}[2]{\parbox{26pt}{\centering #1 \\\vspace{3pt} #2}}
+\newcommand{\nline}{\tabularnewline}
+\newcommand{\colintodo}[1]{\todo[color=orange!20]{\textbf{C:} #1}}
+\newcommand{\davidtodo}[1]{\todo[color=cyan!20]{\textbf{D:} #1}}
+\newcommand{\yiannistodo}[1]{\todo[color=green!20]{\textbf{Y:} #1}}
+\newcommand{\colincomment}[1]{\textcolor{blue}{\\\textbf{\footnotesize #1}\\}}
+\newcommand{\davidcomment}[1]{\textcolor{red}{\\\textbf{\footnotesize #1}\\}}
+\newcommand{\yianniscomment}[1]{\textcolor{OliveGreen}{\\\textbf{\footnotesize #1}\\}}
+\newcommand{\prevtext}[1]{\begin{minipage}{140mm}
+															{\footnotesize\newline\underline{Previous text}:\\#1}
+												 \end{minipage}}
+%\newcommand{\todo}[1]{\textbf{\red #1}}
+\newcommand{\sspcoef}{\mathcal{C}}
+%\newcommand{\TabExtraSpStrut}{\rule[-1.2ex]{1pt}{8ex}}
+%\newcommand\T{\rule{0pt}{12.6ex}}
+%\newcommand\B{\rule[-1.2ex]{0pt}{5pt}}
+%\newcommand{\proof}{\noindent {\bf Proof}:~}
+%\newcommand{\qed}{\hfill\rule{2mm}{2mm}}
+%\renewcommand{\baselinestretch}{1.2}
+\renewcommand{\newline}{\vspace{10pt}}
+\renewcommand{\comment}[1]{\textcolor{gray}{\\#1\\}}
+\renewcommand{\indent}{\hspace{15pt}}
+%\renewcommand*\thesection{\arabic{chapter}}
+%\renewcommand{\thefigure}{\arabic{section}}
+%\renewcommand{\theenumi}{\Roman{enumi}}
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+%\renewcommand{\rowsetup}{\centering}
+
+%%% New theorems %%%
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{example}{Example}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{result}[theorem]{Result}
+%\newtheorem{claim}[theorem]{Claim}
+
+%%% Miscellaneous %%%
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\setcounter{table}{0}
+%\numberwithin{theorem}{section}
+\numberwithin{equation}{section}
+\numberwithin{definition}{section}
+\numberwithin{theorem}{section}
+\numberwithin{lemma}{section}
+\numberwithin{example}{section}
+\numberwithin{table}{section}
+\newcolumntype{M}[1]{>{\vspace{2pt}\centering\hspace{0pt}\vspace{2pt}}m{#1}}
+\definecolor{lightgray}{gray}{0.5}
+%\makenomenclature
+%\baselineskip=18pt plus1pt
+
+%%% General info %%%
+
+\title{Effective order Strong Stability Preserving Runge-Kutta methods}
+
+\author{Author 1\footnote{University 1}
+        \and
+        Author 2\footnote{University 2}
+        \and
+        Author 3\footnote{University 3}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		Actual document		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Document beginning
+\begin{document}
+
+\maketitle
+
+\input{trees} % creates trees
+
+\begin{abstract}
+  In this work we apply the algebraic theory of Runge--Kutta methods
+  and specifically the concept of effective order to strong stability
+  preserving Runge--Kutta methods.  These methods of effective order
+  satisfy relaxed order conditions when combined with special starting
+  and stopping methods.  We construct such methods up to effective
+  order four and establish their optimality (many methods achieve a
+  previously theoretical upper bound on the SSP coefficient).  In
+  particular, we present four-stage effective order four SSP RK
+  methods which is not possible with four stages using classical
+  order.  Numerical experiments demonstrate the feasibility of
+  effective order in practice.  We prove that methods of effective
+  order five cannot have strictly positive weights $b$.  A direct
+  corollary is the non-existence of effective order five SSP methods.
+\end{abstract}
+
+\tableofcontents
+
+\input{1_Intro}
+\input{2_SSP}
+%\input{3_Algebraic_RK}
+\input{3_Algebraic_RK_new}
+\input{4_ExRK_barrier}
+\input{5_Optimal_ESSPRK}
+\input{6_Numerics}
+\input{7_Conclusion}
+
+%\input{Section1}
+%\input{Section2}	
+%\input{Section3}
+%\input{Section4}
+%\input{Section5}
+%\input{Section6}
+
+
+\section*{Acknowledgements}
+	Acknowledgements listed here.
+
+
+\section{Conclusions}\label{sec:conclusions}
+
+The ideas here were applied to explicit Runge--Kutta methods, but they
+can be applied to implicit Runge--Kutta methods and General Linear
+Methods \cite{Butcher2008_book}.
+
+
+\appendix
+\include{AppendixA}
+%\include{AppendixB}
+%\textcolor{gray}{\input{Section3_preColin_20110811}}
+
+\include{Bibliography}
+
+
+\end{document}

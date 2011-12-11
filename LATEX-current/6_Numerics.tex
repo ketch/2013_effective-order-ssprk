@@ -1,0 +1,708 @@
+\section{Numerical experiments}\label{sec:numerics}
+    \subsection{Convergence study}
+    \subsection{Application to nonlinear problems}
+        \subsubsection{Burger's equation}
+        \subsubsection{Buckley-Leverett equation}
+        \subsubsection{High order WENO schemes}
+        
+        
+        
+%\chapter{Algebraic representation of Runge-Kutta methods}\label{chapter4} % chapter 4
+%
+%\vspace{20pt}
+%
+%\qquad In this chapter, we are concerned with a generalisation of Runge-Kutta methods. We review Butcher's theory of an algebraic system which represents Runge-Kutta methods based on their order and finally leads to the concept of ``effective'' order. This will be important for the next chapter where the SSP theory and theory of effective order will be joined in order to construct new Runge-Kutta methods.
+%\newline
+%
+%Under this algebraic interpretation we are able to view individual Runge-Kutta methods as members of a group and therefore define the product of two methods. In this framework, we can gain better understanding of order conditions. Methods of order \( p \) appear as members of a normal subgroup of the that group and hence we are able to formulate the effective order conditions. This makes it possible to construct high order Runge-Kutta methods using SSPRK low order methods and break some of the order barriers mentioned in Chapter \ref{chapter3}. It is even possible to break the ``Butcher Barrier'' \cite{Chen1998_thesis} and construct a \( 5 \)-stage \( 5 \)-order Runge-Kutta method. Finally, the theory of group representation of Runge-Kutta methods has applications in the analysis of the order of General Linear Methods, by using this richer and elaborated structure \cite{Butcher2008_book}.
+%\newline
+%
+%As we will see in the following sections the composition group of Runge-Kutta equivalence classes is homomorphic to the group of mappings from trees to real numbers. In particular, these functions associated with Runge-Kutta methods take each tree to the associated elementary weight \cite{Butcher1987_book, Butcher2008_book}. In this sense elements of this group provide a characterisation of Runge-Kutta methods. We begin by defining the equivalence classes of Runge-Kutta methods, followed by the description of the homomorphic groups and finally we derive the effective order conditions for Runge-Kutta methods.
+%\vspace{10pt}
+%
+%\subsection{Equivalence classes}\label{subsection4.1} % section 4.1
+%
+%\vspace{10pt}
+%
+%\qquad For every n-dimensional initial value problem, Runge-Kutta methods are mappings from \( \mathbb{R}^n \) to \( \mathbb{R}^n \). The semi-group formed by these mappings is important only if it is independent of the particular choice of the problem and the solution space. If two methods, having \( s_{1} \) and \( s_{2} \) stages respectively, are considered then their product can be thought as a combined method of \( s_{1} + s_{2} \) stages. However, when constructing a product of two methods we would like to avoid issues when the same Runge-Kutaa method has multiple representations (for example has redundant collections of stages). Therefore, it is necessary to define equivalence classes of Runge-Kutta methods.
+%\newline
+%
+%According to Butcher \cite{Butcher1987_book, Butcher2008_book} there are three definitions - all of them equivalent - in which equivalence classes of Runge-Kutta methods might be defined. Here we state formally only two of them.
+%\begin{definition}\label{def4.1}
+%    Two Runge-Kutta methods are ``equivalent'' if, for any initial value problem defined by an autonomous function \( \textbf{F} \), satisfying the Lipschitz condition and an initial value \( \textbf{u}^{0} \), there exists \( {\Dt}_{0} > 0 \) such that the results computed by the two methods are identical if \( \Dt \leq {\Dt}_{0} \).
+%\end{definition}
+%\begin{definition}\label{def4.2}
+%    Two Runge-Kutta methods are ``\( \Phi \)-equivalent'' if, for any \( t \in T \), the elementary weights \( \Phi(t) \) corresponding to the each method are equal.
+%\end{definition}
+%
+%One can verify that the above definitions form transitive, symmetric and reflexive relations and hence are indeed equivalence relations. Actually, Definitions \ref{def4.1} and \ref{def4.2} correspond to the same relation as stated by the following theorem.
+%\begin{theorem}\label{the4.1}
+%    Two Runge-Kutta methods are equivalent if and only if they are ``\( \Phi \)-equivalent''.
+%\end{theorem}
+%\begin{proof}
+%    Suppose the two methods have numerical approximations \( \textbf{Y}_{1} \) and \( \widetilde{\textbf{Y}}_{1} \) to the solution at \( t^{0} + \Dt \), with corresponding elementary weights \( \Phi(t) \) and \( \widetilde{\Phi}(t) \) for every \( t \in T \). Recall from Section \ref{subsubsection2.3.3} that the Taylor expansion of the numerical solution is given by
+%    \begin{displaymath}
+%        \textbf{u}^{n+1} = \textbf{u}^{n} + \sum_{t \in T} \frac{(\Dt)^{r(t)}}{\sigma(t)}\Phi(t)\textbf{G}(t)(\textbf{u}^{n}).
+%    \end{displaymath}
+%    Then \( \textbf{Y}_{1} \) is identically equal to \( \widetilde{\textbf{Y}}_{1} \) if and only if \( \Phi(t) = \widetilde{\Phi}(t) \) for any \( t \in T \). This can be extended for the numerical approximations \( \textbf{Y}_{i} \) and \( \widetilde{\textbf{Y}}_{i} \) for stages \( i \in \{1, 2, \dots, s\} \) and that completes the proof.
+%\end{proof}
+%\vspace{10pt}
+%
+%\subsection{The composition group of Runge-Kutta methods}\label{subsection4.2} % section 4.2
+%
+%\vspace{10pt}
+%
+%\qquad The group formation of Runge-Kutta methods is valid for both explicit and implicit methods. For the rest of this chapter we consider the general case of implicit Runge-Kutta methods. Assume two equivalence classes of Runge-Kutta methods and choose \( m \) and \( \widetilde{m} \) to be representatives of each of these classes. Methods \( m \) and \( \widetilde{m} \) can be written as \( (A, \textbf{b}^{\texttt{T}}, \textbf{c}) \) and \( (\tilde{A}, {\tilde{\textbf{b}}}^{\texttt{T}}, \tilde{\textbf{c}}) \), respectively and can be represented by the Butcher tableau
+%\begin{equation}\label{eq4.1}
+%    \begin{tabular}{c | c c c c}
+%    \( c_{1} \)  & \( a_{11} \) & \( a_{12} \) & \( \dots \) & \( a_{1s} \) \\
+%    \( c_{2} \)  & \( a_{21} \) & \( a_{22} \) & \( \dots \) & \( a_{2s} \) \\
+%    \( \vdots \) & \( \vdots \) & \( \vdots \) &             & \( \vdots \) \\
+%    \( c_{s} \)  & \( a_{s1} \) & \( a_{s2} \) & \( \dots \) & \( a_{ss} \) \\
+%    \hline
+%                 & \( b_{1} \)  & \( b_{2} \)  & \( \dots \) & \( b_{s} \)
+%    \end{tabular}
+%\end{equation}
+%and
+%\begin{equation}\label{eq4.2}
+%    \hspace{16pt}\begin{tabular}{c | c c c c r}
+%    \( \tilde{c}_{1} \)         & \( \tilde{a}_{11} \)         & \( \tilde{a}_{12} \)         & \( \dots \) & \( \tilde{a}_{1\tilde{s}} \)         & \\
+%    \( \tilde{c}_{2} \)         & \( \tilde{a}_{21} \)         & \( \tilde{a}_{22} \)         & \( \dots \) & \( \tilde{a}_{2\tilde{s}} \)         & \\
+%    \( \vdots \)                & \( \vdots \)                 & \( \vdots \)                 &             & \( \vdots \)                         & \\
+%    \( \tilde{c}_{\tilde{s}} \) & \( \tilde{a}_{\tilde{s}1} \) & \( \tilde{a}_{\tilde{s}2} \) & \( \dots \) & \( \tilde{a}_{\tilde{s}\tilde{s}} \) & \\
+%    \cline{1-5}
+%                                & \( \tilde{b}_{1} \)          & \( \tilde{b}_{2} \)          & \( \dots \) & \( \tilde{b}_{\tilde{s}} \)          & ,
+%    \end{tabular}
+%\end{equation}
+%where \( s \) and \( \tilde{s} \) are the numbers of stages of methods \( m \) and \( \widetilde{m} \), respectively. Also, the consistency relations \( c_{i} = \sum_{j=1}^{s}a_{ij} \) for \( i \in \{1, 2, \dots, s\} \) and  \( c_{i} = \sum_{j=1}^{\tilde{s}}\tilde{a}_{ij} \) for \( i \in \{1, 2, \dots, \tilde{s}\} \) must hold. Suppose that \( \textbf{u}^{n+1} \) is the result computed by method \( m \) in one step, with initial value \( \textbf{u}^{n} \), then
+%\begin{equation}\label{eq4.3}
+%    \textbf{u}^{n+1} = \textbf{u}^{n} + \Dt\sum_{j=1}^{s}b_{j}\textbf{F}(\textbf{Y}_{j}),
+%\end{equation}
+%where
+%\begin{equation}\label{eq4.4}
+%    \textbf{Y}_{i} = \textbf{u}_{n} + \Dt\sum_{j=1}^{s}a_{ij}\textbf{F}(\textsc{Y}_{j}), \quad i = 1, 2, \dots, s.
+%\end{equation}
+%Similarly suppose that \( \tilde{\textbf{u}}^{n+1} \) is the result computed by method \( \widetilde{m} \) in one step with the same initial value. Then it is natural to consider that method \( \alpha m + \beta \tilde{m} \) computes a result \( \alpha \textbf{u}^{n+1} + \beta \tilde{\textbf{u}}^{n+1} \) from initial value \( \textbf{u}^{n} \) and is given by
+%\begin{equation}\label{eq4.5}
+%    \alpha \textbf{u}^{n+1} + \beta \tilde{\textbf{u}}^{n+1} = \textbf{u}^{n} + \Dt\Bigl(\sum_{j=1}^{s}b_{j}\textbf{F}(\textbf{Y}_{j}) + \sum_{j=1}^{\tilde{s}}\tilde{b}_{j}\textbf{F}(\widetilde{\textbf{Y}}_{j})\Bigr),
+%\end{equation}
+%where
+%\begin{equation}\label{eq4.6}
+%    \begin{split}
+%        \textbf{Y}_{i}             &= \textbf{u}^{n} + \Dt\sum_{j=1}^{s}a_{ij}\textbf{F}(\textbf{Y}_{j}), \quad i = 1, 2, \dots, s \\
+%        \widetilde{\textsc{Y}}_{i} &= \textbf{u}^{n} + \Dt\sum_{j=1}^{\tilde{s}}\tilde{a}_{ij}\textbf{F}(\widetilde{\textbf{Y}}_{j}), \quad i = 1, 2, \dots, \tilde{s}.
+%    \end{split}
+%\end{equation}
+%Method \( \alpha m + \beta \widetilde{m} \) can be represented by the tableau
+%\begin{equation}\label{eq4.7}
+%    \begin{tabular}{c | c c c c : c c c c r}
+%    \( c_{1} \)  & \( a_{11} \) & \( a_{12} \) & \( \dots \) & \( a_{1s} \) & \( 0 \) & \( 0 \) & \( \dots \) & \( 0 \) & \\
+%    \( c_{2} \)  & \( a_{21} \) & \( a_{22} \) & \( \dots \) & \( a_{2s} \) & \( 0 \) & \( 0 \) & \( \dots \) & \( 0 \) & \\
+%    \( \vdots \) & \( \vdots \) & \( \vdots \) &             & \( \vdots \) & \vdots  & \vdots  &             & \vdots  & \\
+%    \( c_{s} \)  & \( a_{s1} \) & \( a_{s2} \) & \( \dots \) & \( a_{ss} \) & \( 0 \) & \( 0 \) & \( \dots \) & \( 0 \) & \\
+%    \cdashline{1-9}
+%    \( \tilde{c}_{1} \)         & \( 0 \) & \( 0 \) & \( \dots \) & \( 0 \) & \( \tilde{a}_{11} \)         & \( \tilde{a}_{12} \)         & \( \dots \) & \( \tilde{a}_{1\tilde{s}} \)             & \\
+%    \( \tilde{c}_{2} \)         & \( 0 \) & \( 0 \) & \( \dots \) & \( 0 \) & \( \tilde{a}_{21} \)         & \( \tilde{a}_{22} \)         & \( \dots \) & \( \tilde{a}_{2\tilde{s}} \)             & \\
+%    \( \vdots \)                & \vdots  & \vdots  &             & \vdots  & \( \vdots \)                 & \( \vdots \)                 &             & \( \vdots \)                             & \\
+%    \( \tilde{c}_{\tilde{s}} \) & \( 0 \) & \( 0 \) & \( \dots \) & \( 0 \) & \( \tilde{a}_{\tilde{s}1} \) & \( \tilde{a}_{\tilde{s}2} \) & \( \dots \) & \( \tilde{a}_{\tilde{s}\tilde{s}} \)     & \\
+%    \cline{1-9}
+%            & \( \alpha b_{1} \) & \( \alpha b_{2} \) & \( \dots \) & \( \alpha b_{s} \) & \( \beta\tilde{b}_{1} \) & \( \beta\tilde{b}_{2} \) & \( \dots \) & \( \beta\tilde{b}_{\tilde{s}} \)    & .
+%    \end{tabular}
+%\end{equation}
+%Associativity with respect to  the addition operation can easily be verified  since \( (\alpha m_{1} + \beta m_{2}) + \gamma m_{3} \) and \( \alpha m_{1} + (\beta m_{2} + \gamma m_{3}) \) compute a result \( (\alpha \textbf{u}^{1} + \beta \textbf{u}^{2}) + \gamma \textbf{u}^{3}  = \alpha \textbf{u}^{1} + (\beta \textbf{u}^{2} + \gamma \textbf{u}^{3}) \).
+%\newline
+%
+%Likewise, the product method \( m\tilde{m} \) can be computed by evaluating \( \textbf{u}^{n} \) using the first method \( m \), with initial value \( \textbf{u}^{n-1}  \) and then writing \( \textbf{u}^{n+1}  \) for the result computed by the second method \( \tilde{m} \), using \( \textbf{u}^{n}  \) as its initial value. Therefore, the \( s + \tilde{s} \) stages and the values of the first submethod and the final one computed by method \( m\widetilde{m} \) are given by the equations
+%\begin{subequations}\label{eq4.8}
+%    \begin{align}
+%        \textbf{u}^{n}    &= \textbf{u}^{n-1} + \Dt\sum_{j=1}^{s}b_{j}\textbf{F}(\textbf{Y}_{j}), \label{eq4.8a} \\
+%        \textbf{Y}_{i}    &= \textbf{u}^{n-1} + \Dt\sum_{j=1}^{s}a_{ij}\textbf{F}(\textbf{Y}_{j}), \quad i = 1, 2, \dots, s, \label{eq4.8b} \\
+%        \textbf{u}^{n+1}  &= \textbf{u}^{n} + \Dt\sum_{j=1}^{\tilde{s}}\tilde{b}_{j}\textbf{F}(\widetilde{\textbf{Y}}_{j}), \label{eq4.8c} \\
+%        \widetilde{\textbf{Y}}_{i} &= \textbf{u}^{n} + \Dt\sum_{j=1}^{\tilde{s}}\tilde{a}_{ij}\textbf{F}(\widetilde{\textbf{Y}}_{j}), \quad i = 1, 2, \dots, \tilde{s}. \label{eq4.8d}
+%    \end{align}
+%\end{subequations}
+%Suppose that functions \( g_{1} \) and \( g_{2} \) denote the mappings taking \( \textbf{u}^{n-1} \) to \( \textbf{u}^{n} \) and \( \textbf{u}^{n}  \) to \( \textbf{u}^{n+1} \) given by methods \( m \) and \( \widetilde{m} \), respectively. Substituting \( \textbf{u}^{n} \) into equations \eqref{eq4.8c} and \eqref{eq4.8d} yields
+%\begin{subequations}\label{eq4.9}
+%    \begin{align}
+%        \textbf{u}^{n+1}           &= \textbf{u}^{n-1} + \Dt\Bigr[\sum_{j=1}^{s}b_{j}\textbf{F}(\textbf{Y}_{j}) + \sum_{j=1}^{\tilde{s}}\tilde{b}_{j}\textbf{F}(\widetilde{\textbf{Y}}_{j})\Bigl], \label{eq4.9a} \\
+%        \widetilde{\textbf{Y}}_{i} &= \textbf{u}^{n-1} + \Dt\Bigr[\sum_{j=1}^{s}b_{j}\textbf{F}(\textbf{Y}_{j}) + \sum_{j=1}^{\tilde{s}}\tilde{a}_{ij}\textbf{F}(\widetilde{\textbf{Y}}_{j})\Bigl], \qquad i = 1, 2, \dots, \tilde{s} \label{eq4.9b},
+%    \end{align}
+%\end{subequations}
+%where \( \textbf{Y}_{i} \), \( i = 1, 2, \dots, s \) is given by \eqref{eq4.8b}. Equation \eqref{eq4.9a} suggests that \( \textbf{u}^{n+1} = g_{2}(\textbf{u}^{n}) \), so \( \textbf{u}^{n+1} = (g_{2} \circ g_{1})(\textbf{u}^{n-1}) \), verifying that \( m\widetilde{m} \) is the composition product of the two methods. Method \( m\widetilde{m} \) can be represented by the tableau
+%\begin{equation}\label{eq4.10}
+%    \begin{tabular}{c | c c c c : c c c c r}
+%    \( c_{1} \)  & \( a_{11} \) & \( a_{12} \) & \( \dots \) & \( a_{1s} \) & \( 0 \) & \( 0 \) & \( \dots \) & \( 0 \) & \\
+%    \( c_{2} \)  & \( a_{21} \) & \( a_{22} \) & \( \dots \) & \( a_{2s} \) & \( 0 \) & \( 0 \) & \( \dots \) & \( 0 \) & \\
+%    \( \vdots \) & \( \vdots \) & \( \vdots \) &             & \( \vdots \) & \vdots  & \vdots  &             & \vdots  & \\
+%    \( c_{s} \)  & \( a_{s1} \) & \( a_{s2} \) & \( \dots \) & \( a_{ss} \) & \( 0 \) & \( 0 \) & \( \dots \) & \( 0 \) & \\
+%    \cdashline{1-9}
+%    \( \sum_{i=1}^{s}b_{i} + \tilde{c}_{1} \) & \( b_{1} \) & \( b_{2} \) & \( \dots \) & \( b_{s} \) & \( \tilde{a}_{11} \) & \( \tilde{a}_{12} \) & \( \dots \) & \( \tilde{a}_{1\tilde{s}} \) & \\
+%    \( \sum_{i=1}^{s}b_{i} + \tilde{c}_{2} \) & \( b_{1} \) & \( b_{2} \) & \( \dots \) & \( b_{s} \) & \( \tilde{a}_{21} \) & \( \tilde{a}_{22} \) & \( \dots \) & \( \tilde{a}_{2\tilde{s}} \) & \\
+%    \( \vdots \)                              & \vdots      & \vdots      &             & \vdots      & \( \vdots \)         & \( \vdots \)         &             & \( \vdots \)                 & \\
+%    \( \sum_{i=1}^{s}b_{i} + \tilde{c}_{\tilde{s}} \) & \( b_{1} \) & \( b_{2} \) & \( \dots \) & \( b_{s} \) & \( \tilde{a}_{\tilde{s}1} \) & \( \tilde{a}_{\tilde{s}2} \) & \( \dots \) & \( \tilde{a}_{\tilde{s}\tilde{s}} \) & \\
+%    \cline{1-9}
+%                                              & \( b_{1} \) & \( b_{2} \) & \( \dots \) & \( b_{s} \) & \( \tilde{b}_{1} \)  & \( \tilde{b}_{1} \)  & \( \dots \) & \( \tilde{b}_{\tilde{s}} \)  & .
+%    \end{tabular}
+%\end{equation}
+%\vspace{5pt}
+%
+%Since we consider equivalence classes of Runge-Kutta methods we are interested in multiplication between classes rather than particular methods of these classes. Therefore, multiplication of equivalence classes must be independent of the choice of the representative member from the two original classes. For a given method \( m \), its equivalence class is denoted by \( [m] \). If two methods are equivalent then we write \( m_{1} \equiv m_{2} \). The following theorem justifies the previous assumption.
+%\begin{theorem}\label{the4.2}
+%    Let \( m_{1} \), \( m_{2} \), \( \overline{m}_{1} \), \( \overline{m}_{2} \) denote a Runge-Kutta methods, such that
+%    \begin{displaymath}
+%        m_{1} \equiv \overline{m}_{1} \qquad \text{and } \qquad m_{2} \equiv \overline{m}_{2}.
+%    \end{displaymath}
+%    Then
+%    \begin{displaymath}
+%        [m_{1}m_{2}] = [\overline{m}_{1}\overline{m}_{2}].
+%    \end{displaymath}
+%\end{theorem}
+%\begin{proof}
+%    Equivalently is sufficient to prove that \( m_{1}m_{2} \equiv \overline{m}_{1}\overline{m}_{2} \). Assume that \( \textbf{u}^{n} \) is the output value of \( m_{1} \) and \( \textbf{u}^{n+1} \) is the output value over the product \( m_{1}m_{2} \). In the same way, \( \bar{\textbf{u}}^{n} \) is the output value for \( \overline{m}_{1} \) and \( \bar{\textbf{u}}^{n+1} \) denotes the corresponding output value of \( \overline{m}_{1}\overline{m}_{2} \). If \( \textbf{F} \) satisfies the Lipschitz condition for sufficient small \( \Dt \), then \( \textbf{u}^{n} = \bar{\textbf{u}}^{n} \) and \( \textbf{u}^{n+1} = \bar{\textbf{u}}^{n+1} \), because \( m_{1} \equiv \overline{m}_{1} \) and \( m_{2} \equiv \overline{m}_{2} \), respectively. Hence, by Definition \ref{def4.1} the two products are equivalent, that is \( [m_{1}m_{2}] = [\overline{m}_{1}\overline{m}_{2}] \).
+%\end{proof}
+%\vspace{20pt}
+%
+%Having constructed a multiplicative operation, it it easily proved that associativity with respect to multiplication holds, that is if \( m_{1}, m_{2}, m_{3} \) are Runge-Kutta methods then \( (m_{1}m_{2})m_{3} = m_{1}(m_{2}m_{3}) \). Consider functions \( g_{i} \) that map \( \textbf{u}^{i} \) to \(\textbf{u}^{i+1} \) for \( i = n-1,n,n+1 \), respectively. Then, based on \eqref{eq4.9} \( (g_{3} \circ (g_{2} \circ g_{1}))(\textbf{u}^{n-1})  = ((g_{3} \circ g_{2}) \circ g_{1})(\textbf{u}^{n-1}) \) and the result follows.
+%\newline
+%
+%In order to complete the group formation of equivalence classes of Runge-Kutta methods we need to include an identity and an inverse element. For the identity element consider any method \( m_{0} \) that leaves an initial value \( \textbf{u}^{n} \) invariant, provided that the problem satisfies Lipschitz condition for sufficient small \( \Dt \). If \( [m_{0}] \equiv 1 \) is the class containing all the identity methods then it is clear that \( [mm_{0}] = [m_{0}m] = [m] \) for every Runge-Kutta method \( m \).
+%\newline
+%
+%For the inverse element, consider first a method \( m \) given by \eqref{eq4.1} where the output after one step is determined by equations \eqref{eq4.3} and \eqref{eq4.4}. To construct a method that undoes the work of the given method \( m \) substitute \eqref{eq4.3} into \eqref{eq4.4} and then solve \eqref{eq4.3} for \( \textbf{u}^{n} \). The reverse method, denoted by \( m^{-1} \) is given by
+%\begin{equation}\label{eq4.11}
+%    \begin{split}
+%        \textbf{u}^{n} &= \textbf{u}^{n+1} + \Dt\sum_{j=1}^{s}(-b_{j})\textbf{F}(\textbf{Y}_{j}) \\
+%        \textbf{Y}_{i}   &= \textbf{u}^{n+1} + \Dt\sum_{j=1}^{s}(a_{ij} - b_{j})\textbf{F}(\textbf{Y}_{j}), \quad i = 1, 2, \dots, s.
+%    \end{split}
+%\end{equation}
+%and has Butcher tableau
+%\begin{equation}\label{eq4.12}
+%    \begin{tabular}{c | c c c c r}
+%    \( c_{1} - \sum_{i=1}^{s}b_{i} \) & \( a_{11} - b_{1} \) & \( a_{12} - b_{2} \) & \( \dots \) & \( a_{1s} - b_{s} \) & \\
+%    \( c_{2} - \sum_{i=1}^{s}b_{i} \) & \( a_{21} - b_{1} \) & \( a_{22} - b_{2} \) & \( \dots \) & \( a_{2s} - b_{s} \) & \\
+%    \( \vdots \)                      & \( \vdots \)         & \( \vdots \)         &             & \( \vdots \)         & \\
+%    \( c_{s} - \sum_{i=1}^{s}b_{i} \) & \( a_{s1} - b_{1} \) & \( a_{s2} - b_{2} \) & \( \dots \) & \( a_{ss} - b_{s} \) & \\
+%    \cline{1-5}
+%                                      & \( - b_{1} \)        & \( - b_{2} \)        & \( \dots \) & \( - b_{s} \)        & .
+%    \end{tabular}
+%\end{equation}
+%By reversing the signs of \eqref{eq4.12} we have a method \( \overline{m} \) known as the reflection of method \( m \) \cite{Scherer1977_article, Scherer1983_article}. Reflected methods are also known as ``adjoint methods''. The reader may consult \cite{Hairer1989_book} for reference to applications and research.
+%\newline
+%
+%To verify that method \( m^{-1} \) is exactly the reversed method of \( m \) we prove the following theorem.
+%\begin{theorem}\label{the4.3}
+%    Let \( m \) denote a Runge-Kutta method. Then
+%    \begin{displaymath}
+%        [mm^{-1}] = [m^{-1}m] = 1.
+%    \end{displaymath}
+%\end{theorem}
+%\begin{proof}
+%    Recall the construction of the product given by equations \eqref{eq4.8}. If \( \textbf{w} \) is the outcome of the product \( mm^{-1} \), then equation \eqref{eq4.8c} is reduced to \( \textbf{w} = \textbf{u}^{n-1} \), that is the initial value of \( m \). Similarly, the outcome of \( m^{-1}m \) is equal to \( \textbf{u}^{n} \), the initial value of \( m^{-1} \). Therefore, both \( mm^{-1} \) and \( m^{-1}m \) are identity maps, hence \( mm^{-1} \equiv m^{-1}m \) and so \( [mm^{-1}] = [m^{-1}m] = 1 \).
+%\end{proof}
+%\vspace{10pt}
+%
+%\subsection{The $ G $ group}\label{subsection4.3} % section 4.3
+%
+%\vspace{10pt}
+%
+%\qquad The rather simplified construction of the group of equivalence classes of Runge-Kutta methods does not allow any detailed exploitation. Therefore, we turn our attention to the set \( G \) containing all functions that map trees to real numbers. The set \( G \) can be viewed as a group if enforced with a binary relation. As we will see in the next section the group \( G \) is homomorphic with the group of equivalence classes of Runge-Kutta methods. We can extend our discussion by generally referring to forests as disjoint unions of trees. Let \( V \) denote the set of vertices and \( E \) the set of edges. Then a forest \( (V, E) \) is the union of undirected graphs in which two vertices are connected by exactly one simple path. Thus, any connected component of a forest is a tree. Assume that \( V \) and \( E \) can be partitioned as \( V = \bigcup_{i=1}^{n}V_{i} \) and \( E = \bigcup_{i=1}^{n}E_{i} \), where \( (V_{i},E_{i}) \) is a tree, for \( i = 1, 2, \dots, n \). Suppose that \( T \) is the set of all rooted trees, then any function \( \alpha : T \rightarrow \mathbb{R} \) in \( G \), can be extended multiplicatively to a function on the set of all forests by
+%\begin{equation}\label{eq4.13}
+%    \alpha\bigl((V,E)\bigr) = \prod_{i=1}^{n}\alpha\bigl((V_{i},E_{i})\bigr).
+%\end{equation}
+%
+%\begin{table}[t!]
+%    \centering
+%    \begin{tabular}{|c|cc|c|l|}
+%        \hline
+%        \( i \) & \multicolumn{2}{c|}{\( t_{i} \)} & \( r(t_{i}) \) & \multicolumn{1}{c|}{\( (\alpha\beta)(t_{i}) \)} \\
+%        \hline
+%        \( 1 \)  & \tree{1}  &           & \( 1 \) & \( \alpha_{1} + \beta_{1} \) \\
+%        \( 2 \)  &           & \tree{2}  & \( 2 \) & \( \alpha_{2} + \alpha_{1}\beta_{1} + \beta{2} \) \\
+%        \( 3 \)  & \tree{3}  &           & \( 3 \) & \( \alpha_{3} + \alpha_{1}^{2}\beta_{1} + 2\alpha_{1}\beta_{2} + \beta_{3} \)  \\
+%        \( 4 \)  &           & \tree{4}  & \( 3 \) & \( \alpha_{4} + \alpha_{2}\beta_{1} + \alpha_{1}\beta_{2} + \beta_{4} \) \\
+%        \( 5 \)  & \tree{5}  &           & \( 4 \) & \( \alpha_{5} + \alpha_{1}^{3}\beta_{1} + 3\alpha_{1}^{2}\beta_{2} + 3\alpha_{1}\beta_{3} + \beta_{5} \) \\
+%        \( 6 \)  &           & \tree{6}  & \( 4 \) & \( \alpha_{6} + \alpha_{1}\alpha_{2}\beta_{1} + (\alpha_{1}^{2}+\alpha_{2})\beta_{2} + \alpha_{1}\beta_{3} + \alpha_{1}\beta_{4} + \beta_{6} \) \\
+%        \( 7 \)  & \tree{7}  &           & \( 4 \) & \( \alpha_{7} + \alpha_{3}\beta_{1} + \alpha_{1}^{2}\beta_{2} + 2\alpha_{1}\beta_{4} + \beta_{7} \) \\
+%        \( 8 \)  &           & \tree{8}  & \( 4 \) & \( \alpha_{8} + \alpha_{4}\beta_{1} + \alpha_{2}\beta_{2} + \alpha_{4}\beta_{1} + \alpha_{1}\beta_{4} + \beta_{8} \) \\
+%        \( 9 \)  & \tree{9}  &           & \( 5 \) & \( \alpha_{9} + \alpha_{1}^{4}\beta_{1} + 4\alpha_{1}^{3}\beta_{2} + 6\alpha_{1}^{2}\beta_{3} + 4\alpha_{1}\beta_{5} + \beta_{9} \) \\
+%        \( 10 \) &           & \tree{10} & \( 5 \) & \( \alpha_{10} + \alpha_{1}^{2}\alpha_{2}\beta_{1} + (2\alpha_{1}\alpha_{2}+\alpha_{1}^{3})\beta_{2} + (2\alpha_{1}^{2}+\alpha_{2})\beta_{3} +
+%                                                        \alpha_{1}^{2}\beta_{4} + \) \\
+%                 &           &           &         & \( \alpha_{1}\beta_{5} + 2\alpha_{1}\beta_{6} + \beta_{10} \) \\
+%        \( 11 \) & \tree{11} &           & \( 5 \) & \( \alpha_{11} + \alpha_{1}\alpha_{3}\beta_{1} + (\alpha_{1}^{3} + \alpha_{3})\beta_{2} + \alpha_{1}^{2}\beta_{3} + 2\alpha_{1}^{2}\beta_{4} +
+%                                                        2\alpha_{1}\beta_{6} + \) \\
+%                 &           &           &         & \( \alpha_{1}\beta_{7} + \beta_{11} \) \\
+%        \( 12 \) &           & \tree{12} & \( 5 \) & \( \alpha_{12} + \alpha_{1}\alpha_{4}\beta_{1} + (\alpha_{1}\alpha_{2} + \alpha_{4})\beta_{2} + \alpha_{2}\beta_{3} + \alpha_{1}^{2}\beta_{4} +
+%                                                        \alpha_{1}\beta_{6} + \) \\
+%                 &           &           &         & \( \alpha_{1}\beta_{8} + \beta_{12} \) \\
+%        \( 13 \) & \tree{13} &           & \( 5 \) & \( \alpha_{13} + \alpha_{2}^{2}\beta_{1} + 2\alpha_{1}\alpha_{2}\beta_{2} + \alpha_{1}^{2}\beta_{3} + 2\alpha_{2}\beta_{4} + 2\alpha_{1}\beta_{6}
+%                                                        + \beta_{13} \) \\
+%        \( 14 \) &           & \tree{14} & \( 5 \) & \( \alpha_{14} + \alpha_{5}\beta_{1} + \alpha_{1}^{3}\beta_{2} + 3\alpha_{1}^{2}\beta_{4} + 3\alpha_{1}\beta_{7} + \beta_{14} \) \\
+%        \( 15 \) & \tree{15} &           & \( 5 \) & \( \alpha_{15} + \alpha_{6}\beta_{1} + \alpha_{1}\alpha_{2}\beta_{2} + (\alpha_{1}^{2} + \alpha_{2})\beta_{4} + \alpha_{1}\beta_{7}
+%                                                        \alpha_{1}\beta_{8} + \beta_{15} \) \\
+%        \( 16 \) &           & \tree{16} & \( 5 \) & \( \alpha_{16} + \alpha_{7}\beta_{1} + \alpha_{3}\beta_{2} + \alpha_{1}^{2}\beta_{4} + 2\alpha_{1}\beta_{8} + \beta_{16} \) \\
+%        \( 17 \) & \tree{17} &           & \( 5 \) & \( \alpha_{17} + \alpha_{8}\beta_{1} + \alpha_{4}\beta_{2} + \alpha_{2}\beta_{4} + \alpha_{1}\beta_{8} + \beta_{17} \)  \\
+%        & & & & \\
+%        \hline
+%    \end{tabular}
+%    \caption{Multiplication table of $ (\alpha\beta)(t) $ up to order five.}
+%    \label{table4.1}
+%\end{table}
+%
+%Given a forest \( (V,E) \) we define a subforest induced by \( \widehat{V} \), the forest \( (\widehat{V},\widehat{E}) \), where \( \widehat{V} \) is a subset of \( V \) and \( \widehat{E} \) is the intersection between the set \( E \) and the set of all pairs of vertices of \( \widehat{V} \). Furthermore, we are concerned of ordered trees allowing a partial ordering between vertices such that if \( [v_{1},v_{2}], [v_{2},v_{3}], \dots [v_{n-1},v_{n}] \) are edges, then \( v_{1} < v_{n} \). We call a subforest \( (\widehat{V},\widehat{E}) \) a normal subforest if for any two vertices \( u \) and \( v \) of \( V \) such that \( u < v \) and \( v \in \widehat{V} \), then also \( u \in \widehat{V} \). Therefore, a normal subforest contains only rooted trees. We write a normal subforest as
+%\begin{equation}\label{eq4.14}
+%    (\widehat{V},\widehat{E}) \lhd (V,E).
+%\end{equation}
+%If \( R \) and \( S \) are forests such that \( R \lhd S \), then \( S \setminus R \) will denote the forest induced by the difference of the vertex sets of \( S \) and \( R \).
+%\newline
+%
+%Based on the above, we are now in a position to define the product between two functions from the set of all forests to real numbers and hence formerly construct group \( G \).
+%\begin{definition}\label{def4.3}
+%    Let \( \alpha \) and \( \beta \) be two multiplicative mappings from forests to real numbers. Then for every forest \( S \),  we define their product by
+%    \begin{displaymath}
+%        (\alpha\beta)(S) = \sum_{R \lhd S}\alpha(S \setminus R)\beta(R).
+%    \end{displaymath}
+%\end{definition}
+%Table \ref{table4.1} presents the evaluation of \( (\alpha\beta)(t) \) up to order five. For convenience we denote the trees by \( t_{i} \), for \( i = 1, 2, \dots, 17 \), where \( t_{0} \) denotes the empty tree \( \emptyset \). We write \( \alpha(t_{i}) = \alpha_{i} \) and \( \beta(t_{i}) = \beta_{i} \), where \( \alpha(\emptyset) = \beta(\emptyset) = 1 \).
+%\newline
+%
+%We need to verify that the set \( G \) with the previous multiplication operation is indeed a group. We begin by proving that the set \( G \) is closed.
+%\begin{lemma}\label{lem4.1}
+%    If \( \alpha \) and \( \beta \) are multiplicative mappings from forests to real numbers, then \( \alpha\beta \) is also a multiplicative mapping.
+%\end{lemma}
+%\begin{proof}
+%    Let \( S \) be a forest such that \( S = S_{1} \cup S_{2} \) for forests \( S_{1} \) and \( S_{2} \). Let \( R_{1} \lhd S_{1} \) and \( R_{2} \lhd S_{2} \). Then each subforest \( R = R_{1} \cup
+%    R_{2} \) is a normal subforest of \( S \), that is \( R \lhd S \). Therefore,
+%    \begin{displaymath}
+%        \begin{split}
+%            (\alpha\beta)(S) &= \sum_{R \lhd S}\alpha(S \setminus R)\beta(R) \\
+%                             &= \sum_{(R_{1} \cup R_{2}) \lhd (S_{1} \cup S_{2})}\alpha(S \setminus R)\beta(R) \\
+%                             &= \sum_{R_{1} \lhd S_{1}}\alpha(S_{1} \setminus R_{1})\beta(R_{1})\sum_{R_{2} \lhd S_{2}}\alpha(S_{2} \setminus R_{2})\beta(R_{2}) \\
+%                             &= (\alpha\beta)(S_{1})(\alpha\beta)(S_{2}),
+%        \end{split}
+%    \end{displaymath}
+%    and thus \( \alpha\beta \) is a multiplicative mapping.
+%\end{proof}
+%We next prove associativity of the product defined by Definition \ref{def4.3}.
+%\begin{lemma}\label{lem4.2}
+%    If \( \alpha \), \( \beta \) and \( \gamma \) are multiplicative mappings from forests to real numbers, then
+%    \begin{displaymath}
+%        (\alpha\beta)\gamma = \alpha(\beta\gamma).
+%    \end{displaymath}
+%\end{lemma}
+%\begin{proof}
+%    Suppose that \( Q \lhd R \lhd S \). Removing the set of vertices of forest \( Q \) from \( R \) and \( S \)  results in \( (R \setminus Q) \lhd (S \setminus Q) \) and hence \( (S \setminus Q) \setminus (R \setminus Q) = S \setminus R \). Therefore,
+%    \begin{displaymath}
+%        \begin{split}
+%            \bigl((\alpha\beta)\gamma\bigr)(S) &= \sum_{Q \lhd S}(\alpha\beta)(S \setminus Q)\gamma(Q) \\
+%                                               &= \sum_{Q \lhd S}\sum_{(R \setminus Q) \lhd (S \setminus Q)}\alpha((S \setminus Q) \setminus (R \setminus Q))\beta((R \setminus Q))\gamma(Q) \\
+%                                               &= \sum_{Q \lhd R}\sum_{R \lhd S}\alpha(S \setminus R)\beta((R \setminus Q))\gamma(Q) \\
+%                                               &= \sum_{R \lhd S}\alpha(S \setminus R)\sum_{Q \lhd R}\beta((R \setminus Q))\gamma(Q) \\
+%                                               &= \sum_{R \lhd S}\alpha(S \setminus R)(\beta\gamma)(R) \\
+%                                               &= \bigl(\alpha(\beta\gamma)\bigr)(S).
+%        \end{split}
+%    \end{displaymath}
+%\end{proof}
+%\vspace{15pt}
+%
+%The semi-group created so far on set \( G \), can be extended to a group by accumulating identity and inverse multiplicative mappings from forests to real numbers. For any \( \alpha \in G \) the construction of left and right identities, \( 1_{left} \) and \( 1_{right} \), and inverses, \( \alpha^{-1}_{left} \) and \( \alpha^{-1}_{right} \), must be such that
+%\begin{displaymath}
+%    1_{left} = 1_{left}(\alpha\alpha^{-1}_{right}) = (1_{left}\alpha)\alpha^{-1}_{right}  = \alpha\alpha^{-1}_{right} = 1_{right}
+%\end{displaymath}
+%and
+%\begin{displaymath}
+%    \alpha^{-1}_{left} = \alpha^{-1}_{left}(\alpha\alpha^{-1}_{right}) = (\alpha^{-1}_{left}\alpha)\alpha^{-1}_{right}  = \alpha^{-1}_{right}.
+%\end{displaymath}
+%\begin{lemma}\label{lem4.3}
+%    Given \( \alpha \in G \), there exists a left and right identity and a left and a right inverse.
+%\end{lemma}
+%\begin{proof}
+%    We restrict the proof to trees and show by induction that it is true on the order \( r(t) \) of tree \( t \). We need to construct an identity mapping \( \beta \) such that \( (\alpha\beta)(t) = (\beta\alpha)(t) = \alpha(t) \) and an inverse \( \hat{\beta} \) such that \( (\alpha\hat{\beta})(t) = (\hat{\beta}\alpha)(t) = 0 \) for every \( t \in T \). For \( t = \tau \) we have that \( (\alpha\beta)(\tau) = (\beta\alpha)(\tau) = \alpha(\tau) + \beta(\tau) \), so we can choose \( \beta \) in such a way that \( \beta(\tau) = 0 \). Similarly, \( \hat{\beta}(\tau) = -\alpha(\tau) \). Assume that the result is proved for all trees with order less than \( r(t) \), \( t \neq \tau \), then note that
+%    \begin{displaymath}
+%        \begin{split}
+%            (\alpha\beta)(t) = \alpha(t) + \beta(t) + \phi(t, \alpha, \beta) \\
+%            (\beta\alpha)(t) = \alpha(t) + \beta(t) + \phi(t, \beta, \alpha),
+%        \end{split}
+%    \end{displaymath}
+%    where \( \phi(t, \alpha, \beta) \) and \( \phi(t, \beta, \alpha) \) involve values of \( \alpha \) and \( \beta \) only for trees with orders less than \( r(t) \). Therefore, we can set \( \beta(t) \) to be \( -\phi(t, \alpha, \beta) \) or \( -\phi(t, \beta, \alpha) \), respectively. Hence, \( (\alpha\beta)(t) = (\beta\alpha)(t) = \alpha(t) \). Similarly, is possible to set \( \hat{\beta}(t)  = -\alpha(t) -\phi(t, \alpha, \beta) \) or \( \hat{\beta}(t)  = -\alpha(t) -\phi(t, \beta, \alpha) \), yielding \( (\alpha\hat{\beta})(t) = (\hat{\beta}\alpha)(t) = 0 \).
+%\end{proof}
+%\vspace{15pt}
+%
+%In order to manipulate efficiently the elements of group \( G \), we find a convenient expression for \( \alpha^{-1} \) for every \( \alpha \in G \). Suppose a tree \( t \) is in the form \( (V,E) \). A partition \( P \) of tree \( t \) is a forest formed by possibly removing some edges from \( E \). Let \( \mathcal{P}(t) \) be the set of all possible partitions of \( t \). Denote the number of components \( (V_{i}, E_{i}) \) of \( P \) by \( n_{P} \) for \( i \in \{1, 2, \dots, n\} \) and let \( t^{i} \) be the tree represented by \( (V_{i}, E_{i}) \). Note that we use a superscript for the components of \( P \), so as not to be confused with the \( t_{i} \), \( i = 1, 2, \dots \), used in Table \ref{table4.1}.
+%\begin{lemma}\label{lem4.4}
+%    For a given \( \alpha \in G \) and \( t \in T \), written in the form \( (V,E) \), then
+%    \begin{equation}\label{eq4.15}
+%        \alpha^{-1}(t) = \sum_{P \in \mathcal{P}(t)}\prod_{i=1}^{n_{P}}\bigl(-\alpha(t^{i})\bigr).
+%    \end{equation}
+%\end{lemma}
+%
+%\begin{table}[t!]
+%    \centering
+%    \begin{tabular}{|c|cc|c|l|}
+%        \hline
+%        \( i \) & \multicolumn{2}{c|}{\( t_{i} \)} & \( r(t_{i}) \) & \multicolumn{1}{c|}{\( \alpha^{-1}(t_{i}) \)} \\
+%        \hline
+%        \( 1 \)  & \tree{1}  &           & \( 1 \) & \( -\alpha_{1} \) \\
+%        \( 2 \)  &           & \tree{2}  & \( 2 \) & \( \alpha_{1}^{2} - \alpha_{2} \) \\
+%        \( 3 \)  & \tree{3}  &           & \( 3 \) & \( 2\alpha_{1}\alpha_{2} - \alpha_{1}^{3} - \alpha_{3} \) \\
+%        \( 4 \)  &           & \tree{4}  & \( 3 \) & \( 2\alpha_{1}\alpha_{2} - \alpha_{1}^{3} - \alpha_{4} \) \\
+%        \( 5 \)  & \tree{5}  &           & \( 4 \) & \( 3\alpha_{1}\alpha_{3} - 3\alpha_{2}\alpha_{1}^{2} + \alpha_{1}^{4} - \alpha_{5} \) \\
+%        \( 6 \)  &           & \tree{6}  & \( 4 \) & \( \alpha_{1}\alpha_{3} + \alpha_{1}\alpha_{4} + \alpha_{2}^{2} - 3\alpha_{2}\alpha_{1}^{2} + \alpha_{1}^{4} - \alpha_{6} \) \\
+%        \( 7 \)  & \tree{7}  &           & \( 4 \) & \( 2\alpha_{1}\alpha_{4} + \alpha_{1}\alpha_{3} - 3\alpha_{1}^{2}\alpha_{2} + \alpha_{1}^{4} - \alpha_{7} \) \\
+%        \( 8 \)  &           & \tree{8}  & \( 4 \) & \( 2\alpha_{1}\alpha_{4} + \alpha_{2}^{2} - 3\alpha_{1}^{2}\alpha_{2} + \alpha_{1}^{4} - \alpha_{8} \) \\
+%        \( 9 \)  & \tree{9}  &           & \( 5 \) & \( 4\alpha_{1}\alpha_{5} - 6\alpha_{1}^{2}\alpha_{3} + 4\alpha_{1}^{3}\alpha_{2} - \alpha_{1}^{5} - \alpha_{9} \) \\
+%        \( 10 \) &           & \tree{10} & \( 5 \) & \( 2\alpha_{1}\alpha_{6} + \alpha_{1}\alpha_{5} + \alpha_{2}\alpha_{3} - \alpha_{1}^{2}\alpha_{4} - 3\alpha_{1}^{2}\alpha_{3} + 4\alpha_{1}\alpha_{2} -  \) \\
+%                 &           &           &         & \( \alpha_{1}^{5} - \alpha_{10} \) \\
+%        \( 11 \) & \tree{11} &           & \( 5 \) & \( \alpha_{1}\alpha_{7} + 2\alpha_{1}\alpha_{6} + \alpha_{2}\alpha_{3} - 2\alpha_{1}\alpha_{2}^{2} - \alpha_{1}^{2}\alpha_{3} - 2\alpha_{1}^{2}\alpha_{4} + 4\alpha_{1}^{3}\alpha_{2} - \) \\
+%                 &           &           &         & \( \alpha_{1}^{5} - \alpha_{11} \) \\
+%        \( 12 \) &           & \tree{12} & \( 5 \) & \( \alpha_{1}\alpha_{8} + \alpha_{1}\alpha_{6} + \alpha_{2}\alpha_{3} + \alpha_{2}\alpha_{4} - 3\alpha_{1}\alpha_{2}^{2} - \alpha_{1}^{2}\alpha_{3} - 2\alpha_{1}^{2}\alpha_{4} + \) \\
+%                 &           &           &         & \( 4\alpha_{1}^{3}\alpha_{2} - \alpha_{1}^{5} - \alpha_{12} \) \\
+%        \( 13 \) & \tree{13} &           & \( 5 \) & \( 2\alpha_{1}\alpha_{6} + 2\alpha_{2}\alpha_{4} - \alpha_{1}^{2}\alpha_{3} - 2\alpha_{1}^{2}\alpha_{4} - 3\alpha_{1}\alpha_{2}^{2} + 4\alpha_{1}^{3}\alpha_{2} - \) \\
+%                 &           &           &         & \( \alpha_{1}^{5} - \alpha_{13} \) \\
+%        \( 14 \) &           & \tree{14} & \( 5 \) & \( 3\alpha_{1}\alpha_{7} + \alpha_{1}\alpha_{5} - 3\alpha_{1}^{2}\alpha_{4} - 3\alpha_{1}^{2}\alpha_{3} + 4\alpha_{1}^{3}\alpha_{2} - \alpha_{1}^{5} - \alpha_{14} \) \\
+%        \( 15 \) & \tree{15} &           & \( 5 \) & \( \alpha_{1}\alpha_{8} + \alpha_{1}\alpha_{7} + \alpha_{1}\alpha_{6} + \alpha_{2}\alpha_{4} - 2\alpha_{1}\alpha_{2}^{2} - \alpha_{1}^{2}\alpha_{3} - 3\alpha_{1}^{2}\alpha_{4} + \) \\
+%                 &           &           &         & \( 4\alpha_{1}^{3}\alpha_{2} - \alpha_{1}^{5} - \alpha_{15} \) \\
+%        \( 16 \) &           & \tree{16} & \( 5 \) & \( 2\alpha_{1}\alpha_{8} + \alpha_{1}\alpha_{7} + \alpha_{2}\alpha_{3} - 2\alpha_{1}\alpha_{2}^{2} - \alpha_{1}^{2}\alpha_{3} - 3\alpha_{1}^{2}\alpha_{4} + 4\alpha_{1}^{3}\alpha_{2} - \) \\
+%                 &           &           &         & \( \alpha_{1}^{5} - \alpha_{16} \) \\
+%        \( 17 \) & \tree{17} &           & \( 5 \) & \( 2\alpha_{1}\alpha_{8} + 2\alpha_{2}\alpha_{4} - 3\alpha_{1}\alpha_{2}^{2} + 4\alpha_{1}^{3}\alpha_{2} - \alpha_{1}^{5} - \alpha_{17} \) \\
+%        & & & & \\
+%        \hline
+%    \end{tabular}
+%    \caption{Formulae for $ \alpha^{-1}(t) $ up to order five.}
+%    \label{table4.2}
+%\end{table}
+%
+%\begin{proof}
+%    It is sufficient to show that a mapping \( \beta \in G \) equal to the left hand side of \eqref{eq4.15}, has the property \( (\alpha\beta)(t) = 0 \) for any \( t \in T \), thus \( \alpha\beta = 1 \). Let \( t = (V,E) \) be a tree and \( u = (\widehat{V},\widehat{E}) \) such that \( (\widehat{V},\widehat{E}) \lhd (V,E) \). Then, from Definition \ref{def4.3} \( (\alpha\beta)(t) = \sum_{u \lhd t}\alpha(t \setminus u)\beta(u) \) for every normal subtree \( u \) of \( t \). Note that tree \( u \) shares the same root with \( t \) and \( t \) can be formed by  \( u \) by adding vertices and edges. Forest \( t \setminus u \) is induced by the difference of the vertex set of \( t \) and \( u \), thus the components of \( t \setminus u \) are induced by the additional vertices that make up \( t \) from \( u \). Let \( t^{i} \), \( i = 1, 2, \dots, k \) be the components of \( t \setminus u \). Then according to \eqref{eq4.13}, \( \alpha(t \setminus u) = \prod_{i=1}^{k}\alpha(t^{i}) \). Therefore, we can equivalently write the product \( \alpha\beta \) as
+%    \begin{equation}\label{eq4.16}
+%        (\alpha\beta)(t) = \sum_{u \lhd t}\prod_{i=1}^{k}\alpha(t^{i})\beta(u).
+%    \end{equation}
+%    Substituting the expression \eqref{eq4.15} in \eqref{eq4.16} we have
+%    \begin{equation}\label{eq4.17}
+%        (\alpha\beta)(t) = \sum_{u \lhd t}\sum_{P \in \mathcal{P}(u)}\prod_{i=1}^{n_{P}}\bigl(-\alpha(t^{i})\bigr)\prod_{j=1}^{k}\alpha(t^{j}).
+%    \end{equation}
+%    Since \( u \) and \( t \setminus u \) are always subforests of some partition \( P \) of tree \( t \) we can express \eqref{eq4.17} as a summation over all partitions of \( t \). Let \( \mathcal{P}^{\#}(t) \) be \( \mathcal{P}(t) \cup \{\emptyset\} \). Then for every partition \( P \) let \( t^{1} = (V_{1},E_{1}) \) to be the component that contains the root vertex of tree \( t \). Given a partition \( P \), consider a combination \( C \) of \( \{1, 2, \dots, n \} \) that contains \( t^{1} \) and let \( \mathcal{C}(P) \) the set of all such combinations of \( P \in \mathcal{P}^{\#}(t) \). Finally, denote by \( \overline{C} \) the complement of \( C \) in \( P \). For the case of \( P = \emptyset \) let \( C = \{\emptyset\} \) and \( \overline{C} = \{n\} \), such that \( \prod_{i \in C}\bigl(-\alpha(t^{i})\bigr) = -\alpha(\emptyset) = -1 \) and \( \prod_{i \in \overline{C}}\alpha(t^{i}) = \alpha(t) \). Equation \eqref{eq4.17} can be written as
+%\begin{displaymath}
+%    \begin{split}
+%        (\alpha\beta)(t) &= \sum_{P \in \mathcal{P}^{\#}(t)}\sum_{C \in \mathcal{C}(P)}\prod_{i \in C}\bigl(-\alpha(t^{i})\bigr)\prod_{j \in \overline{C}}\alpha(t^{j}) \\
+%                         &= \sum_{P \in \mathcal{P}^{\#}(t)}\sum_{C \in \mathcal{C}(P)}(-1)^{n_{C}}\prod_{i \in C}\alpha(t^{i})\prod_{j \in \overline{C}}\alpha(t^{j}) \\
+%                         &= \sum_{P \in \mathcal{P}^{\#}(t)}\sum_{C \in \mathcal{C}(P)}(-1)^{n_{C}}\prod_{i=1}^{n_{P}}\alpha(t^{i}),
+%    \end{split}
+%\end{displaymath}
+%where \( n_{C} \) is the cardinality of combination \( C \). But, for every partition \( P \) the sum \( \sum_{C \in \mathcal{C}(P)}(-1)^{n_{C}} \) is zero, hence \( (\alpha\alpha^{-1})(t) = 0 \).
+%\end{proof}
+%For trees up to five vertices, the values of \( \alpha^{-1}(t) \) are presented in Table \ref{table4.2}.
+%\vspace{10pt}
+%
+%\subsection{The Runge-Kutta homomorphism theorem}\label{subsection4.4} % section 4.4
+%
+%\vspace{10pt}
+%
+%\qquad The formation of group \( G \) introduced in Section \ref{subsection4.3} is important only if it is connected with the group of equivalence classes of Runge-Kutta methods. Let \( K \) denote that group as presented in section \ref{subsection4.2}. Consider an equivalence class of Runge-Kutta methods and a function in \( G \) defined by the elementary weights associated with the representative member of the class. Then the mapping \( \Theta : K \rightarrow G \) for which \( \Theta(m) = \Phi(t) \) for every \( t \in T \) provides an exact correspondence between the algebraic properties of elements of \( K \) and the corresponding elements of \( G \). In Theorem \ref{the4.4} we prove that the mapping \( \Theta \) is a homomorphism between the two groups. This provides a convenient means of understanding properties of group \( K \), by studying their counterparts in group \( G \), which is a simpler mathematical system.
+%\newline
+%
+%\begin{theorem}\label{the4.4}
+%    Let \( m \) and \( \widetilde{m} \) denote two equivalence classes of Runge-Kutta methods and \( \Phi : T \rightarrow \mathbb{R} \), \( \widetilde{\Phi} : T \rightarrow \mathbb{R} \) the elementary weight functions associated with \( m \) and \( \widetilde{m} \), respectively. Suppose that \( \Theta : K \rightarrow G \) maps each equivalence class of Runge-Kutta methods to its elementary weight function, that is \( \Theta(m) = \Phi(t) \) for every \( t \in T \). Then
+%    \begin{displaymath}
+%        \Theta(m\widetilde{m}) = \Theta(m)\Theta(\widetilde{m}).
+%    \end{displaymath}
+%\end{theorem}
+%\begin{proof}
+%    It is sufficient to prove that if \( \widehat{\Phi} : T \rightarrow \mathbb{R} \) is the elementary weight function associated with \( m\widetilde{m} \), then \( \widehat{\Phi}(t) = \Phi(t)\widetilde{\Phi}(t) \) for every \( t \in T \). Denote the methods \( m \) and \( \widetilde{m} \) by \( (A, \textbf{b}^{\texttt{T}}, \textbf{c}) \) and \( (\tilde{A}, \tilde{\textbf{b}}^{\texttt{T}}, \tilde{\textbf{c}}) \), respectively and by \( (\hat{A}, {\hat{\textbf{b}}}^{\texttt{T}}, \hat{\textbf{c}}) \) the \( \hat{s} = s + \tilde{s} \) stage method \( m\widetilde{m} \). Then, from the composition product defined by \eqref{eq4.10} we have
+%    \begin{equation}\label{eq4.18}
+%        \begin{split}
+%            \hat{a}_{ij} &= \left\{
+%                                \begin{array}{ll}
+%                                    a_{ij},              & \hbox{\( i \leq s, j \leq s \)} \\
+%                                    0,                   & \hbox{\(i \leq s, j > s \)} \\
+%                                    b_{j},               & \hbox{\(i > s, j \leq s \)} \\
+%                                    \tilde{a}_{i-s,j-s}, & \hbox{\(i > s, j > s \)},
+%                                \end{array}
+%                           \right. \\
+%            \hat{b}_{i} &= \left\{
+%                                \begin{array}{ll}
+%                                    b_{i},           & \hbox{\( i \leq s \)} \\
+%                                    \tilde{b}_{i-s}, & \hbox{\( i > s \)}.
+%                                \end{array}
+%                           \right.
+%        \end{split}
+%    \end{equation}
+%    for \( i,j \in \{1, 2, \dots, \hat{s}\} \). Equation \eqref{eq2.22} can be written as
+%    \begin{equation}\label{eq4.19}
+%        \widehat{\Phi}(t) = \sum_{V}\hat{b}^{j}\prod_{(k,l) \in E}\hat{a}_{kl},
+%    \end{equation}
+%    where \( V = \{j, k, l, \dots \} \) is the set of vertices of tree \( t \), with \( j \) being the root of \( t \). The summation in \eqref{eq4.19} is over all vertices of \( t \) ranging over the set \( \{1, 2, \dots, \hat{s}\} \). Therefore, as mentioned in \cite{Butcher2008_book} we can write \eqref{eq4.19} in the form
+%    \begin{equation}\label{eq4.20}
+%        \widehat{\Phi}(t) = \sum_{\rho \in I}\hat{b}^{\rho(j)}\prod_{(k,l) \in E}\hat{a}_{\rho(k)\rho(l)},
+%    \end{equation}
+%    where \( I \) is the set of functions from \( V \) to the set \( \{1, 2, \dots, \hat{s}\} \), such that \( \rho(k) \) denotes the value that vertex \( k \) maps. For vertices \( k,l \) such that \( k < l \) and \( \rho(k) \leq s < \rho(l) \), \eqref{eq4.18} suggests that \( \hat{a}_{\rho(k),\rho(l)} \) is zero. Hence, we can omit such mappings and define \( u \lhd t \), such that for all vertices \( k \) associated with \( u \), \( \rho(k) \in \{s+1, s+2, \dots, s+\tilde{s}\} \). Denote by \( I_{u} \) the set of these mappings and by \( I_{t \setminus u} \) the set of mappings from the vertices of \( t \setminus u \) to the set \( \{1, 2, \dots, s\} \). Then \( I = I_{u} \cup I_{t \setminus u} \) and by summing over all normal subtrees of \( t \), equation \eqref{eq4.20} can be expressed in the form
+%    \begin{displaymath}
+%        \begin{split}
+%            \widehat{\Phi}(t) &= \sum_{u \lhd t}\sum_{\rho \in I_{t \setminus u}}b^{\rho(j)}\prod_{(k,l) \in E}a_{\rho(k)\rho(l)}\sum_{\rho \in I_{u}}\tilde{b}^{\rho(j)}\prod_{(k,l) \in
+%                            E}\tilde{a}_{\rho(k)\rho(l)} \\
+%                          &= \sum_{u \lhd t}\Phi(t \setminus u)\widetilde{\Phi}(u) \\
+%                          &= (\Phi\widetilde{\Phi})(t).
+%        \end{split}
+%    \end{displaymath}
+%\end{proof}
+%From now and on, we manipulate methods by their corresponding functions in group \( G \), for which the image of each tree is the elementary weight function of the method.
+%\vspace{10pt}
+%
+%\subsection{Subgroups, quotient groups and special elements}\label{subsection4.5} % section 4.5
+%
+%\vspace{10pt}
+%
+%\qquad Having a robust algebraic system, we draw our attention to the existence of subgroups and ideals of group \( G \), asking at the same time of any potential computational significance \cite{Butcher2008_book}. We begin by defining a subspace of \( G \), from which we can construct ideals and quotient groups. We will define a special quotient group whose members correspond to methods of order \( p \). With these tools in our arsenal, we will be able to proceed in defining a method of ``effective'' order as an element of a special quotient group.
+%\newline
+%
+%Firstly, a generalisation of group \( G \) is considered. Let \( G^{\#} \) be the set of all mappings from \( T^{\#} \) to the real numbers, where \( T^{\#} \) is the set of all trees including the ``empty tree'', \( \emptyset \). Obviously \( G \) is a subset of \( G^{\#} \), since it is defined such that for every \( \alpha \in G \), \( \alpha(\emptyset) = 1 \).
+%\begin{definition}\label{def4.4}
+%    We define the linear subspace \( H_{p} \) of \( G^{\#} \) to be
+%    \begin{displaymath}
+%        H_{p} = \{\alpha \in G^{\#} : \alpha(t) = 0, \quad \text{whenever } r(t) \leq p\}
+%    \end{displaymath}
+%    If \( \alpha, \beta \) are two members of group \( G^{\#} \) and \( \alpha = \beta + H_{p} \), then this will mean that \( \alpha - \beta \in H_{p} \).
+%\end{definition}
+%The subspace \( H_{p} \) is an ideal of \( G^{\#} \) in the following sense.
+%\begin{definition}\label{def4.5}
+%    A subspace \( I \) is an ideal of \( G^{\#} \) if \( I \) is not empty and for all \( \alpha, \beta \in I \), \( \alpha - \beta \in I \). Also, for all \( \alpha \in I \), \( \rho \in G^{\#} \), \( \alpha\rho \) and \( \rho\alpha \) are in \( I \).
+%\end{definition}
+%\begin{theorem}\label{the4.5}
+%    Let \( \alpha, \beta, \rho, \mu \in G^{\#} \) such that \( \alpha = \beta(1 + H_{p}) \) and \( \rho = \mu(1 + H_{p}) \). Then, \( \alpha\rho = \beta\mu(1 + H_{p}) \).
+%\end{theorem}
+%\begin{proof}
+%    Since \( \alpha = \beta(1 + H_{p}) \) and \( \rho = \mu(1 + H_{p}) \), then \( \alpha(t) = \beta(t) \) and \( \rho(t) = \mu(t) \) for every tree \( t \) such that \( r(t) \leq p \). Hence, \( (\alpha\rho)(t) = \sum_{u \lhd t}\alpha(t \setminus u)\rho(u) \), with \( \alpha(t \setminus u) \) and \( \rho(u) \) be less or equal to \( p \), then \( (\alpha\rho)(t) = \sum_{u \lhd t}\beta(t \setminus u)\mu(u) = (\beta\mu)(t) \). Therefore, \( \alpha\rho = \beta\mu(1 + H_{p}) \).
+%\end{proof}
+%\vspace{15pt}
+%
+%As suggested by Butcher \cite{Butcher2008_book} we follow an equivalent interpretation of subgroup \( 1 + H_{p} \in G \) instead of \( H_{p} \). We then have the following result.
+%\begin{theorem}\label{the4.6}
+%    The subgroup \( 1 + H_{p} \) is a normal subgroup of \( G \).
+%\end{theorem}
+%\begin{proof}
+%    We prove that left and right cosets of \( 1 + H_{p} \) are equal. Let \( \alpha, \beta \in G \) such that \( \alpha = \beta(1 + H_{p}) \). Then, for every \( t \) such that \( r(t) \leq p \), \( \alpha(t) = \bigl(\beta(1 + H_{p})\bigr)(t) = \beta(t) \). However, \( \bigl((1 + H_{p})\beta\bigr)(t) = \beta(t) \) so \( \alpha = (1 + H_{p})\beta \). Hence, \( \beta(1 + H_{p}) = (1 + H_{p})\beta \).
+%\end{proof}
+%\vspace{15pt}
+%
+%Because \( 1 + H_{p} \) is a normal subgroup of \( G \), we can define the quotient group \( G/(1 + H_{p}) \) to be the set of all cosets of \( 1 + H_{p} \). Therefore,
+%\begin{displaymath}
+%    G/(1 + H_{p}) = \{\alpha(1 + H_{p}) : \alpha \in G\}.
+%\end{displaymath}
+%The group operation of \( G/(1 + H_{p}) \) is the product of subsets. For each \( \alpha(1 + H_{p}) \) and \( \beta(1 + H_{p}) \) in \( G/(1 + H_{p}) \),
+%\begin{displaymath}
+%    \begin{split}
+%        \bigl(\alpha(1 + H_{p})\bigr)\bigl(\beta(1 + H_{p})\bigr) &= \alpha\bigl((1 + H_{p})\beta\bigr)(1 + H_{p}) \\
+%                                                                  &= \alpha\bigl(\beta(1 + H_{p})\bigr)(1 + H_{p}) \\
+%                                                                  &= \alpha\beta(1 + H_{p})(1 + H_{p}) \\
+%                                                                  &= \alpha\beta(1 + H_{p})
+%     \end{split}
+%\end{displaymath}
+%and the inverse of an element \( \alpha(1 + H_{p}) \) is \( \alpha^{-1}(1 + H_{p}) \).
+%\newline
+%
+%Quotient groups are useful for the description of order in numerical methods. Assume that \( m \) and \( \widetilde{m} \) are Runge-Kutta methods with corresponding elementary weight functions \( \Phi \) and \( \widetilde{\Phi} \). If for any smooth problem with \( \textbf{F} \) satisfying Lipschitz condition and \( \Dt \) being sufficient small, the results computed by \( m \) and \( \widetilde{m} \) after a single step differ by \( \mathcal{O}((\Dt)^{p+1}) \), then \( \Phi(t) = \widetilde{\Phi}(t) \) for every tree \( t \) with order \( r(t) \leq p \). However, this is equivalent with
+%\begin{displaymath}
+%    \Phi = \widetilde{\Phi}(1 + H_{p}),
+%\end{displaymath}
+%which means that \( \Phi \) and \( \widetilde{\Phi} \) map canonically to the same member of \( G/(1 + H_{p}) \).
+%\newline
+%
+%We now introduce a special element \( E \in G \), such that
+%\begin{displaymath}
+%    E = \frac{1}{\gamma(t)}, \quad t \in T.
+%\end{displaymath}
+%If the function \( \alpha \in G \) associated with a Runge-Kutta method corresponds to elementary weight \( E \), then it has the same Taylor expansion as the exact solution, namely
+%\begin{displaymath}
+%    \textbf{u}^{n+1} = \textbf{u}^{n} + \sum_{t \in T}\frac{(\Dt)^{r(t)}}{\sigma(t)}\frac{1}{\gamma(t)}\textbf{G}(t)(\textbf{u}^{n}).
+%\end{displaymath}
+%Therefore, the order conditions of the Runge-Kutta method to be of order \( p \), can be written in the form
+%\begin{displaymath}
+%    \alpha(t) = E(t), \quad \text{for every } t \in T \text{ with } r(t) \leq p.
+%\end{displaymath}
+%\begin{definition}\label{def4.6}
+%    Let \( \alpha \) be the corresponding function in \( G \) of a Runge-Kutta method. Then the method is of order \( p \) if
+%    \begin{displaymath}
+%        \alpha \in E(1 + H_{p}).
+%    \end{displaymath}
+%\end{definition}
+%In addition to \( E \), it is usually convenient to consider members of \( G \) denoted by \( E^{\theta} \), where \( \theta \) is a real number, such that
+%\begin{displaymath}
+%    E^{\theta}(t) = \frac{\theta^{r(t)}}{\gamma(t)}, \quad t \in T.
+%\end{displaymath}
+%The method which corresponds to the elementary weight function \( E^{\theta} \) gives a result at \( x_{0} + \theta \Dt \) instead of \( x_{0} + \Dt \), after a single step \cite{Butcher1987_book}. Thus, the following result comes straightforward.
+%\begin{theorem}\label{the4.7}
+%    For \( \theta, \phi \in \mathbb{R} \),
+%    \begin{displaymath}
+%        E^{\theta+\phi} = E^{\theta}E^{\phi}.
+%    \end{displaymath}
+%\end{theorem}
+%\vspace{10pt}
+%
+%\subsection{Algebraic interpretation of effective order}\label{subsection4.6} % section 4.6
+%
+%\vspace{10pt}
+%
+%\qquad The concept of effective order as a generalisation of the classical order of a Runge-Kutta method was first introduced in \cite{Butcher1969_article}. The theory was further developed by Butcher and Sanz-Serna in \cite{Butcher2008_book, Butcher1998_article, Butcher1996_article} and brought to a level that provides an enhancement of properties of Runge-Kutta methods. The generalisation concentrates on creating new methods by composing old ones, subject to special order conditions, called ``effective'' order conditions. This is achieved by using the counterparts of a Runge-Kutta method in group \( G \), as discussed in the previous sections. By adopting this more general definition of order, the new methods allow more freedom in the choice of their parameters, keeping at the same time high order properties.
+%\newline
+%
+%The main idea boils down to the construction of methods of order \( p \) using methods of order less than \( p \). This is achieved by using a starting method \( S \) followed by a method \( M \) of effective order \( p \) and then a finishing method \( S^{-1} \). In other words, we will show that may exist a starting method \( S \) relative to which the order of method \( M \) is higher than its actual classical order. We denote by \( \alpha \) and \( \beta \) the functions in group \( G \) defined by the elementary weights associated with methods \( M \) and \( S \). Therefore, \( \beta^{-1} \) corresponds to Runge-Kutta method \( S^{-1} \) that annihilates the work of the starting method \( S \). The successive use of these three methods results in a method \( P = SMS^{-1} \), of which the corresponding function in \( G \) is \( \beta\alpha\beta^{-1} \). Hence, the function \( \alpha \) would satisfy ``effective'' order conditions relative to the order conditions of function \( \beta \).
+%\newline
+%
+%Comparably to the concept of conjugacy in group theory, we consider functions \( \alpha \) and \( \rho \) of the group \( G \) such that they are conjugate for all trees of order \( r(t) \leq p \). We want to find a function \( \beta \in G \) for which \( \beta\alpha\beta^{-1}(t) = \rho(t) \) for every tree of order \( r(t) \leq p \). This means that the corresponding Runge-Kutta methods to \( \beta\alpha\beta^{-1} \) and \( \rho \) give identical results in a single step to within \( \mathcal{O}((\Dt)^{p+1}) \) and hence \( \beta\alpha\beta^{-1} \in \rho(1 + H_{p}) \). In particular, if we consider the coset \( E(1 + H_{p}) \)  of \( G/(1 + H_{p}) \) for which the relative method reproduces the exact solution to within \( \mathcal{O}((\Dt)^{p+1}) \), then we have the following definition of effective order \cite{Butcher1987_book, Butcher2008_book}.
+%\begin{definition}\label{def4.7}
+%    Let \( \alpha \) and \( \beta \) be the corresponding functions in \( G \) of two Runge-Kutta methods \( M \) and \( S \), respectively. Then the method \( M \) is of effective order \( p \) if the method \( S \) exists such that
+%    \begin{equation}\label{eq4.21}
+%        \beta\alpha\beta^{-1} \in E(1 + H_{p}).
+%    \end{equation}
+%\end{definition}
+%\vspace{15pt}
+%
+%Using Definition \ref{def4.7} and the multiplication Table \ref{table4.1} we find effective order conditions for trees up to order five. We can simplify our calculations by having \( \beta(t_{i}) = \beta_{i} \) equal to zero for \( i = 1, 2, \dots \). For example for effective order four, classical order three we can either have \( \beta_{1} = \beta_{2} = 0 \) or \( \beta_{1} = \beta_{2} = \beta_{3} = 0 \). Similarly for effective order five and classical order three. Due to Butcher \cite{Butcher2008_book} we have the following result.
+%\begin{lemma}\label{lem4.5}
+%    Let \( \alpha \) be the corresponding function in \( G \) of a Runge-Kutta method. Then the method is of effective order \( p \) if and only if the equation \eqref{eq4.21} holds and \( \beta(t_{0}) = \beta(\tau) = 0\).
+%\end{lemma}
+%\begin{proof}
+%    Assume that there is \( \hat{\beta} \) for which \( \hat{\beta}\alpha\hat{\beta}^{-1} \in E(1 + H_{p}) \) and \( \hat{\beta}(\tau) \neq 0 \), where \( \tau = t_{0} \). Let \( \beta = E^{(-\hat{\beta}(\tau))}\hat{\beta} \) so that
+%    \begin{displaymath}
+%        \beta(\tau) = E^{(-\hat{\beta}(\tau))}\hat{\beta}(\tau) = E^{(-\hat{\beta}(\tau))}(\tau) + \hat{\beta}(\tau) = -\hat{\beta}(\tau)E(\tau) + \hat{\beta}(\tau) = 0.
+%    \end{displaymath}
+%    Then,
+%    \begin{displaymath}
+%        \begin{split}
+%            \beta\alpha\beta^{-1}  &= E^{(-\hat{\beta}(\tau))}\hat{\beta}\alpha\bigl(E^{(-\hat{\beta}(\tau))}\hat{\beta}\bigr)^{-1} \\
+%                                   &= E^{(-\hat{\beta}(\tau))}\hat{\beta}\alpha\hat{\beta}^{-1}E^{\hat{\beta}(\tau)} \\
+%                                   &\in E^{(-\hat{\beta}(\tau))}E(1 + H_{p})E^{\hat{\beta}(\tau)} \\
+%                                   &\in E^{(-\hat{\beta}(\tau))}EE^{\hat{\beta}(\tau)}(1 + H_{p}) \\
+%                                   &\in E^{-\hat{\beta}(\tau) + 1 + \hat{\beta}(\tau)}(1 + H_{p}) \\
+%                                   &\in E(1 + H_{p}).
+%        \end{split}
+%    \end{displaymath}
+%\end{proof}
+%
+%\begin{table}[t]
+%    \centering
+%    \begin{tabular}{|c|c|l|l|}
+%        \hline
+%        \( i \) & \( r(t_{i}) \) & \multicolumn{1}{c|}{\( (\beta\alpha)(t_{i}) \)} & \multicolumn{1}{c|}{\( (E\beta)(t_{i}) \)} \\
+%        \hline
+%        \( 1 \)  & \( 1 \) & \( \alpha_{1} \) & \( 1 \) \\
+%        \( 2 \)  & \( 2 \) & \( \alpha_{2} + \beta_{2} \) & \( \beta_{2} + \frac{1}{2}\) \\
+%        \( 3 \)  & \( 3 \) & \( \alpha_{3} + \beta_{3} \) & \( \beta_{3} + 2\beta_{2} + \frac{1}{3} \) \\
+%        \( 4 \)  & \( 3 \) & \( \alpha_{4} + \beta_{2}\alpha_{1} + \beta_{4} \) & \( \beta_{4} + \beta_{2} + \frac{1}{6} \) \\
+%        \( 5 \)  & \( 4 \) & \( \alpha_{5} + \beta_{5} \) & \( \beta_{5} +3\beta_{3} + 3\beta_{2} + \frac{1}{4} \) \\
+%        \( 6 \)  & \( 4 \) & \( \alpha_{6} + \beta_{2}\alpha_{2} + \beta_{6} \) & \( \beta_{6} + \beta_{4} + \beta_{3} + \frac{3}{2}\beta_{2} + \frac{1}{8} \) \\
+%        \( 7 \)  & \( 4 \) & \( \alpha_{7} \beta_{3}\alpha_{1} +\beta_{7} \) & \( \beta_{7} + 2\beta_{4} + \beta_{2} + \frac{1}{12} \) \\
+%        \( 8 \)  & \( 4 \) & \( \alpha_{8} + \beta_{2}\alpha_{2} + \beta_{4}\alpha_{1} + \beta_{8} \) & \( \beta_{8} + \beta_{4} +\frac{1}{2}\beta_{2} + \frac{1}{24} \) \\
+%        \( 9 \)  & \( 5 \) & \( \alpha_{9} + \beta_{9} \) & \( \beta_{9} + 4\beta_{5} + 6\beta_{3} + 4\beta_{2} + \frac{1}{5} \)\\
+%        \( 10 \) & \( 5 \) & \( \alpha_{10} + \beta_{2}\alpha_{3} + \beta_{10} \) & \( \beta_{10} + 2\beta_{6} + \beta_{5} + \beta_{4} + \frac{5}{2}\beta_{3} + 2\beta_{2} + \frac{1}{10} \) \\
+%        \( 11 \) & \( 5 \) & \( \alpha_{11} + \beta_{3}\alpha_{2} + \beta_{11} \) & \( \beta_{11} + \beta_{7} + 2\beta_{6} + 2\beta_{4} + \beta_{3} + \frac{4}{3}\beta_{2} + \frac{1}{15} \) \\
+%        \( 12 \) & \( 5 \) & \( \alpha_{12} + \beta_{2}\alpha_{3} + \beta_{4}\alpha_{2} + \beta_{12} \) & \( \beta_{12} + \beta_{8} + \beta_{6} + \beta_{4} + \frac{1}{2}\beta_{3} + \frac{2}{3}\beta_{2} + \frac{1}{30} \) \\
+%        \( 13 \) & \( 5 \) & \( \alpha_{13} + 2\beta_{2}\alpha_{4} + \beta_{2}^{2}\alpha_{1} + \beta_{13} \) & \( \beta_{13} + 2\beta_{6} + \beta_{4} + \beta_{3} + \beta_{2} + \frac{1}{20} \) \\
+%        \( 14 \) & \( 5 \) & \( \alpha_{14} + \beta_{5}\alpha_{1} + \beta_{14} \) & \( \beta_{14} + 3\beta_{7} + 3\beta_{4} + \beta_{2} + \frac{1}{20} \) \\
+%        \( 15 \) & \( 5 \) & \( \alpha_{15} + \beta_{2}\alpha_{4} + \beta_{6}\alpha_{1} + \beta_{15} \) & \( \beta_{15} + \beta_{8} + \beta_{7} + \frac{3}{2}\beta_{4} + \frac{1}{2}\beta_{2} + \frac{1}{40} \) \\
+%        \( 16 \) & \( 5 \) & \( \alpha_{16} + \beta_{3}\alpha_{2} + \beta_{7}\alpha_{1} + \beta_{16} \) & \( \beta_{16} + 2\beta_{8} + \beta_{4} + \frac{1}{3}\beta_{2} + \frac{1}{60} \) \\
+%        \( 17 \) & \( 5 \) & \( \alpha_{17} + \beta_{2}\alpha_{4} + \beta_{4}\alpha_{2} + \beta_{8}\alpha_{1} + \beta_{17} \) & \( \beta_{17} + \beta_{8} + \frac{1}{2}\beta_{4} + \frac{1}{6}\beta_{2} + \frac{1}{120} \) \\
+%        \hline
+%    \end{tabular}
+%    \caption{Effective order conditions up to order five.}
+%    \label{table4.3}
+%\end{table}
+%
+%\subsubsection{Effective order conditions}\label{subsubsection4.6.1} % section 4.6.1
+%
+%\qquad To obtain the effective order conditions of method \( M \) it is sufficient to find the effective order conditions on \( \alpha \) such that \( \beta\alpha \in E\beta(1 + H_{p}) \), which is equivalent to Definition \ref{def4.7}. Hence we require \( (\beta\alpha)(t) = (E\beta)(t) \) for \( r(t) \leq p \). The algebraic expressions of Table \ref{table4.1} were used to derive the effective order conditions up to order five. These are shown in Table \ref{table4.3}. In these equations we regard \( \beta_{1} = 0 \) and \( \beta_{i} \) for \( i = 2, 3, \dots \) to be free parameters. Using MAPLE we can simplify equations of Table \ref{table4.3}, by using the known values of \( a_{i} \) in each equation (see Appendix \ref{appendixA} for effective order five conditions). Then, the simplified equations of Table \ref{table4.3} take the form
+%\begin{subequations}\label{eq4.22}
+%    \begin{align}
+%        \alpha_{1}  &= 1 \\
+%        \alpha_{2}  &= \frac{1}{2} \\
+%        \alpha_{3}  &= \frac{1}{3} + 2\beta_{2} \\
+%        \alpha_{4}  &= \frac{1}{6} \\
+%        \alpha_{5}  &= \frac{1}{4} + 3\beta_{2} + 3\beta_{3} \\
+%        \alpha_{6}  &= \frac{1}{8} + \beta_{2} + \beta_{3} + \beta_{4} \\
+%        \alpha_{7}  &= \frac{1}{12} +\beta_{2} - \beta_{3} + 2\beta_{4} \\
+%        \alpha_{8}  &= \frac{1}{24} \\
+%        \alpha_{9}  &= \frac{1}{5} + 4\beta_{2} + 6\beta_{3} + 4\beta_{5} \\
+%        \alpha_{10} &= \frac{1}{10} + \frac{5}{3}\beta_{2} - 2\beta_{2}^{2} + \frac{5}{2}\beta_{3} + \beta_{4} + \beta_{5} + 2\beta_{6} \\
+%        \alpha_{11} &= \frac{1}{15} + \frac{4}{3}\beta_{2} + \frac{1}{2}\beta_{3} + 2\beta_{4} + 2\beta_{6} + \beta_{7} \\
+%        \alpha_{12} &= \frac{1}{30} + \frac{1}{3}\beta_{2} - 2\beta_{2}^{2} + \frac{1}{2}\beta_{3} + \frac{1}{2}\beta_{4} + \beta_{6} + \beta_{8} \\
+%        \alpha_{13} &= \frac{1}{20} + \frac{2}{3}\beta_{2} - \beta_{2}^{2} + \beta_{3} + \beta_{4} + 2\beta_{6} \\
+%        \alpha_{14} &= \frac{1}{20} + \beta_{2} + 3\beta_{4} - \beta_{5} + 3\beta_{7} \\
+%        \alpha_{15} &= \frac{1}{40} + \frac{1}{3}\beta_{2} + \frac{3}{2}\beta_{4} - \beta_{6} + \beta_{7} + \beta_{8} \\
+%        \alpha_{16} &= \frac{1}{60} + \frac{1}{3}\beta_{2} - \frac{1}{2}\beta_{3} + \beta_{4} - \beta_{7} + 2\beta_{8} \\
+%        \alpha_{17} &= \frac{1}{120}.
+%    \end{align}
+%\end{subequations}
+%\vspace{15pt}
+%
+%Once effective order conditions on \( \alpha \) are found we can construct method \( M \). In this way we can find the relative order conditions for \( \beta \), since these depend on the classical order conditions on \( \alpha \). At the same time we find the order conditions of \( \beta^{-1} \) using either Table \ref{table4.2} or by considering \( (\beta^{-1}\beta)(t) = 0 \) for all trees of order \( r(t) \leq p \).
+%\newline
+%
+%\begin{table}[t!]
+%    \centering
+%    \begin{tabular}{cc|c}
+%        \textbf{\( RK(s,3,2) \):} & Order conditions for \( M \) & Order conditions for \( S \) \\
+%        \cline{2-3}
+%                              & \( \alpha_{1} = 1 \), \( \alpha_{2} = \frac{1}{2} \), & \( \beta_{1} = 0 \)          \\
+%                              & \( \alpha_{4} = \frac{1}{6} \)                        & \( \beta_{2} = - \frac{1}{6} + \frac{1}{2}\alpha_{3} \). \\
+%                              \multicolumn{3}{c}{} \\
+%                              \multicolumn{3}{c}{} \\
+%        \textbf{\( RK(s,4,2) \):} & Order conditions for \( M \) & Order conditions for \( S \) \\
+%        \cline{2-3}
+%                              & \( \alpha_{1} = 1 \), \( \alpha_{2} = \frac{1}{2} \), \( \alpha_{4} = \frac{1}{6} \) & \( \beta_{1} = 0 \), \( \beta_{2} = - \frac{1}{6} + \frac{1}{2}\alpha_{3} \) \\
+%                              & \( \frac{1}{4} - \alpha_{3} + \alpha_{5} - 2\alpha_{6} + \alpha_{7} = 0 \)           & \( \beta_{3} = \frac{1}{12} - \frac{1}{2}\alpha_{3} + \frac{1}{3}\alpha_{5} \) \\
+%                              & \( \alpha_{8} = \frac{1}{24} \)                                                      & \( \beta_{4} = - \frac{1}{24} - \frac{1}{3}\alpha_{5} + \alpha_{6} \). \\
+%                              \multicolumn{3}{c}{} \\
+%                              \multicolumn{3}{c}{} \\
+%        \textbf{\( RK(s,4,3)_{1} \):} & Order conditions for \( M \)                                                         & Order conditions for \( S \) \\
+%        \cline{2-3}
+%                              & \( \alpha_{1} = 1 \), \( \alpha_{2} = \frac{1}{2} \), \( \alpha_{3} = \frac{1}{3} \), \( \alpha_{4} = \frac{1}{6} \) & \( \beta_{1} = 0 \), \( \beta_{2} = 0 \) \\
+%                              & \( \frac{1}{12} + \alpha_{5} - 2\alpha_{6} + \alpha_{7} = 0 \) & \( \beta_{3} = - \frac{1}{12} + \frac{1}{3}\alpha_{5} \) \\
+%                              & \( \alpha_{8} = \frac{1}{24} \) & \( \beta_{4} = - \frac{1}{24} - \frac{1}{3}\alpha_{5} + \alpha_{6} \). \\
+%                              \multicolumn{3}{c}{} \\
+%                              \multicolumn{3}{c}{} \\
+%        \textbf{\( RK(s,4,3)_{2} \):} & Order conditions for \( M \)                                                         & Order conditions for \( S \) \\
+%        \cline{2-3}
+%                              & \( \alpha_{1} = 1 \), \( \alpha_{2} = \frac{1}{2} \), \( \alpha_{3} = \frac{1}{3} \) & \( \beta_{1} = 0 \)\\
+%                              & \( \alpha_{4} = \frac{1}{6} \), \( \alpha_{5} = \frac{1}{4} \)                       & \( \beta_{2} = 0 \)\\
+%                              & \( \frac{1}{6} - 2\alpha_{6} + \alpha_{7} = 0 \)                                     & \( \beta_{3} = 0 \)\\
+%                              & \( \alpha_{8} = \frac{1}{24} \) & \( \beta_{4} = - \frac{1}{8} + \alpha_{6} \).
+%    \end{tabular}
+%    \caption{Order conditions on $ \alpha $ and $ \beta $ for methods of effective order three and four.}
+%    \label{table4.4}
+%\end{table}
+%
+%We use the abbreviation RK(\( s \),\( q \),\( p \)) for an \( s \)-stage Runge-Kutta method of effective order \( q \) and classical order \( p \). Using this notation method \( M \) is a RK(\( s \),\( q \),\( p \)). Note that if a method is of effective order \( q \), then this has an actual meaning if \( q > 2 \), because the effective second order conditions are unchanged from the classical order (that is \( a_{1} = 1 \) and \( a_{2} = 1/2 \)). Therefore, all effective order methods are of at least classical order \( 2 \). In general \( q > p \) and by referring to a RK(\( s \),\( q \),\( p \)) this means that the method satisfies \( a(t) = E(t) \) for all trees of order \( r(t) \leq p \) and moreover extra conditions up to order \( q \), given by equations \eqref{eq4.22}. By setting the values of \( \beta_{i} \) for \( i = 2, 3, \dots \) equal to zero, we increase the classical order on \( \alpha \), since \( a(t_{i}) = E(t_{i}) \) for more values of index \( i \) (see equations \eqref{eq4.22}). On the other hand, not requiring any restriction on \( \beta_{i} \), \( i = 2, 3, \dots \) gives more freedom in the choice of coefficients for method \( M \), because now less equations must be satisfied. Further more, it is important that for the tall trees \( t_{0}, t_{4}, t_{8}, t_{17}, \dots \) the effective order conditions on \( \alpha \) match with the classical order conditions.
+%\newline
+%
+%In Table \ref{table4.4} we present explicitly the order conditions on \( \alpha \) and \( \beta \) for methods of effective order \( 3 \) and \( 4 \), where \( s \) denotes the stage. The fifth effective order conditions can be found in Appendix \ref{appendixA}.
+%\newline
+%
+%We verify that the number of order conditions for a method of effective order three and four are always less than the number of the classical order conditions. In particular for effective order three the conditions are now three instead of four and for a method of effective order four are either five or six, instead of eight. For this reason more freedom in the choice of the coefficients of the methods is provided. As an example, effective order explains why one can construct \( s \)-stage explicit Runge-Kutta methods that can effectively attain order \( p \) equal to \( s \), when accompanied by starting and finishing methods \cite{Butcher1987_book}. In this way effective order overcomes the order barrier of explicit methods stating that for stages more than five we can not have classical order equal to the number of stages. The number of conditions for a Runge-Kutta method to have effective order \( q \) has been examined by Butcher and Sanz-Serna in \cite{Butcher1996_article}. It has been proved that if \( v_{q} \) denotes the number of rooted trees with \( q \) vertices, then the minimum number of conditions for effective order \( q \) will be \( e_{q} = v_{q} + 1 \), for \( q > 1 \). This is in contrast with the number of conditions for classical order which is \( c_{q} = \sum_{k=1}^{q}v_{k} \). Table \ref{table4.5} gives the number of rooted trees, the number of effective and the classical order conditions as \( q \) increases \cite{Chen1998_thesis}.
+%\newline
+%
+%\begin{table}[t!]
+%    \centering
+%    \begin{tabular}{|c|cccccccccc|}
+%        \hline
+%        \( q \) & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+%        \hline
+%        \( v_{q} \) & 1 & 1 & 2 & 4 & 9  & 20 & 48 & 115 & 286 & 719  \\
+%        \( e_{q} \) & 1 & 2 & 3 & 5 & 10 & 21 & 49 & 116 & 287 & 720  \\
+%        \( c_{q} \) & 1 & 2 & 4 & 8 & 17 & 37 & 85 & 200 & 486 & 1205 \\
+%        \hline
+%    \end{tabular}
+%    \caption{Number of order conditions for effective order $ q $.}
+%    \label{table4.5}
+%\end{table}
+%
+%In the next chapter we will see how based on the effective order conditions one can construct the main method \( M \) and the starting and finishing perturbation methods \( S \) and \( S^{-1} \). Then, since \( (\beta\alpha\beta^{-1})^{n} = \beta\alpha^{n}\beta^{-1} \) applying \( n \) times the method \( P = SMS^{-1} \) gives
+%\begin{displaymath}
+%    \begin{split}
+%    P^{n} &= SMS^{-1}\underbrace{(SMS^{-1})\dots\dots(SMS^{-1})}_{n-2 \text{ times}}SMS^{-1} \\
+%          &= SM(S^{-1}S)MS^{-1}\dots\dots SM(S^{-1}S)MS^{-1} \\
+%          &= SMIMI\dots\dots IMIMS^{-1} \\
+%          &= SM^{n}S^{-1},
+%    \end{split}
+%\end{displaymath}
+%where \( I \) is the identity method. Therefore, instead of applying the method \( P \) at each step, now three methods come into play. The starting method is applied at the beginning without advancing the solution. Instead, it introduces a permutation on the solution so as method \( M \) reproduces this perturbation within its classical order. The main method \( M \) it is used \( n \) times and the finishing method is used at the end to correct the solution. The final result approximates the solution to within \( \mathcal{O}((\Dt)^{p}) \), where \( p \) is the effective order of method \( M \).
+%
+%

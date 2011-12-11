@@ -1,0 +1,51 @@
+\section{Review of SSP theory}\label{sec:SSP}
+
+\subsection{Strong Stability Preserving Runge-Kutta methods}\label{subsec:SSPRK}
+
+\todo{no downwind method in this paper}
+
+\quad Strong stability preserving time-stepping methods were originally used for time integration of hyperbolic conservation laws
+\begin{align*}
+    U_t + f(U)_x = 0.   % not bold: scalar PDE
+\end{align*}
+A spatial discretization gives the system of ODEs
+\begin{align*}
+    \bm{u}_{t} = \bm{F}(\bm{u}),
+\end{align*}
+where $\bm{u}$ is a vector of grid values approximating the solution $U$ at discrete grid points and $\bm{F}$ is the spatial discretization of function $f$.
+
+The spatial discretization is often chosen such that the solution $\bm{u}^{n}$ computed with the forward Euler scheme
+\begin{align*}
+    \bm{u}^{n+1} = \bm{u}^{n} + \Dt\bm{F}(\bm{u}^{n}),
+\end{align*}
+is non-increasing in some norm, seminorm, or convex functional:
+\begin{align*}
+    \|\bm{u}^{n+1}\| \le \|\bm{u}^n\|,
+\end{align*}
+for some time-step restriction $\Dt \leq \Dt_{\text{FE}}$.
+
+\todo{Add basic SSP intro here}
+
+\todo{SSP coefficient and effective SSP coefficient}.
+\colincomment{Note the somewhat unfortunate terminology: the word effective here is unrelated
+to the concept of effective-order introduced below.}
+\yianniscomment{It is also unfortunately that we can't avoid referring to effective SSP coefficient. Perhaps this can be minimized only in the title of the table \ref{tab:5.1}}
+
+\subsection{Optimization of schemes}\label{subsec:Optimal_SSPRK}
+
+\colincomment{We could consider moving the form of optimization here. If not, can probably merge this whole SSP section with the intro.}
+\yianniscomment{Yes, the optimization problem can be introduced here. Also connected with the radius of absolute monotonicity problem. Finally very brief review on optimal SSPRK.}
+
+
+
+%\chapter{Introduction}\label{chapter1} % chapter 1
+%
+%\vspace{20pt}
+%
+%\qquad When Carl Runge first suggested the idea of generalising Euler method in 1895, he argued that only few people have actually studied the numerical solution of differential equations, whose analytical solution is unknown. Since then, great improvements have been made. The use of Runge-Kutta methods in numerical solution of differential equations has gained fresh interest due to the rapid technological evolution of computers. Although much of the interest has now moved to implicit Runge-Kutta methods, the implementation cost of the implicit schemes makes explicit methods more efficient.
+%\newline
+%
+%When it comes to the numerical solution of hyperbolic pdes, numerical methods need to satisfy certain nonlinear stability requirements, because of the potential unphysical behaviour of the solutions. Therefore, the spatial discretisation is carefully chosen in such a way that guarantees nonlinear stability conditions when coupled with Forward Euler integration. High order strong-stability-preserving time discretisations have been developed to preserve these nonlinear stability properties, possibly under a different time-step restriction. The main motivation of this thesis is to search for strong-stability-preserving (SSP) Runge-Kutta methods of effective order. These methods satisfy specific relaxed order conditions. We make use of the theory of algebraic interpretation of Runge-Kutta methods, developed by Butcher \cite{Butcher2008_book,Butcher1987_book} to derive these conditions. Then, the strong-stability-preserving theory is used to derive optimal SSP methods of effective order. Using such schemes it was possible to overcome certain order barriers of explicit Runge-Kutta methods. Furthermore, effective order SSP schemes are used to construct new Runge-Kutta schemes. In this study we explore the construction of these new methods. The order and SSP properties of the resulting schemes were investigated by performing numerical tests.
+%\newline
+%
+%The thesis is organised as follows. We first begin by giving the basic definitions of Runge-Kutta methods with the underlying theory regarding consistency and stability of the methods. In Chapter \ref{chapter3} we review the fundamental concepts of SSP theory for nonlinear problems. Next, in Chapter \ref{chapter4} we discuss the algebraic interpretation of Runge-Kutta methods. The two theories are joined in Chapter \ref{chapter5} where we show how optimal SSP Runge-Kutta methods of effective order can be found. We then verify numerically the properties regarding the order and time-step restrictions of these schemes. Finally, in Chapter \ref{chapter6} we summarise the main results. 
