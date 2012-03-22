@@ -1,6 +1,8 @@
 \section{Algebraic representation of Runge-Kutta methods}\label{sec:Algebraic_RK}
 
-\indent As first introduced by Butcher \cite{Butcher1969}, the representation of Runge-Kutta methods can be generalized in an abstract algebraic context. The Runge-Kutta methods are represented as elements of an algebraic group, based on their order. In this characterization, we remove our attention from the numerical methods themselves and we concentrate on their counterparts in a certain group containing all real-valued maps on the set of rooted trees. This alternative interpretation leads to a generalization of numerical accuracy called \emph{effective order}. The underlying theory was expanded by Hairer and Wanner \cite{Hairer1974}. It was applied to symplectic methods for Hamiltonian problems \cite{Lopez1996} and further extendend to including Singly--Implicit Runge--Kutta methods \cite{Butcher1997, Butcher1999}. In this section we review the fundamental concepts of this representation providing a sufficient framework in which effective order methods can be defined. For more detailed description the reader may refer to \cite{Butcher2008_book, Butcher1972}.
+\indent The order of a Runge--Kutta method can be generalized by considering an alternative interpretation of numerical accuracy, called \emph{effective order}. As we will see later in Section \ref{sec:Optimal_ESSPRK} this is advantageous in designing SSPRK schemes consisting of suitable pre- and post- processors that attain higher order than the order of the constructing methods. 
+
+The effective order of a Runge--Kutta method is defined in an abstract algebraic context. In this characterization, we remove our attention from the numerical methods themselves and we concentrate on their counterparts in a certain group containing all real-valued maps on the set of rooted trees. The underlying theory was introduced by Butcher \cite{Butcher1969} and expanded by Hairer and Wanner \cite{Hairer1974}. It was applied to symplectic methods for Hamiltonian problems \cite{Lopez1996} and further extendend to including Singly--Implicit Runge--Kutta methods \cite{Butcher1997, Butcher1999}. In this section we review the fundamental concepts of this representation providing a sufficient framework in which effective order methods can be defined. For more detailed description the reader may refer to \cite{Butcher2008_book, Butcher1972}.
 
 \subsection{Formulation of the Runge-Kutta group}\label{sec:RK_group}
 
@@ -35,25 +37,6 @@ The set $G$ when equipped with the the above definition, forms a product group w
     \label{tab:tree_partition}
 	\end{table}
 \end{example}
-\begin{example}\label{ex:FE_inv_2}
-	Consider the forward Euler method $\bm{u}^{n+1} = \bm{u}^{n} + \Dt \bm{F}(\bm{u}^{n})$. To find the inverse method, 		we seek a method that undoes the work of this method, recovering $\bm{u}^{n}$ from $\bm{u}^{n+1}$. We can solve for 
-	$\bm{u}^{n}$ and obtain the backward Euler method with a time--step of $-\Dt$. Now, let $\alpha$ and $\beta$ be 			members of $G$ corresponding respectively to the forward Euler method and the backward Euler method. Applying 				\eqref{eq:Group_operation}, we calculate $(\beta\alpha)(t_0) =\alpha_0\beta_0 = 1$ and $(\beta\alpha)(t_1) 						=\alpha_1\beta_0 + \alpha_0\beta_1 = \alpha_1 + \beta_1 	= 1 - 1 = 0$. We can also calculate $(\beta\alpha)(t_2) = 			\alpha_2\beta_0 + \alpha_1\beta_1 + \alpha_0\beta_2 =  (0)(1) + (1)(-1) + (1)(1) = 0$ and in general $(\beta\alpha)(t_i) 	= 0$ for $i \geq 1$. These results are consistent with the two methods being inverses of each other.
-	\yianniscomment{I corrected the above equations. Butcher tableaux for FE and BE with $-\Dt$ are respectively
-	$\begin{array}{c|c}
-		0 & 0 \\
-		\hline
-		   & 1
-	\end{array}$ and 
-	$\begin{array}{c|c}
-		-1 & -1 \\
-		\hline
-		   & -1
-	\end{array}$. Hence $\alpha_0 = \alpha_1 = 1$ and $\alpha_{i>2} = 0$ and $\beta_0 = 1, \beta_1 = -1, \beta_2 = 1, ...$. I know that BE is $\begin{array}{c|c}
-		1 & 1 \\
-		\hline
-		   & 1
-	\end{array}$, but this is with positive $\Dt$.}
-\end{example}
 
 \subsection{Algebraic interpretation of order}\label{sec:Algebraic_order}
 
@@ -78,6 +61,10 @@ The set $G$ when equipped with the the above definition, forms a product group w
 	\end{displaymath}
 	%Assume that $m$ and $\widetilde{m}$ are Runge-Kutta methods where the corresponding members of $G_1$ are $\alpha$ and $\widetilde{\alpha}$.
 \end{definition}
+\begin{example}\label{ex:FE_inv_2}
+	Consider the forward Euler method $\bm{u}^{n+1} = \bm{u}^{n} + \Dt \bm{F}(\bm{u}^{n})$. To find its inverse, we seek a method that undoes the work of this method, recovering $\bm{u}^{n}$ from $\bm{u}^{n+1}$. We can solve for $\bm{u}^{n}$ and obtain the backward Euler method with a time--step of $-\Dt$. Now suppose  $\alpha \in G$ corresponds to the forward Euler method. By Definition~\ref{def:Group_operation}, we have $(\alpha^{-1}\alpha)(t_1) = \alpha(t_1) + \alpha^{-1}(t_1) = 0$, so any $\alpha^{-1}$ with $\alpha^{-1}(t_1) = -1$ will do. For example, the forward 	Euler method with size $-\Delta t$ is an inverse to the standard forward Euler method, up to order $1$. Notably, under Definition~\ref{def:Inverse_up_to_p}, inverse methods are not unique and inverse methods of explicit methods need not be implicit.
+\end{example}
+
 %These concepts can be make precise within the algebraic structure by using the quotient group $G_1/(1 + H_{p})$ \cite{Butcher2008_book}.
 % Hence we think of working with methods which for a given order $p$,
 % are equivalent in this sense.  This can be made precise using the
@@ -109,10 +96,6 @@ where $\gamma(t)$ is the density. For a particular tree $t \in T$, its density i
 \end{definition}
 \begin{example}\label{ex:Order_conditions}
 	Applying Definition~\ref{def:RK_order} with $p=5$ recovers the standard 17 order conditions for classical order five.
-\end{example}
-\begin{example}\label{ex:FE_inv_3}
-	%\todo{final FE example, showing that in $G_1/(1+H_1)$ we don't need BE to construct an inverse.}
-	Following on from Examples~\ref{ex:FE_inv_1} and~\ref{ex:FE_inv_2}, we wish to construct an inverse method for forward Euler up to order $1$.  By Definition~\ref{def:Group_operation}, we have $(\alpha^{-1}\alpha)(t_1) = \alpha(t_1) + \alpha^{-1}(t_1) = 0$, so any $\alpha^{-1}$ with $\alpha^{-1}(t_1) = -1$ will do. For example, the forward Euler method with size $-\Delta t$ is an inverse to the standard forward Euler method, up to order $1$. Notably, under Definition~\ref{def:Inverse_up_to_p}, inverse methods are not unique and inverse methods of explicit methods need not be implicit.
 \end{example}
 
 \subsubsection{Effective order}\label{sec:Effective_order}
