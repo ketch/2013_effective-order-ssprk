@@ -1,10 +1,11 @@
-\section{Review of SSP theory}\label{sec:SSP}
+%\section{Review of SSP theory}
+\section{Strong Stability Preserving Runge-Kutta methods}
+\label{sec:SSP}
+%\label{subsec:SSPRK}
 
-\subsection{Strong Stability Preserving Runge-Kutta methods}\label{subsec:SSPRK}
+%\todo{no downwind methods in this paper}
 
-\todo{no downwind method in this paper}
-
-\quad Strong stability preserving time-stepping methods were originally used for time integration of hyperbolic conservation laws
+Strong stability preserving time-stepping methods were originally used for time integration of hyperbolic conservation laws \textbf{CITE}
 \begin{align*}
     U_t + f(U)_x = 0.   % not bold: scalar PDE
 \end{align*}
@@ -12,9 +13,11 @@ A spatial discretization gives the system of ODEs
 \begin{align*}
     \bm{u}_{t} = \bm{F}(\bm{u}),
 \end{align*}
-where $\bm{u}$ is a vector of grid values approximating the solution $U$ at discrete grid points and $\bm{F}$ is the spatial discretization of function $f$.
+where $\bm{u}$ is a vector of continuous-in-time grid values approximating the solution $U$ at discrete grid points and $\bm{F}$ is the spatial discretization of function $f$.
+A time discretization then produces a sequence of solutions $\bm{u}^{n} \approx \bm{u}(t_n)$.
 
-The spatial discretization is often chosen such that the solution $\bm{u}^{n}$ computed with the forward Euler scheme
+%In the particular case of hyperbolic conservation laws,
+Many popular spatial discretizations are chosen such that the solution $\bm{u}^{n}$ computed with the forward Euler scheme
 \begin{align*}
     \bm{u}^{n+1} = \bm{u}^{n} + \Dt\bm{F}(\bm{u}^{n}),
 \end{align*}
@@ -23,29 +26,89 @@ is non-increasing in some norm, seminorm, or convex functional:
     \|\bm{u}^{n+1}\| \le \|\bm{u}^n\|,
 \end{align*}
 for some time-step restriction $\Dt \leq \Dt_{\text{FE}}$.
+If this is the case, then an SSP method also generates solutions which are non-increasing, under a modified time-step restriction.
+\begin{definition}[Strong Stability Preserving]
+Suppose $\bm{F}$ is a spatial discretization which satisfies
+$$\|\bm{u}^{n} + \Dt\bm{F}(\bm{u}^{n})\| \le \|\bm{u}^n\|,$$
+for all suitably-restricted time steps
+$0 \le \Dt \le \Dt_{\text{FE}}$,
+in a norm, seminorm, or convex functional $\|\cdot\|$ of interest.
+Then a time-stepping method is said to be \emph{strong stability preserving} with \emph{SSP coefficient} $c$ if it generates a sequence of solution values $\bm{u}^n$ 
+such that
+\begin{align*}
+  \|\bm{u}^{n+1}\| \le \|\bm{u}^n\|,
+\end{align*}
+for a time-step restriction
+$$\Dt \leq c \Dt_{\text{FE}}.$$
+\end{definition}
 
-\todo{Add basic SSP intro here}
 
-\todo{SSP coefficient and effective SSP coefficient}.
-\colincomment{Note the somewhat unfortunate terminology: the word effective here is unrelated
-to the concept of effective-order introduced below.}
-\yianniscomment{It is also unfortunately that we can't avoid referring to effective SSP coefficient. Perhaps this can be minimized only in the title of the table \ref{tab:5.1}}
+\subsection{The SSP coefficient}
 
-\subsection{Optimization of schemes}\label{subsec:Optimal_SSPRK}
-
-\colincomment{We could consider moving the form of optimization here. If not, can probably merge this whole SSP section with the intro.}
-\yianniscomment{Yes, the optimization problem can be introduced here. Also connected with the radius of absolute monotonicity problem. Finally very brief review on optimal SSPRK.}
-
+The SSP coefficient $c$ is a property of the particular time-stepping method and quantifies the allowable time step size relative to that of the forward Euler method
+($\Dt_{\text{FE}}$ can be thought of as a property of the spatial discretization $\bm{F}$).
+Generally we want the SSP coefficient to be as large as possible for efficiency.
+To allow a fair comparison of different explicit methods, we scale by the number of stages $s$ by computing the \emph{effective SSP coefficient}
+$$c_{\text{eff}} = \frac{c}{s}.$$
+Note the somewhat unfortunate terminology: the word \emph{effective} here is unrelated to the concept of \emph{effective order} introduced below.
+%\yianniscomment{It is also unfortunately that we can't avoid referring to effective SSP coefficient. Perhaps this can be minimized only in the title of the table \ref{tab:5.1}}
 
 
-%\chapter{Introduction}\label{chapter1} % chapter 1
-%
-%\vspace{20pt}
-%
-%\qquad When Carl Runge first suggested the idea of generalising Euler method in 1895, he argued that only few people have actually studied the numerical solution of differential equations, whose analytical solution is unknown. Since then, great improvements have been made. The use of Runge-Kutta methods in numerical solution of differential equations has gained fresh interest due to the rapid technological evolution of computers. Although much of the interest has now moved to implicit Runge-Kutta methods, the implementation cost of the implicit schemes makes explicit methods more efficient.
-%\newline
-%
-%When it comes to the numerical solution of hyperbolic pdes, numerical methods need to satisfy certain nonlinear stability requirements, because of the potential unphysical behaviour of the solutions. Therefore, the spatial discretisation is carefully chosen in such a way that guarantees nonlinear stability conditions when coupled with Forward Euler integration. High order strong-stability-preserving time discretisations have been developed to preserve these nonlinear stability properties, possibly under a different time-step restriction. The main motivation of this thesis is to search for strong-stability-preserving (SSP) Runge-Kutta methods of effective order. These methods satisfy specific relaxed order conditions. We make use of the theory of algebraic interpretation of Runge-Kutta methods, developed by Butcher \cite{Butcher2008_book,Butcher1987_book} to derive these conditions. Then, the strong-stability-preserving theory is used to derive optimal SSP methods of effective order. Using such schemes it was possible to overcome certain order barriers of explicit Runge-Kutta methods. Furthermore, effective order SSP schemes are used to construct new Runge-Kutta schemes. In this study we explore the construction of these new methods. The order and SSP properties of the resulting schemes were investigated by performing numerical tests.
-%\newline
-%
-%The thesis is organised as follows. We first begin by giving the basic definitions of Runge-Kutta methods with the underlying theory regarding consistency and stability of the methods. In Chapter \ref{chapter3} we review the fundamental concepts of SSP theory for nonlinear problems. Next, in Chapter \ref{chapter4} we discuss the algebraic interpretation of Runge-Kutta methods. The two theories are joined in Chapter \ref{chapter5} where we show how optimal SSP Runge-Kutta methods of effective order can be found. We then verify numerically the properties regarding the order and time-step restrictions of these schemes. Finally, in Chapter \ref{chapter6} we summarise the main results. 
+%\subsection{Optimization of schemes}
+\subsection{Optimal SSP Schemes}\label{subsec:Optimal_SSPRK}
+
+
+An explicit $s$-stage Runge--Kutta method generates a sequence of approximate solutions $\bm{u}^n \approx \bm{u}(t_n)$ via an update formula
+$$\bm{u}^{n+1} = \bm{u}^{n} + \Dt \sum_i^s b_i \bm{F}(\bm{y}^j),$$
+where the $\bm{y}^j$ are intermediate stage values computed using a similar rule
+$\bm{y}^{i} = \bm{u}^{n} + \Dt \sum_j^s a_{ij} \bm{F}(\bm{y}^i)$.
+This is the Butcher form of the Runge--Kutta method and the coefficients $(A,\bm{b})$ make up the Butcher tableau \cite{Butcher2008_book}.
+For the method to obtain a certain order of accuracy, the coefficients must satisfy certain order conditions.
+
+We say that an SSP Runge--Kutta method is optimal if it has the largest possible SSP coefficient for a given order and a given number of stages.
+The search for these optimal methods was originally based on expressing the Runge--Kutta method as combinations of forward Euler steps (the Shu--Osher form) and solving a nonlinear optimization problem \cite{Gottlieb1998, Gottlieb2001, Spiteri2003a, Spiteri2003b, Ruuth2004}.
+%The optimization process followed is similar with the one used in \cite{Ketcheson2008, Ketcheson2009} and the search for optimal explicit Runge-Kutta methods has been explored in \cite{Gottlieb1998, Gottlieb2001, Spiteri2003a, Spiteri2003b, Ruuth2004} by using the Shu-Osher form.
+However, the SSP coefficient is related to the \emph{radius of absolute monotonicity} \cite{Kraaijevanger1991} and, for irreducible Runge--Kutta methods, the two are equivalent \cite{Ferracina2004, Higueras2004}.
+This gives an algebraic characterization of the SSP coefficient.
+The optimization problem of finding optimal SSP Runge--Kutta methods can thus be formulated in Butcher form by using the absolute monotonicity conditions as follows.
+% The latter formulation is more efficient as it uses half the number of decision variables \cite{Ketcheson2008}.
+% note: the shu--osher form is an optimization even for a given method
+%Assume that the ESSPRK(\( s \),\( q \),\( p \)) method \( M \) can be written as \( (A,\bm{b}^{\texttt{T}},\bm{c}) \) and
+First we define the \( (s+1) \times s \) matrix
+\begin{equation}\label{eqKmat}
+    K = \left(
+            \begin{array}{c}
+                     A              \\
+                     \textbf{b}^{\texttt{T}}
+            \end{array}
+         \right),
+\end{equation}
+%Maximizing the radius of absolute monotonicity of the main method is equivalent with finding the solution to the following optimization problem
+and state the following optimization problem
+\begin{equation}\label{eqSSPopt}
+    \max_{A, \bm{b}^{\texttt{T}}, r} r, \qquad \text{subject to } \quad \left\{
+                                                 \begin{array}{ll}
+                                                   N \geq 0 \\
+                                                   \bm{e}_{s+1} - rN\bm{e}_{s} \geq 0 \\
+                                                   \Phi(K) = 0,
+                                                 \end{array}
+                                               \right.
+\end{equation}
+where \( N(A,b,r) = K(I + rA)^{-1} \in \mathbb{R}^{s+1 \times s}\),
+\( \bm{e}_s \) is the vector of ones of length $s$,
+and \( \Phi(K) \) represents the  order conditions.
+The inequalities are understood component-wise.
+
+Following \cite{Ketcheson2008, Ketcheson2009}, we will use this optimization problem to perform a numerical search for optimal SSP Runge--Kutta methods.
+We first need to define the order conditions $\Phi(K)$ for methods of effective order.
+
+%The methods are found through numerical search, using
+%\textsc{MATLAB}'s optimization toolbox on the above constrained
+%optimization problem.  Specifically, we use \verb"fmincon" with a
+%sequential quadratic programming approach.
+%This process does not guarantee a global minimizer, so several
+%searches are performed until the method with the largest possible SSP
+%coefficient is found.
+
+
+
