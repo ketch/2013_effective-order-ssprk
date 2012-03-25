@@ -1,24 +1,28 @@
 % appendix A
-\section{Appendix}\label{appendixA}
+\section{Proofs}\label{appendixA}
 
-\subsection{Proof of Lemma~\ref{Davids_lemma}}
-\begin{lemma}\label{lemA.1}
-    Given \( b,v \in \mathbb{R}^{n} \), suppose that
-    \begin{subequations}\label{eq4.3}
-        \begin{align}
-            b_i & > 0 \mbox{ for all } i, \label{eq4.3a} \\
-            \sum_{i=1}^n b_i & = 1, \label{eq4.3b} \\
-            \sum_{i=1}^n b_i v_i^2 & = \left(\sum_{i=1}^n b_i v_i \right)^2. \label{eq4.3c}
-        \end{align}
-    \end{subequations}
-    Then all \(v_i\) are equal but at most one; in other words, there exists \( \alpha\in\mathbb{R} \) and an integer \(k\) such that \(v_i=\alpha\) for all \(i\ne k\).
-\end{lemma}
-\begin{proof}
-    Let \( k \) be an arbitrary integer between \( 1 \) and \( n \). Then by collecting terms in powers of \( v_k \), \eqref{eq4.3c} can be written
+%\subsection{Proof of Lemma~\ref{Davids_lemma}}
+
+% \begin{lem}\label{lemA.1}
+%     Given \( b,v \in \mathbb{R}^{n} \), suppose that
+%     \begin{subequations}\label{eq4.3}
+%         \begin{align}
+%             b_i & > 0 \mbox{ for all } i, \label{eq4.3a} \\
+%             \sum_{i=1}^n b_i & = 1, \label{eq4.3b} \\
+%             \sum_{i=1}^n b_i v_i^2 & = \left(\sum_{i=1}^n b_i v_i \right)^2. \label{eq4.3c}
+%         \end{align}
+%     \end{subequations}
+%     Then all \(v_i\) are equal but at most one; in other words, there exists \( \alpha\in\mathbb{R} \) and an integer \(k\) such that \(v_i=\alpha\) for all \(i\ne k\).
+% \end{lem}
+% \colintodo{decide whether to state lemma here or in text: not both}%
+\begin{proof}[Proof of Lemma~\ref{Davids_lemma}]
+    Let \( k \) be an arbitrary integer between \( 1 \) and \( n \). Then by collecting terms in powers of \( v_k \),
+%\eqref{eq4.3c} can be written
+\eqref{eq:DavidsLemma_c} can be written
 \begin{equation*}
     %b_k v_k^2 + \sum_{i\ne k} b_i v_i^2 - b_k^2 v_k^2 - 2 b_k v_k \sum_{i\ne k} b_i v_i
     %        - \left(\sum_{i\ne k} b_i v_i \right)^2 = 0 \\
-    b_{k}(1-b_{k})v_{k}^{2} - 2b_{k}v_{k}\sum_{i \neq k}b_{i}v_{i} + \sum_{i \neq k}b_{i}v_{i}^{2} - \left(\sum_{i \neq k}b_{i}v_{i}\right)^{2} = 0.
+  b_{k}(1-b_{k})v_{k}^{2} - 2b_{k}v_{k}\sum_{i \neq k}b_{i}v_{i} + \sum_{i \neq k}b_{i}v_{i}^{2} - \left(\sum_{i \neq k}b_{i}v_{i}\right)^{2} = 0.
 \end{equation*}
 This is a quadratic equation in \( v_{k} \) whose roots are real if and only if
 \begin{equation*}
@@ -28,7 +32,7 @@ Expanding and canceling terms yields
 \begin{equation*}
     (1-b_{k})\sum_{i \neq k}b_{i}v_{i}^{2} - \left(\sum_{i \neq k}b_{i}v_{i} \right)^{2} \leq 0.
 \end{equation*}
-By \eqref{eq4.3b}, \( 1-b_{k} = \sum_{j \ne k}b_{j} \), so we have
+By \eqref{eq:DavidsLemma_b}, \( 1-b_{k} = \sum_{j \ne k}b_{j} \), so we have
 \begin{equation*}
     \sum_{j \neq k}b_{j}\sum_{i \neq k}b_{i}v_{i}^{2} - \sum_{j \neq k}b_{j}v_{j}\sum_{i \neq k}b_{i}v_{i}.
 \end{equation*}
@@ -48,11 +52,12 @@ This simplifies to
 \begin{equation*}
     \sum_{j \neq k}\sum_{i \neq k,j}b_{j}b_{i}(v_{i} - v_{j})^{2} \leq 0.
 \end{equation*}
-By \eqref{eq4.3a}, this can only hold if \( v_{i} = v_{j} \) for all \( i,j \neq k \).
+By \eqref{eq:DavidsLemma_a}, this can only hold if \( v_{i} = v_{j} \) for all \( i,j \neq k \).
 \end{proof}
 
-\subsection{Proof of Theorem~\ref{thm:positiveb}}
-\begin{proof}
+%\subsection{Proof of Theorem~\ref{thm:positiveb}}
+
+\begin{proof}[Proof of Theorem~\ref{thm:positiveb}]
     Consider the fifth-effective order conditions of classical order two for the main method, listed in Table~\ref{tab:Effective_oc}. We declare \( \beta_{2} \) as a free parameter and we treat the case that \( \beta_{2} \) is nonzero separately from the one that is zero. Among others the order conditions must satisfy the following equations:
     \begin{subequations}\label{eq4.4}
         \begin{align}
@@ -63,26 +68,31 @@ By \eqref{eq4.3a}, this can only hold if \( v_{i} = v_{j} \) for all \( i,j \neq
         \end{align}
     \end{subequations}
     where the powers on vectors are understood component-wise. Supposing that the above equations can be solved simultaneously, then substituting \eqref{eq4.4b} in \eqref{eq4.4c} and collecting terms gives \( \beta_{2} = \bm{b}^{T}\bm{v} \), where \( \bm{v} = \frac{1}{2}\bm{c}^{2} - A\bm{c} \). Squaring yields
-    \begin{equation}\label{eq4.5}
-        \beta_{2}^{2} = \bm{b}^{T}\Bigl(\frac{1}{2}\bm{b}^{T}\bm{c}^{2} - \frac{1}{6}\Bigr)\Bigl(\frac{1}{2}\bm{c}^{2} - A\bm{c}\Bigr).
-    \end{equation}
-    Rewriting \eqref{eq4.4d} and subtracting from \eqref{eq4.5} gives
-    \begin{equation}
+    \begin{equation*}%\label{eq4.5}
+        \beta_{2}^{2} = \bm{b}^{T}\Bigl(\frac{1}{2}\bm{b}^{T}\bm{c}^{2} - \frac{1}{6}\Bigr)\Bigl(\frac{1}{2}\bm{c}^{2} - A\bm{c}\Bigr),
+    \end{equation*}
+    %Rewriting \eqref{eq4.4d} and subtracting from \eqref{eq4.5} gives
+    and subtracting \eqref{eq4.4d} gives
+    \begin{equation*}
         \bm{b}^{T}\biggl(\Bigl(\frac{1}{2}\bm{c}^{2} - A\bm{c}\Bigr)^{2} - \Bigl(\frac{1}{2}\bm{b}^{T}\bm{c}^{2} - \frac{1}{6}\Bigr)\Bigl(\frac{1}{2}\bm{c}^{2} - A\bm{c}\Bigr)\biggr) = 0.
-    \end{equation}
-    Letting \( \bm{w} = \bm{v}^{2} - \beta_{2}\bm{v} \), then equation \eqref{eq4.5} can be written as
+    \end{equation*}
+    Defining \( \bm{w} = \bm{v}^{2} - \beta_{2}\bm{v} \), this can be written as
     \begin{equation}\label{eq4.6}
         \bm{b}^{T}\bm{w} = 0.
     \end{equation}
-    Now, if we require \( b_{i} > 0 \) for all \( i \in \{1,\dots, s\} \), then equation \eqref{eq4.6} is satisfied if \( \bm{w} = 0 \), or if there is a least one negative and at least one positive element in \( \bm{w} \). We will show that none of these two cases can be true.
-    \newline
+    Now, if we require \( b_{i} > 0 \) for all \( i \in \{1,\dots, s\} \), then \eqref{eq4.6} is satisfied if \( \bm{w} = \bm{0} \),
+or if there is a least one negative and at least one positive element in \( \bm{w} \).
+We will show that neither can be true.
 
-    \noindent \textbf{Case 1: \( \bm{w} = 0 \).}
 
-    Then, \( v_{i}^{2} - \beta_{2}v_{i} = 0 \) for all \( i \in \{1,\dots,s\} \), so either \( v_{i} = 0 \) or \( v_{i} = \beta_{2} \). The case that \( \bm{v} = 0 \) is equivalent with a Runge-Kutta method to have stage order two. This means that for a particular time \( t = t^{n} + c_{i}\Delta t \), for \( i \in \{1, \dots, s\} \), the stage \( \textbf{Y}_{i} \) will be at least a second order approximation to the solution at that time. Obviously, for an explicit Runge-Kutta method, the stage \( \textbf{Y}_{2} = \bm{u}^{n} + \Dt\bm{F}(\bm{u}^{n}) \) can not have stage order more than one, hence not all the components of \( \bm{v} \) are zero. Also, \( v_{1} = 0 \) because the first row of matrix \( A \) has only zeros. Let \( I = \{ i \;|\; v_{i} = \beta_{2}, \; i = 1,\dots,s \} \) and \( v_{j} = 0 \) if \( j \neq I \). Then, by using \eqref{eq4.4a} \( \beta_{2} = \sum_{i=1}^{s}b_{i}v_{i} = \sum_{i \in I}b_{i}\beta_{2} = \beta_{2}\sum_{i \in I}b_{i} < \beta_{2} \). Therefore a contradiction.
-    \newline
+\paragraph{Case 1: \( \bm{w} = \bm{0}, \beta_2 \neq 0 \).}
 
-    \noindent \textbf{Case 2: \( \bm{w} \neq 0 \).}
+Here \( v_{i}^{2} - \beta_{2}v_{i} = 0 \) for all \( i \in \{1,\dots,s\} \), so either \( v_{i} = 0 \) or \( v_{i} = \beta_{2} \).
+The case that \( \bm{v} = 0 \) is equivalent with a Runge-Kutta method to have stage order two. This means that for a particular time \( t = t^{n} + c_{i}\Delta t \), for \( i \in \{1, \dots, s\} \), the stage \( \textbf{Y}_{i} \) will be at least a second order approximation to the solution at that time.
+For an explicit Runge-Kutta method, the stage \( \textbf{Y}_{2} = \bm{u}^{n} + \Dt\bm{F}(\bm{u}^{n}) \) can not have stage order more than one, hence not all the components of \( \bm{v} \) are zero. Also, \( v_{1} = 0 \) because the first row of matrix \( A \) has only zeros. Let \( I = \{ i \;|\; v_{i} = \beta_{2}, \; i = 1,\dots,s \} \) and \( v_{j} = 0 \) if \( j \neq I \). Then, by using \eqref{eq4.4a} \( \beta_{2} = \sum_{i=1}^{s}b_{i}v_{i} = \sum_{i \in I}b_{i}\beta_{2} = \beta_{2}\sum_{i \in I}b_{i} < \beta_{2} \). Therefore a contradiction.
+
+
+\paragraph{Case 2: \( \bm{w} \neq \bm{0}, \beta_2 \neq 0 \).}
 
     Then, there exists at least one component \( w_{i} = v_{i}^{2} - \beta_{2}v_{i} \) such that \( w_{i} < 0 \) and at least one component \( w_{j} = v_{j}^{2} - \beta_{2}v_{j} \) such that \( w_{j} > 0 \). We will show that \( 0 < v_{i} < \beta_{2} < v_{j} \).
 
@@ -119,9 +129,12 @@ By \eqref{eq4.3a}, this can only hold if \( v_{i} = v_{j} \) for all \( i,j \neq
         v_{1} = 0 \quad \text{ and } \quad 0 < v_{i} < \beta_{2} < v_{j}, \text{ for } i,j \in \{2,\dots,s\}.
     \end{equation}
     However, based on Lemma~\ref{Davids_lemma} all \( v_{i} \) must be equal except form one. Let that component be \( v_{k} \). If \( k = 1 \), then \( v_{i} = \delta \) for \( i,j \in \{2,\dots,s\} \). If \( k \neq 1 \), then \( v_{i} = 0 \) for \( i \in \{2,\dots,s\}\setminus\{k\} \). Both cases contradict with \eqref{eq4.9}. Thus, the equations \eqref{eq4.4} can not be solved simultaneously and no five-effective order Runge-Kutta of classical order two exists with positive weights.
-    \newline
 
-    In the case that \( \beta_{2} = 0 \) then equation \eqref{eq4.4d} becomes
+
+    \paragraph{Case 3: \( \beta_2 = 0 \).}
+    \colintodo{Ok to label this as third case?}
+    %In the case that \( \beta_{2} = 0 \) then
+    Here \eqref{eq4.4d} becomes
     \begin{equation*}
         \frac{1}{4}\bm{b}^{T}\bm{c}^{4} - \bm{b}^{T}C^{2}A\bm{c} + \bm{b}^{T}(A\bm{c})^{2} = 0,
     \end{equation*}

@@ -9,6 +9,7 @@ For classical order $p \geq 3$ an $s$-stage RK($s$,$5$,$p$) method must satisfy
     \frac{1}{4}\alpha_9- \alpha_{10} + \alpha_{13} = 0,
 \end{equation}
 since $\beta_2 = 0$. As we will prove later in Theorem~\ref{thm:positiveb}, if we require positive weights the equations \eqref{eq:2nd_order_con}, $\alpha_4 = \frac{1}{6}$ and $\alpha_1 = 1$ can not be solved simultaneously. Also the equation \eqref{eq:higher_order_con} is not compatible with the main method having stage order one. This immediately suggests the non existence of fifth-effective order explicit Runge-Kutta methods with positive weights.
+Before we state formally this result we provide the following lemma.
 
 %\begin{table}[t!]
 %    \centering
@@ -40,8 +41,8 @@ since $\beta_2 = 0$. As we will prove later in Theorem~\ref{thm:positiveb}, if w
 %    \label{table4.1}
 %\end{table}
 
-Before we state formally this result we provide the following lemma.
-\begin{lemma}\label{Davids_lemma}
+
+\begin{lem}\label{Davids_lemma}
 	Given $b,v \in \mathbb{R}^{n}$, suppose that
     \begin{subequations}\label{eq:DavidsLemma}
     		\begin{align}
@@ -51,7 +52,7 @@ Before we state formally this result we provide the following lemma.
     		\end{align}
     	\end{subequations}
     	Then all $v_i$ are equal but at most one; in other words, there exists $\alpha \in \mathbb{R}$ and an integer $k$ such that $v_i = \alpha$ for all $i \ne k$.
-\end{lemma}
+\end{lem}
 %\begin{proof}
 %    Let $k$ be an arbitrary integer between $1$ and $n$. Then by collecting terms in powers of $v_k$, \eqref{eq4.3c} can be written
 %\begin{equation*}
@@ -174,5 +175,5 @@ Before we state formally this result we provide the following lemma.
 %\end{proof}
 
 Proofs of Lemma~\ref{Davids_lemma} and Theorem~\ref{thm:positiveb} can be found in the Appendix.
-
-In the next section we will show how based on the effective order conditions one can construct an SSP main method and its corresponding starting and finishing perturbation methods. We then explain how the resulting scheme can be modified so as it becomes an SSP scheme. 
+In the next section we will show how the effective order conditions can be used to construct an SSP main method and its corresponding starting and finishing perturbation methods.
+We then explain how the resulting scheme can be modified so that it becomes an SSP scheme.

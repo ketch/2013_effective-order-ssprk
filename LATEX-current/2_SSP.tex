@@ -33,7 +33,7 @@ $$\|\bm{u}^{n} + \Dt\bm{F}(\bm{u}^{n})\| \le \|\bm{u}^n\|,$$
 for all suitably-restricted time steps
 $0 \le \Dt \le \Dt_{\text{FE}}$,
 in a norm, seminorm, or convex functional $\|\cdot\|$ of interest.
-Then a time-stepping method is said to be \emph{strong stability preserving} with \emph{SSP coefficient} $c$ if it generates a sequence of solution values $\bm{u}^n$ 
+Then a time-stepping method is said to be \emph{strong stability preserving} with \emph{SSP coefficient} $\sspcoef$ if it generates a sequence of solution values $\bm{u}^n$ 
 such that
 \begin{align*}
   \|\bm{u}^{n+1}\| \le \|\bm{u}^n\|,
@@ -45,11 +45,11 @@ $$\Dt \leq c \Dt_{\text{FE}}.$$
 
 \subsection{The SSP coefficient}
 
-The SSP coefficient $c$ is a property of the particular time-stepping method and quantifies the allowable time step size relative to that of the forward Euler method
+The SSP coefficient $\sspcoef$ is a property of the particular time-stepping method and quantifies the allowable time step size relative to that of the forward Euler method
 ($\Dt_{\text{FE}}$ can be thought of as a property of the spatial discretization $\bm{F}$).
 Generally we want the SSP coefficient to be as large as possible for efficiency.
 To allow a fair comparison of different explicit methods, we scale by the number of stages $s$ by computing the \emph{effective SSP coefficient}
-$$c_{\text{eff}} = \frac{c}{s}.$$
+$$\ceff = \frac{\sspcoef}{s}.$$
 Note the somewhat unfortunate terminology: the word \emph{effective} here is unrelated to the concept of \emph{effective order} introduced below.
 %\yianniscomment{It is also unfortunately that we can't avoid referring to effective SSP coefficient. Perhaps this can be minimized only in the title of the table \ref{tab:5.1}}
 
@@ -59,9 +59,9 @@ Note the somewhat unfortunate terminology: the word \emph{effective} here is unr
 
 
 An explicit $s$-stage Runge--Kutta method generates a sequence of approximate solutions $\bm{u}^n \approx \bm{u}(t_n)$ via an update formula
-$$\bm{u}^{n+1} = \bm{u}^{n} + \Dt \sum_i^s b_i \bm{F}(\bm{y}^j),$$
-where the $\bm{y}^j$ are intermediate stage values computed using a similar rule
-$\bm{y}^{i} = \bm{u}^{n} + \Dt \sum_j^s a_{ij} \bm{F}(\bm{y}^i)$.
+$$\bm{u}^{n+1} = \bm{u}^{n} + \Dt \sum_i^s b_i \bm{F}(\bm{Y}^j),$$
+where the $\bm{Y}^j$ are intermediate stage values computed using a similar rule
+$\bm{Y}^{i} = \bm{u}^{n} + \Dt \sum_j^s a_{ij} \bm{F}(\bm{Y}^i)$.
 This is the Butcher form of the Runge--Kutta method and the coefficients $(A,\bm{b})$ make up the Butcher tableau \cite{Butcher2008_book}.
 For the method to obtain a certain order of accuracy, the coefficients must satisfy certain order conditions.
 

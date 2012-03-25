@@ -1,10 +1,11 @@
-\documentclass[10pt,a4paper,oneside,draft]{article}
+\documentclass[10pt,a4paper,oneside]{article}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	Preamble	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%% packages %%%
-\usepackage{amsmath,amssymb,amsthm,amsfonts,enumerate,cite}
-\usepackage[toc,page]{appendix}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{enumerate,cite}
+%\usepackage[toc,page]{appendix}
 %\usepackage{diagrams}
 %\usepackage[pdftex]{graphicx}
 \usepackage{multirow}
@@ -16,23 +17,24 @@
 \usepackage[dvips]{graphicx}
 \usepackage{pstricks,pst-node,pst-tree}
 %\usepackage{cm-super}
-\usepackage{ifthen}
-\usepackage{subfig}
+%\usepackage{ifthen}
+%\usepackage{subfig}
 \usepackage{caption}
 \usepackage{verbatim}
 %\usepackage{maplestd2e}
 \usepackage{slashbox}
 %\usepackage[numbered]{mcode}
-\usepackage{rotating}
+%\usepackage{rotating}
 \usepackage{booktabs}
 %\usepackage[font=small,format=plain,labelfont=bf,up,textfont=it,up]{caption}
-\usepackage{epsfig}
+%\usepackage{epsfig}
 \usepackage{bm}
 %\usepackage{calc}
 %\usepackage{pbox}
 \usepackage{multicol}
 \usepackage{xkeyval}
 \usepackage[textsize=footnotesize]{todonotes}
+\usepackage[colorlinks=true,citecolor=blue,urlcolor=blue]{hyperref}
 
 %%% Page layout %%%
 \setlength{\textwidth}{157mm}   
@@ -75,6 +77,7 @@
 												 \end{minipage}}
 %\newcommand{\todo}[1]{\textbf{\red #1}}
 \newcommand{\sspcoef}{\mathcal{C}}
+\newcommand{\ceff}{\sspcoef_{\text{eff}}}
 %\newcommand{\TabExtraSpStrut}{\rule[-1.2ex]{1pt}{8ex}}
 %\newcommand\T{\rule{0pt}{12.6ex}}
 %\newcommand\B{\rule[-1.2ex]{0pt}{5pt}}
@@ -91,12 +94,13 @@
 %\renewcommand{\rowsetup}{\centering}
 
 %%% New theorems %%%
+\newtheorem{theorem}{Theorem}[section]
 \newtheorem{definition}{Definition}
-\newtheorem{theorem}{Theorem}
-\newtheorem{lemma}{Lemma}
 \newtheorem{example}{Example}
-\newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}{Lemma}
+\newtheorem{lem}[theorem]{Lemma}
+%\newtheorem{proposition}[theorem]{Proposition}
+%\newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{result}[theorem]{Result}
 %\newtheorem{claim}[theorem]{Claim}
 
@@ -153,7 +157,7 @@
   corollary is the non-existence of effective order five SSP methods.
 \end{abstract}
 
-\tableofcontents
+%\tableofcontents
 
 \input{1_Intro}
 \input{2_SSP}
