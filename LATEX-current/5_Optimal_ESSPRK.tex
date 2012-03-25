@@ -228,7 +228,8 @@ where \( \|\cdot\|_{F} \) is the Frobenius norm. The optimisation problem become
 where \( \Phi_{q}(S^{-1}S) \) are the conditions
 %so that \( S^{-1}S = I \) up to order \( q \)
 so that \( \beta^{-1}\beta(t) = 0 \) for trees up to order \( q \)
- and \( \widehat{\Phi}_{i}(S) = 0 \) represents the order conditions on \( \beta \) in Table~\ref{tab:effective4_OCs_separated}. The number of stages for the perturbation methods depends on the effective and classical order of the main method \( M \). When \( M \) is an SSPRK(\( s \),\( 3 \),\( 2 \)) method we found that the stages of methods \( S \) and \( S^{-1} \) are at least two. We were able to find perturbation methods with only two stages for SSPRK(\( s \),\( 3 \),\( 2 \)) methods up to \( 13 \) stages. Similarly, for four effective order methods \( M \), the perturbation methods appear to need at least four stages. For SSPRK(\( s \),\( 4 \),\( 2 \)) we found four-stages methods \( S \) and \( S^{-1} \) up to \( 17 \) stages and for SSPRK(\( s \),\( 4 \),\( 3 \)) up to \( 22 \) stages. Therefore, the perturbation methods have minimal computational and storage cost, in contrast with their large importance in raising the order of the \( SM^{n}S^{-1} \) scheme from low classical order to higher effective order of method \( M \).
+ and \( \widehat{\Phi}_{i}(S) = 0 \) represents the order conditions on \( \beta \) in Table~\ref{tab:Effective_oc}.
+The number of stages for the perturbation methods depends on the effective and classical order of the main method \( M \). When \( M \) is an SSPRK(\( s \),\( 3 \),\( 2 \)) method we found that the stages of methods \( S \) and \( S^{-1} \) are at least two. We were able to find perturbation methods with only two stages for SSPRK(\( s \),\( 3 \),\( 2 \)) methods up to \( 13 \) stages. Similarly, for four effective order methods \( M \), the perturbation methods appear to need at least four stages. For SSPRK(\( s \),\( 4 \),\( 2 \)) we found four-stages methods \( S \) and \( S^{-1} \) up to \( 17 \) stages and for SSPRK(\( s \),\( 4 \),\( 3 \)) up to \( 22 \) stages. Therefore, the perturbation methods have minimal computational and storage cost, in contrast with their large importance in raising the order of the \( SM^{n}S^{-1} \) scheme from low classical order to higher effective order of method \( M \).
 
 \subsubsection{Alternative starting/stopping procedure}\label{subsection3.2.2}
 
@@ -279,7 +280,7 @@ and the scheme \( PM^{n-2}T \) is an SSP method of classical order \( q \).}
 The order conditions from \eqref{eq:PT_OCs} do not contradict the SSP
 requirements.  We can thus use the optimization procedure described in
 Section~\ref{subsection3.1.1} with these order conditions instead of
-the $\Phi_{p,q}$ in \eqref{eq3.2}.  \colincomment{Need some sort of
+the $\Phi_{p,q}$ in \eqref{eqSSPopt}.  \colincomment{Need some sort of
   summary here I suppose about number of stages, etc as above}
 
 

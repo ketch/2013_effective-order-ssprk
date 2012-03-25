@@ -8,7 +8,7 @@ For classical order $p \geq 3$ an $s$-stage RK($s$,$5$,$p$) method must satisfy
 \begin{equation}\label{eq:higher_order_con}
     \frac{1}{4}\alpha_9- \alpha_{10} + \alpha_{13} = 0,
 \end{equation}
-since $\beta_2 = 0$. As we will prove later in Theorem \ref{thm:RKSSP_fifth_effective_order}, if we require positive weights the equations \eqref{eq:2nd_order_con}, $\alpha_4 = \frac{1}{6}$ and $\alpha_1 = 1$ can not be solved simultaneously. Also the equation \eqref{eq:higher_order_con} is not compatible with the main method having stage order one. This immediately suggests the non existence of fifth-effective order explicit Runge-Kutta methods with positive weights.
+since $\beta_2 = 0$. As we will prove later in Theorem~\ref{thm:positiveb}, if we require positive weights the equations \eqref{eq:2nd_order_con}, $\alpha_4 = \frac{1}{6}$ and $\alpha_1 = 1$ can not be solved simultaneously. Also the equation \eqref{eq:higher_order_con} is not compatible with the main method having stage order one. This immediately suggests the non existence of fifth-effective order explicit Runge-Kutta methods with positive weights.
 
 %\begin{table}[t!]
 %    \centering
@@ -40,7 +40,7 @@ since $\beta_2 = 0$. As we will prove later in Theorem \ref{thm:RKSSP_fifth_effe
 %    \label{table4.1}
 %\end{table}
 
-Before we state formally this result we provide the following lemma. Proofs of Lemma \ref{Davids_lemma} and Theorem \ref{thm:RKSSP_fifth_effective_order} can be found in the Appendix.
+Before we state formally this result we provide the following lemma.
 \begin{lemma}\label{Davids_lemma}
 	Given $b,v \in \mathbb{R}^{n}$, suppose that
     \begin{subequations}\label{eq:DavidsLemma}
@@ -90,7 +90,7 @@ Before we state formally this result we provide the following lemma. Proofs of L
 %By \eqref{eq4.3a}, this can only hold if $v_{i} = v_{j}$ for all $i,j \neq k$.
 %\end{proof}
 
-\begin{theorem}\label{thm:RKSSP_fifth_effective_order}
+\begin{theorem}\label{thm:positiveb}
     Any explicit five-effective order Runge-Kutta method $(A,\bm{b}^{T},\bm{c})$ has $b_{i} \leq 0$ for some $i$.
 \end{theorem}
 %\begin{proof}
@@ -172,5 +172,7 @@ Before we state formally this result we provide the following lemma. Proofs of L
 %    \end{equation*}
 %    Since $\bm{v}$ can not be identical equal to zero, it must have a nonzero component. But since $\bm{b} > 0$, then $\bm{b}^{T}\bm{v}^{2} > 0$. Immediately this prevents the existence of five-effective order Runge-Kutta of classical order greater than two if we require positive weights.
 %\end{proof}
+
+Proofs of Lemma~\ref{Davids_lemma} and Theorem~\ref{thm:positiveb} can be found in the Appendix.
 
 In the next section we will show how based on the effective order conditions one can construct an SSP main method and its corresponding starting and finishing perturbation methods. We then explain how the resulting scheme can be modified so as it becomes an SSP scheme. 

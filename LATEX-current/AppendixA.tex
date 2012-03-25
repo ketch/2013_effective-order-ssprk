@@ -1,7 +1,7 @@
 % appendix A
 \section{Appendix}\label{appendixA}
 
-\subsection{Proof of Lemma \ref{lem4.1}}
+\subsection{Proof of Lemma~\ref{Davids_lemma}}
 \begin{lemma}\label{lemA.1}
     Given \( b,v \in \mathbb{R}^{n} \), suppose that
     \begin{subequations}\label{eq4.3}
@@ -51,9 +51,9 @@ This simplifies to
 By \eqref{eq4.3a}, this can only hold if \( v_{i} = v_{j} \) for all \( i,j \neq k \).
 \end{proof}
 
-\subsection{Proof of Theorem \ref{thmA.1}}
+\subsection{Proof of Theorem~\ref{thm:positiveb}}
 \begin{proof}
-    Consider the fifth-effective order conditions of classical order two for the main method, listed in Table \ref{table4.1}. We declare \( \beta_{2} \) as a free parameter and we treat the case that \( \beta_{2} \) is nonzero separately from the one that is zero. Among others the order conditions must satisfy the following equations:
+    Consider the fifth-effective order conditions of classical order two for the main method, listed in Table~\ref{tab:Effective_oc}. We declare \( \beta_{2} \) as a free parameter and we treat the case that \( \beta_{2} \) is nonzero separately from the one that is zero. Among others the order conditions must satisfy the following equations:
     \begin{subequations}\label{eq4.4}
         \begin{align}
             \bm{b}^{T}\bm{e} &= 1 \label{eq4.4a} \\
@@ -67,7 +67,7 @@ By \eqref{eq4.3a}, this can only hold if \( v_{i} = v_{j} \) for all \( i,j \neq
         \beta_{2}^{2} = \bm{b}^{T}\Bigl(\frac{1}{2}\bm{b}^{T}\bm{c}^{2} - \frac{1}{6}\Bigr)\Bigl(\frac{1}{2}\bm{c}^{2} - A\bm{c}\Bigr).
     \end{equation}
     Rewriting \eqref{eq4.4d} and subtracting from \eqref{eq4.5} gives
-    \begin{equation}\label{eq4.6}
+    \begin{equation}
         \bm{b}^{T}\biggl(\Bigl(\frac{1}{2}\bm{c}^{2} - A\bm{c}\Bigr)^{2} - \Bigl(\frac{1}{2}\bm{b}^{T}\bm{c}^{2} - \frac{1}{6}\Bigr)\Bigl(\frac{1}{2}\bm{c}^{2} - A\bm{c}\Bigr)\biggr) = 0.
     \end{equation}
     Letting \( \bm{w} = \bm{v}^{2} - \beta_{2}\bm{v} \), then equation \eqref{eq4.5} can be written as
@@ -118,7 +118,7 @@ By \eqref{eq4.3a}, this can only hold if \( v_{i} = v_{j} \) for all \( i,j \neq
     \begin{equation}\label{eq4.9}
         v_{1} = 0 \quad \text{ and } \quad 0 < v_{i} < \beta_{2} < v_{j}, \text{ for } i,j \in \{2,\dots,s\}.
     \end{equation}
-    However, based on Lemma \ref{lem4.1} all \( v_{i} \) must be equal except form one. Let that component be \( v_{k} \). If \( k = 1 \), then \( v_{i} = \delta \) for \( i,j \in \{2,\dots,s\} \). If \( k \neq 1 \), then \( v_{i} = 0 \) for \( i \in \{2,\dots,s\}\setminus\{k\} \). Both cases contradict with \eqref{eq4.9}. Thus, the equations \eqref{eq4.4} can not be solved simultaneously and no five-effective order Runge-Kutta of classical order two exists with positive weights.
+    However, based on Lemma~\ref{Davids_lemma} all \( v_{i} \) must be equal except form one. Let that component be \( v_{k} \). If \( k = 1 \), then \( v_{i} = \delta \) for \( i,j \in \{2,\dots,s\} \). If \( k \neq 1 \), then \( v_{i} = 0 \) for \( i \in \{2,\dots,s\}\setminus\{k\} \). Both cases contradict with \eqref{eq4.9}. Thus, the equations \eqref{eq4.4} can not be solved simultaneously and no five-effective order Runge-Kutta of classical order two exists with positive weights.
     \newline
 
     In the case that \( \beta_{2} = 0 \) then equation \eqref{eq4.4d} becomes
