@@ -1,20 +1,18 @@
 % appendix A
 \section{Proofs}\label{appendixA}
 
-%\subsection{Proof of Lemma~\ref{Davids_lemma}}
+\begin{lem}\label{Davids_lemma}
+	Given $b,v \in \mathbb{R}^{n}$, suppose that
+    \begin{subequations}\label{eq:DavidsLemma}
+    		\begin{align}
+    			b_i & > 0 \mbox{ for all } i, \label{eq:DavidsLemma_a} \\
+    			\sum_{i=1}^n b_i & = 1, \label{eq:DavidsLemma_b} \\
+    			\sum_{i=1}^n b_i v_i^2 & = \left(\sum_{i=1}^n b_i v_i \right)^2. \label{eq:DavidsLemma_c}
+    		\end{align}
+    	\end{subequations}
+    	Then all $v_i$ are equal but at most one; in other words, there exists $\alpha \in \mathbb{R}$ and an integer $k$ such that $v_i = \alpha$ for all $i \ne k$.
+\end{lem}
 
-% \begin{lem}\label{lemA.1}
-%     Given \( b,v \in \mathbb{R}^{n} \), suppose that
-%     \begin{subequations}\label{eq4.3}
-%         \begin{align}
-%             b_i & > 0 \mbox{ for all } i, \label{eq4.3a} \\
-%             \sum_{i=1}^n b_i & = 1, \label{eq4.3b} \\
-%             \sum_{i=1}^n b_i v_i^2 & = \left(\sum_{i=1}^n b_i v_i \right)^2. \label{eq4.3c}
-%         \end{align}
-%     \end{subequations}
-%     Then all \(v_i\) are equal but at most one; in other words, there exists \( \alpha\in\mathbb{R} \) and an integer \(k\) such that \(v_i=\alpha\) for all \(i\ne k\).
-% \end{lem}
-% \colintodo{decide whether to state lemma here or in text: not both}%
 \begin{proof}[Proof of Lemma~\ref{Davids_lemma}]
     Let \( k \) be an arbitrary integer between \( 1 \) and \( n \). Then by collecting terms in powers of \( v_k \),
 %\eqref{eq4.3c} can be written
@@ -34,7 +32,7 @@ Expanding and canceling terms yields
 \end{equation*}
 By \eqref{eq:DavidsLemma_b}, \( 1-b_{k} = \sum_{j \ne k}b_{j} \), so we have
 \begin{equation*}
-    \sum_{j \neq k}b_{j}\sum_{i \neq k}b_{i}v_{i}^{2} - \sum_{j \neq k}b_{j}v_{j}\sum_{i \neq k}b_{i}v_{i}.
+    \sum_{j \neq k}b_{j}\sum_{i \neq k}b_{i}v_{i}^{2} - \sum_{j \neq k}b_{j}v_{j}\sum_{i \neq k}b_{i}v_{i} \le 0.
 \end{equation*}
 Noting that the terms corresponding to \( i = j \) in the two double sums cancel gives
 \begin{equation*}
@@ -58,7 +56,7 @@ By \eqref{eq:DavidsLemma_a}, this can only hold if \( v_{i} = v_{j} \) for all \
 %\subsection{Proof of Theorem~\ref{thm:positiveb}}
 
 \begin{proof}[Proof of Theorem~\ref{thm:positiveb}]
-    Consider the fifth-effective order conditions of classical order two for the main method, listed in Table~\ref{tab:Effective_oc}. We declare \( \beta_{2} \) as a free parameter and we treat the case that \( \beta_{2} \) is nonzero separately from the one that is zero. Among others the order conditions must satisfy the following equations:
+    Consider the fifth-effective order conditions of classical order two for the main method, listed in Table~\ref{tab:Effective_oc}. We declare \( \beta_{2} \) as a free parameter and we treat the case that \( \beta_{2} \) is nonzero separately from the one that is zero. We make use of the following subset of the order conditions:
     \begin{subequations}\label{eq4.4}
         \begin{align}
             \bm{b}^{T}\bm{e} &= 1 \label{eq4.4a} \\
@@ -128,7 +126,7 @@ For an explicit Runge-Kutta method, the stage \( \textbf{Y}_{2} = \bm{u}^{n} + \
     \begin{equation}\label{eq4.9}
         v_{1} = 0 \quad \text{ and } \quad 0 < v_{i} < \beta_{2} < v_{j}, \text{ for } i,j \in \{2,\dots,s\}.
     \end{equation}
-    However, based on Lemma~\ref{Davids_lemma} all \( v_{i} \) must be equal except form one. Let that component be \( v_{k} \). If \( k = 1 \), then \( v_{i} = \delta \) for \( i,j \in \{2,\dots,s\} \). If \( k \neq 1 \), then \( v_{i} = 0 \) for \( i \in \{2,\dots,s\}\setminus\{k\} \). Both cases contradict with \eqref{eq4.9}. Thus, the equations \eqref{eq4.4} can not be solved simultaneously and no five-effective order Runge-Kutta of classical order two exists with positive weights.
+    By Lemma~\ref{Davids_lemma}, all \( v_{i} \) must be equal except for one. Let that component be \( v_{k} \). If \( k = 1 \), then \( v_{i} = \delta \) {\bf what is $\delta$?} for \( i,j \in \{2,\dots,s\} \). If \( k \neq 1 \), then \( v_{i} = 0 \) for \( i \in \{2,\dots,s\}\setminus\{k\} \). Both cases contradict with \eqref{eq4.9}. Thus, the equations \eqref{eq4.4} can not be solved simultaneously and no five-effective order Runge-Kutta of classical order two exists with positive weights.
 
 
     \paragraph{Case 3: \( \beta_2 = 0 \).}
@@ -142,5 +140,5 @@ For an explicit Runge-Kutta method, the stage \( \textbf{Y}_{2} = \bm{u}^{n} + \
     \begin{equation*}
         \bm{b}^{T}\bm{v}^{2} = 0.
     \end{equation*}
-    Since \( \bm{v} \) can not be identical equal to zero, it must have a nonzero component. But since \( \bm{b} > 0 \), then \( \bm{b}^{T}\bm{v}^{2} > 0 \). Immediately this prevents the existence of five-effective order Runge-Kutta of classical order greater than two if we require positive weights.
+    Since \( \bm{v} \) can not be identically equal to zero {\bf why?}, this implies that $b_j\le0$ for some $j$.
 \end{proof}
