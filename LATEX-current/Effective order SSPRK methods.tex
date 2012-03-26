@@ -78,20 +78,9 @@
 %\newcommand{\todo}[1]{\textbf{\red #1}}
 \newcommand{\sspcoef}{\mathcal{C}}
 \newcommand{\ceff}{\sspcoef_{\text{eff}}}
-%\newcommand{\TabExtraSpStrut}{\rule[-1.2ex]{1pt}{8ex}}
-%\newcommand\T{\rule{0pt}{12.6ex}}
-%\newcommand\B{\rule[-1.2ex]{0pt}{5pt}}
-%\newcommand{\proof}{\noindent {\bf Proof}:~}
-%\newcommand{\qed}{\hfill\rule{2mm}{2mm}}
-%\renewcommand{\baselinestretch}{1.2}
 \renewcommand{\newline}{\vspace{10pt}}
 \renewcommand{\comment}[1]{\textcolor{gray}{\\#1\\}}
 \renewcommand{\indent}{\hspace{15pt}}
-%\renewcommand*\thesection{\arabic{chapter}}
-%\renewcommand{\thefigure}{\arabic{section}}
-%\renewcommand{\theenumi}{\Roman{enumi}}
-%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
-%\renewcommand{\rowsetup}{\centering}
 
 %%% New theorems %%%
 \newtheorem{theorem}{Theorem}[section]
@@ -134,7 +123,6 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		Actual document		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Document beginning
 \begin{document}
 
 \maketitle
@@ -168,24 +156,8 @@
 \input{6_Numerics}
 \input{7_Conclusion}
 
-%\input{Section1}
-%\input{Section2}	
-%\input{Section3}
-%\input{Section4}
-%\input{Section5}
-%\input{Section6}
-
-
 \section*{Acknowledgements}
 	Acknowledgements listed here.
-
-
-\section{Conclusions}\label{sec:conclusions}
-
-The ideas here were applied to explicit Runge--Kutta methods, but they
-can be applied to implicit Runge--Kutta methods and General Linear
-Methods \cite{Butcher2008_book}.
-
 
 \appendix
 \include{AppendixA}

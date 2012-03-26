@@ -56,6 +56,8 @@ By \eqref{eq:DavidsLemma_a}, this can only hold if \( v_{i} = v_{j} \) for all \
 %\subsection{Proof of Theorem~\ref{thm:positiveb}}
 
 \begin{proof}[Proof of Theorem~\ref{thm:positiveb}]
+    {\bf This proof needs some attention.}
+
     Consider the fifth-effective order conditions of classical order two for the main method, listed in Table~\ref{tab:Effective_oc}. We declare \( \beta_{2} \) as a free parameter and we treat the case that \( \beta_{2} \) is nonzero separately from the one that is zero. We make use of the following subset of the order conditions:
     \begin{subequations}\label{eq4.4}
         \begin{align}
@@ -87,7 +89,7 @@ We will show that neither can be true.
 
 Here \( v_{i}^{2} - \beta_{2}v_{i} = 0 \) for all \( i \in \{1,\dots,s\} \), so either \( v_{i} = 0 \) or \( v_{i} = \beta_{2} \).
 The case that \( \bm{v} = 0 \) is equivalent with a Runge-Kutta method to have stage order two. This means that for a particular time \( t = t^{n} + c_{i}\Delta t \), for \( i \in \{1, \dots, s\} \), the stage \( \textbf{Y}_{i} \) will be at least a second order approximation to the solution at that time.
-For an explicit Runge-Kutta method, the stage \( \textbf{Y}_{2} = \bm{u}^{n} + \Dt\bm{F}(\bm{u}^{n}) \) can not have stage order more than one, hence not all the components of \( \bm{v} \) are zero. Also, \( v_{1} = 0 \) because the first row of matrix \( A \) has only zeros. Let \( I = \{ i \;|\; v_{i} = \beta_{2}, \; i = 1,\dots,s \} \) and \( v_{j} = 0 \) if \( j \neq I \). Then, by using \eqref{eq4.4a} \( \beta_{2} = \sum_{i=1}^{s}b_{i}v_{i} = \sum_{i \in I}b_{i}\beta_{2} = \beta_{2}\sum_{i \in I}b_{i} < \beta_{2} \). Therefore a contradiction.
+For an explicit Runge-Kutta method, the stage \( \textbf{Y}_{2} = \bm{u}^{n} + \Dt\bm{F}(\bm{u}^{n}) \) cannot have stage order more than one, hence not all the components of \( \bm{v} \) are zero. Also, \( v_{1} = 0 \) because the first row of matrix \( A \) has only zeros. Let \( I = \{ i \;|\; v_{i} = \beta_{2}, \; i = 1,\dots,s \} \) and \( v_{j} = 0 \) if \( j \neq I \). Then, by using \eqref{eq4.4a} \( \beta_{2} = \sum_{i=1}^{s}b_{i}v_{i} = \sum_{i \in I}b_{i}\beta_{2} = \beta_{2}\sum_{i \in I}b_{i} < \beta_{2} \). Therefore a contradiction.
 
 
 \paragraph{Case 2: \( \bm{w} \neq \bm{0}, \beta_2 \neq 0 \).}
@@ -126,7 +128,14 @@ For an explicit Runge-Kutta method, the stage \( \textbf{Y}_{2} = \bm{u}^{n} + \
     \begin{equation}\label{eq4.9}
         v_{1} = 0 \quad \text{ and } \quad 0 < v_{i} < \beta_{2} < v_{j}, \text{ for } i,j \in \{2,\dots,s\}.
     \end{equation}
-    By Lemma~\ref{Davids_lemma}, all \( v_{i} \) must be equal except for one. Let that component be \( v_{k} \). If \( k = 1 \), then \( v_{i} = \delta \) {\bf what is $\delta$?} for \( i,j \in \{2,\dots,s\} \). If \( k \neq 1 \), then \( v_{i} = 0 \) for \( i \in \{2,\dots,s\}\setminus\{k\} \). Both cases contradict with \eqref{eq4.9}. Thus, the equations \eqref{eq4.4} can not be solved simultaneously and no five-effective order Runge-Kutta of classical order two exists with positive weights.
+    By Lemma~\ref{Davids_lemma}, all \( v_{i} \) must be equal except for one.
+    Let that component be \( v_{k} \). If \( k = 1 \), then \( v_{i} = \delta
+    \) {\bf what is $\delta$?} for \( i,j \in \{2,\dots,s\} \). If \( k \neq 1
+    \), then \( v_{i} = 0 \) for \( i \in \{2,\dots,s\}\setminus\{k\} \). Both
+    cases contradict with \eqref{eq4.9}. Thus, the equations \eqref{eq4.4}
+    cannot be solved simultaneously and no Runge-Kutta method of
+    effective order five and classical order two exists with positive weights.
+    {\bf what about classical order less than 2?}
 
 
     \paragraph{Case 3: \( \beta_2 = 0 \).}
@@ -140,5 +149,5 @@ For an explicit Runge-Kutta method, the stage \( \textbf{Y}_{2} = \bm{u}^{n} + \
     \begin{equation*}
         \bm{b}^{T}\bm{v}^{2} = 0.
     \end{equation*}
-    Since \( \bm{v} \) can not be identically equal to zero {\bf why?}, this implies that $b_j\le0$ for some $j$.
+    Since \( \bm{v} \) cannot be identically equal to zero {\bf why?}, this implies that $b_j\le0$ for some $j$.
 \end{proof}

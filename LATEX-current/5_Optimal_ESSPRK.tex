@@ -4,20 +4,23 @@ construct an SSP main method $M$ and its corresponding starting and finishing
 methods $S,S^{-1}$.  Methods $S$ and $S^{-1}$ are not generally SSP, but we
 explain how the resulting scheme can be reinterpreted so that they are.
 
-We now rely on the SSP theory and the Butcher's theory of effective order, previously reviewed in Sections \ref{sec:SSP} and \ref{sec:Algebraic_RK}, to find optimal explicit SSP Runge-Kutta schemes that contain an effective order explicit SSPRK method. Based on the algebraic expressions of Table~\ref{tab:Effective_oc} the order four conditions for the main method do not depend on the coefficients of the perturbation methods. Therefore, the search for optimal methods of effective order can be carried independently 
+We now rely on the SSP theory and the Butcher's theory of effective order,
+previously reviewed in Sections \ref{sec:SSP} and \ref{sec:Algebraic_RK}, to
+find optimal explicit SSP Runge-Kutta schemes with prescribed effective and classical order.
+explicit SSPRK method.  Due to Corollary~\ref{cor:no-ssp-5}, we need only consider
+methods with effective order up to four.
+
+Recall from Section~\ref{sec:Algebraic_RK} that the methods of effective order involve
+a main method $M$ as well as starting and finishing methods $S,S^{-1}$.
+Note (from Table~\ref{tab:Effective_oc}) that the conditions for the main method $M$
+up to order four do not depend on the coefficients $\beta$ of the methods $S,S^{-1}$. 
+Therefore, the search for optimal methods of effective order can be carried out in
+two steps, first searching for optimal methods $M$ and then for methods $S,S^{-1}$.
 
 
-effective order four conditions the main methods Similarly with previous notations, we denote by ESSPRK($s$,$q$,$p$) an $s$-stage Explicit SSP Runge-Kutta method of effective order $q$ and classical order $p$. For simplicity in $q=p$ then we write ESSPRK($s$,$p$). 
-
-- Explain why the problem of finding the main method and the perturbation methods is decoupled.
-
-- Short description of the section focusing on: 
-
-
-
-
-
-
+We denote by ESSPRK($s,q,p$) an $s$-stage Explicit SSP Runge-Kutta method of
+effective order $q$ and classical order $p$. If $q=p$ then we
+write simply ESSPRK($s,p$). 
 
 The effective order SSPRK methods found are optimal among all SSPRK methods, since their SSP coefficients either match the threshold factors for linear problems \yianniscomment{see SSPRK(s,3,2)} or are at least equal with the already known SSPRK methods. \yianniscomment{see SSPRK(s,4,2) \& SSPRK(s,4,3)}
 
@@ -29,26 +32,21 @@ non-existence of an SSPRK(\( 4 \),\( 4 \)) method.  This scheme uses a
 four-stage, four-effective SSPRK method of classical order either two
 or three, accompanied by specific starting and finishing methods.
 
-\comment{Then, since \( (\beta^{-1}\alpha\beta)^{n} = \beta^{-1}\alpha^{n}\beta \) applying \( n \) times the method \( P = S^{-1}MS \) gives \( P^{n} = S^{-1}M^{n}S \). Therefore, instead of applying the method \( P \) at each step, now three methods come into play. The starting method is applied at the beginning without advancing the solution. Instead, it introduces a perturbation on the solution so as method \( M \) reproduces this perturbation within its classical order. The main method \( M \) it is used \( n \) times and the finishing method is used at the end to correct the solution. The final result approximates the exact solution to within \( \mathcal{O}((\Dt)^{q}) \), where \( q \) is the effective order of method \( M \).}
-
-\comment{Optimality for the whole class of SSPRK methods is achieved, since the effective SSP methods found have larger coefficients compared with the relevant classical SSPRK methods. With the exception of the four-effective SSP methods of four and five stages, the effective SSP methods for nonlinear problems have SSP coefficients equal to those for linear problems, hence the upper bound is obtained \cite{Kraaijevanger1986}.}
+\comment{With the exception of the four-effective SSP methods of four and five stages, the effective SSP methods for nonlinear problems have SSP coefficients equal to those for linear problems, hence the upper bound is obtained \cite{Kraaijevanger1986}.}
 
 \subsection{The main method}\label{subsection3.1}
+We begin by finding the main method $M$.
 
-\qquad We denote by ESSPRK(\( s \),\( q \),\( p \)) an explicit SSP \( s \)-stage Runge-Kutta method of effective order \( q \) and classical order \( p \), where \( q > p \). Let the main method \( M  \) be an ESSPRK(\( s \),\( q \),\( p \)) and \( S  \) a starting method, such that the scheme \( S^{-1}MS \) attains order equal to \( q \). This means that the sequence of methods \( S \), \( M \) and \( S^{-1} \) moves the numerical approximation a single step forward within order \( \mathcal{O}((\Dt)^{q+1}) \). First, the method \( S \) perturbates the solution without advancing it, then \( M \) takes the solution through a single steplength and finally method \( S^{-1} \) eradicates the effect of method \( S \).
-We begin by finding the main method $M$.  Starting and stopping
-methods are covered in Section~\ref{subsection3.2}.
-\comment{PREVIOUSLY: The ESSPRK(\( s \),\( q \),\( p \)) methods have effective order \( q \leq 4 \) and their order conditions are independent of those for the starting and finishing methods. Hence, the construction of the main method \( M \) in the \( S^{-1}MS \) scheme can be carried out first.}
-
-\comment{For a computation that carries out \( n \) steps, this is equivalent with applying method \( S \) at the beginning, then \( n \) times method \( M \) and finally method \( S^{-1} \). Generally, we are able to construct higher order Runge-Kutta schemes by consequently using an ESSPRK method with the aid of suitable starting and finishing methods. In particular, the starting and finishing methods can be chosen to be SSPRK methods, resulting in an SSP Runge-Kutta scheme of higher order.}
+The starting and finishing methods can be chosen to be SSPRK methods, resulting
+in an SSP Runge-Kutta scheme of higher order.
 
 
 \subsubsection{The optimisation problem of the main method}\label{subsection3.1.1}
 
-\qquad Our aim is to find the optimal main method that has the larger possible SSP coefficient for nonlinear problems, fixing each time the stage, effective and classical order. 
+\qquad Our aim is to find the optimal main method that has the largest possible SSP coefficient for nonlinear problems, fixing each time the stage, effective and classical order. 
 Assume that the ESSPRK(\( s \),\( q \),\( p \)) method \( M \) has Butcher tableau  \( (A, \bm{b}) \)
 and reconsider the optimization problem~\eqref{eqSSPopt}
-with \( \Phi_{q,p}(K) \) representing  the \( q \)-effective order, \( p \)-classical order conditions.
+with \( \Phi_{q,p}(K) \) representing  the conditions for effective order $q$ and classical order $p$.
 % \begin{equation}
 %     \max_{A, \bm{b}^{\texttt{T}}, r} r, \qquad \text{subject to } \quad \left\{
 %                                                  \begin{array}{ll}
@@ -141,7 +139,7 @@ usual SSPRK(3,3) method.  We note in Table~\ref{tab:5.1} that
 SSPRK(\( s \),\( 3 \),\( 2 \)) methods have the same SSP coefficients
 as SSPRK(\( s \),\( 3 \)).  It seems possible that for each $s$, the
 ESSPRK($s$, 3, 2) may form a family of which the optimal SSPRK($s$, 3)
-is a particular member.
+is a particular member. {\bf but is the optimal SSPRK($s,3$) unique?}
 
 
 %\subsection{Constructing optimal higher order SSP Runge-Kutta schemes}\label{subsection3.4}
@@ -181,24 +179,6 @@ There is no explicit effective order 5 SSP methods.  This is a corollary of Theo
   %in the Shu-Osher form
   has Butcher Tableau \( (A,\textbf{b}^{\texttt{T}},\textbf{c}) \) with positive weight coefficients \( \textbf{b} > 0 \).
 \end{lem}
-
-\begin{theorem}\label{thm:noESSP5}
-There is no explicit effective order five method with positive SSP coefficient.
-\end{theorem}
-
-\begin{proof}
-  Because ESSPRK($s$, 5, $p$) has classical order $p$, it is therefore
-  also an SSPRK method of order $p$ and must have positive coefficients
-  by Lemma~\ref{lem:ssp_pos_coef}.  But this contracts
-  Theorem~\ref{thm:positiveb}.
-\end{proof}
-
-% \todo{CBM: maybe rewrite lemma to only refer to the ESSPRK case?  No lets not}
-
-\begin{result}
-  \todo{TODO}: can also state a result about conditional contractivity here
-  which also requires positive weights $\textbf{b}$.
-\end{result}
 
 \todo{[In this paper, we should remove mentions of $\alpha$ and $\beta$ that refer something other than Butcher's tree stuff]}
 
@@ -310,281 +290,3 @@ Table~\ref{tab:essprk442} shows the ESSPRK(4,4,2) scheme.
     \hline
   \end{tabular}
 \end{table}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-%    \subsection{Optimal Effective order SSP Runge-Kutta}
-%        \subsubsection{Third order ESSPRK}
-%        \subsubsection{Fourth order ESSPRK}
-%    \subsection{Formulation of higher order SSP Runge-Kutta schemes}
-
-
-
-%\chapter{Strong-Stability-Preserving Runge-Kutta methods}\label{chapter3} % chapter 3
-%
-%\vspace{20pt}
-%
-%\qquad As mentioned in the previous chapter, linear stability theory is necessary and sufficient for convergence of numerical approximations to solutions of linear differential equations, provided a consistent linear numerical method. This holds even for nonlinear differential equations if the linearisation is \( L_{2} \) stable and adequately dissipative when coupled with sufficiently smooth problems \cite{Gottlieb2009_article}. However, when the solutions are discontinuous, then linear stability is not sufficient for convergence. For these kind of problems there is a need for nonlinear stability properties, therefore the numerical methods chosen must satisfy these requirements.
-%\newline
-%
-%We consider autonomous\footnote{The same analysis applies for non-autonomous problems, however we can always transform a non-autonomous problem to an autonomous as suggested in \eqref{eq2.18}.} partial differential equations that may give rise to non-smooth solutions. Usually, hyperbolic conservation laws of the form
-%\begin{equation}\label{eq3.1}
-%    \textbf{U}_{t} + \textbf{f}(\textbf{U})_{x} = 0,
-%\end{equation}
-%have solutions that may exhibit shocks or other discontinuous behavior and hence linear stability theory no longer guarantees convergence. For the numerical solution of these problems, a spacial discretisation using the method of lines is first applied to equation \eqref{eq3.1}. This transforms the partial differential equation into an ordinary one, yielding the semi-discrete system
-%\begin{equation}\label{eq3.2}
-%    \textbf{u}_{t} = \textbf{F}(\textbf{u}),
-%\end{equation}
-%where \( \textbf{F}(\textbf{u}) \) denotes the spacial discretisation of \( \textbf{f}(\textbf{U})_{x} \). It is often important to carefully choose the spatial discretisation in such a way that satisfies certain nonlinearly stability conditions, typically  when coupled with forward Euler integration. For hyperbolic problems, these are mainly non-oscillatory properties, preservation of positivity or maximin principle, stability in maximum norm or TV semi-norm and avoidance of unphysical states. Significant effort has been placed on the development of high order spacial discretisations that demostrate the desired nonlinear properties with forward Euler method. But then since a low order time discretisation was chosen, the method can not attend an overall high order. Unfortunately, there is no guarantee of maintaining nonlinear stability properties when these spatial discretisations are coupled with linear stable high order time discretisations.
-%\newline
-%
-%Strong-stability-preserving (SSP) high order time discretisations were developed to address this problem. Assume that nonlinear stability properties are attained when the spatial discertasation is linked with forward Euler time integration. Then, the class of SSP time discretisation methods ensure that these properties are preserved when the spatial discretisation is coupled with these high order methods. In this chapter we review the underlying theory of SSP methods and discuss how optimal SSP methods can be obtained, by reviewing the connection between SSP theory and absolute monotonicity. We mostly follow the review paper \cite{Gottlieb2009_article}.
-%\vspace{10pt}
-%
-%\subsection{Overview of strong-stability-preserving time discretisation}\label{subsection3.1} % section 3.1
-%
-%\vspace{10pt}
-%
-%\qquad Choosing a numerical method that ensures stability for hyperbolic problems depends on the smoothness of the solution. If the solution is smooth enough then it is sufficient to consider linear stability properties and no strong-stability-preserving methods are necessary. But, if the solution is non-smooth, the presence of oscillations prevents the approximation from converging uniformly \cite{Gottlieb2009_article}. To ensure that oscillations do not occur we require stability in a norm not generated by inner product, such as the maximum norm, the TV semi-norm or any convex functional. It is required that the semi-discrete system \eqref{eq3.2} satisfies the monotonicity property
-%\begin{equation}\label{eq3.4}
-%     \|\textbf{u}^{n+1}\| \leq \|\textbf{u}^{n}\|,
-%\end{equation}
-%in such a norm \( \|\cdot\| \). Here we often consider nonlinear stability in the TV semi-norm defined by
-%\begin{equation}\label{eq3.5}
-%    \|\textbf{u}\|_{TV} = \sum_{i=1}^{n}|\textbf{u}_{i+1} - \textbf{u}_{i}|.
-%\end{equation}
-%However, a general nonlinear stability analysis becomes very complicated when nonlinear problems with discontinuous solutions are considered, where the complex spatial discretisations are combined with high order time discretisations. To overcome this problem we assume that the semi-discretisation \( \textbf{F}(\textbf{u}) \) is chosen so that the numerical solution of the ordinary differential equation \eqref{eq3.2} satisfies the monotonicity property \eqref{eq3.4} under Forward Euler integration, that is
-%\begin{equation}\label{eq3.6}
-%    \|\textbf{u}^{n} + \Dt\textbf{F}(\textbf{u}^{n})\| \leq \|\textbf{u}^{n}\|,
-%\end{equation}
-%for every \( \textbf{u} \) and for \( \Dt \leq {\Dt}_{FE} \). Here \( {\Dt}_{FE} \) represents a fixed time step based on the spacial discretasation and for which \eqref{eq3.6} holds. Now, if we can decompose a higher order method into convex combinations of Forward Euler method, then equation \eqref{eq3.6} will also be satisfied when the spacial discretisation \( \textbf{F}(\textbf{u}) \) is coupled with a higher order time discretisation. Recall the Shu-Osher form \eqref{eq2.10} of a Runge-Kutta method. If all \( \alpha_{ij} \geq 0 \) and \( \beta_{ij} \geq 0 \), then the intermediate stages \( \textbf{Y}_{i} \) are convex combinations of Forward Euler integration, by replacing \( \Dt \) with \( \frac{\beta_{ij}}{\alpha_{ij}}\Dt \) at each stage. Therefore, since the monotonicity property \eqref{eq3.4} is satisfied by the Forward Euler method, it will be preserved by the Runge-Kutta method under a time-step restriction
-%\begin{equation}\label{eq3.7}
-%    \Dt \leq \min\frac{\alpha_{ij}}{\beta_{ij}}{\Dt}_{FE},
-%\end{equation}
-%where \( \alpha_{ij}/\beta_{ij} \) is taken as infinity if \( \beta_{ij} = 0 \) and the minimum is taken over all \( j < i \). Moreover, these Runge-Kutta methods can be used with any spacial discretisation that satisfies the particular stability property (in our case monotonicity) when coupled with Forward Euler integration. We would like \( \min_{i,j}\frac{\alpha_{ij}}{\beta_{ij}} \) to be as large as possible. This leads to the concept of the SSP coefficient \( c \), which we can think of as the
-%\begin{equation}\label{eq3.8}
-%\max_{\alpha,\beta}\min_{i,j}\frac{\alpha_{ij}}{\beta_{ij}}.
-%\end{equation}
-% We have the following precise definition for the SSP coefficient \cite{Ketcheson2009_article}.
-%\begin{definition}\label{def3.1}
-%    For \( {\Dt}_{FE} > 0 \), let \( \mathcal{F}({\Dt}_{FE}) \) denote the set of all pairs \( (\textbf{F}, \|\cdot\|) \), where the function \( \textbf{F} : \mathbb{R}^{n} \rightarrow \mathbb{R}^{n} \) and the convex functional \( \|\cdot\| \) are such that the numerical solution obtained by the Forward Euler method satisfies \( \|\textbf{u}^{n+1}\| \leq \|\textbf{u}^{n}\| \) whenever \( \Dt \leq {\Dt}_{FE} \). Given a Runge-Kutta method, the \emph{SSP coefficient} of the method is the largest constant \( c \geq 0 \) such that, for all \( (\textbf{F}, \|\cdot\|) \in \mathcal{F}({\Dt}_{FE}) \), the numerical solution given by \eqref{eq2.10} satisfies  \( \|\textbf{Y}_{i}\| \leq \|\textbf{u}^{n}\| \) (for \( 1 \leq i \leq s \)), whenever
-%    \begin{equation}\label{eq3.9}
-%        \Dt \leq c{\Dt}_{FE}.
-%    \end{equation}
-%    If \( c > 0 \), the method is said to be strong-stability-preserving under the maximal time-step restriction \eqref{eq3.8}.
-%\end{definition}
-%%In the literature the definition of strong-stability preserving Runge-Kutta methods for nonlinear systems is distinguished from that of linear systems. Definition \eqref{def3.1} applies for nonlinear systems, however an analogous definition stands for linear systems. The difference lies on the requirement of expressing each stage as a convex combination of Forward Euler steps in the case of nonlinear systems. For completeness we state the definition \cite{Ketcheson2008_article, Ketcheson2009_article}.
-%%\begin{definition}\label{def3.2}
-%%    For \( {\Dt}_{FE} > 0 \), let \( \mathcal{F}({\Dt}_{FE}) \) denote the set of all pairs \( (\textbf{L}, \|\cdot\|) \), where the matrix \( \textbf{L} \in \mathbb{R}^{n \times n} \) and the convex functional \( \|\cdot\| \) are such that the numerical solution obtained by the Forward Euler method of the linear autonomous system \( \textbf{u}_{t} = \textbf{L}\textbf{u} \) satisfies \( \|\textbf{u}^{n+1}\| \leq \|\textbf{u}^{n}\| \) whenever \( \Dt \leq {\Dt}_{FE} \). Given a Runge-Kutta method, the linear SSP coefficient of the method is the largest constant \( c_{lin} \leq 0 \) such that, for all \( (\textbf{F}, \|\cdot\|) \in \mathcal{F}({\Dt}_{FE}) \), the numerical solution given by \eqref{eq2.10} satisfies  \( \|\textbf{u}^{n+1}\| \leq \|\textbf{u}^{n}\| \), whenever
-%%    \begin{equation}\label{eq3.8}
-%%        \Dt \leq c_{lin}{\Dt}_{FE}.
-%%    \end{equation}
-%%    If \( c_{lin} > 0 \), the method is said to be strong-stability-preserving for linear systems under the maximal time-step restriction \eqref{eq3.8}.
-%%\end{definition}
-%
-%In order to compare the computational efficiency of a SSP Runge-Kutta scheme we denote by \( c_{ef\!f} \) the effective SSP coefficient, given by
-%\begin{equation}\label{eq3.10}
-%    c_{ef\!f} = \frac{c}{s}.
-%\end{equation}
-%Also, we will refer to an \( s \)-stage \( p \)-order SSP Runge-Kutta method by SSPRK(\( s \),\( p\)).
-%\vspace{10pt}
-%
-%\subsubsection{SSP coefficient and radius of absolute monotonicity}\label{subsection3.1.1} % section 3.1.1
-%
-%\vspace{10pt}
-%
-%\qquad The concept of absolute monotonicity \cite{Spijker1983_article,Kraaijevanger1991_article} will be useful. Kraaijevanger \cite{Kraaijevanger1991_article} defined the radius of monotonicity for a Runge-Kutta method.
-%%The connection between the SSP coefficient and absoulute monotonicity we studied by Spijker \cite{Spijker1983_article} and Kraaijevanger \cite{Kraaijevanger1991_article} for linear and nonlinear systems, respectively. They showed that the linear SSP coffecient is equal to the the stability function of the linear problem and for nonlinear problems that the SSP coefficient is equal to the radius of absolute monotonicity of a Runge-Kutta method.
-%%\begin{definition}\label{def3.3}
-%%    The radius of absolute monotonicity of a function \( \psi \), denoted by \( R(\psi) \), is the largest value \( r \leq 0 \), such that \( \psi(x) \) and all of its derivatives exist and are non negative for \( x \in (-r,0] \).
-%%\end{definition}
-%\begin{definition}\label{def3.3}
-%    The radius of absolute monotonicity of a Runge-Kutta method defined by the Butcher matrix \( K \) (see \eqref{eq2.14}) is denoted by R(K) and is the largest value \( r \geq 0 \), such that \( (I + rA)^{-1} \) exists and
-%    \begin{displaymath}
-%        \begin{split}
-%            K(I + rA)^{-1} &\geq 0 \\
-%            rK(I + rA)^{-1}\textbf{e}_{s} &\leq \textbf{e}_{s+1}.
-%        \end{split}
-%    \end{displaymath}
-%    The above inequalities are understood component-wise and \( \textbf{e}_{s} \) denotes the \( s \)-vector of ones.
-%\end{definition}
-%It is later proved that the SSP coefficient is equal to the radius of absolute monotonicity \cite{Higueras2004_article,Ferracina2005_article}, so an SSP Runge-Kutta method preserves strong stability under a maximal time-step restriction
-%\begin{equation}\label{eq3.11}
-%    \Dt \leq R(K){\Dt}_{FE}
-%\end{equation}
-%for nonlinear problems.
-%\vspace{10pt}
-%
-%\subsubsection{Order barriers of SSP Runge-Kutta methods}\label{subsection3.1.2} % section 3.1.2
-%
-%\vspace{10pt}
-%
-%\qquad The equivalence between the SSP coefficient and the radius of absolute monotonicity allows us to apply results of the theory of absolute monotonicity to SSP Runge-Kutta methods. The SSP property is a very strong requirement since it guarantees that any nonlinear stability property that holds when the spacial discretisation is coupled with Forward Euler method will be preserved when a high order time discretisation is used. However, this imposes great restrictions to the properties of the temporal discretization \cite{Gottlieb2009_article}. We review the most important results mentioned in \cite{Ketcheson2009_article, Gottlieb2009_article} concerning the restrictions of SSP methods that will be useful in the next section.
-%\newline
-%
-%\begin{lemma}\label{lem3.1}\cite{Spijker1983_article}
-%    Any  Runge-Kutta method of order \( p > 1 \) has a finite radius of absolute monotonicity.
-%\end{lemma}
-%Therefore we can not waive time-step restrictions for Runge-Kutta methods of order grater than one, since the SSP coefficient is always bounded (even for implicit methods \cite{Ketcheson2009_article}).
-%\begin{lemma}\label{lem3.2}\cite{Kraaijevanger1991_article}
-%    Any Runge-Kutta method that is not equivalent to a method with fewer stages and has positive radius of absolute monotonicity \( R(K) > 0 \) must have all non-negative coefficients \( A \geq 0 \) and positive weights \( \textbf{b} \geq 0 \).
-%\end{lemma}
-%Finally, we state some results regarding the stage order \( \tilde{p} \) of a Runge-Kutta method. It can be shown that the stage order it is the larger integer \( \tilde{p} \) such that the following equations on the coefficients of the method hold (\cite{Ketcheson2009_article, Dekker1984_book})
-%\begin{displaymath}
-%    \begin{split}
-%        \sum_{j=1}^{s}b_{j}c_{j}^{k-1} &= \frac{1}{k}, \qquad 1 \leq k \leq \tilde{p} \\
-%        \sum_{j=1}^{s}a_{ij}c_{j}^{k-1} &= \frac{1}{k}c_{i}^{k}, \qquad 1 \leq k \leq \tilde{p}.
-%    \end{split}
-%\end{displaymath}
-%\begin{lemma}\label{lem3.3}\cite{Kraaijevanger1991_article}
-%    A Runge-Kutta method with non-negative coefficients \( a_{ij} \geq 0 \)  must have stage order \( \tilde{p} \leq 2 \). If \( \tilde{p} = 2 \), then \( A \) must have a zero row.
-%\end{lemma}
-%\begin{lemma}\label{lem3.4}\cite{Kraaijevanger1991_article}
-%    A Runge-Kutta method with \( \textbf{b} > 0 \) must have stage order \( \tilde{p} \geq \llcorner\frac{p-1}{2}\lrcorner \).
-%\end{lemma}
-%\begin{lemma}\label{lem3.5}\cite{Kraaijevanger1991_article}
-%    The stage order of an explicit Runge-Kutta method can not exceed \( \tilde{p} = 1 \).
-%\end{lemma}
-%By combining the results of Lemmas \eqref{lem3.2} - \eqref{lem3.5}, we conclude that for an explicit SSP Runge-Kutta method the order can not exceed four. This is a strict restriction on the classical order of explicit SSP methods. Also there is no SSP(\( 4 \),\( 4 \)) method as shown in \cite{Gottlieb1998_article}.
-%\vspace{10pt}
-%
-%\subsection{Optimal explicit SSPRK schemes}\label{subsection3.2} % section 3.2
-%
-%\vspace{10pt}
-%
-%\qquad Our aim is to find the best possible explicit SSP method for nonlinear problems, given the stage and the order. This is translated in maximising the SSP coefficient and for nonlinear systems is to  find the global maximum of the optimisation problem
-%\begin{subequations}\label{eq3.12}
-%    \begin{align}
-%        \max_{\alpha_{ij}, \beta_{ij}}&\min_{i,j}\frac{\alpha_{ij}}{\beta_{ij}} \label{eq3.12a} \\
-%        \alpha_{ij} &\geq 0 \label{eq3.12b} \\
-%        \beta_{ij} &\geq 0 \label{eq3.12c} \\
-%        \sum_{k=0}^{i-1}\alpha_{ij} &= 1 \label{eq3.12d}\\
-%        \Phi_{p}(\alpha, \beta) &= 0 \label{eq3.12e},
-%    \end{align}
-%\end{subequations}
-%where \( \Phi_{p}(\alpha, \beta) \) represent the order conditions up to order \( p \), written in terms of \( \alpha_{ij} \) and \( \beta_{ij} \). However, because of the equality of SSP coefficient with the radius of absolute monotonicity, we can transform problem \eqref{eq3.12} in terms of Butcher Tableau coefficients. The reformulated optimisation problem has now the form (\cite{Ketcheson2009_article})
-%\begin{equation}\label{eq3.13}
-%    \max_{K,\mu} r, \quad \text{subject to } \quad \left\{
-%                                                 \begin{array}{ll}
-%                                                   \mu \geq 0 \\
-%                                                   r\mu\textbf{e}_{s} \leq \textbf{e}_{s+1} \\
-%                                                   \Phi_{p}(K) = 0,
-%                                                 \end{array}
-%                                               \right.
-%\end{equation}
-%where \( \mu = K(I + rA)^{-1} \).
-%\newline
-%
-%The methods are found through numerical search, using optimisation tools. One candidate is the optimisation software package \textsc{BARON}, which ensures global optimality. This was used in \cite{Macdonald2003_thesis, Ruuth2006_article} for finding explicit SSPRK methods, however is computationally expensive and less practical than other tools. Instead, we make use of \textsc{MATLAB}'s optimisation toolbox. Specifically, we use \verb"fmincon" with a sequential quadratic approach. This optimisation process finds a constrained minimum of a multivariable function and returns the minimiser and the evaluation of the function at this minimum. In our case the function used is simply \( f(\textbf{x}) =  r \). Vector \( \textbf{x} \) contains the coefficients of the method \( (A, \textbf{b}^{\texttt{T}}, \textbf{c}) \) and the value \( r \) as the last element, which stands for the radius of absolute monotonicity of the Runge-Kutta method. We initially start the optimisation process by setting random entries to vector \( \textbf{x} \). The equalities and inequalities of \eqref{eq3.13} are understood as nonlinear constrains of the optimisation process. The algorithm used for the optimisation is the sequential quadratic programming (SQP). In this method the program at each major iteration finds an approximation of the Hessian of the Lagrangian function using a quasi-Newton updating method. This generates a quadratic programming (QP) subproblem whose solution is used by \verb"fmincon" to form a search direction for a line search procedure. For more information on SQP the reader may consult \cite{Fletcher1987_book, Gill1981_book, Powell1983_article, Hock1983_article}.
-%\newline
-%
-%Despite of the large number of variables for methods with many stages and the nonlinear equations emerging from the order conditions, we were able to find explicit SSPRK methods up to \( 26 \) stages for order one to four. The optimisation tool used does not provide an analytic proof of the optimality of the methods. However, the resulted SSPRK methods up to \( 11 \) stages have the same SSP coefficients with the already known optimal explicit SSPRK methods found in \cite{Ketcheson2009_article} and \cite{Gottlieb2009_article}. A comparison of the effective SSP coefficients for explicit method is contained in Table \ref{table3.1}.
-%\newline
-%
-%\begin{table}[t]
-%    \centering
-%    \begin{tabular}{|c|ccccccccccc|}
-%        \hline
-%        \backslashbox{\hspace{25pt}\( p \)}{\vspace{-7pt}\( s \)}& \( 1 \) & \( 2 \) & \( 3 \) & \( 4 \) & \( 5 \) & \( 6 \) & \( 7 \) & \( 8 \) & \( 9 \) & \( 10 \) & \( 11 \) \\
-%        \hline
-%        \( 2 \) & \( - \) & \( 0.50 \) & \( 0.67 \) & \( 0.75 \) & \( 0.80 \) & \( 0.83 \) & \( 0.86 \) & \( 0.88 \) & \( 0.89 \) & \( 0.90 \) & \( 0.91 \) \\
-%        \( 3 \) & \( - \) & \( - \)    & \( 0.33 \) & \( 0.50 \) & \( 0.53 \) & \( 0.59 \) & \( 0.61 \) & \( 0.64 \) & \( 0.67 \) & \( 0.68 \) & \( 0.69 \) \\
-%        \( 4 \) & \( - \) & \( - \)    & \( - \)    & \( - \)    & \( 0.30 \) & \( 0.38 \) & \( 0.47 \) & \( 0.52 \) & \( 0.54 \) & \( 0.60 \) & \( 0.59 \) \\
-%        \hline
-%    \end{tabular}
-%    \caption{Effective SSP coefficients $ c_{ef\!f} $ of best known explicit SSPRK methods.}
-%    \label{table3.1}
-%\end{table}
-%
-%In Definition \ref{def3.1} we considered only methods that have positive \( \beta_{ij} \). It is possible to have SSP schemes that have negative \( \beta_{ij} \), however, the spacial discretisation must be modified for these cases. When the coefficient \( \beta_{ij} \) becomes negative the spacial discretisation is strong-stability preserving for the first order Euler scheme, solved backward in time \cite{Ruuth2004_article}. Therefore, the strong stability properties satisfied with first order forward and backward Euler method are preserved under an SSPRK method. Since both \( \textbf{F}(\textbf{Y}_{i}) \) and \( \tilde{\textbf{F}}(\textbf{Y}_{i}) \) (for forward and backward methods, respectively) must be computed for each stage, the computational cost is double and usually methods that have negative coefficients \( \beta_{ij} \) are rarely used and avoided whenever possible.
-%\newline
-%
-%In this thesis we study the optimisation of explicit methods with positive coefficients and hence as mentioned in Section \ref{subsection3.1.2} we can not go beyond order four. Below we give the Shu-Osher forms (for non-negative coefficients) of the optimal SSPRK methods found in the Butcher tableau formation, by solving the optimisation problem \eqref{eq3.13} in \textsc{MATLAB}. These agree with the ones found by several authors in \cite{Ketcheson2008_article, Gottlieb2009_article, Macdonald2003_thesis}.
-%
-%\subsubsection{First order explicit SSPRK schemes}\label{subsection3.2.1} % section 3.2.1
-%
-%\qquad The optimal \( s \)-stage first order explicit SSPRK methods consist simply of repeated forward Euler steps. They are given by
-%\begin{displaymath}
-%    \begin{split}
-%        \alpha_{i,i-1} &= 1, \quad 1 \le i \le s \\
-%        \beta_{i,i-1} &= \frac{1}{s}, \quad 1 \le i \le s.
-%    \end{split}
-%\end{displaymath}
-%These methods have SSP coefficient equal to \( s \) and effective SSP coefficient equal to unity. They are equivalent to the Forward Euler method.
-%
-%\subsubsection{Second order explicit SSPRK schemes}\label{subsection3.2.2} % section 3.2.2
-%
-%
-%\qquad The optimal \( s \)-stage second order explicit SSP Runge-Kutta methods have Shu-Osher form
-%\begin{eqnarray*}
-%    \alpha_{i,i-1} = \left\{ \begin{array}{ll}
-%                                    1 & 1\le i\le s-1 \\
-%                                    \frac{s-1}{s} & i=s
-%                                \end{array}\right.,&
-%    \quad \alpha_{s,0} = \frac{1}{s} \\
-%    \beta_{i,i-1} = \left\{ \begin{array}{ll}
-%                                    \frac{1}{s-1} & 1\le i\le s-1 \\
-%                                    \frac{1}{s} & i=s,
-%                              \end{array}\right.&
-%\end{eqnarray*}
-%with abscissae
-%\begin{displaymath}
-%    c_{i} = \frac{i-1}{s-1}, \quad 1 \leq i \leq s.
-%\end{displaymath}
-%The SSP coefficient is \( s-1 \) and their effective SSP coefficient is equal to \( 1 - \frac{1}{s} \).
-%
-%\subsubsection{Third order explicit SSPRK schemes}\label{subsection3.2.3} % section 3.2.3
-%
-%\qquad A family of optimal third order SSPRK method methods with \( s = n^{2} \) stages was discovered in \cite{Ketcheson2008_article}. Its non-zero coefficients are given by
-%\begin{eqnarray*}
-%    \alpha_{i,i-1} & = & \left\{\begin{array}{cc}
-%                                    \frac{n-1}{2n-1} & i=\frac{n(n+1)}{2} \\
-%                                    1 & \mbox{otherwise}, \\
-%                                \end{array}\right. \\
-%    \alpha_{\frac{n(n+1)}{2},\frac{(n-1)(n-2)}{2}} & = & \frac{n}{2n-1}, \\
-%    \beta_{i,i-1} & = & \frac{\alpha_{i,i-1}}{n^2-n}
-%\end{eqnarray*}
-%and the abscissae by
-%\begin{eqnarray*}
-%    c_i & = & \frac{i-1}{n^2-n},  \quad \mbox{for } 1 \le i \le (n+2)(n-1)/2, \\
-%    c_i & = & \frac{i-n-1}{n^2-n}, \quad \mbox{for } (n+2)(n+1)/2 \le i \le n^2.
-%\end{eqnarray*}
-%It has the largest SSP coefficient among all third order \( s \)-stage methods and is equal to \( n^{2} - n \). The effective SSP coefficient is \( 1 - \frac{1}{\sqrt{s}} \).
-%
-%\subsubsection{Forth order explicit SSPRK schemes}\label{subsection3.2.4} % section 3.2.4
-%
-%\qquad The best fourth order SSPRK scheme that is analytically proven to be optimal \cite{Gottlieb2009_article} is the ten-stage scheme given below.
-%\begin{eqnarray*}
-%    \beta_{i,i-1} & = & \left\{\begin{array}{cc}
-%                                    \frac{1}{6} & i\in\{1..4,6..9\} \\
-%                                    \frac{1}{15} & i=5 \\
-%                                    \frac{1}{10} & i=10,
-%                                \end{array}\right. \\
-%    \beta_{10,4} & = & \frac{3}{50}, \\
-%    \alpha_{i,i-1} & = & \left\{\begin{array}{cc}
-%                                    1 & i\in\{1..4,6..9\} \\
-%                                    \frac{2}{5} & i=5 \\
-%                                    \frac{3}{5} & i=10,
-%                                \end{array}\right. \\
-%    \alpha_{5,0} & = & \frac{3}{5}, \\
-%    \alpha_{10,0} & = & \frac{1}{25}, \\
-%    \alpha_{10,4} & = & \frac{9}{25}.
-%\end{eqnarray*}
-%The abscissae are
-%\begin{eqnarray*}
-%c = \frac{1}{6} \cdot \left( 0,1,2,3,4,2,3,4,5,6 \right)^\texttt{T}.
-%\end{eqnarray*}
-%This SSPRK(\( 10 \),\( 4 \)) has SSP coefficient \( c = 6 \) and simple rational coefficients. Among all \( 4 \)-stage SSPRK schemes the most efficient has \( 26 \) stages and has coefficient \( c_{ef\!f} \approx 0.696 \) \cite{Ketcheson2008_article}. %We were able to find a slightly better method with \( c_{ef\!f} \approx 0.699 \).
-%
-%
