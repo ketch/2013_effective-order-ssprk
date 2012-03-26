@@ -22,28 +22,14 @@ We denote by ESSPRK($s,q,p$) an $s$-stage Explicit SSP Runge-Kutta method of
 effective order $q$ and classical order $p$. If $q=p$ then we
 write simply ESSPRK($s,p$). 
 
-The effective order SSPRK methods found are optimal among all SSPRK methods, since their SSP coefficients either match the threshold factors for linear problems \yianniscomment{see SSPRK(s,3,2)} or are at least equal with the already known SSPRK methods. \yianniscomment{see SSPRK(s,4,2) \& SSPRK(s,4,3)}
-
-\colincomment{I don't think the previous is quite right}
-
-Further more, this combination allows the construction of a
-four-stage, effective order four SSPRK scheme and thus in some sense overcomes the
-non-existence of an SSPRK(\( 4 \),\( 4 \)) method.  This scheme uses a
-four-stage, four-effective SSPRK method of classical order either two
-or three, accompanied by specific starting and finishing methods.
-
-\comment{With the exception of the four-effective SSP methods of four and five stages, the effective SSP methods for nonlinear problems have SSP coefficients equal to those for linear problems, hence the upper bound is obtained \cite{Kraaijevanger1986}.}
-
 \subsection{The main method}\label{subsection3.1}
-We begin by finding the main method $M$.
+We begin by optimisation of the main method $M$.
 
-The starting and finishing methods can be chosen to be SSPRK methods, resulting
-in an SSP Runge-Kutta scheme of higher order.
+\subsubsection{The optimisation problem\label{subsection3.1.1}}
 
-
-\subsubsection{The optimisation problem of the main method}\label{subsection3.1.1}
-
-\qquad Our aim is to find the optimal main method that has the largest possible SSP coefficient for nonlinear problems, fixing each time the stage, effective and classical order. 
+\qquad Our aim is to find the optimal main method that has the largest possible
+SSP coefficient for nonlinear problems, for a given number of stages, effective order,
+and classical order. 
 Assume that the ESSPRK(\( s \),\( q \),\( p \)) method \( M \) has Butcher tableau  \( (A, \bm{b}) \)
 and reconsider the optimization problem~\eqref{eqSSPopt}
 with \( \Phi_{q,p}(K) \) representing  the conditions for effective order $q$ and classical order $p$.
@@ -64,8 +50,20 @@ sequential quadratic programming approach.
 This process does not guarantee a global minimizer, so several
 searches are performed to try to ensure the method with the largest possible SSP coefficient is found.
 
+\subsubsection{An upper bound: the optimal threshold factor}
+Useful upper bounds for the foregoing optimization problem can be obtained
+by consider an important relaxation.  In the relaxed problem, the method is
+required to be accurate and strong stability preserving only for linear,
+constant-coefficient initial value problems.  This leads to a reduced set of
+order conditions and a reduced set of absolute monotonicity conditions.  We
+denote the resulting optimal value by $\clin$; clearly for any method
+$$\sspcoef\le\clin.$$
+Exact optimal values of $\clin$ are known for many classes of methods; see
+\cite{kraaijevanger1986,ketcheson2009a}.
 
-\subsubsection{SSP coefficients}\label{subsection3.1.2}
+
+
+\subsubsection{Optimal SSP coefficients\label{subsection3.1.2}}
 
 The effective SSP coefficients for up to eleven stages are shown in Table \ref{tab:5.1}. For the computation of ESSPRK(\( s \),\( 4 \),\( 3 \)) methods we use the effective order conditions with \( \beta_{3} \neq 0 \). This allows more freedom in the choice of coefficients since less equations must be satisfied. Similarly with SSPRK methods, all effective SSP coefficients of ESSPRK methods have \( c_{ef\!f} < 1 \).
 
@@ -181,6 +179,18 @@ There is no explicit effective order 5 SSP methods.  This is a corollary of Theo
 \end{lem}
 
 \todo{[In this paper, we should remove mentions of $\alpha$ and $\beta$ that refer something other than Butcher's tree stuff]}
+
+The effective order SSPRK methods found are optimal among all SSPRK methods, since their SSP coefficients either match the threshold factors for linear problems \yianniscomment{see SSPRK(s,3,2)} or are at least equal with the already known SSPRK methods. \yianniscomment{see SSPRK(s,4,2) \& SSPRK(s,4,3)}
+
+\colincomment{I don't think the previous is quite right}
+
+Further more, this combination allows the construction of a
+four-stage, effective order four SSPRK scheme and thus in some sense overcomes the
+non-existence of an SSPRK(\( 4 \),\( 4 \)) method.  This scheme uses a
+four-stage, four-effective SSPRK method of classical order either two
+or three, accompanied by specific starting and finishing methods.
+
+\comment{With the exception of the four-effective SSP methods of four and five stages, the effective SSP methods for nonlinear problems have SSP coefficients equal to those for linear problems, hence the upper bound is obtained \cite{Kraaijevanger1986}.}
 
 
 \subsection{Starting and finishing methods}\label{subsection3.2}
