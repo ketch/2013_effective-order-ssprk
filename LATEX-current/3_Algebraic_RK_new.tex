@@ -197,8 +197,9 @@ unique and inverse methods of explicit methods need not be implicit.
 
 Effective order is achieved by using a starting method $S$ followed by
 a \emph{main method} $M$ %of effective order $q$
-and then a finishing method $S^{-1}$: i.e., the inverse of $S$ which
-annihilates the work of the starting method (up to order $q$).
+and then a finishing method $S^{-1}$.
+%: i.e., the inverse of $S$ which
+%annihilates the work of the starting method (up to order $q$).
 The methods $S$ and $S^{-1}$ make the method $M$ effectively of higher order than its classical order.
 We denote by $\alpha$ and $\beta$ the functions in group $G$ associated with the methods $M$ and $S$, respectively.
 %Thus $\beta^{-1}$ corresponds to Runge--Kutta method $S^{-1}$ that annihilates the work of the starting method $S$ (up to order $q$).
@@ -254,7 +255,10 @@ $
 and using the product operation \eqref{eq:Group_operation}, we can find expressions for each tree $t$ with $r(t) \leq q$.
 For trees up to order five these are tabulated in \cite[Table~3.89]{Butcher2008_book}.
 \textbf{and in Table~\ref{tab:effectiveOCs}}.
-
+Note that all effective order methods are of at least classical order $2$.
+Note also that for the tall trees $t_1, t_4, t_8, t_{17}, \dots$ the
+effective order conditions of the main method match with the classical
+order conditions \cite{Butcher2008_book}.
 \begin{table}[t]
 	%\vspace*{-5ex}
 	%\setlength{\columnseprule}{0.4pt}
@@ -285,15 +289,18 @@ For trees up to order five these are tabulated in \cite[Table~3.89]{Butcher2008_
     		\alpha_{17} &= \tfrac{1}{120}
     	\end{align*}
     \end{multicols}
-    \caption{Effective order conditions of the main method for trees up to order five.  \textbf{uncommented temporarily, remove later?}}
+    \caption{Effective order conditions of the main method for trees up to order five.  \textbf{temp: remove later?}}
     \label{tab:effectiveOCs}
 \end{table}
+We use the abbreviation RK($s$,$q$,$p$) for an $s$-stage Runge-Kutta method of effective order $q$ and classical order $p$.
 
-\colintodo{This ``construction'' but should move elsewhere but I think it supports the table}
+
+\subsubsection{Constructing methods}
+\colintodo{We wanted this ``construction'' to move elsewhere but I think it supports the table.  Need to decide if this is new work}
 Butcher \cite{Butcher2008_book} also uses the convention that $\beta_1 = 0$, i.e., the starting and finishing methods perturb the solution but do not advance the solution in time, which we follow for now.
 The approach we adopt is to consider the $\beta_{i}$ as free parameters when determining the $\alpha_i$. This provides maximal degrees of freedom when constructing the method $M$. Then when all functions on $\alpha$ are found, the relative order conditions on $\beta$ can be obtained. For a general Runge-Kutta method the effective order conditions up to effective order five are given in Table~\ref{tab:Effective_oc}. We can also find the order conditions of $\beta^{-1}$.
 
-\begin{table}[t!]
+\begin{table}[htb]
 	\centering
     \begin{tabular}{M{2mm}|M{2mm}|M{68mm}|M{67mm}}
         q & p & Order conditions for the main method $M$ & Order conditions for the starting method $S$ \nline
@@ -326,32 +333,24 @@ The approach we adopt is to consider the $\beta_{i}$ as free parameters when det
         & & {\small $\frac{1}{20} + \frac{1}{2}\alpha_9 - 3\alpha_{10} + 3\alpha_{11} - \alpha_{14} = 0$,} & {\small $\beta_6 = -\frac{1}{40} - \frac{1}{8}\alpha_9 + \frac{1}{2}\alpha_{10}$,} \nline
         & & {\small $\frac{1}{40} + \frac{1}{2}\alpha_9 - 2\alpha_{10} + \alpha_{11} + \alpha_{12} - \alpha_{15} = 0$,} & {\small $\beta_7 = -\frac{1}{60} + \frac{1}{4}\alpha_9 - \alpha_{10} + \alpha_{11}$,} \nline
         & & {\small $\frac{1}{60} - \alpha_{11} + 2\alpha_{12} - \alpha_{16} = 0$.} & {\small $\beta_8 = -\frac{1}{120} + \frac{1}{8}\alpha_9 - \frac{1}{2}\alpha_{10} + \alpha_{12}$.} \nline
-    \end{tabular}        
-    \caption{Effective order $q$, classical order $p$ conditions on $ \alpha $ and $ \beta $ for the main and starting methods, $M$ and $S$ respectively.
-      \colincomment{Old comment: something seems wrong here: I can easily substitute $\beta_2=-\frac{1}{6} + \frac{1}{2}\alpha_3$ into the bottom four equations for the main method. Then the OCs for the main method are written in a form that is independent of those of $S$. But I think I remember there was some subtle things here because of the squared $\beta$ terms.}}
-    \label{tab:Effective_oc}    
-    %\yianniscomment{Substituting $\beta_2$ in OC of the main method makes them dependent only on $\alpha$. But still the resulting system of equations has no solution for $\bm{b}>0$. In other words what I say here is that if we let $\beta_2$ a free parameter, then the system of equations for the main method has a solution (with positive coefficients). But since the (initial) five-effective order equations depend on $\beta_2$, $\beta_2=-\frac{1}{6} + \frac{1}{2}\alpha_3$ has to be added to the set of equations solved for the main method (this is how the set of equations of the main and starting methods are coupled in contrast with the 3- and 4-effective order cases). These can be then reduced from $10$ to $9$ by substituting $\beta_2=-\frac{1}{6} + \frac{1}{2}\alpha_3$, yet still no solution with positive $\bm{b}$ exists. Actually as I say in the proof it is enough to consider only $\alpha_1=1, \alpha_4=\frac{1}{6}, \frac{1}{4}\alpha_9 - \alpha_{10} + \alpha_{13} = \beta_2^{2}$ and $\beta_2=-\frac{1}{6} + \frac{1}{2}\alpha_3$. No solution (always with positive weights) exists for these $4$ equations, hence no solution exists for the initial problem of the OCs of the main method.}
+    \end{tabular}
+    \caption{Effective order $q$, classical order $p$ conditions on $ \alpha $ and $ \beta $ for the main and starting methods, $M$ and $S$ respectively.}
+    \label{tab:Effective_oc}
 \end{table}
+
+
+      % \colincomment{Old comment: something seems wrong here: I can easily substitute $\beta_2=-\frac{1}{6} + \frac{1}{2}\alpha_3$ into the bottom four equations for the main method. Then the OCs for the main method are written in a form that is independent of those of $S$. But I think I remember there was some subtle things here because of the squared $\beta$ terms.}
+    %\yianniscomment{Substituting $\beta_2$ in OC of the main method makes them dependent only on $\alpha$. But still the resulting system of equations has no solution for $\bm{b}>0$. In other words what I say here is that if we let $\beta_2$ a free parameter, then the system of equations for the main method has a solution (with positive coefficients). But since the (initial) five-effective order equations depend on $\beta_2$, $\beta_2=-\frac{1}{6} + \frac{1}{2}\alpha_3$ has to be added to the set of equations solved for the main method (this is how the set of equations of the main and starting methods are coupled in contrast with the 3- and 4-effective order cases). These can be then reduced from $10$ to $9$ by substituting $\beta_2=-\frac{1}{6} + \frac{1}{2}\alpha_3$, yet still no solution with positive $\bm{b}$ exists. Actually as I say in the proof it is enough to consider only $\alpha_1=1, \alpha_4=\frac{1}{6}, \frac{1}{4}\alpha_9 - \alpha_{10} + \alpha_{13} = \beta_2^{2}$ and $\beta_2=-\frac{1}{6} + \frac{1}{2}\alpha_3$. No solution (always with positive weights) exists for these $4$ equations, hence no solution exists for the initial problem of the OCs of the main method.}
 
 
 %\yiannistodo{Yes, one can substitute $\beta_2$ and get equations for the main method that depend only one $\alpha_i's$. The difference of this case with the previous ones of effective order $3$ and $4$ is just that the resulting equations can not be solved simultaneously for positive coefficients.}
 % Thus, all $\alpha_{i}$ can be found first and the main method can be construct without requiring the perturbation methods. Then when all functions on $\alpha$ are found, the relative order conditions on $\beta$ can be obtained. At the same time we find the order conditions of $\beta^{-1}$ by requiring $(\beta\beta^{-1})(t) = 0$ for all trees of order $r(t) \leq q$.
 
-\colintodo{remove this example?}
 \begin{example}\label{ex:Effective_RK32}
+\colintodo{remove this example?}
 	Constructing an $s$-stage method of effective order 3 with classical order 2 requires satisfying the three conditions given in Table~\ref{tab:Effective_oc}. This is one less condition than constructing a method with classical order 3, since $\alpha_3$ is here a free parameter. After choosing a method and thus a value for $\alpha_3$, the order conditions for the starting method are now fixed as well.
 \end{example}
 
-We use the abbreviation RK($s$,$q$,$p$) for an $s$-stage Runge-Kutta method of effective order $q$ and classical order $p$.
-%Note that if a method is of effective order $q$, then this is meaningful if $q \geq 2$ because the second effective order conditions are the same with the classical order two conditions.
-All effective order methods are of at least classical order $2$.
-%In general $q \geq p$ and by referring to an RK($s$,$q$,$p$) method
-%this means that its corresponding element $\alpha \in G$ satisfies
-%$\alpha(t) = E(t)$ for all trees of order $r(t) \leq p$ and moreover
-extra conditions up to order $q$ as shown in Table~\ref{tab:Effective_oc}.
-%By setting the values of $\beta_{i}$ for $i = 2, 3, \dots$ equal to zero, we increase the classical order on $\alpha$, since $a(t_{i}) = E(t_{i})$ for more values of index $i$.
-Note also that for the tall trees $t_1, t_4, t_8, t_{17}, \dots$ the effective
-order conditions of the main method match with the classical order conditions \cite{Butcher2008_book}.
 
 % Thus the number of order conditions is always less than the number of the classical order conditions. In particular the third-effective order conditions become three instead of four and for a fourth-effective order method are either five to seven, instead of eight. As an example, effective order explains why one can construct $s$-stage explicit Runge-Kutta methods that can effectively attain order $p$ equal to $s$, when accompanied by starting and finishing methods \cite{Butcher1987_book}. In this way effective order overcomes the order barrier of explicit methods which states that for stages more than five we can not have classical order equal to the number of stages. 
 
