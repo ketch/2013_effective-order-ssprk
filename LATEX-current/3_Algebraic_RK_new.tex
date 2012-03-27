@@ -1,4 +1,4 @@
-\section{Algebraic representation of Runge-Kutta methods}\label{sec:Algebraic_RK}
+\section{Algebraic representation of Runge--Kutta methods}\label{sec:Algebraic_RK}
 
 The effective order of a Runge--Kutta method is defined in an abstract algebraic
 context introduced by Butcher \cite{Butcher1969} and developed further in
@@ -8,7 +8,7 @@ concepts of this representation in order to define effective order methods
 and their order conditions.
 
 
-\subsection{Formulation of the Runge-Kutta group}\label{sec:RK_group}
+\subsection{Formulation of the Runge--Kutta group}\label{sec:RK_group}
 
 %In this characterization, we remove our attention from the numerical methods themselves and we concentrate on their counterparts in a certain group containing all real-valued maps on the set of rooted trees.
 
@@ -28,7 +28,7 @@ for trees $t_{i}$ indexed by integer $i$.
 %, $i = 0, 1, 2, \dots$.
 %, where $t_{0}$ denotes the empty tree $\emptyset$.
 %By convention $\alpha(\emptyset) = 1$.
-The infinite length vector consisting of $\alpha_i$, $i = 0, 1, 2,
+The infinite-length vector consisting of $\alpha_i$, $i = 0, 1, 2,
 \ldots$ is the B-series of the corresponding Runge--Kutta method and
 is related to Taylor expansions of the numerical solution of the
 Runge--Kutta method \cite{Hairer1974, Butcher2008_book}.
@@ -139,7 +139,7 @@ $
     \end{tabular}
     \vspace{5pt}
     \caption{Partitions of tree $t_{11}$ to all
-      possible prunings $w$ such that $w \lhd t_{11}$ and the
+      possible subtrees $w$ and the
       corresponding forests $t_{11} \setminus w$.
       Multiplicity is indicated with $(\times2)$.}
     \label{tab:tree_partition}
@@ -221,22 +221,15 @@ In terms of functions in group $G$ this is leads to the following definition of 
 The practical benefit of methods of effective order results from the
 observation that only $M$ need be used repeatedly.
 \begin{result}
-  With methods $S$, $S^{-1}$, $M$, and $P$ defined as above we have
+  With methods $M$, $S$, $S^{-1}$, and $P$ as above we have
   $$P^n = (S^{-1}MS)^n = (S^{-1}MS) \cdots (S^{-1}MS) (S^{-1}MS)
         = S^{-1} M^n S.$$
-\end{result}
-
-
-%\comment{Then, since \( (\beta^{-1}\alpha\beta)^{n} = \beta^{-1}\alpha^{n}\beta \) applying \( n \) times the method \( P = S^{-1}MS \) gives \( P^{n} = S^{-1}M^{n}S \). Therefore, instead of applying the method \( P \) at each step, now three methods come into play.
 The starting method is applied at the beginning without advancing the
 solution.
 Instead, it introduces a perturbation on the solution.
-% so as method \( M \) reproduces this perturbation within its classical order.
 The main method \( M \) is then used \( n \) times and finally the
 finishing method is used to correct the solution.
-%The final result approximates the exact solution to within \(
-%\mathcal{O}((\Dt)^{q}) \), where \( q \) is the effective order of
-%method \( M \).
+\end{result}
 
 
 
@@ -253,13 +246,13 @@ $
 $
 %\end{equation}
 and using the product operation \eqref{eq:Group_operation}, we can find expressions for each tree $t$ with $r(t) \leq q$.
-For trees up to order five these are tabulated in \cite[Table~3.89]{Butcher2008_book}.
-\textbf{and in Table~\ref{tab:effectiveOCs}}.
+For trees up to order five these are tabulated in \cite[Table~3.89]{Butcher2008_book}
+and in Table~\ref{tab:effectiveOCs}.
 Note that all effective order methods are of at least classical order $2$.
 Note also that for the tall trees $t_1, t_4, t_8, t_{17}, \dots$ the
-effective order conditions of the main method match with the classical
+effective order conditions of the main method match the classical
 order conditions \cite{Butcher2008_book}.
-\begin{table}[t]
+\begin{table}
 	%\vspace*{-5ex}
 	%\setlength{\columnseprule}{0.4pt}
 	%\setlength{\columnsep}{10pt}
