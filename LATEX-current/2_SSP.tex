@@ -1,5 +1,5 @@
 %\section{Review of SSP theory}
-\section{Strong Stability Preserving Runge-Kutta methods}
+\section{Strong Stability Preserving Runge--Kutta methods}
 \label{sec:SSP}
 %\label{subsec:SSPRK}
 
@@ -18,9 +18,9 @@ A time discretization then produces a sequence of solutions $\bm{u}^{n} \approx 
 
 %In the particular case of hyperbolic conservation laws,
 Many popular spatial discretizations are chosen such that the solution $\bm{u}^{n}$ computed with the forward Euler scheme
-\begin{align*}
+\begin{align}\label{eq:forwardEuler}
     \bm{u}^{n+1} = \bm{u}^{n} + \Dt\bm{F}(\bm{u}^{n}),
-\end{align*}
+\end{align}
 is non-increasing in some norm, seminorm, or convex functional:
 \begin{align*}
     \|\bm{u}^{n+1}\| \le \|\bm{u}^n\|,

@@ -1,45 +1,136 @@
 \section{Algebraic representation of Runge-Kutta methods}\label{sec:Algebraic_RK}
 
-The effective order of a Runge--Kutta method is defined in an abstract algebraic context.
-In this characterization, we remove our attention from the numerical methods themselves and we concentrate on their counterparts in a certain group containing all real-valued maps on the set of rooted trees.
-The underlying theory was introduced by Butcher \cite{Butcher1969} and developed further in \cite{Butcher1972, Hairer1974, Butcher1996, Butcher1998}.
-In this section we follow \cite{Butcher2008_book}, reviewing the fundamental concepts of this representation in order to define effective order methods and their order conditions.
-%For more detailed description the reader may refer to \cite{Butcher2008_book, Butcher1972}.
+The effective order of a Runge--Kutta method is defined in an abstract algebraic
+context introduced by Butcher \cite{Butcher1969} and developed further in
+\cite{Butcher1972, Hairer1974, Butcher1996, Butcher1998} and others.
+In this section we follow \cite{Butcher2008_book}, reviewing the fundamental
+concepts of this representation in order to define effective order methods
+and their order conditions.
+
 
 \subsection{Formulation of the Runge-Kutta group}\label{sec:RK_group}
 
-A group for the Runge--Kutta methods is meaningful if it can describe the successive application of two methods.
-
-....
+%In this characterization, we remove our attention from the numerical methods themselves and we concentrate on their counterparts in a certain group containing all real-valued maps on the set of rooted trees.
 
 
-Butcher \cite{Butcher1972} proposed the set $G$ of all functions that map trees to real numbers and in particular to algebraic expressions known as \emph{elementary weights}.
-For every tree $t$ its elementary weight is denoted by $\Phi(t)$ and can be written as an algebraic expression in the coefficients of a Runge--Kutta method.  A recursive formulation and of these expressions and the elementary weights for trees of order up to five can be found in \cite[Definition and Tables~3.12]{Butcher2008_book}.
-%\colintodo{Need to work on this bit, maybe mention/cite B-series too. Also introduce the notation $t_i$, maybe $r(t)$ and the density $\gamma(t)$.}
-%\yiannistodo{Citing B-series I think is enough, $t_{i}$ is introduced here, the rest is better to introduced the time are used.}
-For every function $\alpha \in G$ we write $\alpha_{i} = \alpha(t_{i}) = \Phi(t_{i})$ for trees $t_{i}$, $i = 0, 1, 2, \dots$, where $t_{0}$ denotes the empty tree $\emptyset$. By convection $\alpha(\emptyset) = 1$. The infinite length vector consisting of $\alpha_i$, $i = 0, 1, 2, \ldots$ is the B-series of the corresponding Runge--Kutta method and is related to Taylor expansions of the numerical solution of the Runge--Kutta method \cite{Hairer1974, Butcher2008_book}.
+Butcher \cite{Butcher1972} proposed the set $G$ of functions that map
+trees to real numbers, specifically algebraic expressions known as
+\emph{elementary weights}.
+\colintodo{this section not clear enough}
+%A tree $t$ has order $r(t)$ equal to the number of nodes.
+The elementary weight of a tree $t$
+%is denoted by $\Phi(t)$ and can be written as an
+is an algebraic expression in the coefficients of a Runge--Kutta method.
+For every function $\alpha \in G$ we write the elementary weights as
+$\alpha_{i} = \alpha(t_{i})$
+% = \Phi(t_{i})$
+for trees $t_{i}$ indexed by integer $i$.
+%, $i = 0, 1, 2, \dots$.
+%, where $t_{0}$ denotes the empty tree $\emptyset$.
+%By convention $\alpha(\emptyset) = 1$.
+The infinite length vector consisting of $\alpha_i$, $i = 0, 1, 2,
+\ldots$ is the B-series of the corresponding Runge--Kutta method and
+is related to Taylor expansions of the numerical solution of the
+Runge--Kutta method \cite{Hairer1974, Butcher2008_book}.
+Table~\ref{tab:elementaryWeights} shows these
+expressions up to fifth order; a recursive formulation
+%\textbf{and further tables}
+can be found in \cite[Definition 312]{Butcher2008_book}.
 
-....
 
-, corresponding to composition of two methods,
 
-....
+\begin{table}
+  \centering
+  \begin{tabular}{ccc}
+    \hline
+    $i$ & tree & elementary weight \\
+    \hline
+    0 & $\emptyset$ & 1 (double-check!) \\
+    1 & \tree{1}    & $\bm{b}^T\bm{e}$ \\
+    2 & \tree{2}    & $\bm{b}^T\bm{c}$\\
+    3 & \tree{3}    & $\bm{b}^T\bm{c}^2$\\
+    4 & \tree{4}    & $\bm{b}^TA\bm{c}$\\
+    5 & \tree{5}    & $\bm{b}^T\bm{c}^3$\\
+    6 & \:\:\:\:\:\tree{6} & $\bm{b}^TCA\bm{c}$ \\
+    7 & \tree{7}\:\:\:\:\: & $\bm{b}^TA\bm{c}^2$\\
+    8 & \:\:\tree{8}       & $\bm{b}^TA^2\bm{c}$\\
+    \\
+  \end{tabular}
+  \qquad
+  \begin{tabular}{ccc}
+    \hline
+    $i$ & tree & elementary weight \\
+    \hline
+    9  & \tree{9}       & $\bm{b}^TA^2\bm{c}$ TODO\\
+    10 & \tree{10}      & $\bm{b}^TA^2\bm{c}$ TODO\\
+    11 & \tree{11}      & $\bm{b}^TA^2\bm{c}$ TODO\\
+    12 & \tree{12}      & $\bm{b}^TA^2\bm{c}$ TODO\\
+    13 & \tree{13}      & $\bm{b}^TA^2\bm{c}$ TODO\\
+    14 & \tree{14}      & $\bm{b}^TA^2\bm{c}$ TODO\\
+    15 & \tree{15}      & $\bm{b}^TA^2\bm{c}$ TODO\\
+    16 & \tree{16}\:\:\:\:\:      & $\bm{b}^TA^2\bm{c}$ TODO\\
+    17 & \:\:\:\:\:\tree{17}      & $\bm{b}^TA^2\bm{c}$ TODO\\
+  \end{tabular}
+  \caption{Elementary weights of trees up to forth order.}
+  \label{tab:elementaryWeights}
+\end{table}
 
-A binary operator can be defined on each tree by performing a certain partitioning and computing over the resulting forest.  We begin by defining a \emph{rooted subtree} $w$ of $t$, denoted $t \lhd w$, as the pruning of $t$ which shares the root vertex of $t$ if not the empty tree.  We denote by $w \setminus t$ the forest induced by removing the rooted subtree $w$ from $t$ and accounting for multiplicity over all possible choices for $w$. %(more precisely, the difference of the vertex sets of $t$ and $w$). 
-The group operation depends only on a sequence of elementary weights of the functions $\alpha$ and $\beta$ and was defined in \cite{Butcher2008_book} as follows.
-\begin{definition}\label{def:Group_operation}
-	Let $\alpha$ and $\beta$ be two members of $G$, mapping trees to real numbers. Then for every tree $t$, we define their product by
-	\begin{equation}\label{eq:Group_operation}
-		(\beta\alpha)(t) = \sum_{w \lhd t}\alpha(t \setminus w)\beta(w).
-	\end{equation}
-	Note that $\alpha(t \setminus w)$ refers to the evaluation over a forest. This is well-defined by multiplying the value of $\alpha$ over each tree in the forest.
-\end{definition}
+%corresponding to composition of two methods,
+
+% \subsubsection*{minimalist}
+% Given $\alpha, \beta \in G$, the product can be defined on each
+% tree by performing a certain partitioning of the tree and computing
+% over the resulting forest \cite{Butcher2008_book}.  The product of
+% $\alpha\beta$ corresponds to the application of one Runge--Kutta
+% method followed by another.  This multiplicative binary operation
+% makes $G$ a group.
+
+
+
+Suppose $\alpha, \beta \in G$ correspond to Runge--Kutta methods $M$ and $S$ respectively.
+A multiplicative group operation $\alpha\beta$ can be defined
+by partitioning the input tree and
+%on each tree by performing a certain partitioning of the tree and
+computing over the resulting forest \cite{Butcher2008_book}.
+This product $\alpha\beta$ corresponds to the application
+of method $S$ followed by method $M$.
+\colintodo{note order different from Butcher... bad idea}
+%Runge--Kutta method followed by another.
+It is defined by
+\begin{equation}\label{eq:Group_operation}
+  (\beta\alpha)(t) = \sum_{w \lhd t} \left(\prod_{v \in t \setminus w} \alpha(v)\beta(w)\right),
+\end{equation}
+where $w \lhd t$ indicates a subtree of $t$ which includes the
+root of $t$ and $w \setminus t$ indicates the forest induced
+by removing $w$ from $t$.
+Multiplicity in choosing $w$ must also be accounted for.
+See \cite{Butcher2008_book} for details.
+This product is perhaps best understood via an example.
+
+%\subsubsection*{longer version}
+% The group multiplicative operation $\alpha\beta$ corresponds to the
+% application of one Runge--Kutta method followed by another.
+% It is defined as follows.
+% \begin{definition}\label{def:Group_operation}
+% 	Let $\alpha$ and $\beta$ be two members of $G$, mapping trees to real numbers. Then for every tree $t$, we define their product by
+% 	\begin{equation}\label{eq:Group_operation}
+% 		(\beta\alpha)(t) = \sum_{w \lhd t} \prod_{v \in t \setminus w} \alpha(v)\beta(w),
+% 	\end{equation}
+%         where $w \lhd t$ indicates a subtree of $t$ which includes the
+%         root of $t$ and $w \setminus t$ indicates the forest induced
+%         by removing $w$ from $t$.
+%         Multiplicity in choosing $w$ must also be accounted for.
+% \end{definition}
+% See \cite{Butcher2008_book} for details.  This product is perhaps best
+% understood via an example.
+
 \begin{example}\label{ex:tree_partition}
 	Table~\ref{tab:tree_partition} shows the partition of the five-vertex tree $t_{11}$ to all possible rooted subtrees. Based on this partition, we apply \eqref{eq:Group_operation} to find that the product of two functions in $G$ on tree $t_{11}$ is given by
-	\begin{displaymath}
+$
 		(\beta\alpha)(t_{11}) = \alpha_{11} + \alpha_1\alpha_3\beta_1 + (\alpha_1^{3} + \alpha_3)\beta_2 + \alpha_1^{2}\beta_3 + 2\alpha_1^{2}\beta_4 + 2\alpha_1\beta_6 + \alpha_1\beta_7 + \beta_{11}.
-	\end{displaymath}
-	\begin{table}
+$
+
+\begin{table}
 	\centering
     \begin{tabular}{c cc|c|c|c|c|c|c|c|c|c}
         \multirow{2}{*}{\begin{biggertrees}\treecell{$\tree{11}$}{$t_{11}$}\end{biggertrees}} & & $w$ & $\emptyset$ & $\tree{1}$ & $\tree{2}$ & $\tree{2}$ & $\tree{3}$ & $\tree{4}$ & $\tree{6}$ & $\tree{7}$ & $\tree{11}$ \\[3pt]
@@ -47,83 +138,165 @@ The group operation depends only on a sequence of elementary weights of the func
         & & $t_{11} \setminus w$ & \rowscell{$\tree{11}$}{} & \rowscell{$\tree{1}$}{$\tree{3}$} & \rowscell{$\tree{3}$}{ } & \rowscell{$\tree{1} \quad \tree{1}$}{$\tree{1}$} & \rowscell{$\tree{1} \quad \tree{1}$}{ } & \rowscell{$\tree{1} \quad \tree{1}$}{$(\times2)$} & \rowscell{$\tree{1}$}{$(\times2)$} & \rowscell{$\tree{1}$}{ } & \rowscell{$\emptyset$}{ }
     \end{tabular}
     \vspace{5pt}
-    \caption{Partitions of tree $t_{11}$ to all possible prunings $w$ such that $w \lhd t_{11}$.  Multiplicity is indicated with $(\times2)$.}
+    \caption{Partitions of tree $t_{11}$ to all
+      possible prunings $w$ such that $w \lhd t_{11}$ and the
+      corresponding forests $t_{11} \setminus w$.
+      Multiplicity is indicated with $(\times2)$.}
     \label{tab:tree_partition}
 	\end{table}
 \end{example}
 
+
 \subsection{Algebraic interpretation of order}\label{sec:Algebraic_order}
 
-If two Runge--Kutta methods map to the same element of $G$ then they are essentially the same method, up to reducibility.
-This is overly restrictive for practical purposes and we want a way to discuss equivalence of methods \emph{up to a particular order of accuracy}.
-
-% TODO:
-% Let $T$ be the set of all trees and define the order $r(t)$ for a  tree $t \in T$ to be the cardinality of its set of vertices. Also let $\bm{1}$ be the identity element in $G$.
+If two Runge--Kutta methods map to the same element of $G$ then they
+are essentially the same method (up to reducibility).
+This is overly restrictive for practical purposes and we want a way to
+discuss equivalence of methods up to a particular order of accuracy.
 
 \begin{definition}\label{def:Equivalent_methods}
-	Two Runge--Kutta methods $m_\alpha$ and $m_\beta$ are equivalent up to order $p$, if their corresponding elements in $G$, $\alpha$ and $\beta$ respectively, satisfy
+	Two Runge--Kutta methods
+        are equivalent up to order $p$ if their corresponding elements in $G$, $\alpha$ and $\beta$ respectively, satisfy
 	\begin{displaymath}
-		\alpha(t) = \beta(t), \; \text{for every $t \in T$ with $r(t) \leq p$}.
+		\alpha(t) = \beta(t), \; \text{for every tree $t$ with $r(t) \leq p$},
 	\end{displaymath}
 	%Assume that $m$ and $\widetilde{m}$ are Runge-Kutta methods where the corresponding members of $G_1$ are $\alpha$ and $\widetilde{\alpha}$.
+        where $r(t)$ denotes the order of the tree (number of vertices).
 \end{definition}
-In this sense, methods have inverses: the product of $\alpha^{-1}$ and $\alpha$ (using Definition~\ref{def:Group_operation}) must match the identity method up to order $p$ \cite{Butcher2008_book}.
-Classical order follows from comparing a method with the special group element $E \in G$ which advances the exact solution by one step.
-All of this can be made considerably more precise using quotient groups of $G$ \cite{Butcher2008_book}.
+
+In this sense, methods have inverses: the product of $\alpha^{-1}$ and
+$\alpha$ must match the identity method up to order $p$
+\cite{Butcher2008_book}.
+Classical order follows from comparing a method with the special group
+element $E \in G$ which advances the exact solution by one step
+\cite{Butcher2008_book}.
+All of this can be made considerably more precise using quotient
+groups of $G$ \cite{Butcher2008_book}.
 
 
-\colintodo{remove this example?  I rather liked these :(}
 \begin{example}\label{ex:FE_inv_2}
-  Consider the forward Euler method $\bm{u}^{n+1} = \bm{u}^{n} + \Dt \bm{F}(\bm{u}^{n})$.
+  Consider the forward Euler method \eqref{eq:forwardEuler}.
+  %$\bm{u}^{n+1} = \bm{u}^{n} + \Dt \bm{F}(\bm{u}^{n})$.
   To find an inverse, we seek a method that undoes the work of this method,
-  recovering $\bm{u}^{n}$ from $\bm{u}^{n+1}$.
-  One approach is to solve for $\bm{u}^{n}$, obtaining the backward Euler method
+  recovering $\bm{u}^{n}$ from $\bm{u}^{n+1}$;
+  one approach is to solve for $\bm{u}^{n}$, obtaining the backward Euler method
   with a time-step of $-\Dt$.
   Alternatively, let $\alpha \in G$ correspond to the forward Euler method and by
-  Definition~\ref{def:Group_operation}, we have
+  \eqref{eq:Group_operation}, we have
+  %\cite[Sec~382]{Butcher2008_book}, we have
   $(\alpha^{-1}\alpha)(t_1) = \alpha(t_1) + \alpha^{-1}(t_1) = 0$,
   so any $\alpha^{-1}$ with $\alpha^{-1}(t_1) = -1$ will do.
-  For example, the forward Euler method with size $-\Delta t$ is an inverse to
-  the standard forward Euler method, up to order $1$.
-  Notably, inverse methods up to order $p$ are not unique and inverse
-  methods of explicit methods need not be implicit.
+  For example, the forward Euler method with size $-\Delta t$ is also an
+  inverse (up to order $1$).
 \end{example}
+This example demonstrates that inverse methods up to order $p$ are not
+unique and inverse methods of explicit methods need not be implicit.
 
 
 \subsection{Effective order}\label{sec:Effective_order}
 
-Effective order is achieved by using a starting method $S$ followed by a \emph{main method} $M$ %of effective order $q$ 
-and then a finishing method $S^{-1}$ (the inverse of $S$ which annihilates the work of the starting method (up to order $q$).
+Effective order is achieved by using a starting method $S$ followed by
+a \emph{main method} $M$ %of effective order $q$
+and then a finishing method $S^{-1}$: i.e., the inverse of $S$ which
+annihilates the work of the starting method (up to order $q$).
 The methods $S$ and $S^{-1}$ make the method $M$ effectively of higher order than its classical order.
 We denote by $\alpha$ and $\beta$ the functions in group $G$ associated with the methods $M$ and $S$, respectively.
 %Thus $\beta^{-1}$ corresponds to Runge--Kutta method $S^{-1}$ that annihilates the work of the starting method $S$ (up to order $q$).
 The successive use of these three methods results in a method $P = S^{-1}MS$, of which the corresponding function in $G$ is $\beta^{-1}\alpha\beta$.
 In order for the method $P$ to be of order $q$, then it must reproduce the exact solution to within $\mathcal{O}((\Dt)^{q+1})$.
 This means that the sequence of methods \( S \), \( M \) and \( S^{-1} \) moves the numerical approximation a single step forward with local truncation error \( \mathcal{O}((\Dt)^{q+1}) \).
-In terms of functions in group $G$ this is leads to the following definition of the effective order of a Runge--Kutta method.
+In terms of functions in group $G$ this is leads to the following definition of the effective order of the Runge--Kutta method $M$.
 \begin{definition}\cite{Butcher1987_book}\label{def:Effective_order}
-	Let $\alpha$ and $\beta$ be the corresponding functions in $G$ of two Runge-Kutta methods $M$ and $S$, respectively. Then the method $M$ is of effective order $q$ if the method $S$ exists such that
+  % Let $\alpha$ and $\beta be the corresponding functions in $G$ of a
+  % Runge--Kutta methods $M$ and $S$, respectively.
+  Suppose $M$ is a Runge--Kutta method with corresponding $\alpha \in G$.
+  Then the method $M$ is of effective order $q$ if there exists method
+  $S$ (with corresponding $\beta \in G$) such that
 	\begin{equation}\label{eq:Effective_order_1}
-		(\beta^{-1}\alpha\beta)(t) = E(t), \; \text{for every } t \in T \text{ with } r(t) \leq q.
+		(\beta^{-1}\alpha\beta)(t) = E(t), \; \text{for every tree with $r(t) \leq q$,}
 	\end{equation}
+        where $\beta^{-1}$ is an inverse of $\beta$ up to order $q$.
 \end{definition}
-The practical benefit of methods of effective order results from the observation that only $M$ need be used repeatedly.
-\begin{theorem}
+The practical benefit of methods of effective order results from the
+observation that only $M$ need be used repeatedly.
+\begin{result}
   With methods $S$, $S^{-1}$, $M$, and $P$ defined as above we have
-$$P^n = (S^{-1}MS)^n = (S^{-1}MS)\cdots(S^{-1}MS)(S^{-1}MS) = S^{-1}M^nS.$$
-\end{theorem}
-This follows directly from the algebraic theory above.
+  $$P^n = (S^{-1}MS)^n = (S^{-1}MS) \cdots (S^{-1}MS) (S^{-1}MS)
+        = S^{-1} M^n S.$$
+\end{result}
 
-\comment{Then, since \( (\beta^{-1}\alpha\beta)^{n} = \beta^{-1}\alpha^{n}\beta \) applying \( n \) times the method \( P = S^{-1}MS \) gives \( P^{n} = S^{-1}M^{n}S \). Therefore, instead of applying the method \( P \) at each step, now three methods come into play. The starting method is applied at the beginning without advancing the solution. Instead, it introduces a perturbation on the solution so as method \( M \) reproduces this perturbation within its classical order. The main method \( M \) it is used \( n \) times and the finishing method is used at the end to correct the solution. The final result approximates the exact solution to within \( \mathcal{O}((\Dt)^{q}) \), where \( q \) is the effective order of method \( M \).}
+
+%\comment{Then, since \( (\beta^{-1}\alpha\beta)^{n} = \beta^{-1}\alpha^{n}\beta \) applying \( n \) times the method \( P = S^{-1}MS \) gives \( P^{n} = S^{-1}M^{n}S \). Therefore, instead of applying the method \( P \) at each step, now three methods come into play.
+The starting method is applied at the beginning without advancing the
+solution.
+Instead, it introduces a perturbation on the solution.
+% so as method \( M \) reproduces this perturbation within its classical order.
+The main method \( M \) is then used \( n \) times and finally the
+finishing method is used to correct the solution.
+%The final result approximates the exact solution to within \(
+%\mathcal{O}((\Dt)^{q}) \), where \( q \) is the effective order of
+%method \( M \).
 
 
 
 \subsubsection{Effective order conditions}\label{sec:effOrderCond}
 
+For the main method $M$ to be effective order $q$ its coefficients must satisfy a series of algebraic conditions coming from each tree in Definition~\ref{def:Effective_order}.
+That is, the Runge--Kutta method $M$ corresponding to the function $\alpha$ must satisfy
+\emph{effective order conditions} relative to the order conditions of the
+method $S$ corresponding to the function $\beta$.
+We rewrite \eqref{eq:Effective_order_1} as
+%\begin{equation}\label{eq:Effective_order_2}
+$
+	(\alpha\beta)(t) = (\beta E)(t), \; \text{for all trees with $r(t) \leq q$,}
+$
+%\end{equation}
+and using the product operation \eqref{eq:Group_operation}, we can find expressions for each tree $t$ with $r(t) \leq q$.
+For trees up to order five these are tabulated in \cite[Table~3.89]{Butcher2008_book}.
+\textbf{and in Table~\ref{tab:effectiveOCs}}.
+
+\begin{table}[t]
+	%\vspace*{-5ex}
+	%\setlength{\columnseprule}{0.4pt}
+	%\setlength{\columnsep}{10pt}
+	\begin{multicols}{2}
+		\begin{align*}
+			% tfrac used here to make smaller fractions
+    		\alpha_1  &= 1 \\
+     		\alpha_2  &= \tfrac{1}{2} \\
+    		\alpha_3  &= \tfrac{1}{3} + 2\beta_2 \\
+    		\alpha_4  &= \tfrac{1}{6} \\
+    		\alpha_5  &= \tfrac{1}{4} + 3\beta_2 + 3\beta_3 \\
+    		\alpha_6  &= \tfrac{1}{8} + \beta_2 + \beta_3 + \beta_4 \\
+    		\alpha_7  &= \tfrac{1}{12} +\beta_2 - \beta_3 + 2\beta_4 \\
+    		\alpha_8  &= \tfrac{1}{24}
+    	\end{align*}
+    	\vfill
+    	\columnbreak
+    	\begin{align*}
+    		\alpha_9  &= \tfrac{1}{5} + 4\beta_2 + 6\beta_3 + 4\beta_5 \\
+    		\alpha_{10} &= \tfrac{1}{10} + \tfrac{5}{3}\beta_2 - 2\beta_2^{2} + \tfrac{5}{2}\beta_3 + \beta_4 + \beta_5 + 2\beta_6 \\
+    		\alpha_{11} &= \tfrac{1}{15} + \tfrac{4}{3}\beta_2 + \tfrac{1}{2}\beta_3 + 2\beta_4 + 2\beta_6 + \beta_7 \\
+    		\alpha_{12} &= \tfrac{1}{30} + \tfrac{1}{3}\beta_2 - 2\beta_2^{2} + \tfrac{1}{2}\beta_3 + \tfrac{1}{2}\beta_4 + \beta_6 + \beta_8 \\
+    		\alpha_{13} &= \tfrac{1}{20} + \tfrac{2}{3}\beta_2 - \beta_2^{2} + \beta_3 + \beta_4 + 2\beta_6 \\
+    		\alpha_{14} &= \tfrac{1}{20} + \beta_2 + 3\beta_4 - \beta_5 + 3\beta_7 \\
+    		\alpha_{15} &= \tfrac{1}{40} + \tfrac{1}{3}\beta_2 + \tfrac{3}{2}\beta_4 - \beta_6 + \beta_7 + \beta_8 \\
+    		\alpha_{16} &= \tfrac{1}{60} + \tfrac{1}{3}\beta_2 - \tfrac{1}{2}\beta_3 + \beta_4 - \beta_7 + 2\beta_8 \\
+    		\alpha_{17} &= \tfrac{1}{120}
+    	\end{align*}
+    \end{multicols}
+    \caption{Effective order conditions of the main method for trees up to order five.  \textbf{uncommented temporarily, remove later?}}
+    \label{tab:effectiveOCs}
+\end{table}
+
+\colintodo{This ``construction'' but should move elsewhere but I think it supports the table}
+Butcher \cite{Butcher2008_book} also uses the convention that $\beta_1 = 0$, i.e., the starting and finishing methods perturb the solution but do not advance the solution in time, which we follow for now.
+The approach we adopt is to consider the $\beta_{i}$ as free parameters when determining the $\alpha_i$. This provides maximal degrees of freedom when constructing the method $M$. Then when all functions on $\alpha$ are found, the relative order conditions on $\beta$ can be obtained. For a general Runge-Kutta method the effective order conditions up to effective order five are given in Table~\ref{tab:Effective_oc}. We can also find the order conditions of $\beta^{-1}$.
+
 \begin{table}[t!]
 	\centering
     \begin{tabular}{M{2mm}|M{2mm}|M{68mm}|M{67mm}}
-        q & p & Order conditions for the main method & Order conditions for the starting method \nline
+        q & p & Order conditions for the main method $M$ & Order conditions for the starting method $S$ \nline
         \hline
         \multirow{1}{*}{3} & \multirow{1}{*}{2} & {\small $\alpha_1 = 1$, $\alpha_2 = \frac{1}{2}$, $\alpha_4 = \frac{1}{6}$.} & {\small $\beta_1 = 0$, $\beta_2 = - \frac{1}{6} + \frac{1}{2}\alpha_3$.}\nline
         \hline
@@ -154,60 +327,15 @@ This follows directly from the algebraic theory above.
         & & {\small $\frac{1}{40} + \frac{1}{2}\alpha_9 - 2\alpha_{10} + \alpha_{11} + \alpha_{12} - \alpha_{15} = 0$,} & {\small $\beta_7 = -\frac{1}{60} + \frac{1}{4}\alpha_9 - \alpha_{10} + \alpha_{11}$,} \nline
         & & {\small $\frac{1}{60} - \alpha_{11} + 2\alpha_{12} - \alpha_{16} = 0$.} & {\small $\beta_8 = -\frac{1}{120} + \frac{1}{8}\alpha_9 - \frac{1}{2}\alpha_{10} + \alpha_{12}$.} \nline
     \end{tabular}        
-    \caption{Effective order $q$, classical order $p$ conditions on $ \alpha $ and $ \beta $ for the main and starting methods, respectively. (Note that for the four- and five-effective order case if $\beta_3 = 0$ then the classical order of the main method is still three, though one more condition is to be considered. Similarly, for the five-effective order case if $\beta_5 = \beta_6 = \beta_7 =0 \neq \beta_8$ the classical order of the main method is still four.)\colincomment{Old comment: something seems wrong here: I can easily substitute $\beta_2=-\frac{1}{6} + \frac{1}{2}\alpha_3$ into the bottom four equations for the main method. Then the OCs for the main method are written in a form that is independent of those of $S$. But I think I remember there was some subtle things here because of the squared $\beta$ terms.}}
+    \caption{Effective order $q$, classical order $p$ conditions on $ \alpha $ and $ \beta $ for the main and starting methods, $M$ and $S$ respectively.
+      \colincomment{Old comment: something seems wrong here: I can easily substitute $\beta_2=-\frac{1}{6} + \frac{1}{2}\alpha_3$ into the bottom four equations for the main method. Then the OCs for the main method are written in a form that is independent of those of $S$. But I think I remember there was some subtle things here because of the squared $\beta$ terms.}}
     \label{tab:Effective_oc}    
     %\yianniscomment{Substituting $\beta_2$ in OC of the main method makes them dependent only on $\alpha$. But still the resulting system of equations has no solution for $\bm{b}>0$. In other words what I say here is that if we let $\beta_2$ a free parameter, then the system of equations for the main method has a solution (with positive coefficients). But since the (initial) five-effective order equations depend on $\beta_2$, $\beta_2=-\frac{1}{6} + \frac{1}{2}\alpha_3$ has to be added to the set of equations solved for the main method (this is how the set of equations of the main and starting methods are coupled in contrast with the 3- and 4-effective order cases). These can be then reduced from $10$ to $9$ by substituting $\beta_2=-\frac{1}{6} + \frac{1}{2}\alpha_3$, yet still no solution with positive $\bm{b}$ exists. Actually as I say in the proof it is enough to consider only $\alpha_1=1, \alpha_4=\frac{1}{6}, \frac{1}{4}\alpha_9 - \alpha_{10} + \alpha_{13} = \beta_2^{2}$ and $\beta_2=-\frac{1}{6} + \frac{1}{2}\alpha_3$. No solution (always with positive weights) exists for these $4$ equations, hence no solution exists for the initial problem of the OCs of the main method.}
 \end{table}
 
-For the main method $M$ to be effective order $q$ its coefficients must satisfy a series of algebraic conditions coming from each tree in Definition~\ref{def:Effective_order}.
-That is, the Runge--Kutta method corresponding to the function $\alpha$ must satisfy
-\emph{effective order conditions} relative to the order conditions of the
-method affiliated to the function $\beta$.
-We rewrite \eqref{eq:Effective_order_1} as
-\begin{equation}\label{eq:Effective_order_2}
-	(\alpha\beta)(t) = (\beta E)(t), \; \text{for all trees with $r(t) \leq q$,}
-\end{equation}
-and using the product operation \eqref{eq:Group_operation}, we can find expressions for each tree $t$ with $r(t) \leq q$.
-For trees up to order five these are tabulated in \cite[Table~3.89]{Butcher2008_book}.
-%and in Table~\ref{tab:effectiveOCs}.
-Butcher \cite{Butcher2008_book} also uses the convention that $\beta_1 = 0$, i.e., the starting and finishing methods perturb the solution but do not advance the solution in time, which we follow for now.
-%\begin{table}[t]
-%	%\vspace*{-5ex}
-%	%\setlength{\columnseprule}{0.4pt}
-%	%\setlength{\columnsep}{10pt}
-%	\begin{multicols}{2}
-%		\begin{align*}
-%			% tfrac used here to make smaller fractions
-%     		\alpha_1  &= 1 \\
-%      		\alpha_2  &= \tfrac{1}{2} \\
-%     		\alpha_3  &= \tfrac{1}{3} + 2\beta_2 \\
-%     		\alpha_4  &= \tfrac{1}{6} \\
-%     		\alpha_5  &= \tfrac{1}{4} + 3\beta_2 + 3\beta_3 \\
-%     		\alpha_6  &= \tfrac{1}{8} + \beta_2 + \beta_3 + \beta_4 \\
-%     		\alpha_7  &= \tfrac{1}{12} +\beta_2 - \beta_3 + 2\beta_4 \\
-%     		\alpha_8  &= \tfrac{1}{24}
-%     	\end{align*}
-%     	\vfill
-%     	\columnbreak
-%     	\begin{align*}
-%     		\alpha_9  &= \tfrac{1}{5} + 4\beta_2 + 6\beta_3 + 4\beta_5 \\
-%     		\alpha_{10} &= \tfrac{1}{10} + \tfrac{5}{3}\beta_2 - 2\beta_2^{2} + \tfrac{5}{2}\beta_3 + \beta_4 + \beta_5 + 2\beta_6 \\
-%     		\alpha_{11} &= \tfrac{1}{15} + \tfrac{4}{3}\beta_2 + \tfrac{1}{2}\beta_3 + 2\beta_4 + 2\beta_6 + \beta_7 \\
-%     		\alpha_{12} &= \tfrac{1}{30} + \tfrac{1}{3}\beta_2 - 2\beta_2^{2} + \tfrac{1}{2}\beta_3 + \tfrac{1}{2}\beta_4 + \beta_6 + \beta_8 \\
-%     		\alpha_{13} &= \tfrac{1}{20} + \tfrac{2}{3}\beta_2 - \beta_2^{2} + \beta_3 + \beta_4 + 2\beta_6 \\
-%     		\alpha_{14} &= \tfrac{1}{20} + \beta_2 + 3\beta_4 - \beta_5 + 3\beta_7 \\
-%     		\alpha_{15} &= \tfrac{1}{40} + \tfrac{1}{3}\beta_2 + \tfrac{3}{2}\beta_4 - \beta_6 + \beta_7 + \beta_8 \\
-%     		\alpha_{16} &= \tfrac{1}{60} + \tfrac{1}{3}\beta_2 - \tfrac{1}{2}\beta_3 + \beta_4 - \beta_7 + 2\beta_8 \\
-%     		\alpha_{17} &= \tfrac{1}{120}
-%     	\end{align*}
-%     \end{multicols}
-%     \caption{Effective order conditions of the main method for trees up to order five.}
-%\end{table}
-The approach we adopt is to consider the $\beta_{i}$ as free parameters when determining the $\alpha_i$. This provides maximal degrees of freedom when constructing the method $M$. Then when all functions on $\alpha$ are found, the relative order conditions on $\beta$ can be obtained. For a general Runge-Kutta method the effective order conditions up to effective order five are given in Table~\ref{tab:Effective_oc}. We can also find the order conditions of $\beta^{-1}$ using
-Definition~\ref{def:Inverse_up_to_p}.   
+
 %\yiannistodo{Yes, one can substitute $\beta_2$ and get equations for the main method that depend only one $\alpha_i's$. The difference of this case with the previous ones of effective order $3$ and $4$ is just that the resulting equations can not be solved simultaneously for positive coefficients.}
 % Thus, all $\alpha_{i}$ can be found first and the main method can be construct without requiring the perturbation methods. Then when all functions on $\alpha$ are found, the relative order conditions on $\beta$ can be obtained. At the same time we find the order conditions of $\beta^{-1}$ by requiring $(\beta\beta^{-1})(t) = 0$ for all trees of order $r(t) \leq q$.
-
 
 \colintodo{remove this example?}
 \begin{example}\label{ex:Effective_RK32}

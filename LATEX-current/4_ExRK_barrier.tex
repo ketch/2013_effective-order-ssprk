@@ -8,7 +8,12 @@ For classical order $p \geq 3$ an $s$-stage RK($s$,$5$,$p$) method must satisfy
 \begin{equation}\label{eq:higher_order_con}
     \frac{1}{4}\alpha_9- \alpha_{10} + \alpha_{13} = 0,
 \end{equation}
-since $\beta_2 = 0$. As we will prove later in Theorem~\ref{thm:positiveb}, if we require positive weights the equations \eqref{eq:2nd_order_con}, $\alpha_4 = \frac{1}{6}$ and $\alpha_1 = 1$ can not be solved simultaneously. Also the equation \eqref{eq:higher_order_con} is not compatible with the main method having stage order one. This immediately suggests the non existence of fifth-effective order explicit Runge-Kutta methods with positive weights.
+since $\beta_2 = 0$.
+If we require positive weights then the equations \eqref{eq:2nd_order_con},
+$\alpha_4 = \frac{1}{6}$ and $\alpha_1 = 1$ can not be solved simultaneously.
+Also the equation \eqref{eq:higher_order_con} is not compatible with the main method having stage order one.
+This immediately suggests the non existence of fifth-effective order explicit Runge-Kutta methods with positive weights.
+These results are established as follows.
 
 \begin{theorem}\label{thm:positiveb}
     Let $M$ denote a Runge--Kutta method with non-negative weights: $b\ge 0$.
