@@ -58,7 +58,11 @@ By \eqref{eq:DavidsLemma_a}, this can only hold if \( v_{i} = v_{j} \) for all \
 \begin{proof}[Proof of Theorem~\ref{thm:positiveb}]
     {\bf This proof needs some attention.}
 
-    Consider the fifth-effective order conditions of classical order two for the main method, listed in Table~\ref{tab:Effective_oc}. We declare \( \beta_{2} \) as a free parameter and we treat the case that \( \beta_{2} \) is nonzero separately from the one that is zero. We make use of the following subset of the order conditions:
+    Any method of effective order five must have classical order at least two {\bf Cite?}.
+    Thus it is sufficient to show that any method with all non-negative weights
+    cannot satisfy the conditions of effective order five and classical order two.
+
+    Assume $\bm{b}>0$ and consider the order conditions for effective order five and classical order two for the main method, listed in Table~\ref{tab:Effective_oc}.  We make use of the following subset of those conditions:
     \begin{subequations}\label{eq4.4}
         \begin{align}
             \bm{b}^{T}\bm{e} &= 1 \label{eq4.4a} \\
@@ -67,7 +71,32 @@ By \eqref{eq:DavidsLemma_a}, this can only hold if \( v_{i} = v_{j} \) for all \
             \frac{1}{4}\bm{b}^{T}\bm{c}^{4} - \bm{b}^{T}C^{2}A\bm{c} + \bm{b}^{T}(A\bm{c})^{2} &= \beta_{2}^{2}, \label{eq4.4d}
         \end{align}
     \end{subequations}
-    where the powers on vectors are understood component-wise. Supposing that the above equations can be solved simultaneously, then substituting \eqref{eq4.4b} in \eqref{eq4.4c} and collecting terms gives \( \beta_{2} = \bm{b}^{T}\bm{v} \), where \( \bm{v} = \frac{1}{2}\bm{c}^{2} - A\bm{c} \). Squaring yields
+    where the powers on vectors are understood component-wise. 
+    We also make use of the following two quantities:
+    \begin{align*} 
+        \bm{v} = \frac{1}{2}\bm{c}^{2} - A\bm{c} \\
+        \bm{w} = \bm{v}^{2} - \beta_{2}\bm{v}.
+    \end{align*}
+    Note that, for any explicit method, $\bm{v}\ne 0$, since explicit methods
+    cannot have stage order two \cite{}.
+
+    First consider the case $\beta_2 = 0$.
+    Then \eqref{eq4.4d} becomes
+    \begin{equation*}
+        \frac{1}{4}\bm{b}^{T}\bm{c}^{4} - \bm{b}^{T}C^{2}A\bm{c} + \bm{b}^{T}(A\bm{c})^{2} = 0,
+    \end{equation*}
+    or equivalently
+    \begin{equation*}
+        \bm{b}^{T}\bm{v}^{2} = 0.
+    \end{equation*}
+    Since \( \bm{v} \) cannot be identically equal to zero {\bf why?}, this implies that $b_j\le0$ for some $j$.
+    Hence $\beta_2\ne0$.
+
+    Substituting \eqref{eq4.4b} in \eqref{eq4.4c} and collecting terms gives 
+    \begin{align} \label{eq:btv}
+        \beta_{2} = \bm{b}^{T}\bm{v}.
+    \end{align}
+    Squaring yields
     \begin{equation*}%\label{eq4.5}
         \beta_{2}^{2} = \bm{b}^{T}\Bigl(\frac{1}{2}\bm{b}^{T}\bm{c}^{2} - \frac{1}{6}\Bigr)\Bigl(\frac{1}{2}\bm{c}^{2} - A\bm{c}\Bigr),
     \end{equation*}
@@ -76,27 +105,33 @@ By \eqref{eq:DavidsLemma_a}, this can only hold if \( v_{i} = v_{j} \) for all \
     \begin{equation*}
         \bm{b}^{T}\biggl(\Bigl(\frac{1}{2}\bm{c}^{2} - A\bm{c}\Bigr)^{2} - \Bigl(\frac{1}{2}\bm{b}^{T}\bm{c}^{2} - \frac{1}{6}\Bigr)\Bigl(\frac{1}{2}\bm{c}^{2} - A\bm{c}\Bigr)\biggr) = 0.
     \end{equation*}
-    Defining \( \bm{w} = \bm{v}^{2} - \beta_{2}\bm{v} \), this can be written as
+    This can be written as
     \begin{equation}\label{eq4.6}
         \bm{b}^{T}\bm{w} = 0.
     \end{equation}
-    Now, if we require \( b_{i} > 0 \) for all \( i \in \{1,\dots, s\} \), then \eqref{eq4.6} is satisfied if \( \bm{w} = \bm{0} \),
-or if there is a least one negative and at least one positive element in \( \bm{w} \).
+    Since $b>0$, then \eqref{eq4.6} implies that either \( \bm{w} = \bm{0} \),
+or there is a least one negative and at least one positive element in \( \bm{w} \).
 We will show that neither can be true.
 
 
-\paragraph{Case 1: \( \bm{w} = \bm{0}, \beta_2 \neq 0 \).}
+\paragraph{Case 1: \( \bm{w} = \bm{0} \).}
 
-Here \( v_{i}^{2} - \beta_{2}v_{i} = 0 \) for all \( i \in \{1,\dots,s\} \), so either \( v_{i} = 0 \) or \( v_{i} = \beta_{2} \).
-The case that \( \bm{v} = 0 \) is equivalent with a Runge-Kutta method to have stage order two. This means that for a particular time \( t = t^{n} + c_{i}\Delta t \), for \( i \in \{1, \dots, s\} \), the stage \( \textbf{Y}_{i} \) will be at least a second order approximation to the solution at that time.
-For an explicit Runge-Kutta method, the stage \( \textbf{Y}_{2} = \bm{u}^{n} + \Dt\bm{F}(\bm{u}^{n}) \) cannot have stage order more than one, hence not all the components of \( \bm{v} \) are zero. Also, \( v_{1} = 0 \) because the first row of matrix \( A \) has only zeros. Let \( I = \{ i \;|\; v_{i} = \beta_{2}, \; i = 1,\dots,s \} \) and \( v_{j} = 0 \) if \( j \neq I \). Then, by using \eqref{eq4.4a} \( \beta_{2} = \sum_{i=1}^{s}b_{i}v_{i} = \sum_{i \in I}b_{i}\beta_{2} = \beta_{2}\sum_{i \in I}b_{i} < \beta_{2} \). Therefore a contradiction.
+We have \( v_{i}^{2} - \beta_{2}v_{i} = 0 \) for all \( i \in \{1,\dots,s\} \), so either \( v_{i} = 0 \) or \( v_{i} = \beta_{2} \).
+%The case that \( \bm{v} = 0 \) is equivalent with a Runge-Kutta method to have stage order two. This means that for a particular time \( t = t^{n} + c_{i}\Delta t \), for \( i \in \{1, \dots, s\} \), the stage \( \textbf{Y}_{i} \) will be at least a second order approximation to the solution at that time.
+%For an explicit Runge-Kutta method, the stage \( \textbf{Y}_{2} = \bm{u}^{n} + \Dt\bm{F}(\bm{u}^{n}) \) cannot have stage order more than one, hence not all the components of \( \bm{v} \) are zero. 
+Let \( I = \{ i \in\{1,\dots,s\} | v_{i} = \beta_{2} \} \); then \( v_{j} = 0 \) for \( j \neq I \). 
+Then \eqref{eq:btv} implies 
+$$ \beta_{2} = \sum_{i=1}^{s}b_{i}v_{i} = \sum_{i \in I}b_{i}\beta_{2} = \beta_{2}\sum_{i \in I}b_{i}.$$
+Note that \( v_{1} = 0 \) because the first row of matrix \( A \) is identically zero. 
+Thus $\sum_{i\in I}b_i < \sum_{i=1}^s b_i$, so \eqref{eq4.4a} implies
+$$\beta_{2}\sum_{i \in I}b_{i}< \beta_{2},$$
+which is a contradiction.
 
+\paragraph{Case 2: \( \bm{w} \neq \bm{0} \).}
+Then there exist $i,j$ such that $w_i<0<w_j$.
+     We will show that \( 0 < v_{i} < \beta_{2} < v_{j} \).
 
-\paragraph{Case 2: \( \bm{w} \neq \bm{0}, \beta_2 \neq 0 \).}
-
-    Then, there exists at least one component \( w_{i} = v_{i}^{2} - \beta_{2}v_{i} \) such that \( w_{i} < 0 \) and at least one component \( w_{j} = v_{j}^{2} - \beta_{2}v_{j} \) such that \( w_{j} > 0 \). We will show that \( 0 < v_{i} < \beta_{2} < v_{j} \).
-
-    Consider first the component \( w_{i} \). If \( w_{i} < 0 \), then \( v_{i}^{2} < \beta_{2}v_{i} \). Therefore,
+    Observe that $w_i<0$ means \( v_{i}^{2} < \beta_{2}v_{i} \). Therefore,
     \begin{equation}\label{eq4.7}
         (\beta_{2})^{2} = \sum_{j=1}^{s}b_{j}v_{j}^{2} < \sum_{j \neq i}^{s}b_{j}v_{j}^{2} + b_{i}\beta_{2}v_{i}.
     \end{equation}
@@ -118,13 +153,13 @@ For an explicit Runge-Kutta method, the stage \( \textbf{Y}_{2} = \bm{u}^{n} + \
     \end{equation*}
     which gives a contradiction. Since \( v_{i} \neq 0 \), then \( v_{i} > 0 \) and in this case \( 0 < v_{i} < \beta_{2} \).
 
-    Now consider the component \( w_{j} = v_{j}^{2} - \beta_{2}v_{j} \). Since \( w_{j} > 0 \), then \( v_{j}^{2} > \beta_{2}v_{j} \). If \( v_{j} < 0 \), then \( v_{j} < \beta_{2} \) and \( v_{j} < 0 < v_{i} < \beta_{2} \). Hence \( \beta_{2} \) is larger than all components of \( \bm{v} \). This leads to a contradiction since
+    Note that \( w_{j} > 0 \), means \( v_{j}^{2} > \beta_{2}v_{j} \). If \( v_{j} < 0 \), then \( v_{j} < \beta_{2} \) and \( v_{j} < 0 < v_{i} < \beta_{2} \). Hence \( \beta_{2} \) is larger than all components of \( \bm{v} \). This leads to a contradiction since
     \begin{equation*}
             \beta_{2} = \sum_{k=1}^{s}b_{k}v_{k} < \sum_{k=1}^{s}b_{k}\beta_{2} < \beta_{2}.
     \end{equation*}
-    As before \( v_{j} \) can no be zero, therefore \( v_{j} > 0 \) which gives \( v_{j} > \beta_{2} \).
+    Since \( v_{j}\ne0 \), therefore \( v_{j} > 0 \) which gives \( v_{j} > \beta_{2} \).
 
-    In total we have
+    In summary, we have shown that
     \begin{equation}\label{eq4.9}
         v_{1} = 0 \quad \text{ and } \quad 0 < v_{i} < \beta_{2} < v_{j}, \text{ for } i,j \in \{2,\dots,s\}.
     \end{equation}
@@ -132,22 +167,9 @@ For an explicit Runge-Kutta method, the stage \( \textbf{Y}_{2} = \bm{u}^{n} + \
     Let that component be \( v_{k} \). If \( k = 1 \), then \( v_{i} = \delta
     \) {\bf what is $\delta$?} for \( i,j \in \{2,\dots,s\} \). If \( k \neq 1
     \), then \( v_{i} = 0 \) for \( i \in \{2,\dots,s\}\setminus\{k\} \). Both
-    cases contradict with \eqref{eq4.9}. Thus, the equations \eqref{eq4.4}
-    cannot be solved simultaneously and no Runge-Kutta method of
-    effective order five and classical order two exists with positive weights.
-    {\bf what about classical order less than 2?}
+    cases contradict with \eqref{eq4.9}. %Thus, the equations \eqref{eq4.4}
+    %cannot be solved simultaneously and no Runge-Kutta method of
+    %effective order five and classical order two exists with positive weights.
+    %{\bf what about classical order less than 2?}
 
-
-    \paragraph{Case 3: \( \beta_2 = 0 \).}
-    \colintodo{Ok to label this as third case?}
-    %In the case that \( \beta_{2} = 0 \) then
-    Here \eqref{eq4.4d} becomes
-    \begin{equation*}
-        \frac{1}{4}\bm{b}^{T}\bm{c}^{4} - \bm{b}^{T}C^{2}A\bm{c} + \bm{b}^{T}(A\bm{c})^{2} = 0,
-    \end{equation*}
-    or equivalently
-    \begin{equation*}
-        \bm{b}^{T}\bm{v}^{2} = 0.
-    \end{equation*}
-    Since \( \bm{v} \) cannot be identically equal to zero {\bf why?}, this implies that $b_j\le0$ for some $j$.
 \end{proof}
