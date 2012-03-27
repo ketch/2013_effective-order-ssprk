@@ -281,17 +281,43 @@ order conditions \cite{Butcher2008_book}.
     		\alpha_{16} &= \tfrac{1}{60} + \tfrac{1}{3}\beta_2 - \tfrac{1}{2}\beta_3 + \beta_4 - \beta_7 + 2\beta_8 \\
     		\alpha_{17} &= \tfrac{1}{120}
     	\end{align*}
+        \vfill
     \end{multicols}
-    \caption{Effective order conditions of the main method for trees up to order five.  \textbf{temp: remove later?}}
+    \caption{Effective order five conditions of the main and starting methods $M$ and $S$.}
     \label{tab:effectiveOCs}
 \end{table}
 We use the abbreviation RK($s$,$q$,$p$) for an $s$-stage Runge-Kutta method of effective order $q$ and classical order $p$.
 
 
-\subsubsection{Constructing methods}
-\colintodo{We wanted this ``construction'' to move elsewhere but I think it supports the table.  Need to decide if this is new work}
-Butcher \cite{Butcher2008_book} also uses the convention that $\beta_1 = 0$, i.e., the starting and finishing methods perturb the solution but do not advance the solution in time, which we follow for now.
-The approach we adopt is to consider the $\beta_{i}$ as free parameters when determining the $\alpha_i$. This provides maximal degrees of freedom when constructing the method $M$. Then when all functions on $\alpha$ are found, the relative order conditions on $\beta$ can be obtained. For a general Runge-Kutta method the effective order conditions up to effective order five are given in Table~\ref{tab:Effective_oc}. We can also find the order conditions of $\beta^{-1}$.
+\section{Constructing methods and an effective order barrier}
+
+
+The approach we adopt is to consider the $\beta_{i}$ as free
+parameters when determining the $\alpha_i$.
+The relationship in Table~\ref{tab:effectiveOCs} between the
+$\alpha_i$ and $\beta_i$ is mostly linear (although there are a few
+$\beta_2^2$ terms).
+It is thus straightforward to isolate the equations for $\alpha_i$,
+determining the $\beta_i$ as linear combination of the $\alpha_i$, and
+separate the effective order conditions into conditions on main method
+$M$ and starting method $S$.
+This provides maximal degrees of freedom and minimizes the number of
+constraints when constructing the method $M$.
+Then when all functions on $\alpha$ are found, the relative order
+conditions on $\beta$ can be obtained.
+
+The resulting effective order conditions for main method $M$ are given
+in Table~\ref{tab:Effective_oc} (up to effective order five).
+The order conditions for the starting method $S$ are also given.
+We can also find the order conditions of $\beta^{-1}$ in terms of the
+$\beta_i$ (see \cite[Table~386(III)]{Butcher2008_book}).
+
+Note that we follow the common convention is to set $\beta_1=0$
+\cite{Butcher2008_book}, i.e., the starting and finishing methods
+perturb the solution but do not advance the solution in time
+(Tables~\ref{tab:effectiveOCs} and~\ref{tab:Effective_oc} both make
+this assumption).
+
 
 \begin{table}[htb]
 	\centering
