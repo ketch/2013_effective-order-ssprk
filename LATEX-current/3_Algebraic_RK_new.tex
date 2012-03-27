@@ -1,4 +1,4 @@
-\section{Algebraic representation of Runge-Kutta methods}\label{sec:Algebraic_RK}
+\section{Algebraic representation of Runge--Kutta methods}\label{sec:Algebraic_RK}
 
 The effective order of a Runge--Kutta method is defined in an abstract algebraic
 context introduced by Butcher \cite{Butcher1969} and developed further in
@@ -8,7 +8,7 @@ concepts of this representation in order to define effective order methods
 and their order conditions.
 
 
-\subsection{Formulation of the Runge-Kutta group}\label{sec:RK_group}
+\subsection{Formulation of the Runge--Kutta group}\label{sec:RK_group}
 
 %In this characterization, we remove our attention from the numerical methods themselves and we concentrate on their counterparts in a certain group containing all real-valued maps on the set of rooted trees.
 
@@ -28,7 +28,7 @@ for trees $t_{i}$ indexed by integer $i$.
 %, $i = 0, 1, 2, \dots$.
 %, where $t_{0}$ denotes the empty tree $\emptyset$.
 %By convention $\alpha(\emptyset) = 1$.
-The infinite length vector consisting of $\alpha_i$, $i = 0, 1, 2,
+The infinite-length vector consisting of $\alpha_i$, $i = 0, 1, 2,
 \ldots$ is the B-series of the corresponding Runge--Kutta method and
 is related to Taylor expansions of the numerical solution of the
 Runge--Kutta method \cite{Hairer1974, Butcher2008_book}.
@@ -61,15 +61,15 @@ can be found in \cite[Definition 312]{Butcher2008_book}.
     \hline
     $i$ & tree & elementary weight \\
     \hline
-    9  & \tree{9}       & $\bm{b}^TA^2\bm{c}$ TODO\\
-    10 & \tree{10}      & $\bm{b}^TA^2\bm{c}$ TODO\\
-    11 & \tree{11}      & $\bm{b}^TA^2\bm{c}$ TODO\\
-    12 & \tree{12}      & $\bm{b}^TA^2\bm{c}$ TODO\\
-    13 & \tree{13}      & $\bm{b}^TA^2\bm{c}$ TODO\\
-    14 & \tree{14}      & $\bm{b}^TA^2\bm{c}$ TODO\\
-    15 & \tree{15}      & $\bm{b}^TA^2\bm{c}$ TODO\\
-    16 & \tree{16}\:\:\:\:\:      & $\bm{b}^TA^2\bm{c}$ TODO\\
-    17 & \:\:\:\:\:\tree{17}      & $\bm{b}^TA^2\bm{c}$ TODO\\
+    9  & \tree{9}                 & $\bm{b}^T\bm{c}^4$ (need strut)\\
+    10 & \tree{10}                & $\bm{b}^TCCA\bm{c}$ \\
+    11 & \:\:\:\:\:\tree{11}      & $\bm{b}^TCA\bm{c}^2$ (Check) \\
+    12 & \tree{12}\:\:\:\:        & $\bm{b}^TCAA\bm{c}$ \\
+    13 & \:\:\:\:\:\tree{13}      & $\bm{b}^T \text{diag}(A\bm{c}) A\bm{c}$ (I forget) \\
+    14 & \tree{14}\:\:\:\:        & $\bm{b}^TA\bm{c}^3$ \\
+    15 & \:\:\:\:\:\tree{15}      & $\bm{b}^TACA\bm{c}$ \\
+    16 & \tree{16}\:\:\:\:\:      & $\bm{b}^TA^2\bm{c}^2$ \\
+    17 & \:\:\:\:\:\tree{17}      & $\bm{b}^TA^3\bm{c}$ \\
   \end{tabular}
   \caption{Elementary weights of trees up to forth order.}
   \label{tab:elementaryWeights}
@@ -139,7 +139,7 @@ $
     \end{tabular}
     \vspace{5pt}
     \caption{Partitions of tree $t_{11}$ to all
-      possible prunings $w$ such that $w \lhd t_{11}$ and the
+      possible subtrees $w$ and the
       corresponding forests $t_{11} \setminus w$.
       Multiplicity is indicated with $(\times2)$.}
     \label{tab:tree_partition}
@@ -221,22 +221,15 @@ In terms of functions in group $G$ this is leads to the following definition of 
 The practical benefit of methods of effective order results from the
 observation that only $M$ need be used repeatedly.
 \begin{result}
-  With methods $S$, $S^{-1}$, $M$, and $P$ defined as above we have
+  With methods $M$, $S$, $S^{-1}$, and $P$ as above we have
   $$P^n = (S^{-1}MS)^n = (S^{-1}MS) \cdots (S^{-1}MS) (S^{-1}MS)
         = S^{-1} M^n S.$$
-\end{result}
-
-
-%\comment{Then, since \( (\beta^{-1}\alpha\beta)^{n} = \beta^{-1}\alpha^{n}\beta \) applying \( n \) times the method \( P = S^{-1}MS \) gives \( P^{n} = S^{-1}M^{n}S \). Therefore, instead of applying the method \( P \) at each step, now three methods come into play.
 The starting method is applied at the beginning without advancing the
 solution.
 Instead, it introduces a perturbation on the solution.
-% so as method \( M \) reproduces this perturbation within its classical order.
 The main method \( M \) is then used \( n \) times and finally the
 finishing method is used to correct the solution.
-%The final result approximates the exact solution to within \(
-%\mathcal{O}((\Dt)^{q}) \), where \( q \) is the effective order of
-%method \( M \).
+\end{result}
 
 
 
@@ -253,13 +246,13 @@ $
 $
 %\end{equation}
 and using the product operation \eqref{eq:Group_operation}, we can find expressions for each tree $t$ with $r(t) \leq q$.
-For trees up to order five these are tabulated in \cite[Table~3.89]{Butcher2008_book}.
-\textbf{and in Table~\ref{tab:effectiveOCs}}.
+For trees up to order five these are tabulated in \cite[Table~3.89]{Butcher2008_book}
+and in Table~\ref{tab:effectiveOCs}.
 Note that all effective order methods are of at least classical order $2$.
 Note also that for the tall trees $t_1, t_4, t_8, t_{17}, \dots$ the
-effective order conditions of the main method match with the classical
+effective order conditions of the main method match the classical
 order conditions \cite{Butcher2008_book}.
-\begin{table}[t]
+\begin{table}
 	%\vspace*{-5ex}
 	%\setlength{\columnseprule}{0.4pt}
 	%\setlength{\columnsep}{10pt}
@@ -288,17 +281,43 @@ order conditions \cite{Butcher2008_book}.
     		\alpha_{16} &= \tfrac{1}{60} + \tfrac{1}{3}\beta_2 - \tfrac{1}{2}\beta_3 + \beta_4 - \beta_7 + 2\beta_8 \\
     		\alpha_{17} &= \tfrac{1}{120}
     	\end{align*}
+        \vfill
     \end{multicols}
-    \caption{Effective order conditions of the main method for trees up to order five.  \textbf{temp: remove later?}}
+    \caption{Effective order five conditions of the main and starting methods $M$ and $S$.}
     \label{tab:effectiveOCs}
 \end{table}
 We use the abbreviation RK($s$,$q$,$p$) for an $s$-stage Runge-Kutta method of effective order $q$ and classical order $p$.
 
 
-\subsubsection{Constructing methods}
-\colintodo{We wanted this ``construction'' to move elsewhere but I think it supports the table.  Need to decide if this is new work}
-Butcher \cite{Butcher2008_book} also uses the convention that $\beta_1 = 0$, i.e., the starting and finishing methods perturb the solution but do not advance the solution in time, which we follow for now.
-The approach we adopt is to consider the $\beta_{i}$ as free parameters when determining the $\alpha_i$. This provides maximal degrees of freedom when constructing the method $M$. Then when all functions on $\alpha$ are found, the relative order conditions on $\beta$ can be obtained. For a general Runge-Kutta method the effective order conditions up to effective order five are given in Table~\ref{tab:Effective_oc}. We can also find the order conditions of $\beta^{-1}$.
+\section{Constructing methods and an effective order barrier}
+
+
+The approach we adopt is to consider the $\beta_{i}$ as free
+parameters when determining the $\alpha_i$.
+The relationship in Table~\ref{tab:effectiveOCs} between the
+$\alpha_i$ and $\beta_i$ is mostly linear (although there are a few
+$\beta_2^2$ terms).
+It is thus straightforward to isolate the equations for $\alpha_i$,
+determining the $\beta_i$ as linear combination of the $\alpha_i$, and
+separate the effective order conditions into conditions on main method
+$M$ and starting method $S$.
+This provides maximal degrees of freedom and minimizes the number of
+constraints when constructing the method $M$.
+Then when all functions on $\alpha$ are found, the relative order
+conditions on $\beta$ can be obtained.
+
+The resulting effective order conditions for main method $M$ are given
+in Table~\ref{tab:Effective_oc} (up to effective order five).
+The order conditions for the starting method $S$ are also given.
+We can also find the order conditions of $\beta^{-1}$ in terms of the
+$\beta_i$ (see \cite[Table~386(III)]{Butcher2008_book}).
+
+Note that we follow the common convention is to set $\beta_1=0$
+\cite{Butcher2008_book}, i.e., the starting and finishing methods
+perturb the solution but do not advance the solution in time
+(Tables~\ref{tab:effectiveOCs} and~\ref{tab:Effective_oc} both make
+this assumption).
+
 
 \begin{table}[htb]
 	\centering
@@ -315,7 +334,7 @@ The approach we adopt is to consider the $\beta_{i}$ as free parameters when det
         \hline
         \multirow{8}{*}{5} & \multirow{8}{*}{2} & {\small $\alpha_1 = 1$, $\alpha_2 = \frac{1}{2}$, $\alpha_4 = \frac{1}{6}$, $\alpha_8 = \frac{1}{24}$, $\alpha_{17} = \frac{1}{120}$,} & {\small $\beta_1 = 0$, $\beta_2 = - \frac{1}{6} + \frac{1}{2}\alpha_3$,} \nline
         & & {\small $\frac{1}{4} - \alpha_3 + \alpha_5 - 2\alpha_6 + \alpha_7 = 0$,} & {\small $\beta_3 = \frac{1}{12} - \frac{1}{2}\alpha_3 + \frac{1}{3}\alpha_5$, $\beta_4 = -\frac{1}{24} - \frac{1}{3}\alpha_5 + \alpha_6$} \nline
-        & & {\small $\frac{1}{4}\alpha_9-\alpha_{10}+\alpha_{13}=\beta_2^{2}$,} & {\small $\beta_5 = -\frac{1}{120} + \frac{1}{4}\alpha_3 - \frac{1}{2}\alpha_5 + \frac{1}{4}\alpha_9$,} \nline
+        & & {\small $\frac{1}{4}\alpha_9-\alpha_{10}+\alpha_{13}=\beta_2^{2}$, \: $\beta_2 = - \frac{1}{6} + \frac{1}{2}\alpha_3$,} & {\small $\beta_5 = -\frac{1}{120} + \frac{1}{4}\alpha_3 - \frac{1}{2}\alpha_5 + \frac{1}{4}\alpha_9$,} \nline
         & & {\small $\frac{3}{10} - \frac{3}{2}\alpha_3 + \alpha_5 + \frac{1}{2}\alpha_9 - 3\alpha_{10} + 3\alpha_{11} - \alpha_{14} = 6\beta_2^{2}$,} & {\small $\beta_6 = \frac{7}{720} + \beta_2^{2} + \frac{1}{12}\alpha_3 - \frac{1}{2}\alpha_6 - \frac{1}{8}\alpha_9 + \frac{1}{2}\alpha_{10}$,} \nline
         & & {\small $\frac{1}{15} - \frac{1}{2}\alpha_3 + \alpha_6 + \frac{1}{2}\alpha_9 - 2\alpha_{10} + \alpha_{11} + \alpha_{12} - \alpha_{15} = 2\beta_2^{2}$,} & {\small $\beta_7 = \frac{8}{45} - 2\beta_2^{2} - \frac{7}{12}\alpha_3 + \frac{1}{2}\alpha_5 - \alpha_6 + \frac{1}{4}\alpha_9 - \alpha_{10} + \alpha_{11}$,} \nline
         & & {\small $\frac{19}{60} - \alpha_3 + \alpha_5 - 2\alpha_6 + \alpha_{11} - 2\alpha_{12} + \alpha_{16} = 4\beta_2^{2}$.} & {\small $\beta_8 = -\frac{1}{120} + \beta_2^{2} + \frac{1}{8}\alpha_9 - \frac{1}{2}\alpha_{10} + \alpha_{12}$.} \nline

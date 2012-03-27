@@ -85,8 +85,8 @@
 
 %%% New theorems %%%
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem{definition}{Definition}
-\newtheorem{example}{Example}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
 \newtheorem{lemma}[theorem]{Lemma}
 %\newtheorem{lem}[theorem]{Lemma}
 %\newtheorem{proposition}[theorem]{Proposition}
@@ -100,9 +100,9 @@
 \setcounter{table}{0}
 %\numberwithin{theorem}{section}
 \numberwithin{equation}{section}
-\numberwithin{definition}{section}
+%\numberwithin{definition}{section}
 \numberwithin{theorem}{section}
-\numberwithin{example}{section}
+%\numberwithin{example}{section}
 \numberwithin{table}{section}
 \newcolumntype{M}[1]{>{\vspace{2pt}\centering\hspace{0pt}\vspace{2pt}}m{#1}}
 \definecolor{lightgray}{gray}{0.5}

@@ -1,5 +1,5 @@
 %\section{Review of SSP theory}
-\section{Strong Stability Preserving Runge--Kutta methods}
+\section{Strong stability preserving Runge--Kutta methods}
 \label{sec:SSP}
 %\label{subsec:SSPRK}
 
@@ -39,7 +39,7 @@ such that
   \|\bm{u}^{n+1}\| \le \|\bm{u}^n\|,
 \end{align*}
 for a time-step restriction
-$$\Dt \leq c \Dt_{\text{FE}}.$$
+$$\Dt \leq \sspcoef \Dt_{\text{FE}}.$$
 \end{definition}
 
 
@@ -55,7 +55,7 @@ Note the somewhat unfortunate terminology: the word \emph{effective} here is unr
 
 
 %\subsection{Optimization of schemes}
-\subsection{Optimal SSP Schemes}\label{subsec:Optimal_SSPRK}
+\subsection{Optimal SSP schemes}\label{subsec:Optimal_SSPRK}
 
 
 An explicit $s$-stage Runge--Kutta method generates a sequence of approximate solutions $\bm{u}^n \approx \bm{u}(t_n)$ via an update formula

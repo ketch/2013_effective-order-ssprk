@@ -1,7 +1,7 @@
 % Commands for drawing trees
 
 \psset{treesep=1.3ex,levelsep=1.0ex,treemode=U,showbbox=false}
-\renewcommand\psedge{\ncline[linewidth=0.7pt]}
+\renewcommand\psedge{\ncline[linewidth=0.6pt]}
 \newcommand{\Ts}{\Tdot[dotstyle=*,dotscale=0.7]}
 \newcommand{\tree}[1]%
 {%
@@ -14,14 +14,14 @@
 \ifthenelse{\equal{#1}{7}}{\raisebox{-0.5ex}{{\pstree{\Ts}{\Tn\pstree{\Ts}{\Ts\Ts}}}}}{}%
 \ifthenelse{\equal{#1}{8}}{\raisebox{-0.7ex}{{\pstree{\Ts}{\Tn\pstree{\Ts}{\pstree{\Ts}{\Tn\Ts}\Tn}}}}}{}%
 \ifthenelse{\equal{#1}{9}}{\raisebox{0.0ex}{{\pstree{\Ts}{\Ts\Ts\Ts\Ts}}}}{}%
-\ifthenelse{\equal{#1}{10}}{\raisebox{-0.7ex}{{\pstree{\Ts}{\Ts\Ts\pstree{\Ts}{\Ts}}}}}{}%
-\ifthenelse{\equal{#1}{11}}{\raisebox{-0.7ex}{{\pstree{\Ts}{\Ts\pstree{\Ts}{\Ts\Ts}}}}}{}%
-\ifthenelse{\equal{#1}{12}}{\raisebox{-1.4ex}{{\pstree{\Ts}{\Ts\pstree{\Ts}{\pstree{\Ts}{\Ts}}}}}}{}%
-\ifthenelse{\equal{#1}{13}}{\raisebox{-0.7ex}{{\pstree{\Ts}{\pstree{\Ts}{\Ts}\pstree{\Ts}{\Ts}}}}}{}%
-\ifthenelse{\equal{#1}{14}}{\raisebox{-0.7ex}{{\pstree{\Ts}{\pstree{\Ts}{\Ts\Ts\Ts}}}}}{}%
-\ifthenelse{\equal{#1}{15}}{\raisebox{-1.4ex}{{\pstree{\Ts}{\pstree{\Ts}{\Ts\pstree{\Ts}{\Ts}}}}}}{}%
-\ifthenelse{\equal{#1}{16}}{\raisebox{-1.4ex}{{\pstree{\Ts}{\pstree{\Ts}{\pstree{\Ts}{\Ts\Ts}}}}}}{}%
-\ifthenelse{\equal{#1}{17}}{\raisebox{-2.1ex}{{\pstree{\Ts}{\pstree{\Ts}{\pstree{\Ts}{\pstree{\Ts}{\Ts}}}}}}}{}%
+\ifthenelse{\equal{#1}{10}}{\raisebox{-0.3ex}{{\pstree{\Ts}{\Ts\Ts\pstree{\Ts}{\Ts\Tn}}}}}{}%
+\ifthenelse{\equal{#1}{11}}{\raisebox{-0.5ex}{{\pstree{\Ts}{\Ts\pstree{\Ts}{\Ts\Ts}}}}}{}%
+\ifthenelse{\equal{#1}{12}}{\raisebox{-1.0ex}{{\pstree{\Ts}{\Ts\pstree{\Ts}{\pstree{\Ts}{\Tn\Ts}\Tn}}}}}{}%
+\ifthenelse{\equal{#1}{13}}{\raisebox{-0.5ex}{{\pstree{\Ts}{\pstree{\Ts}{\Ts}\pstree{\Ts}{\Ts}}}}}{}%
+\ifthenelse{\equal{#1}{14}}{\raisebox{-0.5ex}{{\pstree{\Ts}{\Tn\pstree{\Ts}{\Ts\Ts\Ts}}}}}{}%
+\ifthenelse{\equal{#1}{15}}{\raisebox{-0.7ex}{{\pstree{\Ts}{\Tn\pstree{\Ts}{\Ts\pstree{\Ts}{\Ts\Tn}}}}}}{}%
+\ifthenelse{\equal{#1}{16}}{\raisebox{-0.7ex}{{\pstree{\Ts}{\Tn\pstree{\Ts}{\pstree{\Ts}{\Ts\Ts}\Tn}}}}}{}%
+\ifthenelse{\equal{#1}{17}}{\raisebox{-1.3ex}{{\pstree{\Ts}{\Tn\pstree{\Ts}{\pstree{\Ts}{\Tn\pstree{\Ts}{\Ts\Tn}}\Tn}}}}}{}%
 }
 
 
