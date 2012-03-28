@@ -50,18 +50,6 @@ sequential quadratic programming approach.
 This process does not guarantee a global minimizer, so several
 searches are performed to try to ensure the method with the largest possible SSP coefficient is found.
 
-\subsubsection{An upper bound: the optimal threshold factor}
-Useful upper bounds for the foregoing optimization problem can be obtained
-by consider an important relaxation.  In the relaxed problem, the method is
-required to be accurate and strong stability preserving only for linear,
-constant-coefficient initial value problems.  This leads to a reduced set of
-order conditions and a reduced set of absolute monotonicity conditions.  We
-denote the resulting optimal value by $\clin$; clearly for any method
-$$\sspcoef\le\clin.$$
-Exact optimal values of $\clin$ are known for many classes of methods; see
-\cite{Kraaijevanger1986,ketcheson2009a}.
-
-
 
 \subsubsection{Optimal SSP coefficients\label{subsection3.1.2}}
 
