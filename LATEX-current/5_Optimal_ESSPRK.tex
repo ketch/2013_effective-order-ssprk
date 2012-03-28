@@ -194,42 +194,24 @@ or three, accompanied by specific starting and finishing methods.
 
 
 \subsection{Starting and finishing methods}\label{subsection3.2}
-
-\todo{$SM$ or $MS$ order: this section isn't updated.}
-
-\subsubsection{Optimization of $ S $ and $ S^{-1} $}\label{subsection3.2.1}
-
 Having constructed an SSPRK(\( s \),\( q \),\( p \)) scheme that can
 be used as the main method \( M \), we need to find the perturbation
 methods \( S \) and \( S^{-1} \) such that the Runge-Kutta scheme \(
 SM^{n}S^{-1} \) attains classical order $q$ (the effective order of
 method \( M \)).
 
-To find perturbation methods, we must satisfy a set of order conditions.  In order to reuse our optimization codes, we try to pose a constrained optimization problem.  One approach %to finding perturbation methods
- is to try to minimise the size of the coefficients of the method \( S  = (\hat{A}, \hat{\textbf{b}}^{\texttt{T}}, \hat{\textbf{c}}) \). Therefore, we minimize
-\begin{displaymath}
-    \|\hat{A}\|_{F} + \|\hat{\textbf{b}}\|_{2},
-\end{displaymath}
-where \( \|\cdot\|_{F} \) is the Frobenius norm. The optimisation problem becomes
-\begin{equation}\label{eq5.2}
-    \min_{S} \Bigl(\|\hat{A}\|_{F} + \|\hat{\textbf{b}}\|_{2}\Bigr), \quad \text{subject to } \quad \left\{
-                                                                                     \begin{array}{ll}
-                                                                                           \Phi_{q}(S^{-1}S) = 0 \\
-                                                                                           \widehat{\Phi}_{i}(S) = 0,
-                                                                                     \end{array}
-                                                                             \right.
-\end{equation}
-where \( \Phi_{q}(S^{-1}S) \) are the conditions
-%so that \( S^{-1}S = I \) up to order \( q \)
-so that \( \beta^{-1}\beta(t) = 0 \) for trees up to order \( q \)
- and \( \widehat{\Phi}_{i}(S) = 0 \) represents the order conditions on \( \beta \) in Table~\ref{tab:Effective_oc}.
-The number of stages for the perturbation methods depends on the effective and classical order of the main method \( M \). When \( M \) is an SSPRK(\( s \),\( 3 \),\( 2 \)) method we found that the stages of methods \( S \) and \( S^{-1} \) are at least two. We were able to find perturbation methods with only two stages for SSPRK(\( s \),\( 3 \),\( 2 \)) methods up to \( 13 \) stages. Similarly, for four effective order methods \( M \), the perturbation methods appear to need at least four stages. For SSPRK(\( s \),\( 4 \),\( 2 \)) we found four-stages methods \( S \) and \( S^{-1} \) up to \( 17 \) stages and for SSPRK(\( s \),\( 4 \),\( 3 \)) up to \( 22 \) stages. Therefore, the perturbation methods have minimal computational and storage cost, in contrast with their large importance in raising the order of the \( SM^{n}S^{-1} \) scheme from low classical order to higher effective order of method \( M \).
+If method $S$ advances the solution in time,
+then $S^{-1}$ must evolve the solution backward in time, which is undesirable in
+some cases.  For this reason,
+starting and finishing methods $S,S^{-1}$ are usually designed to perturb
+the solution but not advance in time.  
+A drawback of this approach is that the resulting \(
+SM^{n}S^{-1} \) Runge-Kutta scheme is not SSP. The conditions \( S^{-1}S = I \)
+and \( \beta_{1} = 0 \) as lead to \( \beta_{1} = \beta^{-1}_{1} = 0 \) and
+hence the methods \( S \) and \( S^{-1} \) must satisfy $\sum b_i = 0$.  Thus
+they cannot be SSP.  
 
-\subsubsection{Alternative starting/stopping procedure}\label{subsection3.2.2}
-
-An important drawback of the previous formulation is that the resulting \( SM^{n}S^{-1} \) Runge-Kutta scheme is not SSP. The conditions \( S^{-1}S = I \) and \( \beta_{1} = 0 \) as lead to \( \beta_{1} = \beta^{-1}_{1} = 0 \) and hence the methods \( S \) and \( S^{-1} \) must satisfy $\sum b_i = 0$.  Thus they cannot be SSP.  \colincomment{I'm not completely sure about this: SSP theory might be different somehow when the step-size is zero.}
-
-\comment{PREVIOUSLY: The conditions \( S^{-1}S = I \) and \( \beta_{1} = 0 \) as proved in Theorem~XX lead to \( \beta_{1} = \beta^{-1}_{1} = 0 \) and hence methods \( S \) and \( S^{-1} \) are basically of order zero. This could lead to difficulties in some numerical calculations especially if the discontinuous initial data are taken into account.}
+\todo{$SM$ or $MS$ order: this section isn't updated.}
 
 In order to overcome this problem and achieve ``bona fide'' effective order SSPRK methods we need to choose different starting and finishing methods. In the construction of \( SM^{n}S^{-1} \) Runge-Kutta schemes, we consider \( P = SM \) and \( T = MS^{-1} \) as starting and finishing methods, respectively. Then the scheme becomes \( PM^{n-2}T \), where the order conditions of methods \( P \) and \( T \) are those of \( SM \) and \( MS^{-1} \), respectively.
 %Hence, the new starting and finishing methods belong in the equivalent class of methods \( SM \) and \( MS^{-1} \), respectively.
@@ -238,54 +220,32 @@ In practice, the new starting and finishing methods must be equivalent to \( SM 
 \begin{subequations} \label{eq:PT_OCs}
 \begin{align}
     \rho(t) &= \alpha\beta(t), \quad \text{for all trees $t$ with $r(t) \leq q$,} \\
-%\end{align}
-%and
-%\begin{align}
     \tau(t) &= \beta^{-1}\alpha(t), \quad \text{for all trees $t$ with $r(t) \leq q$,}
 \end{align}
 \end{subequations}
+$$
+    \rho\alpha^{n-2}\tau(t) = E(t), \quad \text{for all trees $t$ with $r(t) \leq q$,}
+$$
 and the scheme \( PM^{n-2}T \) is a method of classical order \( q \).
-
-
-\comment{
-\begin{displaymath}
-    \rho \in \beta\alpha(1 + H_{q})
-\end{displaymath}
-and
-\begin{displaymath}
-    \tau \in \alpha\beta^{-1}(1 + H_{q}),
-\end{displaymath}
-where \( q \) is the effective order of method \( M \). In this case,
-\begin{displaymath}
-    \begin{split}
-        (\beta\alpha\beta^{-1})^{n} &\in E^{n}(1 + H_{q}) \\
-        \beta\alpha^{n}\beta^{-1} &\in E(1 + H_{q}) \\
-        \beta\alpha\alpha^{n-2}\alpha\beta^{-1} &\in E(1 + H_{q}) \\
-        \rho\alpha^{n-2}\tau &\in E(1 + H_{q}),
-    \end{split}
-\end{displaymath}
-and the scheme \( PM^{n-2}T \) is an SSP method of classical order \( q \).}
-
-
-\subsubsection{Finding starting methods $ R $ and $ T $}\label{subsection3.2.3}
-
-%Description of optimization of R and T.
 
 The order conditions from \eqref{eq:PT_OCs} do not contradict the SSP
 requirements.  We can thus use the optimization procedure described in
 Section~\ref{subsection3.1.1} with these order conditions instead of
-the $\Phi_{p,q}$ in \eqref{eqSSPopt}.  \colincomment{Need some sort of
-  summary here I suppose about number of stages, etc as above}
+the $\Phi_{p,q}$ in \eqref{eqSSPopt}. 
 
+\subsubsection{Resulting schemes}
+We have constructed starting and finishing schemes for each main scheme,
+with SSP coefficient at least as large as that of the main scheme.
+Table x shows the number of stages required to obtain this in each case.
+Table \ref{tab:essprk442-S} shows the coefficients of the starting and finishing methods for 
+ESSPRK(4,4,2).
 
-\subsection{Resulting schemes}
+The perturbation methods have minimal computational and storage cost, in
+contrast with their large importance in raising the order of the \(
+SM^{n}S^{-1} \) scheme from low classical order to higher effective order of
+method \( M \).
 
-In this section, we present several ESSPRK methods and their starting
-and stopping methods, given in the form of
-Section~\ref{subsection3.2.2}.
-
-Note that the starting and stopping schemes are not stationary.  If
-accurate values are needed at any time other than the final time, the
+If accurate values are needed at any time other than the final time, the
 computation must invoke the stopping method, and then the starting method to start up again. \todo{This should be explained earlier too, with just special notice here because its $RT$ not $SS^{-1}$}
 
 Table~\ref{tab:essprk442} shows the ESSPRK(4,4,2) scheme.
