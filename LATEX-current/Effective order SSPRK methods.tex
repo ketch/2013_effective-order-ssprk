@@ -34,7 +34,10 @@
 \usepackage{multicol}
 \usepackage{xkeyval}
 \usepackage[textsize=footnotesize]{todonotes}
-\usepackage[colorlinks=true,citecolor=blue,urlcolor=blue]{hyperref}
+\definecolor{darkred}{rgb}{.6,0,0}
+\definecolor{darkblue}{rgb}{0,0,0.5}
+\usepackage[colorlinks=true,citecolor=darkblue,urlcolor=darkblue,linkcolor=darkred]{hyperref}
+
 
 %%% Page layout %%%
 \setlength{\textwidth}{157mm}   
@@ -43,13 +46,9 @@
 \setlength{\evensidemargin}{-2mm}
 \setlength{\topmargin}{0mm}
 \setlength{\marginparwidth}{35mm}
-\setlength{\footskip}{20mm}
-\setlength\footnotesep{10mm}
-\setlength{\belowcaptionskip}{10pt}
-\setlength{\parindent}{15pt}
 
 %%% Page style %%%
-\pagestyle{plain}
+%\pagestyle{plain}
 
 %%% New environments %%%
 \newenvironment{biggertrees}{%
@@ -88,36 +87,51 @@
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{example}[theorem]{Example}
 \newtheorem{lemma}[theorem]{Lemma}
-%\newtheorem{lem}[theorem]{Lemma}
 %\newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{result}[theorem]{Result}
 \newtheorem{remark}{Remark}
 
 %%% Miscellaneous %%%
-\setcounter{secnumdepth}{3}
-\setcounter{tocdepth}{3}
-\setcounter{table}{0}
+%\setcounter{secnumdepth}{3}
+%\setcounter{tocdepth}{3}
+%\setcounter{table}{0}
 %\numberwithin{theorem}{section}
-\numberwithin{equation}{section}
+%\numberwithin{equation}{section}
 %\numberwithin{definition}{section}
 \numberwithin{theorem}{section}
 %\numberwithin{example}{section}
-\numberwithin{table}{section}
+%\numberwithin{table}{section}
 \newcolumntype{M}[1]{>{\vspace{2pt}\centering\hspace{0pt}\vspace{2pt}}m{#1}}
 \definecolor{lightgray}{gray}{0.5}
 %\makenomenclature
 %\baselineskip=18pt plus1pt
 
-%%% General info %%%
 
-\title{Effective order Strong Stability Preserving Runge-Kutta methods}
 
-\author{Author 1\footnote{University 1}
-        \and
-        Author 2\footnote{University 2}
-        \and
-        Author 3\footnote{University 3}}
+
+\title{Effective order strong stability preserving Runge--Kutta methods}
+
+\author{%
+  Yiannis Hadjimichael\footnote{ 4700 King Abdullah University of
+    Science \& Technology, Thuwal 23955, Saudi Arabia
+    (\url{yiannis.hadjimichael@kaust.edu.sa},
+    \url{david.ketcheson@kaust.edu.sa}).  The work of these authors
+    was supported by funding from King Abdullah University of Science
+    and Technology (KAUST).  } \and
+  %
+  Colin B.~Macdonald\thanks{Mathematical Institute, University of
+    Oxford, OX1\,3LB, UK (\url{macdonald@maths.ox.ac.uk}).  The work
+    of this author was supported by NSERC Canada and by Award No
+    KUK-C1-013-04 made by King Abdullah University of Science and
+    Technology (KAUST).} \and
+  %
+  David I.~Ketcheson\footnotemark[1] \and
+  %
+  J.~H.~Verner\thanks{Department of Mathematics, Simon Fraser
+    University, Burnaby, British Columbia, V5A\,1S6 Canada
+    (\url{jverner@pims.math.ca}).  The work of this author was
+    supported by a grant from NSERC Canada.}  }
 
 
 
@@ -145,19 +159,20 @@
   corollary is the non-existence of effective order five SSP methods.
 \end{abstract}
 
-%\tableofcontents
 
 \input{1_Intro}
 \input{2_SSP}
-%\input{3_Algebraic_RK}
 \input{3_Algebraic_RK_new}
 \input{4_ExRK_barrier}
 \input{5_Optimal_ESSPRK}
 \input{6_Numerics}
 \input{7_Conclusion}
 
-\section*{Acknowledgements}
-	Acknowledgements listed here.
+
+%\section*{Acknowledgments}
+%The second author thanks Jim Verner for introducing him to this
+%problem and for his support over the years.
+
 
 %\appendix
 %\include{AppendixA}
