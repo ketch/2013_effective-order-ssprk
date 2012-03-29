@@ -13,8 +13,12 @@ A spatial discretization gives the system of ODEs
 \begin{align*}
     \bm{u}_{t} = \bm{F}(\bm{u}),
 \end{align*}
-where $\bm{u}$ is a vector of continuous-in-time grid values approximating the solution $U$ at discrete grid points and $\bm{F}$ is the spatial discretization of function $f$.
-A time discretization then produces a sequence of solutions $\bm{u}^{n} \approx \bm{u}(t_n)$.
+where $\bm{u}$ is a vector of continuous-in-time grid values
+approximating the solution $U$ at discrete grid points and $\bm{F}$ is
+the spatial discretization of $f(U)_x$.
+% TODO: add something about F being more general than just HCL?
+A time discretization then produces a sequence of solutions
+$\bm{u}^{n} \approx \bm{u}(t_n)$.
 
 %In the particular case of hyperbolic conservation laws,
 Many popular spatial discretizations are chosen such that the solution $\bm{u}^{n}$ computed with the forward Euler scheme
