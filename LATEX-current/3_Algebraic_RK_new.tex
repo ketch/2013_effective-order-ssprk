@@ -10,68 +10,45 @@ and their order conditions.
 
 \subsection{Formulation of the Runge--Kutta group}\label{sec:RK_group}
 
-%In this characterization, we remove our attention from the numerical methods themselves and we concentrate on their counterparts in a certain group containing all real-valued maps on the set of rooted trees.
+%In this characterization, we remove our attention from the numerical methods themselves and we concentrate on their counterparts in a certain group containing .
 
-
-Butcher \cite{Butcher1972} proposed the set $G$ of functions that map
-trees to real numbers, specifically algebraic expressions known as
-\emph{elementary weights}.
+An algebraic structure for Runge--Kutta methods is useful if it can describe 
+the successive application of two methods. 
+Butcher \cite{Butcher1972} proposed the set $G$ of all real-valued maps on the 
+set of rooted trees. 
+The set $G$ can form a group where each function $\alpha \in G$ corresponds 
+to an \emph{equivalence} class of Runge--Kutta methods and maps trees to specific 
+algebraic expressions, known as \emph{elementary weights}. 
 \colintodo{this section not clear enough}
-%A tree $t$ has order $r(t)$ equal to the number of nodes.
-The elementary weight of a tree $t$
-%is denoted by $\Phi(t)$ and can be written as an
-is an algebraic expression in the coefficients of a Runge--Kutta method.
-For every function $\alpha \in G$ we write the elementary weights as
-$\alpha_{i} = \alpha(t_{i})$
-% = \Phi(t_{i})$
-for trees $t_{i}$ indexed by integer $i$.
-%, $i = 0, 1, 2, \dots$.
-%, where $t_{0}$ denotes the empty tree $\emptyset$.
-%By convention $\alpha(\emptyset) = 1$.
-The infinite-length vector consisting of $\alpha_i$, $i = 0, 1, 2,
-\ldots$ is the B-series of the corresponding Runge--Kutta method and
-is related to Taylor expansions of the numerical solution of the
-Runge--Kutta method \cite{Hairer1974, Butcher2008_book}.
-Table~\ref{tab:elementaryWeights} shows these
-expressions up to fifth order; a recursive formulation
-%\textbf{and further tables}
-can be found in \cite[Definition 312]{Butcher2008_book}.
+\yiannistodo{I think you should mention that functions in $G$ correspond to classes of RKm and not a single method. Especially to clarify the replacement of $SM$ and $MS^{-1}$ by $R$ and $T$ in section 5.}
+Methods of the same Runge--Kutta class are equivalent in the sense that they have 
+the same B-series expansion \cite{Butcher2008_book}.
+The elementary weight of a tree $t$ is an algebraic expression in the coefficients 
+of a Runge--Kutta method.
 
+For every function $\alpha \in G$ we write the elementary weights as $\alpha_{i} = \alpha(t_{i})$ for trees $t_{i}$ indexed by integer $i$.
+The infinite-length vector consisting of $\alpha_i$, $i = 0, 1, 2,\ldots$ is the B-series 
+of the corresponding Runge--Kutta method and is related to Taylor expansions of the numerical solution of the Runge--Kutta method \cite{Hairer1974, Butcher2008_book}.
+Table~\ref{tab:elementaryWeights} shows these expressions up to fifth order; a recursive formulation can be found in \cite[Definition 312]{Butcher2008_book}.
 
 
 \begin{table}
   \centering
-  \begin{tabular}{ccc}
-    \hline
-    $i$ & tree & elementary weight \\
-    \hline
-    0 & $\emptyset$ & 1 (double-check!) \\
-    1 & \tree{1}    & $\bm{b}^T\bm{e}$ \\
-    2 & \tree{2}    & $\bm{b}^T\bm{c}$\\
-    3 & \tree{3}    & $\bm{b}^T\bm{c}^2$\\
-    4 & \tree{4}    & $\bm{b}^TA\bm{c}$\\
-    5 & \tree{5}    & $\bm{b}^T\bm{c}^3$\\
-    6 & \:\:\:\:\:\tree{6} & $\bm{b}^TCA\bm{c}$ \\
-    7 & \tree{7}\:\:\:\:\: & $\bm{b}^TA\bm{c}^2$\\
-    8 & \:\:\tree{8}       & $\bm{b}^TA^2\bm{c}$\\
-    \\
+  \begin{tabular}{ccccccc}
+    \cline{1-3}\cline{5-7}
+    $i$ & tree & elementary weight & & $i$ & tree & elementary weight \\
+    \cline{1-3}\cline{5-7} \\[-10pt]
+    0 & $\emptyset$ \hspace{15pt}  & 1 & & 9 & \hspace{15pt} \tree{9} & $\bm{b}^T\bm{c}^4$\\
+    1 & \hspace{15pt}  \tree{1} &$\bm{b}^T\bm{e}$ & & 10 & \tree{10} \hspace{15pt} & $\bm{b}^TC^2A\bm{c}$ \\
+    2 & \tree{2} \hspace{15pt}  &$\bm{b}^T\bm{c}$ & & 11 & \hspace{15pt} \tree{11} & $\bm{b}^TCA\bm{c}^2$ \\
+    3 & \hspace{15pt}  \tree{3} & $\bm{b}^T\bm{c}^2$ & & 12 & \tree{12} \hspace{15pt} & $\bm{b}^TCA^2\bm{c}$ \\
+    4 & \tree{4} \hspace{15pt}  & $\bm{b}^TA\bm{c}$ & & 13 & \hspace{15pt} \tree{13} & $\bm{b}^T(A\bm{c})^2$ \\
+    5 & \hspace{15pt}  \tree{5} & $\bm{b}^T\bm{c}^3$ & & 14 & \tree{14} \hspace{15pt} & $\bm{b}^TA\bm{c}^3$ \\
+    6 & \tree{6} \hspace{15pt}  & $\bm{b}^TCA\bm{c}$ & & 15 & \hspace{15pt} \tree{15} & $\bm{b}^TACA\bm{c}$ \\
+    7 & \hspace{15pt}  \tree{7} & $\bm{b}^TA\bm{c}^2$ & & 16 & \tree{16} \hspace{15pt} & $\bm{b}^TA^2\bm{c}^2$ \\
+    8 & \tree{8} \hspace{15pt}  & $\bm{b}^TA^2\bm{c}$ & &  17 & \hspace{15pt} \tree{17} & $\bm{b}^TA^3\bm{c}$ \\
   \end{tabular}
-  \qquad
-  \begin{tabular}{ccc}
-    \hline
-    $i$ & tree & elementary weight \\
-    \hline
-    9  & \tree{9}                 & $\bm{b}^T\bm{c}^4$ (need strut)\\
-    10 & \tree{10}                & $\bm{b}^TCCA\bm{c}$ \\
-    11 & \:\:\:\:\:\tree{11}      & $\bm{b}^TCA\bm{c}^2$ (Check) \\
-    12 & \tree{12}\:\:\:\:        & $\bm{b}^TCAA\bm{c}$ \\
-    13 & \:\:\:\:\:\tree{13}      & $\bm{b}^T \text{diag}(A\bm{c}) A\bm{c}$ (I forget) \\
-    14 & \tree{14}\:\:\:\:        & $\bm{b}^TA\bm{c}^3$ \\
-    15 & \:\:\:\:\:\tree{15}      & $\bm{b}^TACA\bm{c}$ \\
-    16 & \tree{16}\:\:\:\:\:      & $\bm{b}^TA^2\bm{c}^2$ \\
-    17 & \:\:\:\:\:\tree{17}      & $\bm{b}^TA^3\bm{c}$ \\
-  \end{tabular}
-  \caption{Elementary weights of trees up to forth order.}
+  \caption{Elementary weights of trees up to fifth order. By convention $\alpha(\emptyset) = 1$, where $t_{0} = \emptyset$ denotes the empty tree. Here matrix $C =\text{diag}(\bm{c})$.}
   \label{tab:elementaryWeights}
 \end{table}
 
@@ -87,25 +64,25 @@ can be found in \cite[Definition 312]{Butcher2008_book}.
 
 
 
-Suppose $\alpha, \beta \in G$ correspond to Runge--Kutta methods $M$ and $S$ respectively.
+Suppose $\alpha, \beta \in G$ correspond to Runge--Kutta methods $A$ and $B$ respectively.
 A multiplicative group operation $\alpha\beta$ can be defined
 by partitioning the input tree and
 %on each tree by performing a certain partitioning of the tree and
 computing over the resulting forest \cite{Butcher2008_book}.
 This product $\alpha\beta$ corresponds to the application
-of method $S$ followed by method $M$.
+of method $A$ followed by method $B$ and resulting to a method $B \circ A$.
 \colintodo{note order different from Butcher... bad idea}
+\yiannistodo{What about this minor change? We keep Butcher's notation and remove any ambiguities.}
 %Runge--Kutta method followed by another.
 It is defined by
 \begin{equation}\label{eq:Group_operation}
-  (\beta\alpha)(t) = \sum_{w \lhd t} \left(\prod_{v \in t \setminus w} \alpha(v)\beta(w)\right),
+  (\alpha\beta)(t) = \sum_{w \lhd t} \left(\prod_{v \in t \setminus w} \alpha(v)\beta(w)\right),
 \end{equation}
 where $w \lhd t$ indicates a subtree of $t$ which includes the
 root of $t$ and $w \setminus t$ indicates the forest induced
-by removing $w$ from $t$.
+by removing $w$ from $t$ \cite{Butcher2008_book}.
 Multiplicity in choosing $w$ must also be accounted for.
-See \cite{Butcher2008_book} for details.
-This product is perhaps best understood via an example.
+This product is best understood via an example.
 
 %\subsubsection*{longer version}
 % The group multiplicative operation $\alpha\beta$ corresponds to the
@@ -126,9 +103,7 @@ This product is perhaps best understood via an example.
 
 \begin{example}\label{ex:tree_partition}
 	Table~\ref{tab:tree_partition} shows the partition of the five-vertex tree $t_{11}$ to all possible rooted subtrees. Based on this partition, we apply \eqref{eq:Group_operation} to find that the product of two functions in $G$ on tree $t_{11}$ is given by
-$
-		(\beta\alpha)(t_{11}) = \alpha_{11} + \alpha_1\alpha_3\beta_1 + (\alpha_1^{3} + \alpha_3)\beta_2 + \alpha_1^{2}\beta_3 + 2\alpha_1^{2}\beta_4 + 2\alpha_1\beta_6 + \alpha_1\beta_7 + \beta_{11}.
-$
+$(\alpha\beta)(t_{11}) = \alpha_{11} + \alpha_1\alpha_3\beta_1 + (\alpha_1^{3} + \alpha_3)\beta_2 + \alpha_1^{2}\beta_3 + 2\alpha_1^{2}\beta_4 + 2\alpha_1\beta_6 + \alpha_1\beta_7 + \beta_{11}.$
 
 \begin{table}
 	\centering

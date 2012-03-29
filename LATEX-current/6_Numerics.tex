@@ -1,6 +1,6 @@
 \section{Numerical experiments}\label{sec:numerics}
 
-In this section we verify numerically that the order of the constructed Runge-Kutta scheme $TM^{n}R$\yianniscomment{IOn section 5 }, for which the main method $M$ is an SSPRK($s$,$q$,$p$) method, is the effective order $q$ of method $M$. This is done by performing a convergence study on a smooth nonlinear problem. Also we show that the $TM^{n}R$ scheme inherits the properties of the SSPRK($s$,$q$,$p$) method. In particular, the time-step restriction of the Runge-Kutta scheme $TM^{n}R$ is the same with that of the main method $M$. This is demonstrated by showing the effect of SSP coefficient on the nonlinear Burger's equation.
+In this section we verify numerically that the order of the constructed Runge-Kutta scheme $TM^{n}R$, for which the main method $M$ is an SSPRK($s$,$q$,$p$) method, is the effective order $q$ of method $M$. This is done by performing a convergence study on a smooth nonlinear problem. Also we show that the $TM^{n}R$ scheme inherits the properties of the SSPRK($s$,$q$,$p$) method. In particular, the time-step restriction of the Runge-Kutta scheme $TM^{n}R$ is the same with that of the main method $M$. This is demonstrated by showing the effect of SSP coefficient on the nonlinear Burger's equation.
 
 \subsection{Convergence study}\label{subsec:convergence}
 
@@ -24,14 +24,7 @@ Finally, we note that for a fixed time-step, increasing the number of stages the
 
 \begin{figure}[t!]
     \centering
-    \includegraphics[scale=0.6]{Pictures/convergence_3rd_ord.eps}
-    \caption{Convergence of $ SM^{n}S^{-1} $ Runge-Kutta scheme, when $ M $ is SSPRK($ s $,$ 3 $,$ 2 $) method.}
-    \label{fig5.1}
-\end{figure}
-
-\begin{figure}[t!]
-    \centering
-    \includegraphics[scale=0.6]{Pictures/convergence_4th_ord_(1).eps}\includegraphics[scale=0.6]{Pictures/convergence_4th_ord_(2).eps}
+    \includegraphics[scale=0.6]{Pictures/convergence_3rd_ord.eps}\includegraphics[scale=0.6]{Pictures/convergence_4th_ord_(2).eps}
     \caption{Convergence of $TM^{n}R$ Runge-Kutta scheme when (a) $M$ is SSPRK($s $,$ 4 $,$ 2 $) method and (b) $ M $ is SSPRK($ s $,$ 4 $,$ 3 $) method.}
     \label{fig5.2}
 \end{figure}
@@ -58,9 +51,8 @@ The above time discretisation is SSP when coupled with Forward Euler method unde
 
 \begin{figure}[t!]
     \centering
-    \subfloat[$\sigma = 6.0$]{\label{fig5.3a}\includegraphics[scale=0.7]{Pictures/burgers_cont_tvd.eps}} \\
-    \subfloat[$\sigma = 7.1$]{\label{fig5.3b}\includegraphics[scale=0.7]{Pictures/burgers_cont_no_tvd.eps}}
-    \caption{Solution of Burger's equation with continuous initial data, using a $ SM^{n}S^{-1} $ scheme, where $ M $ is SSPRK($ 10 $,$ 4 $,$ 3 $). The SSP coefficient is $ c = 6.0 $.}
+    \subfloat[$\sigma = 6.0$]{\label{fig5.3a}\includegraphics[scale=0.6]{Pictures/burgers_cont_tvd.eps}}\subfloat[$\sigma = 7.1$]{\label{fig5.3b}\includegraphics[scale=0.6]{Pictures/burgers_cont_no_tvd.eps}}
+    \caption{Solution of Burger's equation with continuous initial data, using a $ TM^{n}R $ scheme, where $ M $ is SSPRK($ 10 $,$ 4 $,$ 3 $). The SSP coefficient is $ c = 6.0 $.}
     \label{fig5.3}
 \end{figure}
 
@@ -92,9 +84,8 @@ Figure \ref{fig5.4} shows the result of solving the discontinuous problem using 
 
 \begin{figure}[t!]
     \centering
-    \subfloat[$\sigma = 1.97$]{\label{fig5.4a}\includegraphics[scale=0.7]{Pictures/burgers_discont_tvd.eps}} \\
-    \subfloat[$\sigma = 2.2$]{\label{fig5.4b}\includegraphics[scale=0.7]{Pictures/burgers_discont_no_tvd.eps}}
-    \caption{Solution of Burger's equation with discontinuous initial data, using a $ SM^{n}S^{-1} $ scheme, where $ M $ is SSPRK($ 5 $,$ 4 $,$ 2 $) method. The SSP coefficient is $ c = 1.97 $.}
+    \subfloat[$\sigma = 1.97$]{\label{fig5.4a}\includegraphics[scale=0.6]{Pictures/burgers_discont_tvd.eps}}\subfloat[$\sigma = 2.2$]{\label{fig5.4b}\includegraphics[scale=0.6]{Pictures/burgers_discont_no_tvd.eps}}
+    \caption{Solution of Burger's equation with discontinuous initial data, using a $ TM^{n}R $ scheme, where $ M $ is SSPRK($ 5 $,$ 4 $,$ 2 $) method. The SSP coefficient is $ c = 1.97 $.}
     \label{fig5.4}
 \end{figure}
 
