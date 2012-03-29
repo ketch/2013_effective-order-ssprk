@@ -70,11 +70,18 @@ The search for these optimal methods was originally based on expressing the Rung
 %The optimization process followed is similar with the one used in \cite{Ketcheson2008, Ketcheson2009} and the search for optimal explicit Runge-Kutta methods has been explored in \cite{Gottlieb1998, Gottlieb2001, Spiteri2003a, Spiteri2003b, Ruuth2004} by using the Shu-Osher form.
 However, the SSP coefficient is related to the \emph{radius of absolute monotonicity} \cite{Kraaijevanger1991} and, for irreducible Runge--Kutta methods, the two are equivalent \cite{Ferracina2004, Higueras2004}.
 This gives an algebraic characterization of the SSP coefficient.
-The optimization problem of finding optimal SSP Runge--Kutta methods can thus be formulated in Butcher form by using the absolute monotonicity conditions as follows.
-% The latter formulation is more efficient as it uses half the number of decision variables \cite{Ketcheson2008}.
-% note: the shu--osher form is an optimization even for a given method
-%Assume that the ESSPRK(\( s \),\( q \),\( p \)) method \( M \) can be written as \( (A,\bm{b}^{\texttt{T}},\bm{c}) \) and
-First we define the \( (s+1) \times s \) matrix
+The optimization problem of finding optimal SSP Runge--Kutta methods can be written in terms of the coefficients
+$(A,\bm{b})$ as follows:
+\begin{equation}\label{eqSSPopt}
+    \max_{A, \bm{b}^{\texttt{T}}, r} r, \qquad \text{subject to } \quad \left\{
+                                                 \begin{array}{ll}
+                                                   K(I + rA)^{-1} \geq 0 \\
+                                                   \bm{e}_{s+1} - rK(I + rA)^{-1}\bm{e}_{s} \geq 0 \\
+                                                   \Phi(K) = 0.
+                                                 \end{array}
+                                               \right.
+\end{equation}
+Here
 \begin{equation}\label{eqKmat}
     K = \left(
             \begin{array}{c}
@@ -83,18 +90,6 @@ First we define the \( (s+1) \times s \) matrix
             \end{array}
          \right),
 \end{equation}
-%Maximizing the radius of absolute monotonicity of the main method is equivalent with finding the solution to the following optimization problem
-and state the following optimization problem
-\begin{equation}\label{eqSSPopt}
-    \max_{A, \bm{b}^{\texttt{T}}, r} r, \qquad \text{subject to } \quad \left\{
-                                                 \begin{array}{ll}
-                                                   N \geq 0 \\
-                                                   \bm{e}_{s+1} - rN\bm{e}_{s} \geq 0 \\
-                                                   \Phi(K) = 0,
-                                                 \end{array}
-                                               \right.
-\end{equation}
-where \( N(A,b,r) = K(I + rA)^{-1} \in \mathbb{R}^{s+1 \times s}\),
 \( \bm{e}_s \) is the vector of ones of length $s$,
 and \( \Phi(K) \) represents the  order conditions.
 The inequalities are understood component-wise.
@@ -102,13 +97,15 @@ The inequalities are understood component-wise.
 Following \cite{Ketcheson2008, Ketcheson2009}, we will use this optimization problem to perform a numerical search for optimal SSP Runge--Kutta methods.
 We first need to define the order conditions $\Phi(K)$ for methods of effective order.
 
-%The methods are found through numerical search, using
-%\textsc{MATLAB}'s optimization toolbox on the above constrained
-%optimization problem.  Specifically, we use \verb"fmincon" with a
-%sequential quadratic programming approach.
-%This process does not guarantee a global minimizer, so several
-%searches are performed until the method with the largest possible SSP
-%coefficient is found.
+Useful upper bounds for the optimization problem \eqref{eqSSPopt} can be obtained
+by considering an important relaxation.  In the relaxed problem, the method is
+required to be accurate and strong stability preserving only for linear,
+constant-coefficient initial value problems.  This leads to a reduced set of
+order conditions and a reduced set of absolute monotonicity conditions.  We
+denote the resulting optimal value by $\clin$; clearly for any method
+$$\sspcoef\le\clin.$$
+Exact optimal values of $\clin$ are known for many classes of methods; see
+\cite{Kraaijevanger1986,ketcheson2009a}.
 
 
 

@@ -264,9 +264,7 @@ order conditions \cite{Butcher2008_book}.
 We use the abbreviation RK($s$,$q$,$p$) for an $s$-stage Runge-Kutta method of effective order $q$ and classical order $p$.
 
 
-\section{Constructing methods and an effective order barrier}
-
-
+\subsection{Constructing effective order methods}
 The approach we adopt is to consider the $\beta_{i}$ as free
 parameters when determining the $\alpha_i$.
 The relationship in Table~\ref{tab:effectiveOCs} between the
@@ -333,19 +331,7 @@ this assumption).
 \end{table}
 
 
-      % \colincomment{Old comment: something seems wrong here: I can easily substitute $\beta_2=-\frac{1}{6} + \frac{1}{2}\alpha_3$ into the bottom four equations for the main method. Then the OCs for the main method are written in a form that is independent of those of $S$. But I think I remember there was some subtle things here because of the squared $\beta$ terms.}
-    %\yianniscomment{Substituting $\beta_2$ in OC of the main method makes them dependent only on $\alpha$. But still the resulting system of equations has no solution for $\bm{b}>0$. In other words what I say here is that if we let $\beta_2$ a free parameter, then the system of equations for the main method has a solution (with positive coefficients). But since the (initial) five-effective order equations depend on $\beta_2$, $\beta_2=-\frac{1}{6} + \frac{1}{2}\alpha_3$ has to be added to the set of equations solved for the main method (this is how the set of equations of the main and starting methods are coupled in contrast with the 3- and 4-effective order cases). These can be then reduced from $10$ to $9$ by substituting $\beta_2=-\frac{1}{6} + \frac{1}{2}\alpha_3$, yet still no solution with positive $\bm{b}$ exists. Actually as I say in the proof it is enough to consider only $\alpha_1=1, \alpha_4=\frac{1}{6}, \frac{1}{4}\alpha_9 - \alpha_{10} + \alpha_{13} = \beta_2^{2}$ and $\beta_2=-\frac{1}{6} + \frac{1}{2}\alpha_3$. No solution (always with positive weights) exists for these $4$ equations, hence no solution exists for the initial problem of the OCs of the main method.}
-
-
-%\yiannistodo{Yes, one can substitute $\beta_2$ and get equations for the main method that depend only one $\alpha_i's$. The difference of this case with the previous ones of effective order $3$ and $4$ is just that the resulting equations can not be solved simultaneously for positive coefficients.}
-% Thus, all $\alpha_{i}$ can be found first and the main method can be construct without requiring the perturbation methods. Then when all functions on $\alpha$ are found, the relative order conditions on $\beta$ can be obtained. At the same time we find the order conditions of $\beta^{-1}$ by requiring $(\beta\beta^{-1})(t) = 0$ for all trees of order $r(t) \leq q$.
-
 \begin{example}\label{ex:Effective_RK32}
 \colintodo{remove this example?}
 	Constructing an $s$-stage method of effective order 3 with classical order 2 requires satisfying the three conditions given in Table~\ref{tab:Effective_oc}. This is one less condition than constructing a method with classical order 3, since $\alpha_3$ is here a free parameter. After choosing a method and thus a value for $\alpha_3$, the order conditions for the starting method are now fixed as well.
 \end{example}
-
-
-% Thus the number of order conditions is always less than the number of the classical order conditions. In particular the third-effective order conditions become three instead of four and for a fourth-effective order method are either five to seven, instead of eight. As an example, effective order explains why one can construct $s$-stage explicit Runge-Kutta methods that can effectively attain order $p$ equal to $s$, when accompanied by starting and finishing methods \cite{Butcher1987_book}. In this way effective order overcomes the order barrier of explicit methods which states that for stages more than five we can not have classical order equal to the number of stages. 
-
-
