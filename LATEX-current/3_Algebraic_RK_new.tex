@@ -4,7 +4,7 @@ The effective order of a Runge--Kutta method is defined in an abstract algebraic
 context introduced by Butcher \cite{Butcher1969} and developed further in
 \cite{Butcher1972, Hairer1974, Butcher1996, Butcher1998} and others.
 In this section we follow \cite{Butcher2008_book}, reviewing the fundamental
-concepts of this representation in order to define effective order methods
+concepts of this representation used to define effective order methods
 and their order conditions.
 
 
@@ -12,22 +12,21 @@ and their order conditions.
 
 %In this characterization, we remove our attention from the numerical methods themselves and we concentrate on their counterparts in a certain group containing .
 
-An algebraic structure for Runge--Kutta methods is useful if it can describe 
-the successive application of two methods. 
-Butcher \cite{Butcher1972} proposed the set $G$ of all real-valued maps on the 
-set of rooted trees. 
-The set $G$ can form a group where each function $\alpha \in G$ corresponds 
-to an \emph{equivalence} class of Runge--Kutta methods and maps trees to specific 
-algebraic expressions, known as \emph{elementary weights}. 
-\colintodo{this section not clear enough}
-\yiannistodo{I think you should mention that functions in $G$ correspond to classes of RKm and not a single method. Especially to clarify the replacement of $SM$ and $MS^{-1}$ by $R$ and $T$ in section 5.}
-Methods of the same Runge--Kutta class are equivalent in the sense that they have 
-the same B-series expansion \cite{Butcher2008_book}.
-The elementary weight of a tree $t$ is an algebraic expression in the coefficients 
-of a Runge--Kutta method.
+For our purposes, an algebraic structure for Runge--Kutta methods is useful if it can describe
+the successive application of two methods.
+Butcher \cite{Butcher1972} proposed the group $G$ of all real-valued maps on the
+set of rooted trees.
+Each function $\alpha \in G$ corresponds
+to an \emph{equivalence} class of Runge--Kutta methods and maps trees to specific
+algebraic expressions in the coefficients
+of a Runge--Kutta method, known as \emph{elementary weights}.
+%The elementary weight of a tree $t$ is an algebraic expression in the coefficients
+%of a Runge--Kutta method.
+Two Runge--Kutta methods are equivalent if they have the same values for these expressions.
+
 
 For every function $\alpha \in G$ we write the elementary weights as $\alpha_{i} = \alpha(t_{i})$ for trees $t_{i}$ indexed by integer $i$.
-The infinite-length vector consisting of $\alpha_i$, $i = 0, 1, 2,\ldots$ is the B-series 
+The infinite-length vector consisting of $\alpha_i$, $i = 0, 1, 2,\ldots$ is the B-series
 of the corresponding Runge--Kutta method and is related to Taylor expansions of the numerical solution of the Runge--Kutta method \cite{Hairer1974, Butcher2008_book}.
 Table~\ref{tab:elementaryWeights} shows these expressions up to fifth order; a recursive formulation can be found in \cite[Definition 312]{Butcher2008_book}.
 
@@ -70,11 +69,14 @@ by partitioning the input tree and
 %on each tree by performing a certain partitioning of the tree and
 computing over the resulting forest \cite{Butcher2008_book}.
 This product $\alpha\beta$ corresponds to the application
-of method $A$ followed by method $B$ and resulting to a method $B \circ A$.
-\colintodo{note order different from Butcher... bad idea}
-\yiannistodo{What about this minor change? We keep Butcher's notation and remove any ambiguities.}
+of method $A$ followed by method $B$ and resulting to a method
+$BA$.\footnote{We write $BA$ to mean method $A$ followed by method $B$
+  (following matrix and operator ordering convention) but we use the
+  ordering $\alpha\beta$ to match the convention in
+  \cite{Butcher2008_book}.}
+\colintodo{clean up paper: want $\alpha\beta$ and $MS$.}
 %Runge--Kutta method followed by another.
-It is defined by
+The product is defined by
 \begin{equation}\label{eq:Group_operation}
   (\alpha\beta)(t) = \sum_{w \lhd t} \left(\prod_{v \in t \setminus w} \alpha(v)\beta(w)\right),
 \end{equation}
@@ -179,7 +181,8 @@ The methods $S$ and $S^{-1}$ make the method $M$ effectively of higher order tha
 We denote by $\alpha$ and $\beta$ the functions in group $G$ associated with the methods $M$ and $S$, respectively.
 %Thus $\beta^{-1}$ corresponds to Runge--Kutta method $S^{-1}$ that annihilates the work of the starting method $S$ (up to order $q$).
 The successive use of these three methods results in a method $P = S^{-1}MS$, of which the corresponding function in $G$ is $\beta^{-1}\alpha\beta$.
-In order for the method $P$ to be of order $q$, then it must reproduce the exact solution to within $\mathcal{O}((\Dt)^{q+1})$.
+\colintodo{Move this stuff about $O(h^{q+1})$ later with the Result?}
+For the method $P$ to be of order $q$, it must reproduce the exact solution to within $\mathcal{O}((\Dt)^{q+1})$.
 This means that the sequence of methods \( S \), \( M \) and \( S^{-1} \) moves the numerical approximation a single step forward with local truncation error \( \mathcal{O}((\Dt)^{q+1}) \).
 In terms of functions in group $G$ this is leads to the following definition of the effective order of the Runge--Kutta method $M$.
 \begin{definition}\cite{Butcher1987_book}\label{def:Effective_order}
