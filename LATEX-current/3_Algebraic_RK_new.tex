@@ -84,7 +84,7 @@ where $w \lhd t$ indicates a subtree of $t$ which includes the
 root of $t$ and $w \setminus t$ indicates the forest induced
 by removing $w$ from $t$ \cite{Butcher2008_book}.
 Multiplicity in choosing $w$ must also be accounted for.
-This product is best understood via an example.
+The above operation is best understood via an example.
 
 %\subsubsection*{longer version}
 % The group multiplicative operation $\alpha\beta$ corresponds to the
@@ -180,7 +180,7 @@ and then a finishing method $S^{-1}$.
 The methods $S$ and $S^{-1}$ make the method $M$ effectively of higher order than its classical order.
 We denote by $\alpha$ and $\beta$ the functions in group $G$ associated with the methods $M$ and $S$, respectively.
 %Thus $\beta^{-1}$ corresponds to Runge--Kutta method $S^{-1}$ that annihilates the work of the starting method $S$ (up to order $q$).
-The successive use of these three methods results in a method $P = S^{-1}MS$, of which the corresponding function in $G$ is $\beta^{-1}\alpha\beta$.
+The successive use of these three methods results in a method $P = S^{-1}MS$, of which the corresponding function in $G$ is $\beta\alpha\beta^{-1}$.
 \colintodo{Move this stuff about $O(h^{q+1})$ later with the Result?}
 For the method $P$ to be of order $q$, it must reproduce the exact solution to within $\mathcal{O}((\Dt)^{q+1})$.
 This means that the sequence of methods \( S \), \( M \) and \( S^{-1} \) moves the numerical approximation a single step forward with local truncation error \( \mathcal{O}((\Dt)^{q+1}) \).
@@ -189,15 +189,16 @@ In terms of functions in group $G$ this is leads to the following definition of 
   % Let $\alpha$ and $\beta be the corresponding functions in $G$ of a
   % Runge--Kutta methods $M$ and $S$, respectively.
   Suppose $M$ is a Runge--Kutta method with corresponding $\alpha \in G$.
-  Then the method $M$ is of effective order $q$ if there exists method
+  Then the method $M$ is of effective order $q$ if there exists a method
   $S$ (with corresponding $\beta \in G$) such that
 	\begin{equation}\label{eq:Effective_order_1}
-		(\beta^{-1}\alpha\beta)(t) = E(t), \; \text{for every tree with $r(t) \leq q$,}
+		(\beta\alpha\beta^{-1})(t) = E(t), \; \text{for every tree with $r(t) \leq q$,}
 	\end{equation}
         where $\beta^{-1}$ is an inverse of $\beta$ up to order $q$.
 \end{definition}
 The practical benefit of methods of effective order results from the
 observation that only $M$ need be used repeatedly.
+\yiannistodo{move this result ot section 5}
 \begin{result}
   With methods $M$, $S$, $S^{-1}$, and $P$ as above we have
   $$P^n = (S^{-1}MS)^n = (S^{-1}MS) \cdots (S^{-1}MS) (S^{-1}MS)
@@ -264,7 +265,7 @@ order conditions \cite{Butcher2008_book}.
     \caption{Effective order five conditions of the main and starting methods $M$ and $S$.}
     \label{tab:effectiveOCs}
 \end{table}
-We use the abbreviation RK($s$,$q$,$p$) for an $s$-stage Runge-Kutta method of effective order $q$ and classical order $p$.
+Finally, we use the abbreviation RK($s$,$q$,$p$) for an $s$-stage Runge-Kutta method of effective order $q$ and classical order $p$.
 
 
 \subsection{Constructing effective order methods}
@@ -336,5 +337,6 @@ this assumption).
 
 \begin{example}\label{ex:Effective_RK32}
 \colintodo{remove this example?}
+\yiannistodo{I think yes and incluse the remarks made here in subsection 3.4}
 	Constructing an $s$-stage method of effective order 3 with classical order 2 requires satisfying the three conditions given in Table~\ref{tab:Effective_oc}. This is one less condition than constructing a method with classical order 3, since $\alpha_3$ is here a free parameter. After choosing a method and thus a value for $\alpha_3$, the order conditions for the starting method are now fixed as well.
 \end{example}

@@ -1,6 +1,6 @@
 \section{Numerical experiments}\label{sec:numerics}
 
-In this section we verify numerically that the order of the constructed Runge-Kutta scheme $TM^{n}R$, for which the main method $M$ is an SSPRK($s$,$q$,$p$) method, is the effective order $q$ of method $M$. This is done by performing a convergence study on a smooth nonlinear problem. Also we show that the $TM^{n}R$ scheme inherits the properties of the SSPRK($s$,$q$,$p$) method. In particular, the time-step restriction of the Runge-Kutta scheme $TM^{n}R$ is the same with that of the main method $M$. This is demonstrated by showing the effect of SSP coefficient on the nonlinear Burger's equation.
+In this section we verify numerically that the order of the constructed Runge-Kutta scheme $TM^{n-2}R$, for which the main method $M$ is an SSPRK($s$,$q$,$p$) method, is the effective order $q$ of method $M$. For simplicity we call the $TM^{n-2}R$ scheme as \emph{ESSPRK-scheme}. This is done by performing a convergence study on a smooth nonlinear problem. Also we show that the ESSP-scheme inherits the properties of the SSPRK($s$,$q$,$p$) method. In particular, the time-step restriction of the ESSPRK-scheme is the same with that of the main method $M$. This is demonstrated by showing the effect of SSP coefficient on the nonlinear Burger's equation.
 
 \subsection{Convergence study}\label{subsec:convergence}
 
@@ -12,12 +12,12 @@ and exact solution
 \begin{equation}\label{eq5.4}
     u(t) = 10/(15t + 1).
 \end{equation}
-We solve the initial value problem \eqref{eq5.3} and \eqref{eq5.4} using an $TM^{n}R$ Runge-Kutta scheme, where $M$ is a $q$-effective order SSPRK method for $q = 3, 4$. 
+We solve the initial value problem \eqref{eq5.3} and \eqref{eq5.4} using an ESSPRK-scheme where $M$ is a $q$-effective order SSPRK method for $q = 3, 4$. 
 Method $M$ was found by solving the optimisation problem \eqref{eq5.2} and the starting and finishing methods were found by solving the problem \eqref{eq5.3}. 
 The stages of the permutation methods were kept as low as possible, thus we use two stages for a 3-effective order method $M$ and four stages for a 4-effective order method. 
 The solution is computed for $N = 50.2^{k}$ for $k = 0, 1, 2, \dots, 6$ and hence the time-step used is $\Dt = \frac{1}{N} = \frac{2^{1-N}}{100}$ for each computation. 
 The error between the exact solution and the approximation with respect to time-step is shown in Figures \ref{fig5.1} and \ref{fig5.2} on a logarithmic scale. \yiannistodo{Update pictures, correct legends, axis, etc.}
-The convergence study was performed for various stages and the results show that the Runge-Kutta scheme $TM^{n}R $ attends order equal to the effective order of method $M$. 
+The convergence study was performed for various stages and the results show that the ESSPRK-scheme attends order equal to the effective order of method $M$. 
 We note it is important to measure the error after applying the finishing method $R$, otherwise we observe the
 classical order $p$ of method $M$ instead of the higher effective order $q$. 
 Finally, we note that for a fixed time-step, increasing the number of stages the decreases the error.
@@ -25,7 +25,7 @@ Finally, we note that for a fixed time-step, increasing the number of stages the
 \begin{figure}[t!]
     \centering
     \includegraphics[scale=0.6]{Pictures/convergence_3rd_ord.eps}\includegraphics[scale=0.6]{Pictures/convergence_4th_ord_(2).eps}
-    \caption{Convergence of $TM^{n}R$ Runge-Kutta scheme when (a) $M$ is SSPRK($s $,$ 4 $,$ 2 $) method and (b) $ M $ is SSPRK($ s $,$ 4 $,$ 3 $) method.}
+    \caption{Convergence of $TM^{n-2}R$ Runge-Kutta scheme when (a) $M$ is SSPRK($s $,$ 4 $,$ 2 $) method and (b) $ M $ is SSPRK($ s $,$ 4 $,$ 3 $) method.}
     \label{fig5.2}
 \end{figure}
 
@@ -52,11 +52,11 @@ The above time discretisation is SSP when coupled with Forward Euler method unde
 \begin{figure}[t!]
     \centering
     \subfloat[$\sigma = 6.0$]{\label{fig5.3a}\includegraphics[scale=0.6]{Pictures/burgers_cont_tvd.eps}}\subfloat[$\sigma = 7.1$]{\label{fig5.3b}\includegraphics[scale=0.6]{Pictures/burgers_cont_no_tvd.eps}}
-    \caption{Solution of Burger's equation with continuous initial data, using a $ TM^{n}R $ scheme, where $ M $ is SSPRK($ 10 $,$ 4 $,$ 3 $). The SSP coefficient is $ c = 6.0 $.}
+    \caption{Solution of Burger's equation with continuous initial data, using a $ TM^{n-2}R $ scheme, where $ M $ is SSPRK($ 10 $,$ 4 $,$ 3 $). The SSP coefficient is $ c = 6.0 $.}
     \label{fig5.3}
 \end{figure}
 
-Burger's equation was solved using a $TM^{n}R$ Runge-Kutta scheme with time-step restriction $\Dt \leq \sigma{\Dt}_{FE}$, where $\sigma$ indicates the size of the time step. Figure \ref{fig5.3} shows that if $\sigma$ stays below the SSP coefficient of the method $M$, then no oscillations are observed. If this stability limit is violated, then oscillations appear. \yianniscomment{Elaborate more: Sharpness of SSP coefficient} We were able to determine when exactly the nonlinear stability is not satisfied by computing the the total-variation (TV) norm at each step of the computation process. This indicates that the $TM^{n}R$ scheme inherits the time-step restriction from the SSP coefficient of the main method $M$.
+Burger's equation was solved using an ESSPRK-scheme with time-step restriction $\Dt \leq \sigma{\Dt}_{FE}$, where $\sigma$ indicates the size of the time step. Figure \ref{fig5.3} shows that if $\sigma$ stays below the SSP coefficient of the method $M$, then no oscillations are observed. If this stability limit is violated, then oscillations appear. \yianniscomment{Elaborate more: Sharpness of SSP coefficient} We were able to determine when exactly the nonlinear stability is not satisfied by computing the the total-variation (TV) norm at each step of the computation process. This indicates that the ESSPRK-scheme inherits the time-step restriction from the SSP coefficient of the main method $M$.
 \newline
 
 We also consider Burger's equation with discontinuous data
@@ -69,7 +69,7 @@ We also consider Burger's equation with discontinuous data
               \right.
 \end{equation}
 
-Figure \ref{fig5.4} shows the result of solving the discontinuous problem using a $TM^{n}R$ Runge-Kutta scheme, with $M$ an SSPRK($4$,$4$,$3$). Clearly, the monotonicity in the TV-norm is violated at $t = 0$ because the method $S$ is not an SSP method. However, this does not propagate in time if the time-step size $\sigma$ is kept below the SSP coefficient of method $M$. Otherwise, oscillations continue to appear for $t > 0$. The actual solution was plotted using the method of the characteristics and is given by
+Figure \ref{fig5.4} shows the result of solving the discontinuous problem using anESSPRK-scheme, with $M$ an SSPRK($4$,$4$,$3$). Clearly, the monotonicity in the TV-norm is violated at $t = 0$ because the method $S$ is not an SSP method. However, this does not propagate in time if the time-step size $\sigma$ is kept below the SSP coefficient of method $M$. Otherwise, oscillations continue to appear for $t > 0$. The actual solution was plotted using the method of the characteristics and is given by
 
 \begin{equation}\label{eq5.9}
     u(t,x)  = \left\{
@@ -85,7 +85,7 @@ Figure \ref{fig5.4} shows the result of solving the discontinuous problem using 
 \begin{figure}[t!]
     \centering
     \subfloat[$\sigma = 1.97$]{\label{fig5.4a}\includegraphics[scale=0.6]{Pictures/burgers_discont_tvd.eps}}\subfloat[$\sigma = 2.2$]{\label{fig5.4b}\includegraphics[scale=0.6]{Pictures/burgers_discont_no_tvd.eps}}
-    \caption{Solution of Burger's equation with discontinuous initial data, using a $ TM^{n}R $ scheme, where $ M $ is SSPRK($ 5 $,$ 4 $,$ 2 $) method. The SSP coefficient is $ c = 1.97 $.}
+    \caption{Solution of Burger's equation with discontinuous initial data, using a $ TM^{n-2}R $ scheme, where $ M $ is SSPRK($ 5 $,$ 4 $,$ 2 $) method. The SSP coefficient is $ c = 1.97 $.}
     \label{fig5.4}
 \end{figure}
 

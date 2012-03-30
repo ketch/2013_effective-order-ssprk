@@ -29,7 +29,7 @@ the optimal SSP cofficients with respect to the those for linear problems and we
 Our aim is to find the optimal main method that has the largest possible
 SSP coefficient for nonlinear problems, for a given number of stages, effective order,
 and classical order. 
-Assume that the ESSPRK(\( s \),\( q \),\( p \)) method \( M \) has Butcher tableau  \( (A, \bm{b}) \)
+Assume that the ESSPRK($s, q, p$) method \( M \) has Butcher tableau  ($A \bm{b}^T), \bm{c}$)
 and reconsider the optimization problem~\eqref{eqSSPopt}
 with \( \Phi_{q,p}(K) \) representing  the conditions for effective order $q$ and classical order $p$.
 % \begin{equation}
@@ -145,7 +145,7 @@ classical Shu-Osher SSPRK(3,3) method \yiannistodo{cite}.
     where $ 1/6 \leq \gamma \leq 1/2 $ is a free parameter. We denote the above family as ESSPRK($4$,$3$,$2$).
 \end{theorem}
 \begin{proof}
-	Similar with Theorem~\ref{thm:ESSPRK(3,3,2)}
+	Similar with Theorem~\ref{thm:ESSPRK(3,3,2)}.
 \end{proof}
 
 As before Theorem~\ref{thm:ESSPRK(3,3,2)} gives an \emph{family} of four-stage methods.
@@ -157,7 +157,7 @@ a family in which an optimal SSPRK($s$,$3$) is a particular member.
 
 \subsubsection{Effective order four methods}\label{subsubsection3.4.2}
 
-  Second row: most of these are optimal b/c they match the linear bounds and they are at least as good as the SSPRK (they are all better except (10,4) which is equal).  Third row: still better than SSPRK.
+%  Second row: most of these are optimal b/c they match the linear bounds and they are at least as good as the SSPRK (they are all better except (10,4) which is equal).  Third row: still better than SSPRK.
 
 For effective order four most methods found are optimal because they match the linear bounds and they are at least as good as the SSPRK (they are all better except (10,4) which is equal). Unlike effective order three, here ESSPRK methods have generally larger SSP coefficients $\sspcoef$ compared to SSPRK. Also, for stages \( s > 7 \) the SSP coefficient of SSPRK(\( s \),\( 4 \),\( 2 \)) and SSPRK(\( s \),\( 4 \),\( 3 \)) are the same. In particular for four-stage methods we have the following result.
 
@@ -179,17 +179,17 @@ For effective order four most methods found are optimal because they match the l
 %\todo{possible result on ($n^2+1$, 4,2) methods: should not hold up paper waiting for this result.}
 
 
-\subsubsection{Non-existence of fifth-order schemes}\label{sec:noESSP5}
-
-There is no explicit effective order 5 SSP methods.  This is a corollary of Theorem~\ref{thm:positiveb} and the following lemma.
-
-\begin{lemma}\label{lem:ssp_pos_coef}\cite{Ruuth2002}
-  \todo{is this also in Kraaijevanger \cite{Kraaijevanger1991}?}
-  An SSPRK method
-  %with \( \alpha_{ij}, \beta_{ij} \geq 0 \)
-  %in the Shu-Osher form
-  has Butcher Tableau \( (A,\textbf{b}^{\texttt{T}},\textbf{c}) \) with positive weight coefficients \( \textbf{b} > 0 \).
-\end{lemma}
+%\subsubsection{Non-existence of fifth-order schemes}\label{sec:noESSP5}
+%
+%There is no explicit effective order 5 SSP methods.  This is a corollary of Theorem~\ref{thm:positiveb} and the following lemma.
+%
+%\begin{lemma}\label{lem:ssp_pos_coef}\cite{Ruuth2002}
+%  \todo{is this also in Kraaijevanger \cite{Kraaijevanger1991}?}
+%  An SSPRK method
+%  %with \( \alpha_{ij}, \beta_{ij} \geq 0 \)
+%  %in the Shu-Osher form
+%  has Butcher Tableau \( (A,\textbf{b}^{\texttt{T}},\textbf{c}) \) with positive weight coefficients \( \textbf{b} > 0 \).
+%\end{lemma}
 
 
 Some of the effective order SSPRK methods found are optimal among all SSPRK methods,
@@ -209,7 +209,7 @@ In all cases the SSP coefficient of the effective order SSPRK are greather than 
 Having constructed an SSPRK(\( s \),\( q \),\( p \)) scheme that can
 be used as the main method \( M \), we need to find the perturbation
 methods \( S \) and \( S^{-1} \) such that the Runge-Kutta scheme \(
-SM^{n}S^{-1} \) attains classical order $q$ (the effective order of
+S^{-1}M^{n}S \) attains classical order $q$ (the effective order of
 method \( M \)).
 
 If method $S$ advances the solution in time,
@@ -218,27 +218,22 @@ some cases.  For this reason,
 starting and finishing methods $S,S^{-1}$ are usually designed to perturb
 the solution but not advance in time.  
 A drawback of this approach is that the resulting \(
-SM^{n}S^{-1} \) Runge-Kutta scheme is not SSP. The conditions \( S^{-1}S = I \)
+S^{-1}M^{n}S \) Runge-Kutta scheme is not SSP. The conditions \( SS^{-1} = I \)
 and \( \beta_{1} = 0 \) as lead to \( \beta_{1} = \beta^{-1}_{1} = 0 \) and
 hence the methods \( S \) and \( S^{-1} \) must satisfy $\sum b_i = 0$.  Thus
-they cannot be SSP.  
-
-\todo{$SM$ or $MS$ order: this section isn't updated.}
-
-In order to overcome this problem and achieve ``bona fide'' effective order SSPRK methods we need to choose different starting and finishing methods. In the construction of \( SM^{n}S^{-1} \) Runge-Kutta schemes, we consider \( P = SM \) and \( T = MS^{-1} \) as starting and finishing methods, respectively. Then the scheme becomes \( PM^{n-2}T \), where the order conditions of methods \( P \) and \( T \) are those of \( SM \) and \( MS^{-1} \), respectively.
+they cannot be SSP.
+In order to overcome this problem and achieve ``bona fide'' effective order SSPRK methods we need to choose different starting and finishing methods. In the construction of \( S^{-1}M^{n}S \) Runge-Kutta schemes, we consider \( R = MS \) and \( T = S^{-1}M \) as starting and finishing methods, respectively. Then the scheme becomes \( TM^{n-2}R \), where the order conditions of methods \( R \) and \( T \) are those of \( MS \) and \( S^{-1}M \), respectively.
 %Hence, the new starting and finishing methods belong in the equivalent class of methods \( SM \) and \( MS^{-1} \), respectively.
-In practice, the new starting and finishing methods must be equivalent to \( SM \) and \( MS^{-1} \), respectively, up to order $q$.
- In other words if \( \rho \) and \( \tau \) are the corresponding functions in group $G_1$ of methods \( P \) and \( T \), then
-\begin{subequations} \label{eq:PT_OCs}
-\begin{align}
-    \rho(t) &= \alpha\beta(t), \quad \text{for all trees $t$ with $r(t) \leq q$,} \\
-    \tau(t) &= \beta^{-1}\alpha(t), \quad \text{for all trees $t$ with $r(t) \leq q$,}
-\end{align}
-\end{subequations}
-$$
+In practice, the new starting and finishing methods must be equivalent to \( MS \) and \( S^{-1}M \), respectively, up to order $q$.
+ In other words if \( \rho \) and \( \tau \) are the corresponding functions in group $G$ of methods \( R \) and \( T \), then
+\begin{equation} \label{eq:PT_OCs}
+    \rho(t) = \beta\alpha(t), \text{ and } \tau(t) = \alpha\beta^{-1}(t) \quad \text{for all trees $t$ with $r(t) \leq q$,}
+\end{equation}
+Therefore,
+\begin{equation} \label{eq:TM^{n-2}R_OCs}
     \rho\alpha^{n-2}\tau(t) = E(t), \quad \text{for all trees $t$ with $r(t) \leq q$,}
-$$
-and the scheme \( PM^{n-2}T \) is a method of classical order \( q \).
+\end{equation}
+and the scheme \( TM^{n-2}R \) is a method of classical order \( q \).
 
 The order conditions from \eqref{eq:PT_OCs} do not contradict the SSP
 requirements.  We can thus use the optimization procedure described in
@@ -249,12 +244,13 @@ the $\Phi_{p,q}$ in \eqref{eqSSPopt}.
 We have constructed starting and finishing schemes for each main scheme,
 with SSP coefficient at least as large as that of the main scheme.
 Table x shows the number of stages required to obtain this in each case.
+\yiannistodo{TODO}
 Table \ref{tab:essprk442-S} shows the coefficients of the starting and finishing methods for 
 ESSPRK(4,4,2).
 
 The perturbation methods have minimal computational and storage cost, in
 contrast with their large importance in raising the order of the \(
-SM^{n}S^{-1} \) scheme from low classical order to higher effective order of
+TM^{n-2}R \) scheme from low classical order to higher effective order of
 method \( M \).
 
 If accurate values are needed at any time other than the final time, the
