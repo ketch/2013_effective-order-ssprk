@@ -4,8 +4,8 @@ The effective order of a Runge--Kutta method is defined in an abstract algebraic
 context introduced by Butcher \cite{Butcher1969} and developed further in
 \cite{Butcher1972, Hairer1974, Butcher1996, Butcher1998} and others.
 In this section we follow \cite{Butcher2008_book}, reviewing the fundamental
-concepts of this representation used to define effective order methods
-and their order conditions.
+concepts of this representation which are then used to define
+effective order methods and their order conditions.
 
 
 \subsection{Formulation of the Runge--Kutta group}\label{sec:RK_group}
@@ -17,15 +17,17 @@ the successive application of two methods.
 Butcher \cite{Butcher1972} proposed the group $G$ of all real-valued maps on the
 set of rooted trees.
 Each function $\alpha \in G$ corresponds
-to an \emph{equivalence} class of Runge--Kutta methods and maps trees to specific
+to an \emph{equivalence class} of Runge--Kutta methods and maps trees to specific
 algebraic expressions in the coefficients
 of a Runge--Kutta method, known as \emph{elementary weights}.
 %The elementary weight of a tree $t$ is an algebraic expression in the coefficients
 %of a Runge--Kutta method.
-Two Runge--Kutta methods are equivalent if they have the same values for these expressions.
+Two Runge--Kutta methods are equivalent if they have the same values of these expressions.
 
 
-For every function $\alpha \in G$ we write the elementary weights as $\alpha_{i} = \alpha(t_{i})$ for trees $t_{i}$ indexed by integer $i$.
+For every function $\alpha \in G$ we write the values of the
+elementary weights as $\alpha_{i} = \alpha(t_{i})$ for trees $t_{i}$
+indexed by integer $i$.
 The infinite-length vector consisting of $\alpha_i$, $i = 0, 1, 2,\ldots$ is the B-series
 of the corresponding Runge--Kutta method and is related to Taylor expansions of the numerical solution of the Runge--Kutta method \cite{Hairer1974, Butcher2008_book}.
 Table~\ref{tab:elementaryWeights} shows these expressions up to fifth order; a recursive formulation can be found in \cite[Definition 312]{Butcher2008_book}.
@@ -35,7 +37,7 @@ Table~\ref{tab:elementaryWeights} shows these expressions up to fifth order; a r
   \centering
   \begin{tabular}{ccccccc}
     \cline{1-3}\cline{5-7}
-    $i$ & tree & elementary weight & & $i$ & tree & elementary weight \\
+    $i$ & tree $t_i$ & elementary weight & & $i$ & tree $t_i$ & elementary weight \\
     \cline{1-3}\cline{5-7} \\[-10pt]
     0 & $\emptyset$ \hspace{15pt}  & 1 & & 9 & \hspace{15pt} \tree{9} & $\bm{b}^T\bm{c}^4$\\
     1 & \hspace{15pt}  \tree{1} &$\bm{b}^T\bm{e}$ & & 10 & \tree{10} \hspace{15pt} & $\bm{b}^TC^2A\bm{c}$ \\
@@ -47,11 +49,14 @@ Table~\ref{tab:elementaryWeights} shows these expressions up to fifth order; a r
     7 & \hspace{15pt}  \tree{7} & $\bm{b}^TA\bm{c}^2$ & & 16 & \tree{16} \hspace{15pt} & $\bm{b}^TA^2\bm{c}^2$ \\
     8 & \tree{8} \hspace{15pt}  & $\bm{b}^TA^2\bm{c}$ & &  17 & \hspace{15pt} \tree{17} & $\bm{b}^TA^3\bm{c}$ \\
   \end{tabular}
-  \caption{Elementary weights of trees up to fifth order. By convention $\alpha(\emptyset) = 1$, where $t_{0} = \emptyset$ denotes the empty tree. Here matrix $C =\text{diag}(\bm{c})$.}
+  \caption{Elementary weights of trees up to fifth order.
+    % By convention $\alpha(\emptyset) = 1$, where
+    % $t_{0} = \emptyset$ denotes the empty tree.
+    % Colin removed the previous b/c there is no alpha in this table.
+    Here matrix $C =\text{diag}(\bm{c})$ and exponents of
+    vectors represent component exponentiation.}
   \label{tab:elementaryWeights}
 \end{table}
-
-%corresponding to composition of two methods,
 
 % \subsubsection*{minimalist}
 % Given $\alpha, \beta \in G$, the product can be defined on each
@@ -60,7 +65,6 @@ Table~\ref{tab:elementaryWeights} shows these expressions up to fifth order; a r
 % $\alpha\beta$ corresponds to the application of one Runge--Kutta
 % method followed by another.  This multiplicative binary operation
 % makes $G$ a group.
-
 
 
 Suppose $\alpha, \beta \in G$ correspond to Runge--Kutta methods $A$ and $B$ respectively.
@@ -84,7 +88,7 @@ where $w \lhd t$ indicates a subtree of $t$ which includes the
 root of $t$ and $w \setminus t$ indicates the forest induced
 by removing $w$ from $t$ \cite{Butcher2008_book}.
 Multiplicity in choosing $w$ must also be accounted for.
-The above operation is best understood via an example.
+The following example demonstrates the idea of this product:
 
 %\subsubsection*{longer version}
 % The group multiplicative operation $\alpha\beta$ corresponds to the
@@ -161,7 +165,7 @@ groups of $G$ \cite{Butcher2008_book}.
   Alternatively, let $\alpha \in G$ correspond to the forward Euler method and by
   \eqref{eq:Group_operation}, we have
   %\cite[Sec~382]{Butcher2008_book}, we have
-  $(\alpha^{-1}\alpha)(t_1) = \alpha(t_1) + \alpha^{-1}(t_1) = 0$,
+  $(\alpha\alpha^{-1})(t_1) = \alpha(t_1) + \alpha^{-1}(t_1) = 0$,
   so any $\alpha^{-1}$ with $\alpha^{-1}(t_1) = -1$ will do.
   For example, the forward Euler method with size $-\Delta t$ is also an
   inverse (up to order $1$).
@@ -172,18 +176,17 @@ unique and inverse methods of explicit methods need not be implicit.
 
 \subsection{Effective order}\label{sec:Effective_order}
 
-Effective order is achieved by using a starting method $S$ followed by
-a \emph{main method} $M$ %of effective order $q$
-and then a finishing method $S^{-1}$.
+Effective order is achieved by using a \emph{starting method} $S$
+followed by a \emph{main method} $M$
+and then a \emph{finishing method} $S^{-1}$.
 %: i.e., the inverse of $S$ which
 %annihilates the work of the starting method (up to order $q$).
-The methods $S$ and $S^{-1}$ make the method $M$ effectively of higher order than its classical order.
+%The methods $S$ and $S^{-1}$ make the method $M$ effectively of higher order than its classical order.
 We denote by $\alpha$ and $\beta$ the functions in group $G$ associated with the methods $M$ and $S$, respectively.
 %Thus $\beta^{-1}$ corresponds to Runge--Kutta method $S^{-1}$ that annihilates the work of the starting method $S$ (up to order $q$).
 The successive use of these three methods results in a method $P = S^{-1}MS$, of which the corresponding function in $G$ is $\beta\alpha\beta^{-1}$.
-\colintodo{Move this stuff about $O(h^{q+1})$ later with the Result?}
-For the method $P$ to be of order $q$, it must reproduce the exact solution to within $\mathcal{O}((\Dt)^{q+1})$.
-This means that the sequence of methods \( S \), \( M \) and \( S^{-1} \) moves the numerical approximation a single step forward with local truncation error \( \mathcal{O}((\Dt)^{q+1}) \).
+We want $P$ to have order $q$ whereas $M$ might have lower classical
+order $p < q$.
 In terms of functions in group $G$ this is leads to the following definition of the effective order of the Runge--Kutta method $M$.
 \begin{definition}\cite{Butcher1987_book}\label{def:Effective_order}
   % Let $\alpha$ and $\beta be the corresponding functions in $G$ of a
@@ -199,8 +202,11 @@ In terms of functions in group $G$ this is leads to the following definition of 
 The practical benefit of methods of effective order results from the
 observation that only $M$ need be used repeatedly.
 \yiannistodo{move this result ot section 5}
+\colintodo{leave here for now please}
 \begin{result}
-  With methods $M$, $S$, $S^{-1}$, and $P$ as above we have
+  Let method $M$ have effective order $q$ with associated methods $S$,
+  $S^{-1}$.  Let $P=S^{-1}MS$ then
+  %With methods $M$, $S$, $S^{-1}$, and $P$ as above we have
   $$P^n = (S^{-1}MS)^n = (S^{-1}MS) \cdots (S^{-1}MS) (S^{-1}MS)
         = S^{-1} M^n S.$$
 The starting method is applied at the beginning without advancing the
@@ -219,15 +225,12 @@ That is, the Runge--Kutta method $M$ corresponding to the function $\alpha$ must
 \emph{effective order conditions} relative to the order conditions of the
 method $S$ corresponding to the function $\beta$.
 We rewrite \eqref{eq:Effective_order_1} as
-%\begin{equation}\label{eq:Effective_order_2}
-$
-	(\alpha\beta)(t) = (\beta E)(t), \; \text{for all trees with $r(t) \leq q$,}
-$
-%\end{equation}
+$(\beta\alpha)(t) = (E\beta)(t), \; \text{for all trees with $r(t) \leq q$,}$
 and using the product operation \eqref{eq:Group_operation}, we can find expressions for each tree $t$ with $r(t) \leq q$.
 For trees up to order five these are tabulated in \cite[Table~3.89]{Butcher2008_book}
 and in Table~\ref{tab:effectiveOCs}.
-Note that all effective order methods are of at least classical order $2$.
+Note that these conditions match the classical order conditions up to
+second order.
 Note also that for the tall trees $t_1, t_4, t_8, t_{17}, \dots$ the
 effective order conditions of the main method match the classical
 order conditions \cite{Butcher2008_book}.

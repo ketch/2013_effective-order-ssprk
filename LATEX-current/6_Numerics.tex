@@ -24,7 +24,8 @@ Finally, we note that for a fixed time-step, increasing the number of stages the
 
 \begin{figure}[t!]
     \centering
-    \includegraphics[scale=0.6]{Pictures/convergence_3rd_ord.eps}\includegraphics[scale=0.6]{Pictures/convergence_4th_ord_(2).eps}
+    \includegraphics[width=0.5\textwidth]{Pictures/convergence_3rd_ord}%
+    \includegraphics[width=0.5\textwidth]{Pictures/convergence_4th_ord_(2)}
     \caption{Convergence of $TM^{n-2}R$ Runge-Kutta scheme when (a) $M$ is SSPRK($s $,$ 4 $,$ 2 $) method and (b) $ M $ is SSPRK($ s $,$ 4 $,$ 3 $) method.}
     \label{fig5.2}
 \end{figure}
@@ -51,7 +52,10 @@ The above time discretisation is SSP when coupled with Forward Euler method unde
 
 \begin{figure}[t!]
     \centering
-    \subfloat[$\sigma = 6.0$]{\label{fig5.3a}\includegraphics[scale=0.6]{Pictures/burgers_cont_tvd.eps}}\subfloat[$\sigma = 7.1$]{\label{fig5.3b}\includegraphics[scale=0.6]{Pictures/burgers_cont_no_tvd.eps}}
+    \subfloat[$\sigma = 6.0$]{\label{fig5.3a}%
+      \includegraphics[width=0.5\textwidth]{Pictures/burgers_cont_tvd}}%
+    \subfloat[$\sigma = 7.1$]{\label{fig5.3b}%
+      \includegraphics[width=0.5\textwidth]{Pictures/burgers_cont_no_tvd}}
     \caption{Solution of Burger's equation with continuous initial data, using a $ TM^{n-2}R $ scheme, where $ M $ is SSPRK($ 10 $,$ 4 $,$ 3 $). The SSP coefficient is $ c = 6.0 $.}
     \label{fig5.3}
 \end{figure}
@@ -84,8 +88,16 @@ Figure \ref{fig5.4} shows the result of solving the discontinuous problem using 
 
 \begin{figure}[t!]
     \centering
+<<<<<<< Updated upstream
     \subfloat[$\sigma = 1.97$]{\label{fig5.4a}\includegraphics[scale=0.6]{Pictures/burgers_discont_tvd.eps}}\subfloat[$\sigma = 2.2$]{\label{fig5.4b}\includegraphics[scale=0.6]{Pictures/burgers_discont_no_tvd.eps}}
     \caption{Solution of Burger's equation with discontinuous initial data, using a $ TM^{n-2}R $ scheme, where $ M $ is SSPRK($ 5 $,$ 4 $,$ 2 $) method. The SSP coefficient is $ c = 1.97 $.}
+=======
+    \subfloat[$\sigma = 1.97$]{\label{fig5.4a}%
+      \includegraphics[width=0.5\textwidth]{Pictures/burgers_discont_tvd.eps}}%
+    \subfloat[$\sigma = 2.2$]{\label{fig5.4b}%
+      \includegraphics[width=0.5\textwidth]{Pictures/burgers_discont_no_tvd.eps}}
+    \caption{Solution of Burger's equation with discontinuous initial data, using a $ TM^{n}R $ scheme, where $ M $ is SSPRK($ 5 $,$ 4 $,$ 2 $) method. The SSP coefficient is $ c = 1.97 $.}
+>>>>>>> Stashed changes
     \label{fig5.4}
 \end{figure}
 

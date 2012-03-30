@@ -1,27 +1,27 @@
-%\section{Review of SSP theory}
 \section{Strong stability preserving Runge--Kutta methods}
 \label{sec:SSP}
-%\label{subsec:SSPRK}
 
-%\todo{no downwind methods in this paper}
-
-Strong stability preserving time-stepping methods were originally used for time integration of hyperbolic conservation laws \textbf{CITE}
+Strong stability preserving time-stepping methods were originally used
+for time integration of hyperbolic conservation laws
+\cite{Shu/Osher:1988} such as
 \begin{align*}
-    U_t + f(U)_x = 0.   % not bold: scalar PDE
+    U_t + f(U)_x = 0,   % not bold: scalar PDE
 \end{align*}
+with appropriate initial and boundary conditions.
 A spatial discretization gives the system of ODEs
 \begin{align*}
     \bm{u}_{t} = \bm{F}(\bm{u}),
 \end{align*}
 where $\bm{u}$ is a vector of continuous-in-time grid values
 approximating the solution $U$ at discrete grid points and $\bm{F}$ is
-the spatial discretization of $f(U)_x$.
-% TODO: add something about F being more general than just HCL?
+the spatial discretization. % of $f(U)_x$.
+% TODO: do we need add something about F being more general than just HCL?
 A time discretization then produces a sequence of solutions
 $\bm{u}^{n} \approx \bm{u}(t_n)$.
 
-%In the particular case of hyperbolic conservation laws,
-Many popular spatial discretizations are chosen such that the solution $\bm{u}^{n}$ computed with the forward Euler scheme
+Many popular spatial discretizations are chosen such that for a
+suitable class of problems the solution $\bm{u}^{n}$ computed with the
+forward Euler scheme
 \begin{align}\label{eq:forwardEuler}
     \bm{u}^{n+1} = \bm{u}^{n} + \Dt\bm{F}(\bm{u}^{n}),
 \end{align}
@@ -37,8 +37,9 @@ $$\|\bm{u}^{n} + \Dt\bm{F}(\bm{u}^{n})\| \le \|\bm{u}^n\|,$$
 for all suitably-restricted time steps
 $0 \le \Dt \le \Dt_{\text{FE}}$,
 in a norm, seminorm, or convex functional $\|\cdot\|$ of interest.
-Then a time-stepping method is said to be \emph{strong stability preserving} with \emph{SSP coefficient} $\sspcoef$ if it generates a sequence of solution values $\bm{u}^n$ 
-such that
+Then a time-stepping method is said to be \emph{strong stability
+  preserving} with \emph{SSP coefficient} $\sspcoef > 0$ if it
+generates a sequence of solution values $\bm{u}^n$ such that
 \begin{align*}
   \|\bm{u}^{n+1}\| \le \|\bm{u}^n\|,
 \end{align*}
@@ -59,23 +60,33 @@ Note the somewhat unfortunate terminology: the word \emph{effective} here is unr
 
 
 %\subsection{Optimization of schemes}
-\subsection{Optimal SSP schemes}\label{subsec:Optimal_SSPRK}
+\subsection{Optimal SSP schemes}
+\label{subsec:Optimal_SSPRK}
 
 
 An explicit $s$-stage Runge--Kutta method generates a sequence of approximate solutions $\bm{u}^n \approx \bm{u}(t_n)$ via an update formula
-$$\bm{u}^{n+1} = \bm{u}^{n} + \Dt \sum_i^s b_i \bm{F}(\bm{Y}^j),$$
-where the $\bm{Y}^j$ are intermediate stage values computed using a similar rule
-$\bm{Y}^{i} = \bm{u}^{n} + \Dt \sum_j^s a_{ij} \bm{F}(\bm{Y}^i)$.
-This is the Butcher form of the Runge--Kutta method and the coefficients $(A,\bm{b})$ make up the Butcher tableau \cite{Butcher2008_book}.
+\begin{align*}
+\bm{u}^{n+1} &= \bm{u}^{n} + \Dt \sum_i^s b_i \bm{F}(\bm{Y}^j), \\
+\text{where} \quad \bm{Y}^{i} &= \bm{u}^{n} + \Dt \sum_j^s a_{ij} \bm{F}(\bm{Y}^i).
+\end{align*}
+For time dependent $\bm{F}$ we would also need nodes $c_i =
+\sum_j^sa_{ij}$.
+% where the $\bm{Y}^j$ are intermediate stage values.
+This is the Butcher form of the Runge--Kutta method and the
+coefficients $(A,\bm{b},\bm{c})$ make up the Butcher tableau
+\cite{Butcher2008_book}.
 For the method to obtain a certain order of accuracy, the coefficients must satisfy certain order conditions.
+For the method to be SSP, it must have a strictly positive SSP
+coefficient.
 
 We say that an SSP Runge--Kutta method is optimal if it has the largest possible SSP coefficient for a given order and a given number of stages.
 The search for these optimal methods was originally based on expressing the Runge--Kutta method as combinations of forward Euler steps (the Shu--Osher form) and solving a nonlinear optimization problem \cite{Gottlieb1998, Gottlieb2001, Spiteri2003a, Spiteri2003b, Ruuth2004}.
 %The optimization process followed is similar with the one used in \cite{Ketcheson2008, Ketcheson2009} and the search for optimal explicit Runge-Kutta methods has been explored in \cite{Gottlieb1998, Gottlieb2001, Spiteri2003a, Spiteri2003b, Ruuth2004} by using the Shu-Osher form.
 However, the SSP coefficient is related to the \emph{radius of absolute monotonicity} \cite{Kraaijevanger1991} and, for irreducible Runge--Kutta methods, the two are equivalent \cite{Ferracina2004, Higueras2004}.
 This gives an algebraic characterization of the SSP coefficient.
-The optimization problem of finding optimal SSP Runge--Kutta methods can be written in terms of the coefficients
-$(A,\bm{b})$ as follows:
+The optimization problem of finding optimal SSP Runge--Kutta methods
+can be written in terms of the coefficients $(A,\bm{b},\bm{c})$ as
+follows:
 \begin{equation}\label{eqSSPopt}
     \max_{A, \bm{b}^{\texttt{T}}, r} r, \qquad \text{subject to } \quad \left\{
                                                  \begin{array}{ll}
@@ -86,18 +97,17 @@ $(A,\bm{b})$ as follows:
                                                \right.
 \end{equation}
 Here
-\begin{equation}\label{eqKmat}
+\begin{equation*}%\label{eqKmat}
     K = \left(
             \begin{array}{c}
                      A              \\
-                     \textbf{b}^{\texttt{T}}
+                     \bm{b}^{\texttt{T}}
             \end{array}
          \right),
-\end{equation}
+\end{equation*}
 \( \bm{e}_s \) is the vector of ones of length $s$,
 and \( \Phi(K) \) represents the  order conditions.
 The inequalities are understood component-wise.
-
 Following \cite{Ketcheson2008, Ketcheson2009}, we will use this optimization problem to perform a numerical search for optimal SSP Runge--Kutta methods.
 We first need to define the order conditions $\Phi(K)$ for methods of effective order.
 
