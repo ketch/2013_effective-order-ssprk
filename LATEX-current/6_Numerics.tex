@@ -13,7 +13,7 @@ and exact solution
     u(t) = 10/(15t + 1).
 \end{equation}
 We solve the initial value problem \eqref{eq5.3} and \eqref{eq5.4} using an ESSPRK-scheme where $M$ is a $q$-effective order SSPRK method for $q = 3, 4$. 
-Method $M$ was found by solving the optimisation problem \eqref{eq5.2} and the starting and finishing methods were found by solving the problem \eqref{eq5.3}. 
+Method $M$ was found by solving the optimization problem \eqref{eq5.2} and the starting and finishing methods were found by solving the problem \eqref{eq5.3}. 
 The stages of the permutation methods were kept as low as possible, thus we use two stages for a 3-effective order method $M$ and four stages for a 4-effective order method. 
 The solution is computed for $N = 50.2^{k}$ for $k = 0, 1, 2, \dots, 6$ and hence the time-step used is $\Dt = \frac{1}{N} = \frac{2^{1-N}}{100}$ for each computation. 
 The error between the exact solution and the approximation with respect to time-step is shown in Figures \ref{fig5.1} and \ref{fig5.2} on a logarithmic scale. \yiannistodo{Update pictures, correct legends, axis, etc.}
