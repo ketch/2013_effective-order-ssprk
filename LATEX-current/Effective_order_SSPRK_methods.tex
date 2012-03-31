@@ -1,44 +1,42 @@
 \documentclass[10pt,a4paper,oneside]{article}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	Preamble	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Preamble %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
 
 %%% packages %%%
 \usepackage{amsmath,amssymb,amsfonts,amsthm}
-\usepackage{enumerate,cite}
-%\usepackage[toc,page]{appendix}
-%\usepackage{diagrams}
-%\usepackage[pdftex]{graphicx}
-\usepackage{multirow}
-\usepackage{url}
-%\usepackage{nomencl}
 \usepackage[usenames,dvipsnames]{color}
+\usepackage[dvips]{graphicx} % [pdftex]
+\usepackage{pstricks,pst-node,pst-tree}
+\usepackage{bm}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{enumerate,cite}
+\usepackage{url}
 \usepackage{array}
 \usepackage{arydshln}
-\usepackage[dvips]{graphicx}
-\usepackage{pstricks,pst-node,pst-tree}
-%\usepackage{cm-super}
-%\usepackage{ifthen}
 \usepackage{subfig}
-\usepackage{caption}
+\usepackage{caption} % [font=small,format=plain,labelfont=bf,up,textfont=it,up]
 \usepackage{verbatim}
-%\usepackage{maplestd2e}
 \usepackage{slashbox}
-%\usepackage[numbered]{mcode}
-%\usepackage{rotating}
 \usepackage{booktabs}
-%\usepackage[font=small,format=plain,labelfont=bf,up,textfont=it,up]{caption}
-%\usepackage{epsfig}
-\usepackage{graphicx}
-\usepackage{bm}
-%\usepackage{calc}
-%\usepackage{pbox}
-\usepackage{multicol}
 \usepackage{xkeyval}
 \usepackage[textsize=footnotesize]{todonotes}
+\definecolor{lightgray}{gray}{0.5}
 \definecolor{darkred}{rgb}{.6,0,0}
 \definecolor{darkblue}{rgb}{0,0,0.5}
 \usepackage[colorlinks=true,citecolor=darkblue,urlcolor=darkblue,linkcolor=darkred]{hyperref}
-
+%\usepackage[toc,page]{appendix}
+%\usepackage{diagrams}
+%\usepackage{nomencl}
+%\usepackage{cm-super}
+%\usepackage{ifthen}
+%\usepackage{maplestd2e}
+%\usepackage[numbered]{mcode}
+%\usepackage{rotating}
+%\usepackage{epsfig}
+%\usepackage{calc}
+%\usepackage{pbox}
 
 %%% Page layout %%%
 \setlength{\textwidth}{157mm}   
@@ -49,16 +47,12 @@
 \setlength{\marginparwidth}{35mm}
 
 %%% Page style %%%
-%\pagestyle{plain}
-
-%%% New environments %%%
-\newenvironment{biggertrees}{%
-    \psset{treesep=3ex,levelsep=3ex,treemode=U,showbbox=false}
-    \renewcommand\psedge{\ncline[linewidth=1.0pt]}
-    \renewcommand{\Ts}{\Tdot[dotstyle=*,dotscale=1.1]}
-}{}
+\pagestyle{plain}
 
 %%% New commands %%%
+\newcommand{\sspcoef}{\mathcal{C}}
+\newcommand{\ceff}{\sspcoef_{\text{eff}}}
+\newcommand{\clin}{\sspcoef_{\text{lin}}}
 \newcommand{\pd}[2]{\frac{\partial{#1}}{\partial{#2}}}
 \newcommand{\pdseconda}[2]{\frac{\partial^2{#1}}{\partial{{#2}^2}}}
 \newcommand{\pdsecondb}[3]{\frac{\partial^2{#1}}{\partial{#2}\partial{#3}}}
@@ -72,13 +66,8 @@
 \newcommand{\colincomment}[1]{\textcolor{blue}{\\\textbf{\footnotesize #1}\\}}
 \newcommand{\davidcomment}[1]{\textcolor{red}{\\\textbf{\footnotesize #1}\\}}
 \newcommand{\yianniscomment}[1]{\textcolor{OliveGreen}{\\\textbf{\footnotesize #1}\\}}
-\newcommand{\prevtext}[1]{\begin{minipage}{140mm}
-															{\footnotesize\newline\underline{Previous text}:\\#1}
-												 \end{minipage}}
-%\newcommand{\todo}[1]{\textbf{\red #1}}
-\newcommand{\sspcoef}{\mathcal{C}}
-\newcommand{\ceff}{\sspcoef_{\text{eff}}}
-\newcommand{\clin}{\sspcoef_{\text{lin}}}
+
+%%% Renew commands %%%
 \renewcommand{\newline}{\vspace{10pt}}
 \renewcommand{\comment}[1]{\textcolor{gray}{\\#1\\}}
 \renewcommand{\indent}{\hspace{15pt}}
@@ -88,99 +77,93 @@
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{example}[theorem]{Example}
 \newtheorem{lemma}[theorem]{Lemma}
-%\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{result}[theorem]{Result}
 \newtheorem{remark}{Remark}
 
 %%% Miscellaneous %%%
-%\setcounter{secnumdepth}{3}
-%\setcounter{tocdepth}{3}
-%\setcounter{table}{0}
+\numberwithin{theorem}{section}
+\numberwithin{equation}{section}
+\numberwithin{table}{section}
+\numberwithin{figure}{section}
+\newcolumntype{M}[1]{>{\vspace{2pt}\centering\hspace{0pt}\vspace{2pt}}m{#1}}
 %\numberwithin{theorem}{section}
 %\numberwithin{equation}{section}
 %\numberwithin{definition}{section}
-\numberwithin{theorem}{section}
 %\numberwithin{example}{section}
-\numberwithin{table}{section}
-\numberwithin{figure}{section}
-\numberwithin{equation}{section}
-\newcolumntype{M}[1]{>{\vspace{2pt}\centering\hspace{0pt}\vspace{2pt}}m{#1}}
-\definecolor{lightgray}{gray}{0.5}
-%\makenomenclature
+%\setcounter{secnumdepth}{3}
+%\setcounter{tocdepth}{3}
+%\setcounter{table}{0}
 %\baselineskip=18pt plus1pt
+%\makenomenclature
 
-
-
-
+%%% General info %%%
 \title{Effective order strong stability preserving Runge--Kutta methods}
-
-\author{%
-  Yiannis Hadjimichael\footnote{ 4700 King Abdullah University of
-    Science \& Technology, Thuwal 23955, Saudi Arabia
-    (\url{yiannis.hadjimichael@kaust.edu.sa},
-    \url{david.ketcheson@kaust.edu.sa}).  The work of these authors
-    was supported by funding from King Abdullah University of Science
-    and Technology (KAUST).  } \and
-  %
-  Colin B.~Macdonald\thanks{Mathematical Institute, University of
-    Oxford, OX1\,3LB, UK (\url{macdonald@maths.ox.ac.uk}).  The work
-    of this author was supported by NSERC Canada and by Award No
-    KUK-C1-013-04 made by King Abdullah University of Science and
-    Technology (KAUST).} \and
-  %
-  David I.~Ketcheson\footnotemark[1] \and
-  %
-  J.~H.~Verner\thanks{Department of Mathematics, Simon Fraser
-    University, Burnaby, British Columbia, V5A\,1S6 Canada
-    (\url{jverner@pims.math.ca}).  The work of this author was
-    supported by a grant from NSERC Canada.}  }
+\author{
+	Yiannis Hadjimichael\footnote{4700 King Abdullah University of Science \& Technology, 
+	Thuwal 23955, Saudi Arabia (\url{yiannis.hadjimichael@kaust.edu.sa}). The majority of 	
+	the work of this author was made during his MSc studies in University of Oxford.}		 
+    	\and 
+    	Colin B.~Macdonald\thanks{Mathematical Institute, University of Oxford, OX1\,3LB, UK 
+    	(\url{macdonald@maths.ox.ac.uk}). The work of this author was supported by NSERC 
+    	Canada and by Award No KUK-C1-013-04 made by King Abdullah University of Science 
+    	and Technology (KAUST).} 
+    	\and 
+    	David I.~Ketcheson\thanks{4700 King Abdullah University of Science \& Technology, 
+	Thuwal 23955, Saudi Arabia (\url{david.ketcheson@kaust.edu.sa}). The work of this 
+	author was supported by funding from King Abdullah University of Science and 
+	Technology (KAUST).\textbf{\textcolor{red}{GRAND?}}}
+    	\and 
+    	J.~H.~Verner\thanks{Department of Mathematics, Simon Fraser University, Burnaby, 
+    	British Columbia, V5A\,1S6 Canada (\url{jverner@pims.math.ca}). The work of this 	
+    	author was supported by a grant from NSERC Canada.}
+}
 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		Actual document		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Main document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
 
-\maketitle
+	\maketitle
+	
+	%%% Supporting macros %%%
+	\input{trees} % creates trees
+	
+	\begin{abstract}
+  		In this work we apply the algebraic theory of Runge--Kutta methods
+  		and specifically the concept of effective order to strong stability
+  		preserving Runge--Kutta methods. These methods of effective order
+  		satisfy relaxed order conditions when combined with special starting
+  		and stopping methods. We construct such methods up to effective
+  		order four and establish their optimality (many methods achieve a
+  		previously theoretical upper bound on the SSP coefficient). In
+  		particular, we present four-stage effective order four SSP RK
+  		methods which is not possible with four stages using classical
+  		order. Numerical experiments demonstrate the feasibility of
+  		effective order in practice. We prove that methods of effective
+  		order five cannot have strictly positive weights $b$. A direct
+  		corollary is the non-existence of effective order five SSP methods.
+	\end{abstract}
 
-\input{trees} % creates trees
+	%%% Main body %%%
+	\input{1_Intro}
+	\input{2_SSP}
+	\input{3_Algebraic_RK}
+	\input{4_ExRK_barrier}
+	\input{5_Optimal_ESSPRK}
+	\input{6_Numerics}
+	\input{7_Conclusion}
 
-\begin{abstract}
-  In this work we apply the algebraic theory of Runge--Kutta methods
-  and specifically the concept of effective order to strong stability
-  preserving Runge--Kutta methods.  These methods of effective order
-  satisfy relaxed order conditions when combined with special starting
-  and stopping methods.  We construct such methods up to effective
-  order four and establish their optimality (many methods achieve a
-  previously theoretical upper bound on the SSP coefficient).  In
-  particular, we present four-stage effective order four SSP RK
-  methods which is not possible with four stages using classical
-  order.  Numerical experiments demonstrate the feasibility of
-  effective order in practice.  We prove that methods of effective
-  order five cannot have strictly positive weights $b$.  A direct
-  corollary is the non-existence of effective order five SSP methods.
-\end{abstract}
+	%\section*{Acknowledgments}{
+	%The second author thanks Jim Verner for introducing him to this
+	%problem and for his support over the years.
+	%}
 
-
-\input{1_Intro}
-\input{2_SSP}
-\input{3_Algebraic_RK}
-\input{4_ExRK_barrier}
-\input{5_Optimal_ESSPRK}
-\input{6_Numerics}
-\input{7_Conclusion}
-
-
-%\section*{Acknowledgments}
-%The second author thanks Jim Verner for introducing him to this
-%problem and for his support over the years.
-
-
-%\appendix
-%\include{AppendixA}
-
-\bibliographystyle{acm} %apalike
-\bibliography{bibliography}
+	%%% Appendix and Bibliography %%%
+	%\appendix
+	%\include{AppendixA}
+	\bibliographystyle{acm} %apalike
+	\bibliography{bibliography}
 
 \end{document}
