@@ -78,7 +78,6 @@ $BA$.\footnote{We write $BA$ to mean method $A$ followed by method $B$
   (following matrix and operator ordering convention) but we use the
   ordering $\alpha\beta$ to match the convention in
   \cite{Butcher2008_book}.}
-\colintodo{clean up paper: want $\alpha\beta$ and $MS$.}
 %Runge--Kutta method followed by another.
 The product is defined by
 \begin{equation}\label{eq:Group_operation}
@@ -202,7 +201,7 @@ In terms of functions in group $G$ this is leads to the following definition of 
 The practical benefit of methods of effective order results from the
 observation that only $M$ need be used repeatedly.
 \yiannistodo{move this result ot section 5}
-\colintodo{leave here for now please}
+\colintodo{leave here for now please.  Could call it something other than ``Result''}
 \begin{result}
   Let method $M$ have effective order $q$ with associated methods $S$
   and $S^{-1}$.  Let $P=S^{-1}MS$ then
@@ -229,6 +228,8 @@ $(\beta\alpha)(t) = (E\beta)(t), \; \text{for all trees with $r(t) \leq q$,}$
 and using the product operation \eqref{eq:Group_operation}, we can find expressions for each tree $t$ with $r(t) \leq q$.
 For trees up to order five these are tabulated in \cite[Table~3.89]{Butcher2008_book}
 and in Table~\ref{tab:effectiveOCs}.
+In general, the effective order conditions have more degrees of
+freedom than the classical order conditions.
 Note that these conditions match the classical order conditions up to
 second order.
 Note also that for the tall trees $t_1, t_4, t_8, t_{17}, \dots$ the
@@ -338,8 +339,6 @@ this assumption).
 \end{table}
 
 
-\begin{example}\label{ex:Effective_RK32}
-\colintodo{remove this example?}
-\yiannistodo{I think yes and incluse the remarks made here in subsection 3.4}
-	Constructing an $s$-stage method of effective order 3 with classical order 2 requires satisfying the three conditions given in Table~\ref{tab:Effective_oc}. This is one less condition than constructing a method with classical order 3, since $\alpha_3$ is here a free parameter. After choosing a method and thus a value for $\alpha_3$, the order conditions for the starting method are now fixed as well.
-\end{example}
+% \begin{example}\label{ex:Effective_RK32}
+% Constructing an $s$-stage method of effective order 3 with classical order 2 requires satisfying the three conditions given in Table~\ref{tab:Effective_oc}. This is one less condition than constructing a method with classical order 3, since $\alpha_3$ is here a free parameter. After choosing a method and thus a value for $\alpha_3$, the order conditions for the starting method are now fixed as well.
+% \end{example}

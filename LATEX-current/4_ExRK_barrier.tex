@@ -24,14 +24,14 @@ just reading the proof.}
 %These results are established as follows.
 
 \begin{theorem}\label{thm:positiveb}
-    Let $M$ denote a Runge--Kutta method with positive weights: $b>0$.
+    Let $M$ denote a Runge--Kutta method with positive weights: $\bm{b}>0$.
     Then $M$ has effective order of at most four.
 \end{theorem}
-The proof of Theorem~\ref{thm:positiveb} is deferred to the appendix.
+The proof of Theorem~\ref{thm:positiveb} is given below.
 
 \begin{lemma}\label{lem:positiveb}(see \cite[Theorem~4.2]{Kraaijevanger1991},\cite[Lemma 4.2]{Ruuth2002})
 Let $M$ denote an irreducible Runge--Kutta method with $\sspcoef>0$.  Then $M$ has positive weights:
-$b>0$.
+$\bm{b}>0$.
 \end{lemma}
 
 \begin{corollary}\label{cor:no-ssp-5}
@@ -48,7 +48,7 @@ This follows immediately from Theorem~\ref{thm:positiveb} and Lemma~\ref{lem:pos
 
 The proof of Theorem \ref{thm:positiveb} makes use of the following lemma.
 \begin{lemma}\label{Davids_lemma}
-	Let $b,v \in \mathbb{R}^{n}$ be given such that
+	Let $\bm{b},\bm{v} \in \mathbb{R}^{n}$ be given such that
     \begin{subequations}\label{eq:DavidsLemma}
     		\begin{align}
     			b_i & > 0 \mbox{ for all } i, \label{eq:DavidsLemma_a} \\
@@ -152,7 +152,7 @@ Together with \eqref{eq:DavidsLemma_a}, this implies that \( v_{i} = v_{j} \) fo
     \begin{equation}\label{eq4.6}
         \bm{b}^{T}\bm{w} = 0.
     \end{equation}
-    Since $b>0$, then \eqref{eq4.6} implies that either \( \bm{w} = \bm{0} \),
+    Since $\bm{b}>0$, then \eqref{eq4.6} implies that either \( \bm{w} = \bm{0} \),
     or there is a least one negative and at least one positive element in \( \bm{w} \).
 
 \paragraph{Case 1: \( \bm{w} = \bm{0} \).}
