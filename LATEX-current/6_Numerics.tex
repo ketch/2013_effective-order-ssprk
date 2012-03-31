@@ -60,7 +60,7 @@ The above time discretisation is SSP when coupled with Forward Euler method unde
     \label{fig5.3}
 \end{figure}
 
-Burger's equation was solved using an ESSPRK-scheme with time-step restriction $\Dt \leq \sigma{\Dt}_{FE}$, where $\sigma$ indicates the size of the time step. Figure \ref{fig5.3} shows that if $\sigma$ stays below the SSP coefficient of the method $M$, then no oscillations are observed. If this stability limit is violated, then oscillations appear. \yianniscomment{Elaborate more: Sharpness of SSP coefficient} We were able to determine when exactly the nonlinear stability is not satisfied by computing the the total-variation (TV) norm at each step of the computation process. This indicates that the ESSPRK-scheme inherits the time-step restriction from the SSP coefficient of the main method $M$.
+Burger's equation was solved using an ESSPRK-scheme with time-step restriction $\Dt \leq \sigma{\Dt}_{FE}$, where $\sigma$ indicates the size of the time step. Figure \ref{fig5.3} shows that if $\sigma$ stays below the SSP coefficient of the method $M$, then no oscillations are observed. If this stability limit is violated, then oscillations appear. \yiannistodo{Elaborate more: Sharpness of SSP coefficient} We were able to determine when exactly the nonlinear stability is not satisfied by computing the the total-variation (TV) norm at each step of the computation process. This indicates that the ESSPRK-scheme inherits the time-step restriction from the SSP coefficient of the main method $M$.
 \newline
 
 We also consider Burger's equation with discontinuous data

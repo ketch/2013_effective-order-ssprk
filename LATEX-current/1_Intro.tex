@@ -1,10 +1,14 @@
 \section{Introduction}\label{sec:Intro}
 
-The solutions of nonlinear hyperbolic partial differential equations (PDEs) contain discontinuities propagating at finite speeds, even when the initial conditions are smooth.
-The challenge of the numerical solution of these systems is twofold.
-It is desirable that the approximation is of high accuracy in regions where the solution is smooth and that the discontinuities are captured without exhibiting any oscillations or overshoots.
+The solutions of nonlinear hyperbolic partial differential equations (PDEs) contain 
+discontinuities propagating at finite speeds, even when the initial conditions are smooth.
+The challenge of the numerical solution of these systems is twofold. 
+It is desirable that the approximation is of high accuracy in regions where the solution is 
+smooth and that the discontinuities are captured without exhibiting any oscillations or 
+overshoots. 
 
-Many numerical methods are based on a method-of-lines approach where the problem is first discretized with a spatial discretization to yield a system of ODEs.
+Many numerical methods are based on a method-of-lines approach where the problem is first 
+discretized with a spatial discretization to yield a system of ODEs.
 The spatial discretization is often chosen to ensure certain strong stability properties of the original PDE problem (e.g., max-norm monotonicity, free of oscillations, positivity, etc {\bf [One cite each]}) are preserved \emph{when coupled with first-order Forward Euler time integration}.
 Often the combination is subject to a time step size restriction.
 Strong stability preserving (SSP) time discretizations (formerly TVD
