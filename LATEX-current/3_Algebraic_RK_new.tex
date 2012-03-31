@@ -204,16 +204,16 @@ observation that only $M$ need be used repeatedly.
 \yiannistodo{move this result ot section 5}
 \colintodo{leave here for now please}
 \begin{result}
-  Let method $M$ have effective order $q$ with associated methods $S$,
-  $S^{-1}$.  Let $P=S^{-1}MS$ then
-  %With methods $M$, $S$, $S^{-1}$, and $P$ as above we have
+  Let method $M$ have effective order $q$ with associated methods $S$
+  and $S^{-1}$.  Let $P=S^{-1}MS$ then
   $$P^n = (S^{-1}MS)^n = (S^{-1}MS) \cdots (S^{-1}MS) (S^{-1}MS)
         = S^{-1} M^n S.$$
 The starting method is applied at the beginning without advancing the
 solution.
 Instead, it introduces a perturbation on the solution.
-The main method \( M \) is then used \( n \) times and finally the
+The main method \( M \) is then used for \( n \) time steps and finally the
 finishing method is used to correct the solution.
+%Notably, if the classical order of $M$ is $p < q$, (insert local truncation error bit)...
 \end{result}
 
 
