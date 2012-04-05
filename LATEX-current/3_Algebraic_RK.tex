@@ -29,34 +29,30 @@ For every function $\alpha \in G$ we write the values of the
 elementary weights as $\alpha_{i} = \alpha(t_{i})$ for trees $t_{i}$
 indexed by integer $i$.
 The infinite-length vector consisting of $\alpha_i$, $i = 0, 1, 2,\ldots$ is the B-series
-of the corresponding Runge--Kutta method and is related to Taylor expansions of the numerical solution of the Runge--Kutta method \cite{Hairer1974, Butcher2008_book}.
-Table~\ref{tab:elementaryWeights} shows these expressions up to fifth order; a recursive formulation can be found in \cite[Definition 312]{Butcher2008_book}.
+of the corresponding Runge--Kutta method and is related to Taylor expansions of the numerical solution of the Runge--Kutta method \cite{Hairer1974, Butcher2008_book}. 
+By convention $\alpha(t_{0}) = 1$, where $t_{0}$ denotes the empty tree. 
+Table~\ref{tab:elementary_weights} shows these expressions up to fifth order; a recursive formulation can be found in \cite[Definition 312]{Butcher2008_book}. 
 
 \begin{table}
-  \centering
-  \begin{smalltrees}
-  \begin{tabular}{ccccccc}
-    \cline{1-3}\cline{5-7}
-    $i$ & tree $t_i$ & elementary weight & & $i$ & tree $t_i$ & elementary weight \\
-    \cline{1-3}\cline{5-7} \\[-10pt]
-    0 & $\emptyset$ \hspace{15pt}  & 1 & & 9 & \hspace{15pt} \tree{9} & $\bm{b}^T\bm{c}^4$\\
-    1 & \hspace{15pt}  \tree{1} &$\bm{b}^T\bm{e}$ & & 10 & \tree{10} \hspace{15pt} & $\bm{b}^TC^2A\bm{c}$ \\
-    2 & \tree{2} \hspace{15pt}  &$\bm{b}^T\bm{c}$ & & 11 & \hspace{15pt} \tree{11} & $\bm{b}^TCA\bm{c}^2$ \\
-    3 & \hspace{15pt}  \tree{3} & $\bm{b}^T\bm{c}^2$ & & 12 & \tree{12} \hspace{15pt} & $\bm{b}^TCA^2\bm{c}$ \\
-    4 & \tree{4} \hspace{15pt}  & $\bm{b}^TA\bm{c}$ & & 13 & \hspace{15pt} \tree{13} & $\bm{b}^T(A\bm{c})^2$ \\
-    5 & \hspace{15pt}  \tree{5} & $\bm{b}^T\bm{c}^3$ & & 14 & \tree{14} \hspace{15pt} & $\bm{b}^TA\bm{c}^3$ \\
-    6 & \tree{6} \hspace{15pt}  & $\bm{b}^TCA\bm{c}$ & & 15 & \hspace{15pt} \tree{15} & $\bm{b}^TACA\bm{c}$ \\
-    7 & \hspace{15pt}  \tree{7} & $\bm{b}^TA\bm{c}^2$ & & 16 & \tree{16} \hspace{15pt} & $\bm{b}^TA^2\bm{c}^2$ \\
-    8 & \tree{8} \hspace{15pt}  & $\bm{b}^TA^2\bm{c}$ & &  17 & \hspace{15pt} \tree{17} & $\bm{b}^TA^3\bm{c}$ \\
-  \end{tabular}
+	\centering
+	\begin{smalltrees}
+		\begin{tabular}{ccccccc}
+    		\cline{1-3}\cline{5-7}
+    		$i$ & tree $t_i$ & elementary weight & & $i$ & tree $t_i$ & elementary weight \\
+    		\cline{1-3}\cline{5-7} \\[-10pt]
+    		0 & $\emptyset$ \hspace{15pt}  & 1 & & 9 & \hspace{15pt} \tree{9} & $\bm{b}^T\bm{c}^4$\\
+    		1 & \hspace{15pt}  \tree{1} &$\bm{b}^T\bm{e}$ & & 10 & \tree{10} \hspace{15pt} & $\bm{b}^TC^2A\bm{c}$ \\
+    		2 & \tree{2} \hspace{15pt}  &$\bm{b}^T\bm{c}$ & & 11 & \hspace{15pt} \tree{11} & $\bm{b}^TCA\bm{c}^2$ \\
+    		3 & \hspace{15pt}  \tree{3} & $\bm{b}^T\bm{c}^2$ & & 12 & \tree{12} \hspace{15pt} & $\bm{b}^TCA^2\bm{c}$ \\
+    		4 & \tree{4} \hspace{15pt}  & $\bm{b}^TA\bm{c}$ & & 13 & \hspace{15pt} \tree{13} & $\bm{b}^T(A\bm{c})^2$ \\
+    		5 & \hspace{15pt}  \tree{5} & $\bm{b}^T\bm{c}^3$ & & 14 & \tree{14} \hspace{15pt} & $\bm{b}^TA\bm{c}^3$ \\
+    		6 & \tree{6} \hspace{15pt}  & $\bm{b}^TCA\bm{c}$ & & 15 & \hspace{15pt} \tree{15} & $\bm{b}^TACA\bm{c}$ \\
+    		7 & \hspace{15pt}  \tree{7} & $\bm{b}^TA\bm{c}^2$ & & 16 & \tree{16} \hspace{15pt} & $\bm{b}^TA^2\bm{c}^2$ \\
+    		8 & \tree{8} \hspace{15pt}  & $\bm{b}^TA^2\bm{c}$ & &  17 & \hspace{15pt} \tree{17} & $\bm{b}^TA^3\bm{c}$ \\
+  		\end{tabular}
   \end{smalltrees}
-  \caption{Elementary weights of trees up to fifth order.
-    % By convention $\alpha(\emptyset) = 1$, where
-    % $t_{0} = \emptyset$ denotes the empty tree.
-    % Colin removed the previous b/c there is no alpha in this table.
-    Here matrix $C =\text{diag}(\bm{c})$ and exponents of
-    vectors represent component exponentiation.}
-  \label{tab:elementaryWeights}
+  \caption{Elementary weights of trees up to fifth order for a Runge--Kutta method $(A,\bm{b})$. Here $C$ is a diagonal matrix with components $c_i = \sum_j^s a_{ij}$ and exponents of vectors represent component exponentiation.}
+  \label{tab:elementary_weights}
 \end{table}
 
 % \subsubsection*{minimalist}
@@ -276,15 +272,16 @@ order conditions \cite{Butcher2008_book}.
         \vfill
     \end{multicols}
     \caption{Effective order five conditions of the main and starting methods $M$ and $S$.}
-    \label{tab:effectiveOCs}
+    \label{tab:effective_OCs_on_alpha}
 \end{table}
 Finally, we use the abbreviation RK($s$,$q$,$p$) for an $s$-stage Runge-Kutta method of effective order $q$ and classical order $p$.
+\yiannistodo{We can remove this line. We don't use this notation further in the text.}
 
 
 \subsection{Constructing effective order methods}
 The approach we adopt is to consider the $\beta_{i}$ as free
 parameters when determining the $\alpha_i$.
-The relationship in Table~\ref{tab:effectiveOCs} between the
+The relationship in Table~\ref{tab:effective_OCs_on_alpha} between the
 $\alpha_i$ and $\beta_i$ is mostly linear (although there are a few
 $\beta_2^2$ terms).
 It is thus straightforward to isolate the equations for $\alpha_i$,
@@ -305,13 +302,13 @@ $\beta_i$ (see \cite[Table~386(III)]{Butcher2008_book}).
 Note that we follow the common convention is to set $\beta_1=0$
 \cite{Butcher2008_book}, i.e., the starting and finishing methods
 perturb the solution but do not advance the solution in time
-(Tables~\ref{tab:effectiveOCs} and~\ref{tab:Effective_oc} both make
+(Tables~\ref{tab:effective_OCs} and~\ref{tab:Effective_oc} both make
 this assumption).
-
 
 \begin{table}[htb]
 	\centering
     \begin{tabular}{M{2mm}|M{2mm}|M{68mm}|M{67mm}}
+    		\hline
         q & p & Order conditions for the main method $M$ & Order conditions for the starting method $S$ \nline
         \hline
         \multirow{1}{*}{3} & \multirow{1}{*}{2} & {\small $\alpha_1 = 1$, $\alpha_2 = \frac{1}{2}$, $\alpha_4 = \frac{1}{6}$.} & {\small $\beta_1 = 0$, $\beta_2 = - \frac{1}{6} + \frac{1}{2}\alpha_3$.}\nline
@@ -344,7 +341,7 @@ this assumption).
         & & {\small $\frac{1}{60} - \alpha_{11} + 2\alpha_{12} - \alpha_{16} = 0$.} & {\small $\beta_8 = -\frac{1}{120} + \frac{1}{8}\alpha_9 - \frac{1}{2}\alpha_{10} + \alpha_{12}$.} \nline
     \end{tabular}
     \caption{Effective order $q$, classical order $p$ conditions on $ \alpha $ and $ \beta $ for the main and starting methods, $M$ and $S$ respectively.}
-    \label{tab:Effective_oc}
+    \label{tab:effective_OCs}
 \end{table}
 
 

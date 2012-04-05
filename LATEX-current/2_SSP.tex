@@ -66,14 +66,14 @@ Note the somewhat unfortunate terminology: the word \emph{effective} here is unr
 
 An explicit $s$-stage Runge--Kutta method generates a sequence of approximate solutions $\bm{u}^n \approx \bm{u}(t_n)$ via an update formula
 \begin{align*}
-\bm{u}^{n+1} &= \bm{u}^{n} + \Dt \sum_i^s b_i \bm{F}(\bm{Y}^j), \\
-\text{where} \quad \bm{Y}^{i} &= \bm{u}^{n} + \Dt \sum_j^s a_{ij} \bm{F}(\bm{Y}^i).
+\bm{u}^{n+1} &= \bm{u}^{n} + \Dt \sum_i^s b_i \bm{F}(\bm{Y}_j), \\
+\text{where} \quad \bm{Y}_{i} &= \bm{u}^{n} + \Dt \sum_j^s a_{ij} \bm{F}(\bm{Y}_i).
 \end{align*}
 For time dependent $\bm{F}$ we would also need nodes $c_i =
 \sum_j^sa_{ij}$.
 % where the $\bm{Y}^j$ are intermediate stage values.
 This is the Butcher form of the Runge--Kutta method and the
-coefficients $(A,\bm{b},\bm{c})$ make up the Butcher tableau
+coefficients $(A,\bm{b})$ make up the Butcher tableau
 \cite{Butcher2008_book}.
 For the method to obtain a certain order of accuracy, the coefficients must satisfy certain order conditions.
 For the method to be SSP, it must have a strictly positive SSP
@@ -85,10 +85,10 @@ The search for these optimal methods was originally based on expressing the Rung
 However, the SSP coefficient is related to the \emph{radius of absolute monotonicity} \cite{Kraaijevanger1991} and, for irreducible Runge--Kutta methods, the two are equivalent \cite{Ferracina2004, Higueras2004}.
 This gives an algebraic characterization of the SSP coefficient.
 The optimization problem of finding optimal SSP Runge--Kutta methods
-can be written in terms of the coefficients $(A,\bm{b},\bm{c})$ as
+can be written in terms of the coefficients $(A,\bm{b})$ as
 follows:
-\begin{equation}\label{eqSSPopt}
-    \max_{A, \bm{b}^{\texttt{T}}, r} r, \qquad \text{subject to } \quad \left\{
+\begin{equation}\label{eq:SSP_opt}
+    \max_{A, \bm{b}, r} r, \qquad \text{subject to } \quad \left\{
                                                  \begin{array}{ll}
                                                    K(I + rA)^{-1} \geq 0 \\
                                                    \bm{e}_{s+1} - rK(I + rA)^{-1}\bm{e}_{s} \geq 0 \\
@@ -97,7 +97,7 @@ follows:
                                                \right.
 \end{equation}
 Here
-\begin{equation*}%\label{eqKmat}
+\begin{equation*}
     K = \left(
             \begin{array}{c}
                      A              \\
@@ -105,22 +105,19 @@ Here
             \end{array}
          \right),
 \end{equation*}
-\( \bm{e}_s \) is the vector of ones of length $s$,
+$\bm{e}_s$ denotes the vector of ones of length $s$,
 and \( \Phi(K) \) represents the  order conditions.
 The inequalities are understood component-wise.
-Following \cite{Ketcheson2008, Ketcheson2009}, we will use this optimization problem to perform a numerical search for optimal SSP Runge--Kutta methods.
-We first need to define the order conditions $\Phi(K)$ for methods of effective order.
 
-% Yiannis moved it back to Section 5, so comment out here.
-% Useful upper bounds for the optimization problem \eqref{eqSSPopt} can be obtained
-% by considering an important relaxation.  In the relaxed problem, the method is
-% required to be accurate and strong stability preserving only for linear,
-% constant-coefficient initial value problems.  This leads to a reduced set of
-% order conditions and a reduced set of absolute monotonicity conditions.  We
-% denote the resulting optimal value by $\clin$; clearly for any method
-% $$\sspcoef\le\clin.$$
-% Exact optimal values of $\clin$ are known for many classes of methods; see
-% \cite{Kraaijevanger1986,ketcheson2009a}.
+Useful upper bounds for the above optimization problem can be obtained by consider an important relaxation. 
+In the relaxed problem, the method is required to be accurate and strong stability preserving only for linear, constant-coefficient initial value problems. 
+This leads to a reduced set of order conditions and a reduced set of absolute monotonicity conditions.
+We denote the resulting optimal value by $\clin$; clearly for any method
+\begin{equation*}
+	\sspcoef\le\clin.
+\end{equation*}
+Exact optimal values of $\clin$ are known for many classes of methods; for example see \cite{Kraaijevanger1986,ketcheson2009a}.
 
-
-
+Following \cite{Ketcheson2008, Ketcheson2009}, we will use the optimization problem \eqref{eq:SSP_opt} to perform a numerical search for optimal explicit SSP Runge--Kutta methods. 
+However, we first need to define the order conditions $\Phi(K)$ for methods of effective order.
+This is discussed in the next section.
