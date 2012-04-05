@@ -192,6 +192,7 @@ with these order conditions instead of the $\Phi_{p,q}$ in \eqref{eq:SSP_opt}.
 Rewriting the second condition in \eqref{eq:R_T_OCs} as $(\tau\beta)(t) = \alpha(t)$, the 
 order conditions for the starting and finishing methods are given in 
 Table~\ref{tab:rho_tau_OCs}. 
+\yiannistodo{Replace $\beta_2$ since it is known in both 3rd and 4th order}
 Note that for either case of order $q=3$ or $q=4$, the algebraic expressions on 
 $\beta$ up to order $q-1$ are already found by the optimization procedure of 
 the main method (see Table~\ref{tab:effective_OCs}). 
@@ -232,22 +233,24 @@ coefficient at least as large as that of the main method.
 This constraint does not allow these methods to have the same number of stages as the main method. 
 Specifically if the main method is ESSPRK($s,3,2$) or ESSPRK($s,4,3$) then the staring and 
 finishing methods have $s+1$ stages. In the case of ESSPRK($s,4,2$) methods, where $s > 4$ 
-the starting and finishing methods need $s+2$ stages.
-Finally for the single case where the main method is ESSPRK($4,4,2$) the starting and finishing 
+the starting and finishing methods have $s+2$ stages.
+Finally for the single case the main method is ESSPRK($4,4,2$) the starting and finishing 
 methods must have $7$ stages.
-The starting procedures found are first order accurate, except when the main method is 
-ESSPRK($s,4,3$) in which case they have second order accuracy. 
+The starting and finishing processors found are first order accurate, except when the main 
+method is ESSPRK($s,4,3$). 
+In such case they achieve second order accuracy. 
  
-In general, the starting and finishing processors have minimal computational and storage cost, 
-in contrast with their large importance in raising the order of the $TM^{n-2}R$ scheme from low 
-classical order to higher effective order of method $M$.
+In general, the starting and finishing methods have minimal computational and storage cost 
+especially if we consider that they replace the action of two methods. 
+This is in contrast with their large importance in raising the order of the $TM^{n-2}R$ scheme 
+from low classical order to higher effective order of method $M$.
 If accurate values are needed at any time other than the final time, the computation must invoke 
 the stopping method, and then the starting method to start up again. 
 \todo{This should be explained earlier too, with just special notice here because its $RT$ not $SS^{-1}$}
 
 Tables \ref{tab:ESSPRK(4,4,2)_scheme} and \ref{tab:ESSPRK(4,4,3)_scheme} show the coefficients 
 \yiannistodo{Need to do ESSPRK443. Shall we write them in terms of fractions?}
-of the effective SSP schemes in the case where the main method is ESSPRK($4,4,2$) and 
+of the effective SSP schemes in the case the main method is ESSPRK($4,4,2$) and 
 ESSPRK($4,4,3$), respectively. 
 
 \begin{sidewaystable}
