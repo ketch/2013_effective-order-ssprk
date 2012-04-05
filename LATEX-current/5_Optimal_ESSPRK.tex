@@ -12,7 +12,7 @@ to four.
 
 Recall from Section~\ref{sec:Algebraic_RK} that the methods of effective order involve a main 
 method $M$ as well as starting and finishing methods $S$ and $S^{-1}$.
-Note from Table~\ref{tab:Effective_oc} that the conditions for the main method $M$ up to 
+Note from Table~\ref{tab:effective_OCs} that the conditions for the main method $M$ up to 
 order four do not depend on the coefficients $\beta$ of the methods $S, S^{-1}$. 
 Therefore, the search for optimal methods of effective order can be carried out in two steps, 
 first searching for optimal methods $M$ and then for methods $S, S^{-1}$.
@@ -299,7 +299,7 @@ ESSPRK($4,4,3$), respectively.
 \begin{sidewaystable}
     \centering
     \small
-    \subfloat[ESSPRK($4,4,2$) \label{ESSPRK(4,4,2)_scheme_a}]{
+    \subfloat[ESSPRK($4,4,2$) \label{ESSPRK(4,4,3)_scheme_a}]{
         \begin{tabular}{c | c c c c}
              $0$ & & & & \\
              $0.730429885784024$ & $0.730429885784024$ & & & \\
@@ -309,7 +309,7 @@ ESSPRK($4,4,3$), respectively.
              & $0.384422058644697$ & $0.261153837271738$ & $0.127250866803383$ & $0.227173237280182$
         \end{tabular}
     }\\
-    \subfloat[Starting method $R$ \label{ESSPRK(4,4,2)_scheme_b}]{
+    \subfloat[Starting method $R$ \label{ESSPRK(4,4,3)_scheme_b}]{
         \begin{tabular}{c | c c c c c c c}
 			$0$ & $0$ & & & & & \\
 			$0.368528990388300$ & $0.368528990388300$ & & & & \\
@@ -322,7 +322,7 @@ ESSPRK($4,4,3$), respectively.
              & $0.158858667911766$ & $0.132624979397548$ & $0.076758079467455$ & $0.143345856400282$ & $0.192909209728994$ & $0.181473130107360$ & $0.114030076986594$
         \end{tabular}
     }\qquad
-    \subfloat[Finishing method $T$ \label{ESSPRK(4,4,2)_scheme_c}]{
+    \subfloat[Finishing method $T$ \label{ESSPRK(4,4,3)_scheme_c}]{
         \begin{tabular}{c | c c c c c c c}
 			$0$ & & & & & & & \\
 			$0.465693404328418$ & $0.465693404328418$ & & & & & & \\
@@ -335,7 +335,9 @@ ESSPRK($4,4,3$), respectively.
              & $0.362310622610060$ & $0.110738022380265$ & $0.067943249952253$ & $0.040024838042309$ & $0.059125267976139$ & $0.258294856260501$ & $0.101563142778474$
         \end{tabular}
     }
-    \caption{Fourth order effective SSP scheme where the main method $M$ is ESSPRK(4,4,3).}  
+    \caption{Fourth order effective SSP scheme where the main method $M$ is ESSPRK(4,4,3).
+      \textbf{Just a copy of the (4,4,2) as a placeholder for now.}
+    }
     \label{tab:ESSPRK(4,4,3)_scheme}
 \end{sidewaystable}
 

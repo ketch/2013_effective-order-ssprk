@@ -13,21 +13,21 @@ and exact solution
     u(t) = 10/(15t + 1).
 \end{equation}
 We solve the initial value problem \eqref{eq5.3} and \eqref{eq5.4} using an ESSPRK-scheme where $M$ is a $q$-effective order SSPRK method for $q = 3, 4$. 
-Method $M$ was found by solving the optimization problem \eqref{eq5.2} and the starting and finishing methods were found by solving the problem \eqref{eq5.3}. 
 The stages of the permutation methods were kept as low as possible, thus we use two stages for a 3-effective order method $M$ and four stages for a 4-effective order method. 
 The solution is computed for $N = 50.2^{k}$ for $k = 0, 1, 2, \dots, 6$ and hence the time-step used is $\Dt = \frac{1}{N} = \frac{2^{1-N}}{100}$ for each computation. 
-The error between the exact solution and the approximation with respect to time-step is shown in Figures \ref{fig5.1} and \ref{fig5.2} on a logarithmic scale. \yiannistodo{Update pictures, correct legends, axis, etc.}
+The error between the exact solution and the approximation with respect to time-step is shown in Figure~\ref{fig:convstudy} on a logarithmic scale.
+\yiannistodo{Update pictures, correct legends, axis, etc.}
 The convergence study was performed for various stages and the results show that the ESSPRK-scheme attends order equal to the effective order of method $M$. 
 We note it is important to measure the error after applying the finishing method $R$, otherwise we observe the
 classical order $p$ of method $M$ instead of the higher effective order $q$. 
 Finally, we note that for a fixed time-step, increasing the number of stages the decreases the error.
 
-\begin{figure}[t!]
+\begin{figure}
     \centering
     \includegraphics[width=0.5\textwidth]{Pictures/convergence_3rd_ord}%
     \includegraphics[width=0.5\textwidth]{Pictures/convergence_4th_ord_(2)}
     \caption{Convergence of $TM^{n-2}R$ Runge-Kutta scheme when (a) $M$ is SSPRK($s $,$ 4 $,$ 2 $) method and (b) $ M $ is SSPRK($ s $,$ 4 $,$ 3 $) method.}
-    \label{fig5.2}
+    \label{fig:convstudy}
 \end{figure}
 
 \subsection{Application to nonlinear problems}\label{subsec:nonlinear_problems}
