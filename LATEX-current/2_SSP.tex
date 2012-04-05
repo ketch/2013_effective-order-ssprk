@@ -73,7 +73,7 @@ For time dependent $\bm{F}$ we would also need nodes $c_i =
 \sum_j^sa_{ij}$.
 % where the $\bm{Y}^j$ are intermediate stage values.
 This is the Butcher form of the Runge--Kutta method and the
-coefficients $(A,\bm{b})$ make up the Butcher tableau
+coefficients $(A,\bm{b},\bm{c})$ make up the Butcher tableau
 \cite{Butcher2008_book}.
 For the method to obtain a certain order of accuracy, the coefficients must satisfy certain order conditions.
 For the method to be SSP, it must have a strictly positive SSP
@@ -85,7 +85,7 @@ The search for these optimal methods was originally based on expressing the Rung
 However, the SSP coefficient is related to the \emph{radius of absolute monotonicity} \cite{Kraaijevanger1991} and, for irreducible Runge--Kutta methods, the two are equivalent \cite{Ferracina2004, Higueras2004}.
 This gives an algebraic characterization of the SSP coefficient.
 The optimization problem of finding optimal SSP Runge--Kutta methods
-can be written in terms of the coefficients $(A,\bm{b})$ as
+can be written in terms of the coefficients $(A,\bm{b},\bm{c})$ as
 follows:
 \begin{equation}\label{eq:SSP_opt}
     \max_{A, \bm{b}, r} r, \qquad \text{subject to } \quad \left\{
