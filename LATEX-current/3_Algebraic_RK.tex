@@ -205,8 +205,8 @@ In terms of functions in group $G$ this is leads to the following definition of 
 \end{definition}
 The practical benefit of methods of effective order results from the
 observation that only $M$ need be used repeatedly.
-It is straightforward to observe that if $P=S^{-1}MS$, where method 
-$M$ have effective order $q$ with associated methods $S$ and $S^{-1}$, then
+To see this, observe that if $P=S^{-1}MS$, where method
+$M$ has effective order $q$ with associated methods $S$ and $S^{-1}$, then
 \begin{displaymath}
 	P^n = (S^{-1}MS)^n = (S^{-1}MS) \cdots (S^{-1}MS) (S^{-1}MS) = S^{-1} M^n S.
 \end{displaymath}
@@ -215,8 +215,6 @@ solution.
 Instead, it introduces a perturbation on the solution.
 The main method \( M \) is then used for \( n \) time steps and finally the
 finishing method is used to correct the solution.
-\colintodo{leave here for now please.  Could call it something other than ``Result''}
-\yiannistodo{Yes keep it here.}
 
 %\begin{result}
 %  Let method $M$ have effective order $q$ with associated methods $S$
@@ -285,8 +283,7 @@ order conditions \cite{Butcher2008_book}.
     \caption{Effective order five conditions of the main and starting methods $M$ and $S$.}
     \label{tab:effective_OCs_on_alpha}
 \end{table}
-Finally, we use the abbreviation RK($s$,$q$,$p$) for an $s$-stage Runge-Kutta method of effective order $q$ and classical order $p$.
-\yiannistodo{We can remove this line. We don't use this notation further in the text.}
+%Finally, we use the abbreviation RK($s$,$q$,$p$) for an $s$-stage Runge-Kutta method of effective order $q$ and classical order $p$.
 
 
 \subsection{Constructing effective order methods}

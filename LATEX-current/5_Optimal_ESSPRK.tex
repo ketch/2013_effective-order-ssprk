@@ -19,13 +19,13 @@ first searching for optimal methods $M$ and then for methods $S, S^{-1}$.
 
 We denote by ESSPRK($s,q,p$) an $s$--stage Explicit SSP Runge--Kutta method of effective 
 $q$--order and classical $p$--order. 
-Also we write ESSPRK($s,q$) for a ``classical" $s$-stage Explicit SSP Runge--Kutta method of 
+Also we write SSPRK($s,q$) for a ``classical" $s$-stage Explicit SSP Runge--Kutta method of 
 $q$--order.
 
 \subsection{The main method}\label{subsec:main_method}
 We begin by formulating an optimization problem for the main method $M$. 
 Then we discuss the optimal SSP cofficients with respect to the those of linear problems and 
-ESSPRK($s,q$) methods. Some families for third and fourth effective order methods are also 
+SSPRK($s,q$) methods. Some families for third and fourth effective order methods are also 
 presented.
 
 \subsubsection{The optimization problem}\label{subsubsec:opt_problem}
@@ -46,7 +46,7 @@ found.
 \subsubsection{Optimal SSP coefficients}\label{subsubsec:optimal_SSP_coeff}
 The effective SSP coefficients for up to eleven stages are shown in 
 Table~\ref{tab:eff_SSP_coeff}. 
-Similarly with ESSPRK($s,q$) methods, all effective SSP coefficients of ESSPRK($s,q,p$) methods 
+Similarly with SSPRK($s$, $q$) methods, all effective SSP coefficients of ESSPRK($s,q,p$) methods 
 have $\sspcoef < 1$. 
 Since the $q$--effective order SSP methods (accompanied with relevant starting and finishing 
 methods) are used in a scheme that attains classical order equal to $q$, it is reasonable to 
@@ -54,7 +54,7 @@ compare their accuracy with the ESSPRK($s,q$) methods.
 We then have the following results:
 \begin{result}
 	ESSPRK($s,q,p$) methods have SSP coefficients $\sspcoef$ greater than or equal to that of 
-	ESSPRK($s,q$) methods.
+	SSPRK($s$, $q$) methods.
 \end{result}
 \begin{result}
 	Many of the ESSPRK($s,q,p$) methods (and all of those with $s \ge 7$ stages) we have 
@@ -133,26 +133,26 @@ SSPRK($3,3$) method \cite{Gottlieb1998}.
 Similarly, in Theorem~\ref{thm:ESSPRK(4,3,2)} the particular value of $\gamma = 1/6$ 
 corresponds to the usual SSPRK($4,3$) method.
 It seems possible that for each number of stages $s$, the ESSPRK($s, 3, 2$) methods may 
-form a family in which an optimal SSPRK($s$,$3$) method is a particular member. 
-In general ESSPRK($s,q,p$) methods can be thought us a generalization of the ESSPRK($s,q$) 
+form a family in which an optimal SSPRK($s$, $3$) method is a particular member. 
+In general ESSPRK($s,q,p$) methods can be thought us a generalization of the SSPRK($s$, $q$) 
 class. 
 
 \subsubsection{Effective order four methods}\label{subsubsec:4th_ESSPRK}
 For effective order four, most methods found are optimal because they match the linear 
-bounds and they are at least as good as the ESSPRK($s,4$) (they are all better except in the 
+bounds and they are at least as good as the SSPRK($s$, $4$) (they are all better except in the 
 case where $s =10$, in which are equal). 
 Unlike effective order three, here ESSPRK($s,4,p$) methods, for $p = 2,3$ have generally 
-larger SSP coefficients $\sspcoef$ compared to ESSPRK($s,4$). 
+larger SSP coefficients $\sspcoef$ compared to SSPRK($s$, $4$). 
 Also, for stages $s > 7$ the SSP coefficient of ESSPRK($s,4,2$) and ESSPRK($s,4,3$) are the 
 same. 
 In particular for four-stage methods we have the following result:
 \begin{result}
-	In contrast with the non-existence of SSP($4$,$4$) method \cite{Gottlieb1998,Ruuth2002}, 
+	In contrast with the non-existence of SSPRK($4$, $4$) method \cite{Gottlieb1998,Ruuth2002}, 
 	we were are able to find ESSPRK($4,4,2$) and ESSPRK($4,4,3$) methods.
 \end{result}
 
 \subsection{Starting and finishing methods}\label{subsec:starting_finishing}
-Having constructed an SSPRK($s,q,p$) scheme that can be used as the main method $M$, we 
+Having constructed an ESSPRK($s,q,p$) scheme that can be used as the main method $M$, we 
 need to find the perturbation methods $S$ and $S^{-1}$ such that the Runge-Kutta scheme 
 $S^{-1}MS$ attains classical order $q$, equal to the effective order of method $M$. 
 

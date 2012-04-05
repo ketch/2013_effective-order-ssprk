@@ -25,5 +25,6 @@ clean:
 	rm -f ${BN}.ilg
 	rm -f ${BN}.log
 	rm -f ${BN}.ind
+	rm -f ${BN}.out
 	rm -f ${BN}.ps
 
