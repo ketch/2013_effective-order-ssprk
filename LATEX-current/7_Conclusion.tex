@@ -1,293 +1,56 @@
 \section{Conclusion}\label{sec:Conclusion}
+The theory of strong-stability preserving time discretization has been 
+combined with the algebraic interpretation of effective order Runge--Kutta 
+methods. 
+Based on this concept, we succeeded in constructing the first explicit 
+effective order SSP Runge--Kutta (ESSPRK) methods. 
+These methods when accompanied with relative staring and finishing 
+procedures result to schemes that attain higher order than the order of 
+the constructing methods. 
+It is proved that explicit Runge--Kutta methods with strictly positive 
+weights have at most fourth effective order. 
+This generates a barrier for explicit effective order SSP methods and 
+hence we studied ESSPRK methods of third and fourth effective order.
 
-\qquad The ideas here were applied to explicit Runge--Kutta methods, but they
+Optimal ESSPRK methods were constructed and we studied their SSP 
+properties in comparison with the classical SSPRK methods for linear and 
+nonlinear problems. 
+We were able to find families of third effective order ESSPRK methods. 
+Also, despite the non existence of four-stage, four-order SSPRK methods, 
+we found fourth effective order methods with four stages and of classical 
+order two and three. 
+
+Going beyond the initial formulation of the effective order schemes, a 
+different choice of the starting and finishing methods allows the 
+formation of an overall SSP scheme. 
+The starting method not only perturbs but also advances the solution by 
+a single time-step.  
+Then the main ESSPRK method carries out the rest of the computation. 
+At the final step a correction is applied by using a finishing method which 
+basically eradicates the accumulated effect of the starting method. 
+As a result the numerical approximation has order of accuracy equal to 
+the effective order of the main method and thus higher than its classical 
+order. 
+The starting and finishing methods have minimal computation cost as 
+they contain at most two more stages than those of the main method.
+
+Finally, we performed numerical tests on nonlinear problems. In this way 
+we showed that the schemes achieved their desired order. 
+Moreover, we emphasized the importance of the SSP coefficient as an 
+indicator of the maximum possible time-step for the solution of 
+hyperbolic pdes. 
+As shown in the case of Burgers' equation allowing slightly bigger time-steps 
+than the theoretical bounds results in a highly oscillatory numerical 
+approximation.  
+
+\subsection{Future Work}\label{subsec:future_work}
+The ideas here were applied to explicit Runge--Kutta methods, but they
 can be applied to implicit Runge--Kutta methods and General Linear
 Methods \cite{Butcher2008_book}.
 
-
-%\chapter{Effective order strong-stability-preserving Runge-Kutta schemes}\label{chapter5} % chapter 5
-%
-%\vspace{20pt}
-%
-%\qquad As seen in Chapter \ref{chapter3}, effort has been made to find optimal explicit SSP Runge-Kutta methods. In this chapter we rely on the SSP theory and the Butcher's theory of effective order reviewed previously, to find optimal explicit SSP methods of effective order. Combining SSP theory with effective order is a new and previously unexplored area of research. We use effective order SSP methods to overcome the non-existence of a \( 4 \)-stage classical order four SSPRK method by constructing \( 4 \)-stage \emph{effective order} SSPRK methods. It is numerically tested that these schemes have the time-step restrictions of the effective order method used. In this construction we are using matrices \( M \), \( S \) and \( S^{-1} \) as described in Definition \ref{def4.7}, where \( M \) is an effective order SSP Runge-Kutta method of low classical order and \( S \) and \( S^{-1} \) are the perturbation methods related to \( M \). We describe how these methods are obtained and give some examples. Also we discuss the non-existence of 5-effective order SSPRK method.
-%\newline
-%
-%Having constructed such methods we can successively use them and derive a Runge-Kutta scheme that solves the differential equation \eqref{eq2.1} using \( SMS^{-1} \) at each step. In particular, as mentioned in section \ref{subsubsection4.6.1} applying this scheme \( n \) times is equivalent to applying \( S \) once at the beginning, then method \( M \) \( n \) times and finally \( S^{-1} \) once.
-%\newline
-%
-%Finally, in the last section we perform convergence analysis on a nonlinear problem. It is numerically verified that the order of the scheme \( SM^{n}S^{-1} \) is equal to the effective order of the main method \( M \). The scheme is also used in solving Burger's equation with both smooth and discontinuous initial data. It is shown numerically that the resulting \( SM^{n}S^{-1} \) scheme seems to share the same SSP properties with the main SSPRK method \( M \).
-%\vspace{10pt}
-%
-%\subsection{Optimal explicit effective order SSPRK methods}\label{subsection5.1} % section 5.1
-%
-%\vspace{10pt}
-%
-%\qquad Similarly with the notation of RK(\( s \),\( q \),\( p \)) introduced in section \ref{subsubsection4.6.1} we denote by SSPRK(\( s \),\( q \),\( p \)) an \( s \)-stage SSP Runge-Kutta method of effective order \( q \) and classical order \( p \). For the construction of numerically optimal high order explicit Runge-Kutta schemes we first need to construct the effective order SSP Runge-Kutta method \( M \). Recall the optimisation process carried out to find optimal explicit SSPRK methods presented in Section \ref{subsection3.2}. In the same vein, we are able to find optimal SSPRK methods of effective order. Assume that the method \( M \) can be written as \( (A, \textbf{b}^{\texttt{T}}, \textbf{c}) \). Then, modifying the equations of the order conditions in the optimization problem \eqref{eq3.13} results in the problem
-%\begin{equation}\label{eq5.1}
-%    \max_{K,\mu} r, \qquad \text{subject to } \quad \left\{
-%                                                 \begin{array}{ll}
-%                                                   \mu \geq 0 \\
-%                                                   r\mu\textbf{e}_{s} \leq \textbf{e}_{s+1} \\
-%                                                   \Phi_{p,q}(K) = 0,
-%                                                 \end{array}
-%                                               \right.
-%\end{equation}
-%where \( \mu = K(I + rA)^{-1} \) and \( \Phi_{q,p}(K) \) are the effective order \( q \), classical order \( p \) conditions. For effective order three and four, these are given in Table \ref{table4.4}. As before, the optimisation problem has only nonlinear polynomial constrains and thus the implementation is done by using \verb"fmincon" from \textsc{MATLAB}'s toolbox. We perform several searches until the method with the largest possible SSP coefficient is found. Part of the code used can be found in Appendix \ref{appendixB}.
-%\newline
-%
-%The effective SSP coefficients for up to eleven stages are shown in Table \ref{table5.1}.\footnote{For the computation of the SSPRK(\( s \),\( 4 \),\( 3 \)) methods we used the effective order conditions with \( \beta_{3} \neq 0 \) as shown in Table \ref{table4.4}.} Similarly with SSPRK methods discussed in Chapter \ref{chapter3}, all effective SSP coefficients of SSPRK(\( s \),\( q \),\( p \)) schemes have \( c_{ef\!f} < 1 \). After doing many numerical searches, and selectively testing each of the effective order five conditions, we found that we were unable to satisfy the equation
-%\begin{displaymath}
-%    \frac{1}{4}\alpha_{9} - \alpha_{10} + \alpha_{13} = 0,
-%\end{displaymath}
-%of the five effective order conditions (see Appendix A) for a method with positive coefficients. But according to Lemma \ref{lem3.2} choosing negative coefficients contradicts with having positive radius of absolute monotonicity. Hence, it seems not possible for a \( 5 \)-effective SSPRK method to exist. It remains to consider only methods of order less than four.
-%\vspace{10pt}
-%
-%\begin{table}[t!]
-%    \centering
-%    \begin{tabular}{|cc|ccccccccccc|}
-%        \hline
-%        \multicolumn{2}{|c|}{\backslashbox{\qquad\qquad}{\vspace{-7pt}\( s \)}} & \( 1 \) & \( 2 \) & \( 3 \) & \( 4 \) & \( 5 \) & \( 6 \) & \( 7 \) & \( 8 \) & \( 9 \) & \( 10 \) & \( 11 \) \\
-%        \hline
-%        \multirow{2}{*}{\( p = 2 \)} & \( q = 3 \) & \( - \) &  \( - \) & \( 0.33 \) & \( 0.50 \) & \( 0.53 \) & \( 0.59 \) & \( 0.61 \) & \( 0.64 \) & \( 0.67 \) & \( 0.68 \) & \( 0.69 \) \\
-%        \cline{2-13}
-%                                     & \( q = 4 \) & \( - \) & \( - \)  & \( - \)    & \( 0.22 \) & \( 0.39 \) & \( 0.44 \) & \( 0.50 \) & \( 0.54 \) & \( 0.57 \) & \( 0.60 \) & \( 0.62 \) \\
-%                                     \hline
-%        \( p = 3  \)                 & \( q = 4 \) & \( - \) & \( - \)  & \( - \)    & \( 0.19 \) & \( 0.36 \) & \( 0.43 \) & \( 0.50 \) & \( 0.54 \) & \( 0.57 \) & \( 0.60 \) & \( 0.62 \) \\
-%        \hline
-%    \end{tabular}
-%    \caption{Effective SSP coefficients $ c_{ef\!f} $ of best known explicit effective order SSPRK methods.}
-%    \label{table5.1}
-%\end{table}
-%
-%\subsection{Starting and finishing methods}\label{subsection5.2} % section 5.2
-%
-%\vspace{10pt}
-%
-%\qquad Having constructed an SSPRK(\( s \),\( q \),\( p \)) scheme that can be used as the main method \( M \), we need to find the perturbation methods \( S \) and \( S^{-1} \). One approach to finding permutation methods is to try to minimise the size of the coefficients of the method \( S  = (\hat{A}, \hat{\textbf{b}}^{\texttt{T}}, \hat{\textbf{c}})\). Therefore, we minimise
-%\begin{displaymath}
-%    \|\hat{A}\|_{F} + \|\hat{\textbf{b}}\|_{2},
-%\end{displaymath}
-%where \( \|\cdot\|_{F} \) is the Frobenius norm. The optimisation problem becomes
-%\begin{equation}\label{eq5.2}
-%    \min_{S} \Bigl(\|\hat{A}\|_{F} + \|\hat{\textbf{b}}\|_{2}\Bigr), \quad \text{subject to } \quad \left\{
-%                                                                                     \begin{array}{ll}
-%                                                                                           \Phi_{q}(S^{-1}S) = 0 \\
-%                                                                                           \widehat{\Phi}_{i}(S) = 0,
-%                                                                                     \end{array}
-%                                                                             \right.
-%\end{equation}
-%where \( \Phi_{q}(S^{-1}S) \) are the conditions so that \( S^{-1}S = I \) up to order \( q \) and \( \widehat{\Phi}_{i}(S) = 0 \) represents the order conditions on \( \beta \) in Table \ref{table4.4}. The number of stages for the perturbation methods depends on the effective and classical order of the main method \( M \). When \( M \) is an SSPRK(\( s \),\( 3 \),\( 2 \)) method we found that the stages of methods \( S \) and \( S^{-1} \) are at least two. We were able to find perturbation methods with only two stages for SSPRK(\( s \),\( 3 \),\( 2 \)) methods up to \( 13 \) stages. Similarly, for four effective order methods \( M \), the perturbation methods appear to need at least four stages. For SSPRK(\( s \),\( 4 \),\( 2 \)) we found four-stages methods \( S \) and \( S^{-1} \) up to \( 17 \) stages and for SSPRK(\( s \),\( 4 \),\( 3 \)) up to \( 22 \) stages. Therefore, the perturbation methods have minimal computational and storage cost, in contrast with their large importance in raising the order of the \( SM^{n}S^{-1} \) scheme from low classical order to higher effective order of method \( M \).
-%\vspace{10pt}
-%
-%\subsection{Constructing higher order Runge-Kutta schemes}\label{subsection5.3} % section 5.3
-%
-%\vspace{10pt}
-%
-%\qquad As described in Chapter \ref{chapter4}, using \( n \) times an SSPRK(\( s \),\( q \),\( p \)) method as the main method \( M \) accompanied by the relevant starting and finishing methods \( S \) and \( S^{-1} \) respectively, the resulting Runge-Kutta scheme \( SM^{n}S^{-1} \) attains order \( q \).
-%
-%\subsubsection{Three order schemes}\label{subsection5.3.1} % section 5.3.1
-%
-%\qquad Table \ref{table5.1} shows that SSPRK(\( s \),\( 3 \),\( 2 \)) methods have the same SSP coefficients as SSPRK(\( s \),\( 3 \)). Even though a second order SSPRK method of effective order three is used for the main part of the computation, the \( SM^{n}S^{-1} \) scheme has the same efficiency with a scheme that uses a three-order SSPRK method \( n \) times. Table \ref{table5.2} gives the SSPRK(\( 3 \),\( 3 \),\( 2 \)) scheme and its relevant permutation methods.
-%
-%\begin{table}[t!]
-%    \centering
-%    \subfloat[SSPRK(\( 3 \),\( 3 \),\( 2 \)) \label{table5.2a}]{
-%        \begin{tabular}{c | c c c}
-%             \( 0 \)                 &                         &                         &                        \\
-%             \( 1.000000000000000 \) & \( 1.000000000000000 \) &                         &                        \\
-%             \( 0.750006104700033 \) & \( 0.375003052350017 \) & \( 0.375003052350017 \) &                        \\
-%             \hline
-%                                     & \( 0.388892506459463 \) & \( 0.166666666666667 \) & \( 0.166666666666667 \)
-%        \end{tabular}
-%    }\\
-%    \subfloat[Starting method \( S \) \label{table5.2b}]{
-%        \begin{tabular}{c | c c }
-%            \( 0 \)                 &                          &                        \\
-%            \( 0.242748848789897 \) & \( 0.242748848789897 \)  &                        \\
-%            \hline
-%                                    & \( -0.171649358274553 \) & \( 0.171649358274553 \)
-%        \end{tabular}
-%    }\qquad
-%    \subfloat[Finishing method \( S^{-1} \) \label{table5.2c}]{
-%        \begin{tabular}{c | c c }
-%            \( 0 \)                 &                         &                         \\
-%            \( 0.242748848789897 \) & \( 0.242748848789897 \) &                         \\
-%            \hline
-%                                    & \( 0.171649358274553 \) & \( -0.171649358274553 \)
-%        \end{tabular}
-%    }
-%    \caption{A $ 3 $-order $ SMS^{-1} $ scheme with SSPRK($ 3 $,$ 3 $,$ 2 $) as method $ M $.}
-%    \label{table5.2}
-%\end{table}
-%
-%\begin{sidewaystable}
-%    \centering
-%    \subfloat[SSPRK(\( 4 \),\( 4 \),\( 2 \)) \label{table5.3a}]{
-%        \begin{tabular}{c | c c c c}
-%             \( 0 \)                 &                         &                         &                         &                        \\
-%             \( 0.730429866081069 \) & \( 0.730429866081069 \) &                         &                         &                        \\
-%             \( 0.644963703324400 \) & \( 0.251830546683861 \) & \( 0.393133156640539 \) &                         &                        \\
-%             \( 0.999999949118683 \) & \( 0.141062661503187 \) & \( 0.220213136725785 \) & \( 0.638724150889712 \) &                        \\
-%             \hline
-%                                     & \( 0.384422039411979 \) & \( 0.261153819243924 \) & \( 0.127250873854741 \) & \( 0.227173267489356 \)
-%        \end{tabular}
-%    }\\
-%    \subfloat[Starting method \( S \) \label{table5.3b}]{
-%        \begin{tabular}{c | c c c c}
-%             \( 0 \)                  &                          &                          &                          &                        \\
-%             \( -0.256710782961031 \) & \( -0.256710782961031 \) &                          &                          &                        \\
-%             \( 0.085558539953181 \)  & \( -0.051748076261000 \) & \( 0.137306616214181  \) &                          &                        \\
-%             \( -0.057405914354903 \) & \( -0.036806107999514 \) & \( -0.101578501549627 \) & \( 0.080978695194238 \)  &                        \\
-%             \hline
-%                                      & \( 0.053318928303430 \)  & \( -0.092469530841306 \) & \( 0.150825667701091 \)  & \( -0.111675065163215 \)
-%        \end{tabular}
-%    }\qquad
-%    \subfloat[Finishing method \( S^{-1} \) \label{table5.3c}]{
-%        \begin{tabular}{c | c c c c}
-%             \( 0 \)                  &                          &                           &                         &                        \\
-%             \( 0.211579618221416 \)  & \( 0.211579618221416 \)  &                           &                         &                        \\
-%             \( -0.235088810806135 \) & \( -0.042284616593180 \) & \( -0.192804194212955  \) &                         &                        \\
-%             \( 0.068651367308440 \)  & \( -0.001711904486092 \) & \( -0.120505465858868  \) & \( 0.190868737653400 \) &                        \\
-%             \hline
-%                                      & \( 0.084680670548319 \)  & \( -0.006911893603473 \)  & \( 0.119351382318490 \) & \( -0.197120159263337 \)
-%        \end{tabular}
-%    }
-%    \caption{A $ 4 $-order $SMS^{-1}$ scheme with SSPRK($ 4 $,$ 4 $,$ 2 $) as method $ M $.}
-%    \label{table5.3}
-%\end{sidewaystable}
-%
-%\begin{sidewaystable}
-%    \centering
-%    \subfloat[SSPRK($ 4 $,$ 4 $,$ 3 $) \label{table5.4a}]{
-%        \begin{tabular}{c | c c c c}
-%             \( 0 \)                 &                         &                         &                         &                        \\
-%             \( 0.601245068769722 \) & \( 0.601245068769722 \) &                         &                         &                        \\
-%             \( 0.436888707505256 \) & \( 0.139346825211062 \) & \( 0.297541882294194 \) &                         &                        \\
-%             \( 0.747760163802786 \) & \( 0.060555448798830 \) & \( 0.129301705951913 \) & \( 0.557903009052043 \) &                        \\
-%             \hline
-%                                     & \( 0.220532075697708 \) & \( 0.180572386906126 \) & \( 0.181420587786042 \) & \( 0.417474949610123 \)
-%        \end{tabular}
-%    }\\
-%    \subfloat[Starting method \( S \) \label{table5.4b}]{
-%        \begin{tabular}{c | c c c c}
-%             \( 0 \)                   &                          &                          &                          &                        \\
-%             \( 0.153419597494927 \)   & \( 0.153419597494927 \)  &                          &                          &                        \\
-%             \( -0.256226278766643 \)  & \( 0.144288235134420 \)  & \( -0.111938043632223 \) &                          &                        \\
-%             \( -0.022612311497187 \)  & \( -0.021379760180247 \) & \( -0.083350912174082 \) & \( 0.082118360857142 \)  &                        \\
-%             \hline
-%                                       & \( 0.034074647174452 \) & \( -0.100159362943098 \)  & \( -0.072173498542553 \) & \( 0.138258214311199 \)
-%        \end{tabular}
-%    }\qquad
-%    \subfloat[Finishing method \( S^{-1} \) \label{table5.4c}]{
-%        \begin{tabular}{c | c c c c}
-%             \( 0 \)                  &                          &                           &                          &                        \\
-%             \( 0.153419584694713 \)  & \( 0.153419584694713 \)  &                           &                          &                        \\
-%             \( -0.256226266150157 \) & \( -0.144288221502475 \) & \( -0.111938044647682  \) &                          &                        \\
-%             \( -0.022612310620527 \) & \( -0.021379759765904 \) & \( -0.083350904952004  \) & \( 0.082118354097382 \)  &                        \\
-%             \hline
-%                                      & \( -0.034074647539842 \) & \( 0.100159376727875 \)   & \( 0.072173506785242 \) & \( -0.138258235973274 \)
-%        \end{tabular}
-%    }
-%    \caption{A $ 4 $-order $SMS^{-1} $ scheme with SSPRK($ 4 $,$ 4 $,$ 3 $) as method $ M $.}
-%    \label{table5.4}
-%\end{sidewaystable}
-%
-%\subsubsection{Fourth order schemes}\label{subsection5.3.2} % section 5.3.2
-%
-%\qquad The big advantage comes when we use SSPRK(\( s \),\( 4 \),\( p \)) for method \( M \). Then, the corresponding \( SM^{n}S^{-1} \) has order four and greater or at least equal SSP coefficients than the SSPRK(\( s \),\( 4 \)) methods. Also, for stages \( s > 7 \) the SSP coefficient of SSPRK(\( s \),\( 4 \),\( 2 \)) and SSPRK(\( s \),\( 4 \),\( 3 \)) are the same. In contrast with the non-existence of SSP(\( 4 \),\( 4 \)) method \cite{Gottlieb1998_article,Ruuth2002_article} (as mentioned in Section \ref{subsection3.1.2}), we were are able to find SSPRK(\( 4 \),\( 4 \),\( 2 \)) and SSPRK(\( 4 \),\( 4 \),\( 3 \)) methods. Their corresponding \( SMS^{-1} \) schemes are presented in Tables \ref{table5.3} and \ref{table5.4}.
-%\vspace{10pt}
-%
-%\subsection{Numerical Tests}\label{subsection5.4} % section 5.4
-%
-%\vspace{10pt}
-%
-%\qquad In this section we verify numerically that the order of the constructed Runge-Kutta scheme \( SM^{n}S^{-1} \), for which the main method \( M \) is an SSPRK(\( s \),\( q \),\( p \)) method, is the effective order \( q \) of method \( M \). This is done by performing a convergence study on a smooth nonlinear problem. Also we show that the \( SM^{n}S^{-1} \) scheme inherits the properties of the SSPRK(\( s \),\( q \),\( p \)) method. In particular, the time-step restriction of the Runge-Kutta scheme \( SM^{n}S^{-1} \) is the same with that of the main method \( M \). This is demonstrated by showing the effect of SSP coefficient on the nonlinear Burger's equation.
-%
-%\subsubsection{Convergence study}\label{subsection6.1} % section 6.1
-%
-%\qquad We consider the nonlinear equation
-%\begin{equation}\label{eq5.3}
-%    u'(t) = -\frac{3}{2}u^{2}(t), \quad t \in [0,1], \quad \text{with } u(0) = 10,
-%\end{equation}
-%and exact solution
-%\begin{equation}\label{eq5.4}
-%    u(t) = 10/(15t + 1).
-%\end{equation}
-%We solve the initial value problem \eqref{eq5.3} and \eqref{eq5.4} using an \( SM^{n}S^{-1} \) Runge-Kutta scheme, where \( M \) is a \( q \)-effective order SSPRK method for \( q = 3, 4 \). Method \( M \) was found by solving the optimisation problem \eqref{eq5.2} and the starting and finishing methods were found by solving the problem \eqref{eq5.3}. The stages of the permutation methods were kept as low as possible, thus we use two stages for a 3-effective order method \( M \) and four stages for a 4-effective order method. The solution is computed for \( N = 50.2^{k} \) for \( k = 0, 1, 2, \dots, 6 \) and hence the time-step used is \( \Dt = \frac{1}{N} = \frac{2^{1-N}}{100} \) for each computation. The error between the exact solution and the approximation with respect to time-step is shown in Figures \ref{fig5.1} and \ref{fig5.2} on a logarithmic scale. The convergence study was performed for various stages and the results show that the Runge-Kutta scheme \( SM^{n}S^{-1} \) attends order equal to the effective order of method \( M \). We note it is important to measure the error after applying the finishing method \( S^{-1} \), otherwise we observe the
-%classical order \( p \) of method \( M \) instead of the higher effective order \( q \). Finally, we note that increasing the number of stages the error becomes smaller for the same time-step.
-%
-%\begin{figure}[t!]
-%    \centering
-%    \includegraphics[scale=0.7]{Pictures/fig5.1.eps}
-%    \caption{Convergence of $ SM^{n}S^{-1} $ Runge-Kutta scheme, when $ M $ is SSPRK($ s $,$ 3 $,$ 2 $) method.}
-%    \label{fig5.1}
-%\end{figure}
-%
-%\begin{figure}[t!]
-%    \centering
-%    \includegraphics[scale=0.7]{Pictures/fig5.2.eps}
-%    \includegraphics[scale=0.7]{Pictures/fig5.3.eps}
-%    \caption{Convergence of $ SM^{n}S^{-1} $ Runge-Kutta scheme when (a) $ M $ is SSPRK($ s $,$ 4 $,$ 2 $) method and (b) $ M $ is SSPRK($ s $,$ 4 $,$ 3 $) method.}
-%    \label{fig5.2}
-%\end{figure}
-%
-%\subsubsection{Burger's equation}\label{subsection6.1} % section 6.1
-%
-%\qquad The inviscid Burger's equation consists of the hyperbolic conservation law
-%\begin{equation}\label{eq5.5}
-%    U_{t} + f(U)_{x} = 0,
-%\end{equation}
-%when the flux function \( f(U) = \frac{1}{2}U^{2} \). We consider initial data
-%\begin{equation}\label{eq5.6}
-%    u(0,x)  = \frac{1}{2} - \frac{1}{4}sin{\pi x},
-%\end{equation}
-%on a periodic domain \( x \in [0,2) \). The solution advances to the right where it eventually exhibits a shock. We perform a semi-discetisation of \( f(U)_{x} \) using an upwind approximation \cite{Ketcheson2009_article} that gives
-%\begin{equation}\label{eq5.7}
-%    f(U)_{x} \approx \frac{1}{\Dt}\bigl(f(u_{i}) - f(u_{i-1})\bigr).
-%\end{equation}
-%The above time discretisation is SSP when coupled with Forward Euler method under time restriction \( \Dt \leq {\Dt}_{FE} = \frac{\Delta x}{\|u(0,x)\|_{\infty}} \). We integrate to time \( t_{f} = 2.3 \) with \( m = 256 \) points in space.
-%\newline
-%
-%\begin{figure}[t!]
-%    \centering
-%    \subfloat[\( \sigma = 6.0 \)]{\label{fig5.3a}\includegraphics[scale=0.7]{Pictures/fig5.4.eps}} \\
-%    \subfloat[\( \sigma = 7.1 \)]{\label{fig5.3b}\includegraphics[scale=0.7]{Pictures/fig5.5.eps}}
-%    \caption{Solution of Burger's equation with continuous initial data, using a $ SM^{n}S^{-1} $ scheme, where $ M $ is SSPRK($ 10 $,$ 4 $,$ 3 $). The SSP coefficient is $ c = 6.0 $.}
-%    \label{fig5.3}
-%\end{figure}
-%
-%Burger's equation was solved using a \( SM^{n}S^{-1} \) Runge-Kutta scheme with time-step restriction \( \Dt \leq \sigma{\Dt}_{FE} \), where \( \sigma \) indicates the size of the time step. Figure \ref{fig5.3} shows that if \( \sigma \) stays below the SSP coefficient of the method \( M \), then no oscillations are observed. If this stability limit is violated, then oscillations appear. We were able to determine when exactly the nonlinear stability is not satisfied by computing the the total-variation (TV) norm at each step of the computation process. This indicates that the \( SM^{n}S^{-1} \) scheme inherits the time-step restriction from the SSP coefficient of the main method \( M \).
-%\newline
-%
-%We also consider Burger's equation with discontinuous data
-%\begin{equation}\label{eq5.8}
-%    u(0,x)  = \left\{
-%                \begin{array}{ll}
-%                  1, & \hbox{\( 0.5 \leq x \leq 1.5 \)} \\
-%                  0, & \hbox{otherwise.}
-%                \end{array}
-%              \right.
-%\end{equation}
-%
-%Figure \ref{fig5.4} shows the result of solving the discontinuous problem using a \( SM^{n}S^{-1} \) Runge-Kutta scheme, with \( M \) an SSPRK(\( 4 \),\( 4 \),\( 3 \)). Clearly, the monotonicity in the TV-norm is violated at \( t = 0 \) because the method \( S \) is not an SSP method. However, this does not propagate in time if the time-step size \( \sigma \) is kept below the SSP coefficient of method \( M \). Otherwise, oscillations continue to appear for \( t > 0 \). The actual solution was plotted using the method of the characteristics and is given by
-%\begin{equation}\label{eq5.9}
-%    u(t,x)  = \left\{
-%                \begin{array}{ll}
-%                  0, & \hbox{\( 0 \leq x \leq 0.5 \)} \\
-%                  \frac{x-0.5}{t}, & \hbox{\( 0.5 < x \leq 0.5 + t \)} \\
-%                  1, & \hbox{\( 0.5 + t < x \leq 1.5  + \frac{t}{2} \)} \\
-%                  0, & \hbox{\( 1.5  + \frac{t}{2} < x \leq 2 \)}. \\
-%                \end{array}
-%              \right.
-%\end{equation}
-%
-%\begin{figure}[t!]
-%    \centering
-%    \subfloat[\( \sigma = 1.97 \)]{\label{fig5.4a}\includegraphics[scale=0.7]{Pictures/fig5.6.eps}} \\
-%    \subfloat[\( \sigma = 2.2 \)]{\label{fig5.4b}\includegraphics[scale=0.7]{Pictures/fig5.7.eps}}
-%    \caption{Solution of Burger's equation with discontinuous initial data, using a $ SM^{n}S^{-1} $ scheme, where $ M $ is SSPRK($ 5 $,$ 4 $,$ 2 $) method. The SSP coefficient is $ c = 1.97 $.}
-%    \label{fig5.4}
-%\end{figure}
-%
-%
-%
+Also, other possible directions may be the investigation of low-storage 
+effective order SSP methods and advancing the SSP theory of effective 
+methods. 
+Finally, application of the effective order theory on other classes of 
+methods, for example Rosenbrock methods, is also worthy of future 
+research.
