@@ -190,7 +190,8 @@ Now the $S^{-1}M^nS$ is equivalent to the $TM^{n-2}R$ scheme and attains classic
 The order conditions from \eqref{eq:R_T_OCs} do not contradict the SSP requirements.  
 We can thus use the optimization procedure described in Section~\ref{subsec:Optimal_SSPRK} 
 with these order conditions instead of the $\Phi_{p,q}$ in \eqref{eq:SSP_opt}. 
-Rewriting the second condition in \eqref{eq:R_T_OCs} as $(\tau\beta)(t) = \alpha(t)$, the 
+Rewriting the second condition in \eqref{eq:R_T_OCs} as $(\tau\beta)(t) = \alpha(t)$ 
+the 
 order conditions for the starting and finishing methods are given in 
 Table~\ref{tab:rho_tau_OCs}. 
 \yiannistodo{Replace $\beta_2$ since it is known in both 3rd and 4th order}
@@ -232,15 +233,30 @@ Care must be taken so that the conditions on $\beta$ given in Table~\ref{tab:eff
 We were able to construct starting and finishing schemes for each main method, with an SSP 
 coefficient at least as large as that of the main method. 
 This constraint does not allow these methods to have the same number of stages as the main method. 
-Specifically if the main method is ESSPRK($s,3,2$) or ESSPRK($s,4,3$) then the staring and 
-finishing methods have $s+1$ stages. In the case of ESSPRK($s,4,2$) methods, where $s > 4$ 
-the starting and finishing methods have $s+2$ stages.
-Finally for the single case the main method is ESSPRK($4,4,2$) the starting and finishing 
-methods must have $7$ stages.
+Specifically if the main method is ESSPRK($s,3,2$) the starting and finishing methods have 
+$s+1$ and $s$ stages, respectively. 
+The results in the case of fourth effective order are summarized in Table~\ref{tab:RT_stages}. 
 The starting and finishing processors found are first order accurate, except when the main 
 method is ESSPRK($s,4,3$). 
 In such case they achieve second order accuracy. 
- 
+
+\begin{table}
+    \centering
+    \begin{tabular}{|c|c|cccccccc|}
+        \hline
+        \multicolumn{2}{|c|}{\backslashbox{\hspace{1pt}\vspace{1pt}$p$}{\vspace{-5pt}$s$}} & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ & $11$ \\
+        \hline
+        \multirow{2}{*}{$2$} & $R$ & $5$ & $7$ & $7$ & $8$ & $8$ & $10$ & $11$ & $12$ \\
+        & $T$ & $5$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ & $11$ \\
+        \hline
+        \multirow{2}{*}{$3$}& $R$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ & $11$ & $12$ \\
+        & $T$ & $5$ & $5$ & $7$ & $8$ & $8$ & $10$ & $11$ & $12$ \\
+        \hline
+    \end{tabular}
+    \caption{Number of stages for the starting ($R$) and finishing ($T$) methods related to a fourth effective order ESSPRK($s,4,p$) main method.}
+    \label{tab:RT_stages}
+\end{table}
+
 In general, the starting and finishing methods have minimal computational and storage cost 
 especially if we consider that they replace the action of two methods. 
 This is in contrast with their large importance in raising the order of the $TM^{n-2}R$ scheme 
@@ -250,7 +266,7 @@ the stopping method, and then the starting method to start up again.
 \todo{This should be explained earlier too, with just special notice here because its $RT$ not $SS^{-1}$}
 
 Tables \ref{tab:ESSPRK(4,4,2)_scheme} and \ref{tab:ESSPRK(4,4,3)_scheme} show the coefficients 
-\yiannistodo{Need to do ESSPRK443. Shall we write them in terms of fractions?}
+\yiannistodo{Is it better to  write them in terms of fractions?}
 of the effective SSP schemes in the case the main method is ESSPRK($4,4,2$) and 
 ESSPRK($4,4,3$), respectively. 
 
@@ -268,29 +284,25 @@ ESSPRK($4,4,3$), respectively.
         \end{tabular}
     }\\
     \subfloat[Starting method $R$ \label{ESSPRK(4,4,2)_scheme_b}]{
-        \begin{tabular}{c | c c c c c c c}
-			$0$ & $0$ & & & & & \\
-			$0.368528990388300$ & $0.368528990388300$ & & & & \\
-			$0.342748487994850$ & $0.163637232389806$ & $0.179111255605044$ & & & \\
-			$0.399531957757558$ &$0.087623597940194$ & $0.095909545880816$ & $0.215998813936548$ & & \\
-			$0.596621812583163$ & $0.065110834808025$ & $0.071267908932713$ & $0.160503145540209$ & $0.299739923302216$ & \\
-			$1.000000000000000$ & $0.065110834808025$ & $0.071267908932713$ & $0.160503145540209$ & $0.299739923302216$ & $0.403378187416837$ \\
-			$1.000000000000000$ & $0.128459547821024$ & $0.049242630698629$ & $0.109293269089292$ & $0.204105383629792$ & $0.274676989249750$ \\
+        \begin{tabular}{c | c c c c c}
+			$0$ & $0$ & & & \\
+			$0.373522916411400$ & $0.373522916411400$ & & & & \\
+			$0.427950722860423$ & $0.131590527793077$ & $0.296360195067346$ & & & \\
+			$0.638639971034253$ & $0.066215361487869$ & $0.149126215815910$ & $0.423298393730474$ & & \\
+			$1.000000000000000$ & $0.059378615605483$ & $0.099226317694128$ & $0.281656318212781$ & $0.559738748487608$ & \\		
              \hline
-             & $0.158858667911766$ & $0.132624979397548$ & $0.076758079467455$ & $0.143345856400282$ & $0.192909209728994$ & $0.181473130107360$ & $0.114030076986594$
+             & $0.167820631351745$ & $0.266506504585377$ & $0.094688801056065$ & $0.188176112416812$ & $0.282807950590000$ 
         \end{tabular}
     }\qquad
     \subfloat[Finishing method $T$ \label{ESSPRK(4,4,2)_scheme_c}]{
-        \begin{tabular}{c | c c c c c c c}
-			$0$ & & & & & & & \\
-			$0.465693404328418$ & $0.465693404328418$ & & & & & & \\
-			$0.719290143041143$ & $0.465693404328418$ & $0.253596738712725$ & & & & & \\
-			$0.799046274039383$ & $0.314021726630174$ & $0.171002820779034$ & $0.314021726630174$ & & & \\
-			$0.856165266139389$ & $0.212576943502588$ & $0.115760324489710$ & $0.212576943502588$ & $0.315251054644502$ & & \\
-			$0.712688880619757$ & $0.465693404328418$ & $0.173157170343708$ & $0.073838305947631$ & $0.000000000000000$ & $0.000000000000000$ & \\
-			$0.884369909308419$ & $0.238598445629827$ & $0.067390197065757$ & $0.123752262940046$ & $0.183524284260010$ & $0.271104719412779$ \\
-             \hline
-             & $0.362310622610060$ & $0.110738022380265$ & $0.067943249952253$ & $0.040024838042309$ & $0.059125267976139$ & $0.258294856260501$ & $0.101563142778474$
+        \begin{tabular}{c | c c c c c}
+			$0$ & & & & & \\
+			$0.502859501089623$ & $0.502859501089623$ & & & & \\
+			$0.932299154557159$ & $0.466149577278579$ & $0.466149577278579$ & & & \\
+			$0.592066180887698$ & $0.291363412015344$ & $0.144655475088422$ & $0.156047293783932$ & & \\
+			$0.820219483624087$ & $0.389493128711985$ & $0.077538391027073$ & $0.083644646541993$ & $0.269543317343036$ & \\
+             \hline            
+             & $0.357516861171415$ & $0.120524890425247$ & $0.051000692115440$ & $0.164348781516878$ & $0.306608774771021$ 
         \end{tabular}
     }
     \caption{Fourth order effective SSP scheme where the main method $M$ is ESSPRK(4,4,2).}  
@@ -303,42 +315,36 @@ ESSPRK($4,4,3$), respectively.
     \subfloat[ESSPRK($4,4,2$) \label{ESSPRK(4,4,3)_scheme_a}]{
         \begin{tabular}{c | c c c c}
              $0$ & & & & \\
-             $0.730429885784024$ & $0.730429885784024$ & & & \\
-             $0.644963741710099$ & $0.251830567791499$ & $0.393133173918601$ & & \\
-             $1.000000000000000$ & $0.141062646387053$ & $0.220213163087548$ & $0.638724190525399$ & \\
+             $0.601245068769723$ & $0.601245068769723$ & & & \\
+             $0.436888719184949$ & $0.139346828936332$ & $0.297541890248617$ & & \\
+             $0.747760163759696$ & $0.060555450003183$ & $0.129301708523521$ & $0.557903005232992$ & \\
              \hline
-             & $0.384422058644697$ & $0.261153837271738$ & $0.127250866803383$ & $0.227173237280182$
+             & $0.220532078494543$ & $0.180572397262273$ & $0.181420582935982$ & $0.417474941307203$
         \end{tabular}
     }\\
     \subfloat[Starting method $R$ \label{ESSPRK(4,4,3)_scheme_b}]{
-        \begin{tabular}{c | c c c c c c c}
-			$0$ & $0$ & & & & & \\
-			$0.368528990388300$ & $0.368528990388300$ & & & & \\
-			$0.342748487994850$ & $0.163637232389806$ & $0.179111255605044$ & & & \\
-			$0.399531957757558$ &$0.087623597940194$ & $0.095909545880816$ & $0.215998813936548$ & & \\
-			$0.596621812583163$ & $0.065110834808025$ & $0.071267908932713$ & $0.160503145540209$ & $0.299739923302216$ & \\
-			$1.000000000000000$ & $0.065110834808025$ & $0.071267908932713$ & $0.160503145540209$ & $0.299739923302216$ & $0.403378187416837$ \\
-			$1.000000000000000$ & $0.128459547821024$ & $0.049242630698629$ & $0.109293269089292$ & $0.204105383629792$ & $0.274676989249750$ \\
+        \begin{tabular}{c | c c c c c}
+			$0$ & $0$ & & & & \\
+			$0.233583075787679$ & $0.233583075787679$ & & & & \\
+			$0.515691493839167$ & $0.113222521489861$ & $0.402468972349307$ & & & \\
+			$0.531082309996490$ &$0.044673367659019$ & $0.158799187092104$ & $0.327609755245368$ & & \\
+			$0.781350492733201$ & $0.125069004030275$ & $0.133636207609711$ & $0.147871644558862$ & $0.374773636534354$ & \\			
              \hline
-             & $0.158858667911766$ & $0.132624979397548$ & $0.076758079467455$ & $0.143345856400282$ & $0.192909209728994$ & $0.181473130107360$ & $0.114030076986594$
+             & $0.154940460576884$ & $0.122447291145256$ & $0.196845001120610$ & $0.163510218326813$ & $0.362257028830438$
         \end{tabular}
     }\qquad
     \subfloat[Finishing method $T$ \label{ESSPRK(4,4,3)_scheme_c}]{
         \begin{tabular}{c | c c c c c c c}
-			$0$ & & & & & & & \\
-			$0.465693404328418$ & $0.465693404328418$ & & & & & & \\
-			$0.719290143041143$ & $0.465693404328418$ & $0.253596738712725$ & & & & & \\
-			$0.799046274039383$ & $0.314021726630174$ & $0.171002820779034$ & $0.314021726630174$ & & & \\
-			$0.856165266139389$ & $0.212576943502588$ & $0.115760324489710$ & $0.212576943502588$ & $0.315251054644502$ & & \\
-			$0.712688880619757$ & $0.465693404328418$ & $0.173157170343708$ & $0.073838305947631$ & $0.000000000000000$ & $0.000000000000000$ & \\
-			$0.884369909308419$ & $0.238598445629827$ & $0.067390197065757$ & $0.123752262940046$ & $0.183524284260010$ & $0.271104719412779$ \\
+			$0$ & & & & & \\
+			$0.439651096124100$ & $0.439651096124100$ & & & & \\
+			$0.703468818352023$ & $0.297025122670221$ & $0.406443695681802$ & & & \\
+			$0.428982979460892$ & $0.097632937435411$ & $0.133599109579618$ & $0.197750932445863$ & & \\
+			$0.874787742275635$ & $0.082872736093259$ & $0.113401522491430$ & $0.167854837386445$ & $0.510658646304502$ & \\			
              \hline
-             & $0.362310622610060$ & $0.110738022380265$ & $0.067943249952253$ & $0.040024838042309$ & $0.059125267976139$ & $0.258294856260501$ & $0.101563142778474$
+             & $0.182401342203530$ & $0.219128338221130$ & $0.078473760154594$ & $0.238737856798909$ & $0.281258702621837$
         \end{tabular}
     }
-    \caption{Fourth order effective SSP scheme where the main method $M$ is ESSPRK(4,4,3).
-      \textbf{Just a copy of the (4,4,2) as a placeholder for now.}
-    }
+    \caption{Fourth order effective SSP scheme where the main method $M$ is ESSPRK(4,4,3).}
     \label{tab:ESSPRK(4,4,3)_scheme}
 \end{sidewaystable}
 
