@@ -1,45 +1,46 @@
 \section{Numerical experiments}\label{sec:numerics}
 
-In this section we verify numerically that the order of the constructed 
-Runge-Kutta scheme $TM^{n-2}R$, for which $M$ is an SSPRK($s$,$q$,$p$) 
-method, is indeed equal to the effective order $q$ of method $M$. 
-For simplicity we call the $TM^{n-2}R$ scheme as \emph{ESSPRK-scheme}. 
-A convergence study is performed on a smooth nonlinear ode problem. 
-Also we show that the ESSP-scheme inherits the properties of the 
-SSPRK($s,q,p$) method. 
-In particular, the time-step restriction of the ESSPRK-scheme is the same 
-with that of the main method $M$. 
-This is demonstrated by showing the effect of the SSP coefficient on 
-Burgers' equation.
+In this section we numerically verify the properties of the
+constructed scheme $TM^{n-2}R$, where $M$ is an SSPRK($s,q,p$) and
+$R$ and $T$ are its associated SSP starting and stopping schemes from
+Section~\ref{subsec:starting_finishing}.
+Specifically, we use a convergence study to show that the procedure
+attains order $q$.  We also demonstrate on Burgers' equation that the
+SSP coefficient accurately measures the maximal stepsize for which the
+methods are strong stability preserving.
+
+For simplicity we denote the multi-method $TM^{n-2}R$ procedure as the
+\emph{ESSPRK-scheme}.
 
 \subsection{Convergence study}\label{subsec:convergence}
-We consider the nonlinear equation
+We consider the nonlinear ODE
 \begin{equation}\label{eq:conv_eq}
     u'(t) = -\frac{3}{2}u^{2}(t), \quad t \in [0,1], \quad \text{with } u(0) = 10,
 \end{equation}
-and exact solution
-\begin{equation}\label{eq:conv_eq_exact}
-    u(t) = 10/(15t + 1).
-\end{equation}
-We solve the initial value problem \eqref{eq:conv_eq} and 
-\eqref{eq:conv_eq_exact} using an ESSPRK-scheme where $M$ is an 
+and exact solution $u(t) = 10/(15t + 1)$.
+We solve the initial value problem \eqref{eq:conv_eq}
+using an ESSPRK-scheme where $M$ is an 
 ESSPRK($s,q,p$) method for $q = 3, 4$ and $p = 2$.
-The stages of the permutation methods were kept as low as possible, thus 
-we use two stages for a third-effective order method $M$ and four stages for 
-a fourth-effective order method. 
-The solution is computed for $N = 50.2^{k}$ for $k = 0, 1, 2, \dots, 6$ and 
-hence the time-step used is $\Dt = \tfrac{1}{N} = \tfrac{2^{(1-k)}}{100}$ 
-for each computation. 
-The error between the exact solution and the approximation with respect 
+%The stages of the permutation methods were kept as low as possible, thus 
+%we use two stages for a third-effective order method $M$ and four stages for 
+%a fourth-effective order method. 
+The solution is computed for using $N = 50 \cdot 2^{k}$ time steps for
+$k = 0, 1, 2, \dots, 6$.
+% and 
+%hence the time-step used is $\Dt = \tfrac{1}{N} = \tfrac{2^{(1-k)}}{100}$ 
+%for each computation. 
+The error at $t=1$ between the exact solution and the approximation with respect 
 to time-step is shown in Figure~\ref{fig:conv_study} on a logarithmic scale.
-The convergence study was performed for various stages and the results 
-show that the ESSPRK-scheme attends order equal to the effective order of 
-method $M$. 
-An important observation is that the error has order equal to the classical 
-order of the main method and it is only increased when the finishing method 
-is applied.
+The convergence study was performed for various number of stages $s$ and the results 
+show that the ESSPRK-scheme attains an order of accuracy equal to the effective order of 
+method $M$.
+It is important in doing this sort of convergence study that the
+effective order can only be obtained after the finishing method is
+applied.
+Intermediate steps will typically only be order $p$ accurate (the classical
+order of the main method).
 Finally, we note that for a fixed time-step increasing the number of stages
-decreases the error.
+generally decreases the error constant.
 
 \begin{figure}
 	\centering
@@ -52,29 +53,37 @@ decreases the error.
     \label{fig:conv_study}
 \end{figure}
 
-\subsection{Application to nonlinear problems}\label{subsec:nonlinear_problems}
-\subsubsection{Burgers' equation}\label{subsubsec:burgers}
+
+\subsection{Burgers' equation}\label{subsubsec:burgers}
+
 The inviscid Burgers' equation consists of the hyperbolic conservation law
 \begin{equation}\label{eq:HCL}
     U_{t} + f(U)_{x} = 0,
 \end{equation}
 when the flux function $f(U) = \frac{1}{2}U^{2}$. 
 We consider initial data
-\begin{equation}\label{eq:burgers_IC}
-    u(0,x)  = \frac{1}{2} - \frac{1}{4}sin{\pi x},
-\end{equation}
-on a periodic domain $x \in [0,2)$. 
+%\begin{equation}\label{eq:burgers_IC}
+    $U(0,x)  = \frac{1}{2} - \frac{1}{4}\sin{\pi x}$,
+%\end{equation}
+on a periodic domain $x \in [0,2)$.
 The solution advances to the right where it eventually exhibits a shock. 
 We perform a semi-discetisation of $f(U)_{x}$ using an upwind approximation 
-\cite{Ketcheson2009} that gives
+\textbf{[Cite sth, Laney or LeVeque's red book?]} that gives
 \begin{equation}\label{eq:burgers_flux}
-    f(U)_{x} \approx \frac{1}{\Dt}\bigl(f(u_{i}) - f(u_{i-1})\bigr).
+    f(U)_{x} \approx \frac{1}{\Dt}\bigl(f(U_{i}) - f(U_{i-1})\bigr).
 \end{equation}
+\colintodo{so much wrong with this sentence!}
+\sout{
+The above time discretisation is SSP when coupled with Forward Euler method
+}
+The spatial discretization is total-variation-diminishing (TVD) when
+coupled with Forward Euler method under time restriction
+$\Dt \leq {\Dt}_{\text{FE}} = (1 / \|U(0,x)\|_{\infty}) \Delta x$
+\textbf{[Cite]}.
+The SSP theory predicts that using a time-discretization with a SSP
+coefficient $\sspcoef$, the solution will be TVD for $\Dt \leq
+\sspcoef {\Dt}_{\text{FE}}$.
 
-The above time discretisation is SSP when coupled with Forward Euler method 
-under time restriction $\Dt \leq {\Dt}_{FE} = \frac{\Delta x}{\|u(0,x)\|_{\infty}}$. 
-We integrate to time $t_{f} = 2.3$ with $m = 256$ points in space.
-\newline
 
 \begin{figure}[t!]
     \centering
@@ -89,8 +98,11 @@ We integrate to time $t_{f} = 2.3$ with $m = 256$ points in space.
 \end{figure}
 
 Burgers' equation was solved using an ESSPRK-scheme with time-step 
-restriction $\Dt \leq \sigma{\Dt}_{FE}$, where $\sigma$ indicates the size 
+restriction $\Dt \leq \sigma{\Dt}_{\text{FE}}$, where $\sigma$ indicates the size 
 of the time step. 
+We integrate to time $t_{f} = 2.3$
+\colintodo{double-check this $t_f$}
+with $m = 256$ points in space.
 Figure \ref{fig:burgers_cont} shows that if $\sigma$ stays below the SSP 
 coefficient of the method $M$, then no oscillations are observed. 
 If this stability limit is violated, then oscillations appear. 
@@ -100,7 +112,7 @@ satisfied by computing the the total-variation (TV) norm at each step of the
 computation process. 
 This indicates that the ESSPRK-scheme inherits the time-step restriction 
 from the SSP coefficient of the main method $M$.
-\newline
+
 
 We also consider the Burgers' equation with discontinuous data
 \begin{equation}\label{eq:burgers_discont_IC}
