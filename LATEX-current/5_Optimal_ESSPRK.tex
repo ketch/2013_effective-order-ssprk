@@ -220,10 +220,23 @@ Note that for either case of effective order $q=3$ or $q=4$, the algebraic expre
 $\beta$ up to order $q-1$ are already found by the optimization procedure of 
 the main method (see Table~\ref{tab:effective_OCs}). 
 However, the values of the order $q$ elementary weights on $\beta$ are not known; these 
-are $\beta_3$ and $\beta_4$ for third effective order and $\beta_5$ to $\beta_8$ for fourth 
-effective order. 
+are $\beta_3$ and $\beta_4$ for third effective order and
+$\beta_5$, $\beta_6$, $\beta_7$ and $\beta_8$ for fourth
+effective order.
+From Table~\ref{tab:rho_tau_OCs}, we see that both the $R$ and $T$
+methods depend on these parameters.
+Our approach is to optimize for both methods at once, where we solve a
+modified version of the optimization problem \eqref{eq:SSP_opt} where
+we simultaneously maximize both SSP coefficients subject to the
+constraints given in \eqref{eq:R_T_OCs} and well as
+$\beta\beta^{-1}(t) = 1$ for all trees $t$ with $r(t) \le q$.
+\colintodo{Sort out whether we need this $\beta\beta^{-1}$ condition.}
+In practice, we maximize the objective function $\min(r_1,r_2)$
+\textbf{(Or perhaps $\log(r_1) + \log(r_2)$ instead)}
+where $r_1$ and $r_2$ are the absolute radii of monotonicity of the
+two Runge--Kutta schemes.
 
-\colintodo{describe the simultaneous opt problem here.}
+
 \sout{
 One can obtain these values by finding the relevant methods $S$ and $S^{-1}$. 
 It is sufficient to satisfy $S^{-1}S = I$ up to order $q$ and we can construct an optimization 
@@ -299,18 +312,15 @@ In such case they achieve second order accuracy.
     \label{tab:RT_stages}
 \end{table}
 
-In general, the starting and finishing methods have minimal computational and storage cost 
-especially if we consider that they replace the action of two methods. 
-This is in contrast with their large importance in raising the order of the $TM^{n-2}R$ scheme 
-from low classical order to higher effective order of method $M$.
-If accurate values are needed at any time other than the final time, the computation must invoke 
-the stopping method, and then the starting method to start up again. 
-\todo{This should be explained earlier too, with just special notice here because its $RT$ not $SS^{-1}$}
 
 Tables \ref{tab:ESSPRK(4,4,2)_scheme} and \ref{tab:ESSPRK(4,4,3)_scheme} show the coefficients 
-\yiannistodo{Is it better to  write them in terms of fractions?}
 of the effective SSP schemes in the case the main method is ESSPRK($4,4,2$) and 
 ESSPRK($4,4,3$), respectively. 
+
+It is important to note that in practice, if accurate values are
+needed at any time other than the final time, the computation must
+invoke the stopping method, and then the starting method to start up
+again.
 
 \begin{sidewaystable}
     \centering
