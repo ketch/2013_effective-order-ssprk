@@ -43,10 +43,10 @@ decreases the error.
 
 \begin{figure}
 	\centering
-     \subfloat[SSPRK($s,3,2$)]{\label{fig:burgers_cont_a}
+     \subfloat[SSPRK($s,3,2$)]{\label{fig:conv_study_a}
      \includegraphics[width=0.5\textwidth]{Pictures/convergence_3rd_ord}}
-     \subfloat[SSPRK($s,4,2$)]{\label{fig:burgers_cont_b}
-    \includegraphics[width=0.5\textwidth]{Pictures/convergence_4th_ord_(2)}}
+     \subfloat[SSPRK($s,4,2$)]{\label{fig:conv_study_b}
+    \includegraphics[width=0.5\textwidth]{Pictures/convergence_4th_ord}}
     \caption{Convergence of $TM^{n-2}R$ Runge-Kutta scheme when (a) $M$ 
     is an SSPRK($s,3,2$) method and (b) $ M $ is an SSPRK($s,4,2$) method.}
     \label{fig:conv_study}
@@ -78,13 +78,16 @@ We integrate to time $t_{f} = 2.3$ with $m = 256$ points in space.
 
 \begin{figure}[t!]
     \centering
-    \subfloat[$\sigma = $]{\label{fig:burgers_cont_a}
+    \subfloat[$\sigma = 6.0$]{\label{fig:burgers_cont_a}
       \includegraphics[width=0.5\textwidth]{Pictures/burgers_cont_tvd}}
-    \subfloat[$\sigma =$]{\label{fig:burgers_cont_b}
+    \subfloat[$\sigma = 6.68$]{\label{fig:burgers_cont_b}
       \includegraphics[width=0.5\textwidth]{Pictures/burgers_cont_no_tvd}}
     \caption{Solution of Burgers' equation with continuous initial data, using a 
     $TM^{n-2}R$ scheme, where $ M $ is SSPRK($10,4,2$). 
-    The SSP coefficient is $\sspcoef =$.}
+    The SSP coefficient is $\sspcoef = 6.0$. 
+    Here $TV$ denotes the difference between the final and initial solution in 
+    the $TV$-norm. 
+    A positive difference shows a violation of the TVD condition.}
     \label{fig:burgers_cont}
 \end{figure}
 
@@ -122,22 +125,23 @@ starting procedures.
 
 \begin{figure}[t!]
     \centering
-    \subfloat[$\sigma = $]{\label{fig:burgers_discont_a}
+    \subfloat[$\sigma = 6.0$]{\label{fig:burgers_discont_a}
       \includegraphics[width=0.5\textwidth]{Pictures/burgers_discont_tvd.eps}}
-    \subfloat[$\sigma = $]{\label{fig:burgers_discont_a}
+    \subfloat[$\sigma = 6.18$]{\label{fig:burgers_discont_a}
       \includegraphics[width=0.5\textwidth]{Pictures/burgers_discont_no_tvd.eps}}
     \caption{Solution of Burgers' equation with discontinuous initial data, using a 
-    $TM^{n-2}R$ scheme, where $M$ is SSPRK($4,4,3$) method. 
-    The SSP coefficient is $ \sspcoef = $.}
+    $TM^{n-2}R$ scheme, where $M$ is SSPRK($10,4,2$) method. 
+    The SSP coefficient is $ \sspcoef = 6.0$.
+    Here $TV$ denotes the difference between the final and initial solution in 
+    the $TV$-norm. 
+    A positive difference shows a violation of the TVD condition.}
     \label{fig:burgers_discont}
 \end{figure}
 
 \begin{figure}[t!]
     \centering
-    \subfloat[]{\label{fig:burgers_starting_method_R}
-      \includegraphics[width=0.5\textwidth]{Pictures/burgers_discont_tvd.eps}}
-    \subfloat[]{\label{fig:burgers_starting_method_S}
-      \includegraphics[width=0.5\textwidth]{Pictures/burgers_discont_no_tvd.eps}}
+	TODO
+	\yianniscomment{This should be cut out since if we optimize directly for R and T, we are not mentioning S.}
     \caption{Solution of Burgers' equation with discontinuous initial data 
     after one step, using a $TM^{n-2}R$ scheme, where $M$ is an 
     SSPRK($5,4,2$) method. The solution is advanced one step by using (a) $R$ and 
