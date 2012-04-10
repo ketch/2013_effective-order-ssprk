@@ -68,11 +68,13 @@ We consider initial data
 on a periodic domain $x \in [0,2)$.
 The solution advances to the right where it eventually exhibits a shock. 
 We perform a semi-discetisation of $f(U)_{x}$ using an upwind approximation 
-\textbf{[Cite sth, Laney or LeVeque's red book?]} that gives
+\textbf{[Cite sth, Laney or LeVeque's red book?]}
+\yianniscomment{This appears in this reference. I don't think LeVeque } that gives
 \begin{equation}\label{eq:burgers_flux}
     f(U)_{x} \approx \frac{1}{\Dt}\bigl(f(U_{i}) - f(U_{i-1})\bigr).
 \end{equation}
 \colintodo{so much wrong with this sentence!}
+\yiannistodo{I see your point. I wanted to refer to the full scheme (FE + TVD spatial discr.) which is SSP}
 \sout{
 The above time discretisation is SSP when coupled with Forward Euler method
 }
@@ -94,9 +96,9 @@ coefficient $\sspcoef$, the solution will be TVD for $\Dt \leq
     \caption{Solution of Burgers' equation with continuous initial data, using a 
     $TM^{n-2}R$ scheme, where $ M $ is SSPRK($10,4,2$). 
     The SSP coefficient is $\sspcoef = 6.0$. 
-    Here $TV$ denotes the difference between the final and initial solution in 
-    the $TV$-norm. 
-    A positive difference shows a violation of the TVD condition.}
+    Here $TV$ denotes the difference between the $TV$-norms of the final and 
+    initial solution.
+    A positive sign indicates a violation of the TVD condition.}
     \label{fig:burgers_cont}
 \end{figure}
 
@@ -144,9 +146,9 @@ starting procedures.
     \caption{Solution of Burgers' equation with discontinuous initial data, using a 
     $TM^{n-2}R$ scheme, where $M$ is SSPRK($10,4,2$) method. 
     The SSP coefficient is $ \sspcoef = 6.0$.
-    Here $TV$ denotes the difference between the final and initial solution in 
-    the $TV$-norm. 
-    A positive difference shows a violation of the TVD condition.}
+    Here $TV$ denotes the difference between the $TV$-norms of the final and 
+    initial solution.
+    A positive sign indicates a violation of the TVD condition.}
     \label{fig:burgers_discont}
 \end{figure}
 
