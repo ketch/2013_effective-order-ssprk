@@ -55,7 +55,7 @@ lemma.
     		\begin{align}
     			b_i & > 0 \mbox{ for all } i, \label{eq:DavidsLemma_a} \\
     			\sum_{i=1}^n b_i & = 1, \label{eq:DavidsLemma_b} \\
-    			\sum_{i=1}^n b_i v_i^2 & = \left(\sum_{i=1}^n b_i v_i \right)^2. \label{eq:DavidsLemma_c}
+    			\sum_{i=1}^n b_i v_i^2 & = \biggl(\sum_{i=1}^n b_i v_i\biggr)^{\!\! 2}. \label{eq:DavidsLemma_c}
     		\end{align}
     	\end{subequations}
     	Then all $v_i$ are equal but at most one; in other words, there exists 
@@ -68,15 +68,15 @@ lemma.
     Then by collecting terms in powers of $v_k$, \eqref{eq:DavidsLemma_c} 
     can be written
     \begin{equation*}
-    		b_k(1-b_k)v_k^2 - 2b_k v_k\sum_{i \neq k}b_i v_i + \sum_{i \neq k}b_i v_i^2 - \left(\sum_{i \neq k}b_i v_i\right)^2 = 0.  		
+    		b_k(1-b_k)v_k^2 - 2b_k v_k\sum_{i \neq k}b_i v_i + \sum_{i \neq k}b_i v_i^2 - \biggl(\sum_{i \neq k}b_i v_i\biggr)^{\!\! 2} = 0.  		
 	\end{equation*}
 	This is a quadratic equation in $v_k$ whose roots are real if and only if
 	\begin{equation*}
-    		4b_k^2\left(\sum_{i \neq k}b_i v_i\right)^2 - 4b_k(1-b_k)\left(\sum_{i \neq k}b_i v_i^2 - \left(\sum_{i \neq k}b_i v_i\right)^2\right) \geq 0.
+    		4b_k^2\biggl(\sum_{i \neq k}b_i v_i\biggr)^{\!\! 2} - 4b_k(1-b_k)\Biggl(\sum_{i \neq k}b_i v_i^2 - \biggl(\sum_{i \neq k}b_i v_i\biggr)^{\!\! 2}\Biggr) \geq 0.
 	\end{equation*}
 	Expanding and canceling terms yields
 	\begin{equation*}
-    (1-b_k)\sum_{i \neq k}b_i v_i^2 - \left(\sum_{i \neq k}b_i v_i\right)^2 \leq 0.
+    (1-b_k)\sum_{i \neq k}b_i v_i^2 - \biggl(\sum_{i \neq k}b_i v_i\biggr)^{\!\! 2} \leq 0.
 	\end{equation*}
 	By \eqref{eq:DavidsLemma_b}, $1-b_k = \sum_{j \ne k}b_j$, so we have
 	\begin{equation*}
@@ -110,110 +110,116 @@ lemma.
     Thus it is sufficient to show that any method with all non-negative weights
     cannot satisfy the conditions of effective order five and classical order two.
 
-    Assume $\bm{b} > 0$ and consider the order conditions for effective order five and classical 
-    order two for the main method, listed in Table~\ref{tab:effective_OCs}.  
+    Assume $\bm{b} > 0$ and consider the five--effective order and two--classical 
+    order conditions for the main method, listed in Table~\ref{tab:effective_OCs}.  
     We make use of the following subset of those conditions:
     \begin{subequations}\label{eq:theorem_cond}
-        \begin{align}
-            \bm{b}^{T}\bm{e} = 1 &\quad \bm{b}^{T}A\bm{c} = \frac{1}{6} \label{eq:theorem_conda} \\
-            \frac{1}{2}\bm{b}^{T}\bm{c}^{2} - \frac{1}{6} = \beta_{2} &\quad \frac{1}{4}\bm{b}^{T}\bm{c}^{4} - \bm{b}^{T}C^{2}A\bm{c} + \bm{b}^{T}(A\bm{c})^{2} &= \beta_{2}^{2}, \label{eq:theorem_condb}
-        \end{align}
-    \end{subequations}
-    where the powers on vectors are understood component-wise. 
-    We also make use of the following two quantities:
-    \begin{displaymath} 
-        \bm{v} = \frac{1}{2}\bm{c}^{2} - A\bm{c} \quad \bm{w} = \bm{v}^{2} - \beta_{2}\bm{v}.
-    \end{displaymath}
-    Note that, for any explicit method, $\bm{v}\ne 0$, since explicit methods
-    cannot have stage order two \cite{Kraaijevanger1991}.
+    		\begin{align}
+    			\bm{b}^T\bm{e} & = 1 \label{eq:theorem_cond_a} \\
+             	\bm{b}^TA\bm{c} &= \frac{1}{6} \label{eq:theorem_cond_b} \\
+            	\frac{1}{2}\bm{b}^T\bm{c}^2 - \frac{1}{6} &= \beta_2 \label{eq:theorem_cond_c} \\
+            	\frac{1}{4}\bm{b}^T\bm{c}^4 - \bm{b}^TC^2A\bm{c} + \bm{b}^T(A\bm{c})^2 &= (\beta_2)^2, \label{eq:theorem_cond_d}
+        	\end{align}
+	\end{subequations}
+	where the powers on vectors are understood component-wise. 
+	Considering the following quantity
+	\begin{equation*} 
+		\bm{v} = \frac{1}{2}\bm{c}^2 - A\bm{c},
+	\end{equation*}
+	then substituting in \eqref{eq:theorem_cond_c} and using 
+	\eqref{eq:theorem_cond_b} gives
+	\begin{equation}\label{eq:btv}
+		\beta_2 = \bm{b}^T\bm{v}.
+	\end{equation}
+	Also, \eqref{eq:theorem_cond_d} can be expressed as
+	\begin{equation}\label{eq:btv2}
+		(\beta_2)^2 = \bm{b}^T\bm{v}^2.
+	\end{equation}
+	Squaring \eqref{eq:btv} yields
+	\begin{align*}
+		(\beta_2)^2 &= \beta_2\bm{b}^T\bm{v} \\
+				        &= \bm{b}^T\beta_2\bm{v}
+	\end{align*}
+	and subtracting \eqref{eq:btv2} gives
+	\begin{equation}\label{eq:beta_2_subtraction}
+		\bm{b}^T(\bm{v}^2 - \beta_2\bm{v}) = 0.
+	\end{equation}
+	We let
+	\begin{equation*} 
+		\bm{w} = \bm{v}^{2} - \beta_{2}\bm{v}
+	\end{equation*}    
+	and thus \eqref{eq:beta_2_subtraction} can be written as 
+	\begin{equation}\label{eq:btw}
+		\bm{b}^T\bm{w} = 0.
+	\end{equation}
+	First consider the case that $\beta_2 = 0$. 
+	Then $\bm{b}^T\bm{v}^2$, but $\bm{v }\neq 0$ because explicit methods 
+	cannot have stage order two \cite{Ruuth2002}. This implies that $b_j \leq 0$ 
+	for some $j$, which is a contradiction. Hence $\beta_2 \neq 0$.
+	
+	Since $\bm{b}>0$, then \eqref{eq:btw} implies that either 
+	$\bm{w} = \bm{0}$, or there is a least one negative and at least one positive 
+	element in $\bm{w}$.
+	We will show that neither can be true.
+	
+	\paragraph{Case 1: $\bm{w} = \bm{0}$.}
+	We have $v_i^2 - \beta_2 v_i = 0$ for all $i \in \{1, \dots, s\}$, so either 
+	$v_i = 0$ or $v_i = \beta_2$.
+	Let the set $I = \{i : v_i = \beta_2\} \subseteq \{1, \dots, s\}$; then 
+	$v_j = 0$ for $j \neq I$.
+	Then \eqref{eq:btv} implies 
+	\begin{equation*}
+		\beta_2 = \sum_{i=1}^s b_i v_i = \sum_{i \in I}b_i\beta_2 = \beta_2\sum_{i \in I}b_i.
+	\end{equation*}
+	Note that $v_1 = 0$ because the first row of matrix $A$ is identically zero. 
+	Thus $\sum_{i\in I}b_i < \sum_{i=1}^s b_i$ and \eqref{eq:theorem_cond_a} 
+	implies
+	\begin{equation*}
+		\beta_2\sum_{i \in I}b_i< \beta_2,
+	\end{equation*} 
+	which leads to a contradiction.
+	
+	\paragraph{Case 2: $\bm{w} \neq \bm{0}$.}
+	Then there exist indices $i, j \in \{2, \dots, s\}$ such that $w_i < 0 < w_j$.
+	We will show that $0 < v_i < \beta_2 < v_j$.
 
-    First we show that $\beta_2 \ne 0$.  Suppose $\beta_2=0$.
-    Then \eqref{eq4.4d} becomes
-    \begin{equation*}
-        \frac{1}{4}\bm{b}^{T}\bm{c}^{4} - \bm{b}^{T}C^{2}A\bm{c} + \bm{b}^{T}(A\bm{c})^{2} = 0,
-    \end{equation*}
-    or equivalently
-    \begin{equation*}
-        \bm{b}^{T}\bm{v}^{2} = 0,
-    \end{equation*}
-    which is a contradiction since $\bm{v}\ne0$ and $\bm{b}>0$.
-
-    Substituting \eqref{eq4.4b} in \eqref{eq4.4c} and collecting terms gives 
-    \begin{align} \label{eq:btv}
-        \beta_{2} = \bm{b}^{T}\bm{v}.
-    \end{align}
-    Squaring yields
-    \begin{equation*}%\label{eq4.5}
-        \beta_{2}^{2} = \bm{b}^{T}\Bigl(\frac{1}{2}\bm{b}^{T}\bm{c}^{2} - \frac{1}{6}\Bigr)\Bigl(\frac{1}{2}\bm{c}^{2} - A\bm{c}\Bigr),
-    \end{equation*}
-    %Rewriting \eqref{eq4.4d} and subtracting from \eqref{eq4.5} gives
-    and subtracting \eqref{eq4.4d} gives
-    \begin{equation*}
-        \bm{b}^{T}\biggl(\Bigl(\frac{1}{2}\bm{c}^{2} - A\bm{c}\Bigr)^{2} - \Bigl(\frac{1}{2}\bm{b}^{T}\bm{c}^{2} - \frac{1}{6}\Bigr)\Bigl(\frac{1}{2}\bm{c}^{2} - A\bm{c}\Bigr)\biggr) = 0.
-    \end{equation*}
-    This can be written as
-    \begin{equation}\label{eq4.6}
-        \bm{b}^{T}\bm{w} = 0.
-    \end{equation}
-    Since $\bm{b}>0$, then \eqref{eq4.6} implies that either $\bm{w} = \bm{0}$,
-    or there is a least one negative and at least one positive element in $\bm{w}$.
-
-\paragraph{Case 1: $\bm{w} = \bm{0}$.}
-
-We have $v_{i}^{2} - \beta_{2}v_{i} = 0$ for all $i \in \{1,\dots,s\}$, so either $v_{i} = 0$ or $v_{i} = \beta_{2}$.
-%The case that $\bm{v} = 0$ is equivalent with a Runge-Kutta method to have stage order two. This means that for a particular time $t = t^{n} + c_{i}\Delta t$, for $i \in \{1, \dots, s\}$, the stage $\textbf{Y}_{i}$ will be at least a second order approximation to the solution at that time.
-%For an explicit Runge-Kutta method, the stage $\textbf{Y}_{2} = \bm{u}^{n} + \Dt\bm{F}(\bm{u}^{n})$ cannot have stage order more than one, hence not all the components of $\bm{v}$ are zero. 
-Let $I = \{ i \in\{1,\dots,s\} | v_{i} = \beta_{2} \}$; then $v_{j} = 0$ for $j \neq I$. 
-Then \eqref{eq:btv} implies 
-$$ \beta_{2} = \sum_{i=1}^{s}b_{i}v_{i} = \sum_{i \in I}b_{i}\beta_{2} = \beta_{2}\sum_{i \in I}b_{i}.$$
-Note that $v_{1} = 0$ because the first row of matrix $A$ is identically zero. 
-Thus $\sum_{i\in I}b_i < \sum_{i=1}^s b_i$, so \eqref{eq4.4a} implies
-$$\beta_{2}\sum_{i \in I}b_{i}< \beta_{2},$$
-which is a contradiction.
-
-\paragraph{Case 2: $\bm{w} \neq \bm{0}$.}
-Then there exist $i,j$ such that $w_i<0<w_j$.
-     We will show that $0 < v_{i} < \beta_{2} < v_{j}$.
-
-    Observe that $w_i<0$ means $v_{i}^{2} < \beta_{2}v_{i}$. Therefore,
-    \begin{equation}\label{eq4.7}
-        (\beta_{2})^{2} = \sum_{j=1}^{s}b_{j}v_{j}^{2} < \sum_{j \neq i}^{s}b_{j}v_{j}^{2} + b_{i}\beta_{2}v_{i}.
-    \end{equation}
-    The inequality \eqref{eq4.7} can be written as
-    \begin{equation}\label{eq4.8}
-        \begin{split}
-            \beta_{2}\sum_{j=1}^{s}b_{j}v_{j} &< \sum_{j \neq i}^{s}b_{j}v_{j}^{2} + \beta_{2}b_{i}v_{i} \\
-            \beta_{2}\sum_{j \neq i}^{s}b_{j}v_{j} &< \sum_{j \neq i}^{s}b_{j}v_{j}^{2} \\
-            \beta_{2}\sum_{j \neq i}^{s}b_{j}v_{j} &< (\beta_{2})^{2}.
-        \end{split}
+    Observe first that $w_i < 0$ results to $v_i^2 < \beta_2 v_i$. 
+    Therefore,
+    \begin{equation}\label{eq:case_2}
+    		(\beta_2)^2 = \sum_{j=1}^s b_j v_j^2 < \sum_{j \neq i}^s b_j v_j^2 + \beta_2 b_i v_i
+    	\end{equation}
+    	The inequality \eqref{eq:case_2} can be written as
+    	\begin{equation}\label{case_2_b}
+    		\beta_2\sum_{j=1}^s b_j v_j < \sum_{j \neq i}^s b_j v_j^2 + \beta_2 b_i v_i
+    	\end{equation}
+    	or 
+    	\begin{equation}\label{case_2_c}
+            \beta_2\sum_{j \neq i}^s b_j v_j < \sum_{j \neq i}^s b_j v_j^2 < (\beta_2)^2.
     \end{equation}
     Suppose that $v_{i} < 0$. Then
     \begin{equation*}
-        \beta_{2} = \sum_{j=1}^{s}b_{j}v_{j} < \sum_{j \neq i}^{s}b_{j}v_{j}
-    \end{equation*}
-    From \eqref{eq4.8} we have
-    \begin{equation*}
-            \beta_{2}\beta_{2} < \beta_{2}\sum_{j \neq i}^{s}b_{j}v_{j} < (\beta_{2})^{2},
-    \end{equation*}
-    which gives a contradiction. Since $v_{i} \neq 0$, then $v_{i} > 0$ and in this case $0 < v_{i} < \beta_{2}$.
-
-    Note that $w_{j} > 0$, means $v_{j}^{2} > \beta_{2}v_{j}$. If $v_{j} < 0$, then $v_{j} < \beta_{2}$ and $v_{j} < 0 < v_{i} < \beta_{2}$. Hence $\beta_{2}$ is larger than all components of $\bm{v}$. This leads to a contradiction since
-    \begin{equation*}
-            \beta_{2} = \sum_{k=1}^{s}b_{k}v_{k} < \sum_{k=1}^{s}b_{k}\beta_{2} < \beta_{2}.
-    \end{equation*}
-    Since $v_{j}\ne0$, therefore $v_{j} > 0$ which gives $v_{j} > \beta_{2}$.
-
-    In summary, we have shown that
-    \begin{equation}\label{eq4.9}
-        v_{1} = 0 \quad \text{ and } \quad 0 < v_{i} < \beta_{2} < v_{j}, \text{ for } i,j \in \{2,\dots,s\}.
+    		\beta_2 = \sum_{j=1}^s b_j v_j < \sum_{j \neq i}^s b_j v_j,
+    	\end{equation*}
+    	hence a contradiction. 
+    	Since $v_i \neq 0$, then $v_i > 0$ and in this case $0 < v_i < \beta_2$.
+    	
+    	Similarly, note that $w_j > 0$ implies $v_j^2 > \beta_2 v_j$. 
+    	If $v_j < 0$, then $v_j < \beta_2$ and $v_j < 0 < v_j < \beta_2$. 
+    	Since indices $i, j$ are arbitrary chosen, $\beta_2$ is larger than all 
+    	components of $\bm{v}$. 
+    	This leads to a contradiction since
+    	\begin{equation*}
+    		\beta_2 = \sum_{k=1}^s b_k v_k < \sum_{k=1}^s b_k\beta_2 < \beta_2.
+    	\end{equation*}
+    	We have $v_j \neq 0$, therefore $v_j > 0$ which gives $v_j > \beta_2$.
+    	
+    	In summary, we have shown that
+    	\begin{equation}\label{eq:beta_2_condition}
+    		v_1 = 0 \quad \text{ and } \quad 0 < v_i < \beta_2 < v_j, \text{ for } i, j \in \{2, \dots, s\}.
     \end{equation}
-    By Lemma~\ref{Davids_lemma}, all $v_{i}$ must be equal except for one.
-    Let that component be $v_{k}$. If $k = 1$, then $v_{i} = \delta
-   $ {\bf what is $\delta$?} for $i,j \in \{2,\dots,s\}$. If $k \neq 1
-   $, then $v_{i} = 0$ for $i \in \{2,\dots,s\}\setminus\{k\}$. Both
-    cases contradict with \eqref{eq4.9}. %Thus, the equations \eqref{eq4.4}
-    %cannot be solved simultaneously and no Runge-Kutta method of
-    %effective order five and classical order two exists with positive weights.
-    %{\bf what about classical order less than 2?}
-
+    By Lemma~\ref{Davids_lemma}, all $v_i$ must be equal except for one.
+    Let that component be $v_k$. 
+    If $k = 1$, then all $v_i$ are equal for $i, j \in \{2, \dots, s\}$. 
+    If $k \neq 1$, then $v_i = 0$ for $i \in \{2,\dots,s\}\setminus\{k\}$. 
+    Both cases contradict with \eqref{eq:beta_2_condition}.
 \end{proof}
