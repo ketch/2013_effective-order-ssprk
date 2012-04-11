@@ -204,6 +204,28 @@ Table~\ref{tab:rho_tau_OCs}.
 %\yiannistodo{Replace $\beta_2$ since it is known in both 3rd and 4th order}
 % colin: no: beta_2 is different in each case
 
+\begin{table}
+	\centering
+	\begin{tabular}{lcl}
+		\hline
+    		\multicolumn{1}{c}{$\rho(t) = (\beta\alpha)(t)$} & & \multicolumn{1}{c}{$(\tau\beta)(t) = \alpha(t)$} \\
+    		\hline
+    		 $\rho_1 = \alpha_1$ & & $\tau_1 = \alpha_1$ \\
+    		$\rho_2 = \alpha_2 + \beta_2$ & & $\tau_2 = \alpha_2 - \beta_2$ \\
+    		$\rho_3 = \alpha_3 + \beta_3$ & & $\tau_3 = \alpha_3 - 2\alpha_1\beta_2 - \beta_3$ \\
+    		$\rho_4 = \alpha_4 + \alpha_1\beta_2 + \beta_4$ & & $\tau_4 = \alpha_4 - \alpha_1\beta_2 - \beta_4$ \\
+                \hdashline[2pt/3pt]
+		$\rho_5 = \alpha_5 + \beta_5$ & & $\tau_5 = \alpha_5 - 3\alpha_1\beta_2^2 - 3\alpha_1\beta_3 - \beta_5$ \\
+		$\rho_6 = \alpha_6 + \alpha_2\beta_2 + \beta_6$ & & $\tau_6 = \alpha_6 - (\alpha_1^2 + \alpha_2 -\beta_2)\beta_2 -\alpha_1\beta_3 - \alpha_1\beta_4 - \beta_6$ \\
+		$\rho_7 = \alpha_7 + \alpha_1\beta_3 + \beta_7$ & & $\tau_7 = \alpha_7 - 2\alpha_1\beta_4 - \alpha_1^2\beta_2 - \beta_7$ \\
+		$\rho_8 = \alpha_8 + \alpha_1\beta_4 + \alpha_2\beta_2 + \beta_8$ & & $\tau_8 = \alpha_8 - \alpha_1\beta_4 - \alpha_2\beta_2 + \beta_2^2 -  \beta_8$
+  	\end{tabular}
+  	\caption{Order conditions on $\rho$ and $\tau$ up to fourth effective order for starting 
+  	and finishing methods $R$ and $T$, respectively.
+        The upper block represents the third 
+  	effective order conditions.}
+  	\label{tab:rho_tau_OCs}
+\end{table}
 
 
 \subsubsection{Optimizing the staring and finishing methods}\label{subsubsec:opt_methods}
@@ -237,66 +259,42 @@ where $r_1$ and $r_2$ are the absolute radii of monotonicity of the
 two Runge--Kutta schemes.
 
 
-\sout{
-One can obtain these values by finding the relevant methods $S$ and $S^{-1}$. 
-It is sufficient to satisfy $S^{-1}S = I$ up to order $q$ and we can construct an optimization 
-problem that minimizes the magnitude of the coefficients appearing in these two methods.
-Care must be taken so that the conditions on $\beta$ given in Table~\ref{tab:effective_OCs} for the third and fourth effective order also hold. 
-}
+% One can obtain these values by finding the relevant methods $S$ and $S^{-1}$. 
+% It is sufficient to satisfy $S^{-1}S = I$ up to order $q$ and we can construct an optimization 
+% problem that minimizes the magnitude of the coefficients appearing in these two methods.
+% Care must be taken so that the conditions on $\beta$ given in Table~\ref{tab:effective_OCs} for the third and fourth effective order also hold. 
 
-\begin{table}
-	\centering
-	\begin{tabular}{lcl}
-		\hline
-    		\multicolumn{1}{c}{$\rho(t) = (\beta\alpha)(t)$} & & \multicolumn{1}{c}{$(\tau\beta)(t) = \alpha(t)$} \\
-    		\hline
-    		 $\rho_1 = \alpha_1$ & & $\tau_1 = \alpha_1$ \\
-    		$\rho_2 = \alpha_2 + \beta_2$ & & $\tau_2 = \alpha_2 - \beta_2$ \\
-    		$\rho_3 = \alpha_3 + \beta_3$ & & $\tau_3 = \alpha_3 - 2\alpha_1\beta_2 - \beta_3$ \\
-    		$\rho_4 = \alpha_4 + \alpha_1\beta_2 + \beta_4$ & & $\tau_4 = \alpha_4 - \alpha_1\beta_2 - \beta_4$ \\\\
-		$\rho_5 = \alpha_5 + \beta_5$ & & $\tau_5 = \alpha_5 - 3\alpha_1\beta_2^2 - 3\alpha_1\beta_3 - \beta_5$ \\
-		$\rho_6 = \alpha_6 + \alpha_2\beta_2 + \beta_6$ & & $\tau_6 = \alpha_6 - (\alpha_1^2 + \alpha_2 -\beta_2)\beta_2 -\alpha_1\beta_3 - \alpha_1\beta_4 - \beta_6$ \\
-		$\rho_7 = \alpha_7 + \alpha_1\beta_3 + \beta_7$ & & $\tau_7 = \alpha_7 - 2\alpha_1\beta_4 - \alpha_1^2\beta_2 - \beta_7$ \\
-		$\rho_8 = \alpha_8 + \alpha_1\beta_4 + \alpha_2\beta_2 + \beta_8$ & & $\tau_8 = \alpha_8 - \alpha_1\beta_4 - \alpha_2\beta_2 + \beta_2^2 -  \beta_8$
-  	\end{tabular}
-  	\caption{Order conditions on $\rho$ and $\tau$ up to fourth effective order for starting 
-  	and finishing methods $R$ and $T$, respectively (the upper block represents the third 
-  	effective order conditions).}
-  	\label{tab:rho_tau_OCs}
-\end{table}
+
 
 \subsection{Resulting schemes}\label{subsec:resulting_schemes}
 We were able to construct starting and finishing schemes for each main method, with an SSP 
 coefficient at least as large as that of the main method.
 For each order, effective order, and number of stages, several extra
 stages were typically required to satisfy the order conditions and SSP
-conditions, as shown in Table~\ref{tab:numStagesRT}.
+conditions, as shown in Table~\ref{tab:RT_stages}.
+
+\sout{
+This constraint does not allow these methods to have the same number of stages as the main method.
+}
+\colintodo{you have counterexamples in the table!}
+Specifically if the main method is ESSPRK($s,3,2$) the starting and finishing methods have 
+$s+1$ and $s$ stages, respectively. 
+The results in the case of fourth effective order are summarized in Table~\ref{tab:RT_stages}. 
+The starting and finishing schemes themselves are first order accurate, except when the main 
+method is ESSPRK($s,4,3$), where 
+they achieve second order accuracy. 
 
 \begin{table}
+    \centering
 	\centering
 	\begin{tabular}{ccc}
           $q$ & $p$ & number of stages each for $R$ and $T$\\
           \hline
-          3 & 2 & s+1??? \\
+          3 & 2 & s+1 ??? \\
           4 & 2 & s+1??? \\
           4 & 3 & s+2???
   	\end{tabular}
-    \caption{Minimum number of stages required for the starting and
-          stopping method $R$ and $T$ for each particular ESSPRK($s,q,p$)
-          main method.  \textbf{maybe we'll want this sort of table eventually}}
-  	\label{tab:numStagesRT}
-\end{table}
-
-This constraint does not allow these methods to have the same number of stages as the main method. 
-Specifically if the main method is ESSPRK($s,3,2$) the starting and finishing methods have 
-$s+1$ and $s$ stages, respectively. 
-The results in the case of fourth effective order are summarized in Table~\ref{tab:RT_stages}. 
-The starting and finishing processors found are first order accurate, except when the main 
-method is ESSPRK($s,4,3$). 
-In such case they achieve second order accuracy. 
-
-\begin{table}
-    \centering
+        \qquad
     \begin{tabular}{|c|c|cccccccc|}
         \hline
         \multicolumn{2}{|c|}{\backslashbox{\hspace{1pt}\vspace{1pt}$p$}{\vspace{-5pt}$s$}} & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ & $11$ \\
@@ -308,7 +306,11 @@ In such case they achieve second order accuracy.
         & $T$ & $5$ & $5$ & $7$ & $8$ & $8$ & $10$ & $11$ & $12$ \\
         \hline
     \end{tabular}
-    \caption{Number of stages for the starting ($R$) and finishing ($T$) methods related to a fourth effective order ESSPRK($s,4,p$) main method.}
+    \caption{Minimum number of stages required for the starting and
+          stopping method $R$ and $T$ for each ESSPRK($s,4,p$)
+          main method.
+          \textbf{TODO: double check these, then decide which table we want.}
+        }
     \label{tab:RT_stages}
 \end{table}
 
