@@ -1,13 +1,17 @@
 TODO list for effective order paper
 ===================================
 
-* conclusion & abstract
+DONE * conclusion 
 
-* fix proofs
+DONE * fix proofs
 
-* Colin: think about the R&T OCs
+DONE * Colin: think about the R&T OCs
 
-* Use R and rho not P in section 5.  (P was already used and doesn't go with rho anyway)
+DONE * Use R and rho not P in section 5.  (P was already used and doesn't go with rho anyway)
+
+
+
+* abstract
 
 * double-check all \alpha\beta and BA orderings are correct.  Section 1,2,3 should be done.
 
