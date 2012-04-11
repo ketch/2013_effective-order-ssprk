@@ -324,10 +324,14 @@ needed at any time other than the final time, the computation must
 invoke the stopping method, and then the starting method to start up
 again.
 
-\begin{sidewaystable}
+%\begin{sidewaystable}
+\begin{table}
+    \setlength{\tabcolsep}{2pt}
     \centering
-    \small
-    \subfloat[ESSPRK($4,4,2$) \label{ESSPRK(4,4,2)_scheme_a}]{
+    %\small
+    \scriptsize
+    %\tiny
+    \subfloat[Main method $M$, ESSPRK($4,4,2$) \label{ESSPRK(4,4,2)_scheme_a}]{
         \begin{tabular}{c | c c c c}
              $0$ & & & & \\
              $0.730429885784024$ & $0.730429885784024$ & & & \\
@@ -347,7 +351,7 @@ again.
              \hline
              & $0.167820631351745$ & $0.266506504585377$ & $0.094688801056065$ & $0.188176112416812$ & $0.282807950590000$ 
         \end{tabular}
-    }\qquad
+    }\\
     \subfloat[Finishing method $T$ \label{ESSPRK(4,4,2)_scheme_c}]{
         \begin{tabular}{c | c c c c c}
 			$0$ & & & & & \\
@@ -359,14 +363,22 @@ again.
              & $0.357516861171415$ & $0.120524890425247$ & $0.051000692115440$ & $0.164348781516878$ & $0.306608774771021$ 
         \end{tabular}
     }
-    \caption{Fourth order effective SSP scheme where the main method $M$ is ESSPRK(4,4,2).}  
+    \caption{ESSPRK(4,4,2): an effective order four SSPRK method with
+      four stages and classical order two with its associated starting
+      and stopping schemes.}
+      %Fourth order effective SSP scheme where the main method $M$ is ESSPRK(4,4,2).}
     \label{tab:ESSPRK(4,4,2)_scheme}
-\end{sidewaystable}
+\end{table}
+%\end{sidewaystable}
 
-\begin{sidewaystable}
+%\begin{sidewaystable}
+\begin{table}
+    \setlength{\tabcolsep}{2pt}
     \centering
-    \small
-    \subfloat[ESSPRK($4,4,2$) \label{ESSPRK(4,4,3)_scheme_a}]{
+    %\small
+    \scriptsize
+    %\tiny
+    \subfloat[Main method $M$, ESSPRK($4,4,3$) \label{ESSPRK(4,4,3)_scheme_a}]{
         \begin{tabular}{c | c c c c}
              $0$ & & & & \\
              $0.601245068769723$ & $0.601245068769723$ & & & \\
@@ -386,7 +398,7 @@ again.
              \hline
              & $0.154940460576884$ & $0.122447291145256$ & $0.196845001120610$ & $0.163510218326813$ & $0.362257028830438$
         \end{tabular}
-    }\qquad
+    }\\
     \subfloat[Finishing method $T$ \label{ESSPRK(4,4,3)_scheme_c}]{
         \begin{tabular}{c | c c c c c c c}
 			$0$ & & & & & \\
@@ -398,7 +410,11 @@ again.
              & $0.182401342203530$ & $0.219128338221130$ & $0.078473760154594$ & $0.238737856798909$ & $0.281258702621837$
         \end{tabular}
     }
-    \caption{Fourth order effective SSP scheme where the main method $M$ is ESSPRK(4,4,3).}
+    \caption{ESSPRK(4,4,3): an effective order four SSPRK method with
+      four stages and classical order three with its associated starting
+      and stopping schemes.}
+    %\caption{Fourth order effective SSP scheme where the main method $M$ is ESSPRK(4,4,3).}
     \label{tab:ESSPRK(4,4,3)_scheme}
-\end{sidewaystable}
+\end{table}
+%\end{sidewaystable}
 
