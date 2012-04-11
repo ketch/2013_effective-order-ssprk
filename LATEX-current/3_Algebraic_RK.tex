@@ -277,8 +277,8 @@ order conditions \cite{Butcher2008_book}.
     		\alpha_{15} &= \tfrac{1}{40} + \tfrac{1}{3}\beta_2 + \tfrac{3}{2}\beta_4 - \beta_6 + \beta_7 + \beta_8 \\
     		\alpha_{16} &= \tfrac{1}{60} + \tfrac{1}{3}\beta_2 - \tfrac{1}{2}\beta_3 + \beta_4 - \beta_7 + 2\beta_8 \\
     		\alpha_{17} &= \tfrac{1}{120}
-    	\end{align*}
-        \vfill
+    	\end{align*}%
+        %\vfill
     \end{multicols}
     \caption{Effective order five conditions of the main and starting methods $M$ and $S$.}
     \label{tab:effective_OCs_on_alpha}
@@ -304,8 +304,12 @@ conditions on $\beta$ can be obtained.
 The resulting effective order conditions for main method $M$ are given
 in Table~\ref{tab:effective_OCs} (up to effective order five).
 The order conditions for the starting method $S$ are also given.
-We can also find the order conditions of $\beta^{-1}$ in terms of the
+We can also find the order conditions of
+%$\beta^{-1}$
+$S^{-1}$
+in terms of the
 $\beta_i$ (see \cite[Table~386(III)]{Butcher2008_book}).
+\colintodo{Do we need a table of $\beta_i^{-1}$ to make it easier to follow the $R$ and $T$ discussion later?  I think probably not\ldots}
 
 Note that we follow the common convention is to set $\beta_1=0$
 \cite{Butcher2008_book}, i.e., the starting and finishing methods

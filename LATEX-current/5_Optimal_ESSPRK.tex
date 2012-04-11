@@ -36,7 +36,7 @@ $q$ and classical order $p$.
 
 The methods are found through numerical search, using \textsc{MATLAB}'s optimization 
 toolbox on the above constrained optimization problem. 
-Specifically, we use \texttt{fmincon} with a sequential quadratic programming approach \textbf{CITE Ketcheson 2008?}.
+Specifically, we use \texttt{fmincon} with a sequential quadratic programming approach \cite{Ketcheson2008}.
 This process does not guarantee a global minimizer, so many searches from random initial 
 guesses are performed to try to ensure the method with the largest possible SSP coefficient is 
 found.
@@ -44,7 +44,7 @@ found.
 \subsubsection{Optimal SSP coefficients}\label{subsubsec:optimal_SSP_coeff}
 The effective SSP coefficients for up to eleven stages are shown in 
 Table~\ref{tab:eff_SSP_coeff}. 
-Similarly to SSPRK($s,q$) methods, all effective SSP coefficients of ESSPRK($s,q,p$) methods 
+Similarly to SSPRK($s,q$) methods, all ESSPRK($s,q,p$) methods 
 have $\ceff < 1$. 
 Since the effective order $q$ SSPRK methods (accompanied with relevant starting and finishing 
 methods) are used in a scheme that attains classical order equal to $q$, it is reasonable to 
@@ -191,13 +191,13 @@ respectively.
 Then the equivalence is expressed as
 \begin{equation} \label{eq:R_T_OCs}
     \rho(t) = (\beta\alpha)(t) \text{ and } \tau(t) = (\alpha\beta^{-1})(t), \quad \text{for all 
-    trees $t$ with $r(t) \leq q$,}
+    trees $t$ with $r(t) \leq q$.}
 \end{equation}
-and equivalently,
-\colintodo{Is this useful?  if useful, we should double-check that it is equivalent.}
-\begin{equation} \label{eq:RMT_OCs}
-    \rho\alpha\tau(t) = E^3(t), \quad \text{for all trees $t$ with $r(t) \leq q$.}
-\end{equation}
+%and equivalently,
+%\colintodo{Is this useful?  if useful, we should double-check that it is equivalent.}
+%\begin{equation} \label{eq:RMT_OCs}
+%    \rho\alpha\tau(t) = E^3(t), \quad \text{for all trees $t$ with $r(t) \leq q$.}
+%\end{equation}
 Rewriting the second condition in \eqref{eq:R_T_OCs} as $(\tau\beta)(t) = \alpha(t)$, the 
 order conditions for the starting and finishing methods can be determined and are given in
 Table~\ref{tab:rho_tau_OCs}.
@@ -237,8 +237,8 @@ Section~\ref{subsec:Optimal_SSPRK} with the $R$ and $T$ order
 conditions of Table~\ref{tab:rho_tau_OCs} instead of the $\Phi_{p,q}$
 in \eqref{eq:SSP_opt}.
 
-
-Note that for either case of effective order $q=3$ or $q=4$, the algebraic expressions on 
+For a given main method $M$, the values of $\alpha_i$ are already known.
+Also note that for either case of effective order $q=3$ or $q=4$, the algebraic expressions on 
 $\beta$ up to order $q-1$ are already found by the optimization procedure of 
 the main method (see Table~\ref{tab:effective_OCs}). 
 However, the values of the order $q$ elementary weights on $\beta$ are not known; these 
@@ -247,7 +247,7 @@ $\beta_5$, $\beta_6$, $\beta_7$ and $\beta_8$ for fourth
 effective order.
 From Table~\ref{tab:rho_tau_OCs}, we see that both the $R$ and $T$
 methods depend on these parameters.
-Our approach is to optimize for both methods at once, where we solve a
+Our approach is to optimize for both methods at once: we solve a
 modified version of the optimization problem \eqref{eq:SSP_opt} where
 we simultaneously maximize both SSP coefficients subject to the
 constraints given in \eqref{eq:R_T_OCs} and well as
