@@ -1,7 +1,7 @@
 \section{Numerical experiments}\label{sec:numerics}
 
 In this section we numerically verify the properties of the
-constructed scheme $TM^{n-2}R$, where $M$ is an SSPRK($s,q,p$) and
+constructed scheme $TM^{n-2}R$, where $M$ is an ESSPRK($s,q,p$) scheme and
 $R$ and $T$ are its associated SSP starting and stopping schemes from
 Section~\ref{subsec:starting_finishing}.
 Specifically, we use a convergence study to show that the procedure
@@ -9,7 +9,7 @@ attains order $q$.  We also demonstrate on Burgers' equation that the
 SSP coefficient accurately measures the maximal stepsize for which the
 methods are strong stability preserving.
 
-For simplicity we denote the multi-method $TM^{n-2}R$ procedure as the
+For simplicity we denote the multi-method $TM^{n-2}R$ procedure as an
 \emph{ESSPRK-scheme}.
 
 \subsection{Convergence study}\label{subsec:convergence}
@@ -24,13 +24,24 @@ ESSPRK($s,q,p$) method for $q = 3, 4$ and $p = 2$.
 %The stages of the permutation methods were kept as low as possible, thus 
 %we use two stages for a third-effective order method $M$ and four stages for 
 %a fourth-effective order method. 
-The solution is computed for using $N = 50 \cdot 2^{k}$ time steps for
+The solution is computed for using $n = 50 \cdot 2^{k}$ time steps for
 $k = 0, 1, 2, \dots, 6$.
 % and 
 %hence the time-step used is $\Dt = \tfrac{1}{N} = \tfrac{2^{(1-k)}}{100}$ 
 %for each computation. 
 The error at $t=1$ between the exact solution and the approximation with respect 
 to time-step is shown in Figure~\ref{fig:conv_study} on a logarithmic scale.
+\begin{figure}
+	\centering
+     \subfloat[SSPRK($s,3,2$)]{\label{fig:conv_study_a}
+     \includegraphics[width=0.45\textwidth]{Pictures/convergence_3rd_ord}}
+   \quad
+     \subfloat[SSPRK($s,4,2$)]{\label{fig:conv_study_b}
+    \includegraphics[width=0.45\textwidth]{Pictures/convergence_4th_ord}}
+    \caption{Convergence of $TM^{n-2}R$ Runge-Kutta scheme when (a) $M$ 
+    is an SSPRK($s,3,2$) method and (b) $ M $ is an SSPRK($s,4,2$) method.}
+    \label{fig:conv_study}
+\end{figure}
 The convergence study was performed for various number of stages $s$ and the results 
 show that the ESSPRK-scheme attains an order of accuracy equal to the effective order of 
 method $M$.
@@ -42,107 +53,94 @@ order of the main method).
 Finally, we note that for a fixed time-step increasing the number of stages
 generally decreases the error constant.
 
-\begin{figure}
-	\centering
-     \subfloat[SSPRK($s,3,2$)]{\label{fig:conv_study_a}
-     \includegraphics[width=0.5\textwidth]{Pictures/convergence_3rd_ord}}
-     \subfloat[SSPRK($s,4,2$)]{\label{fig:conv_study_b}
-    \includegraphics[width=0.5\textwidth]{Pictures/convergence_4th_ord}}
-    \caption{Convergence of $TM^{n-2}R$ Runge-Kutta scheme when (a) $M$ 
-    is an SSPRK($s,3,2$) method and (b) $ M $ is an SSPRK($s,4,2$) method.}
-    \label{fig:conv_study}
-\end{figure}
-
-
 \subsection{Burgers' equation}\label{subsubsec:burgers}
 
 The inviscid Burgers' equation consists of the hyperbolic conservation law
 \begin{equation}\label{eq:HCL}
     U_{t} + f(U)_{x} = 0,
 \end{equation}
-when the flux function $f(U) = \frac{1}{2}U^{2}$. 
+with flux function $f(U) = \frac{1}{2}U^{2}$. 
 We consider initial data
-%\begin{equation}\label{eq:burgers_IC}
-    $U(0,x)  = \frac{1}{2} - \frac{1}{4}\sin{\pi x}$,
-%\end{equation}
+$U(0,x)  = \frac{1}{2} - \frac{1}{4}\sin{\pi x}$,
 on a periodic domain $x \in [0,2)$.
 The solution advances to the right where it eventually exhibits a shock. 
-We perform a semi-discetisation of $f(U)_{x}$ using an upwind approximation 
-\textbf{[Cite sth, Laney or LeVeque's red book?]}
-\yianniscomment{This appears in this reference. I don't think LeVeque } that gives
-\begin{equation}\label{eq:burgers_flux}
-    f(U)_{x} \approx \frac{1}{\Dt}\bigl(f(U_{i}) - f(U_{i-1})\bigr).
-\end{equation}
-\colintodo{so much wrong with this sentence!}
-\yiannistodo{I see your point. I wanted to refer to the full scheme (FE + TVD spatial discr.) which is SSP}
-\sout{
-The above time discretisation is SSP when coupled with Forward Euler method
-}
-The spatial discretization is total-variation-diminishing (TVD) when
+We perform a semi-discretization
+using an upwind approximation to obtain the system of ODEs
+\begin{equation*}%\label{eq:burgers_flux}
+  %f(U)_{x} \approx \frac{1}{\Delta x}\bigl(f(u_{i}) - f(u_{i-1})\bigr).
+  \frac{\textrm{d}}{\textrm{d} t}
+  u_i = \frac{f(u_{i}) - f(u_{i-1})}{\Delta x}.
+\end{equation*}
+This spatial discretization is total-variation-diminishing (TVD) when
 coupled with Forward Euler method under time restriction
 $\Dt \leq {\Dt}_{\text{FE}} = (1 / \|U(0,x)\|_{\infty}) \Delta x$
-\textbf{[Cite]}.
+\cite{Laney:1998}.
+\colintodo{David: who would you cite for this?}
 The SSP theory predicts that using a time-discretization with a SSP
 coefficient $\sspcoef$, the solution will be TVD for $\Dt \leq
 \sspcoef {\Dt}_{\text{FE}}$.
 
 
-\begin{figure}[t!]
+\colintodo{Is there a particular reason we use ESSPRK($10,4,2$)?  $(4,4,2)$ would seem more interesting/reproducible.}
+Burgers' equation was solved using an ESSPRK-scheme with time-step 
+restriction $\Dt \leq \sigma{\Dt}_{\text{FE}}$, where $\sigma$ indicates the size 
+of the time step. 
+We integrate to roughly time $t_{f} = 2.5$
+with $m = 256$ points in space.
+Figure~\ref{fig:burgers_cont} shows that if $\sigma$ stays below the SSP 
+coefficient of the method $M$, then no oscillations are observed. 
+If this stability limit is violated, then oscillations may appear.
+\begin{figure}
     \centering
     \subfloat[$\sigma = 6.0$]{\label{fig:burgers_cont_a}
-      \includegraphics[width=0.5\textwidth]{Pictures/burgers_cont_tvd}}
+      \includegraphics[width=0.45\textwidth]{Pictures/burgers_cont_tvd}}
+    \quad
     \subfloat[$\sigma = 6.68$]{\label{fig:burgers_cont_b}
-      \includegraphics[width=0.5\textwidth]{Pictures/burgers_cont_no_tvd}}
+      \includegraphics[width=0.45\textwidth]{Pictures/burgers_cont_no_tvd}}
     \caption{Solution of Burgers' equation with continuous initial data, using a 
-    $TM^{n-2}R$ scheme, where $ M $ is SSPRK($10,4,2$). 
+    $TM^{n-2}R$ scheme, where $ M $ is ESSPRK($10,4,2$). 
     The SSP coefficient is $\sspcoef = 6.0$. 
     Here $TV$ denotes the difference between the $TV$-norms of the final and 
     initial solution.
     A positive sign indicates a violation of the TVD condition.}
     \label{fig:burgers_cont}
 \end{figure}
-
-Burgers' equation was solved using an ESSPRK-scheme with time-step 
-restriction $\Dt \leq \sigma{\Dt}_{\text{FE}}$, where $\sigma$ indicates the size 
-of the time step. 
-We integrate to time $t_{f} = 2.3$
-\colintodo{double-check this $t_f$}
-with $m = 256$ points in space.
-Figure \ref{fig:burgers_cont} shows that if $\sigma$ stays below the SSP 
-coefficient of the method $M$, then no oscillations are observed. 
-If this stability limit is violated, then oscillations appear. 
-\yiannistodo{Elaborate more: Sharpness of SSP coefficient} 
-We were able to determine when exactly the nonlinear stability is not 
-satisfied by computing the the total-variation (TV) norm at each step of the 
-computation process. 
-This indicates that the ESSPRK-scheme inherits the time-step restriction 
-from the SSP coefficient of the main method $M$.
+%\yiannistodo{Elaborate more: Sharpness of SSP coefficient} 
+%We were able to determine when exactly the nonlinear stability is not 
+%satisfied by computing the the total-variation (TV) norm at each step of the 
+%computation process. 
+%This indicates that the ESSPRK-scheme inherits the time-step restriction 
+%from the SSP coefficient of the main method $M$.
+We measure these oscillations by computing the total variation.
+It turns out that \textbf{\red TODO $\sigma = x.yz$}
+is the largest value of $\sigma$ for which the total variation has not
+increased at the final time.
+This is \textbf{\red TODO $xy\%$} larger the value SSP coefficient
+$\sspcoef = 6$.
+\colintodo{In the figures, I would prefer to just report the TV
+  itself, instead of this TV error.}
 
 
-We also consider the Burgers' equation with discontinuous data
-\begin{equation}\label{eq:burgers_discont_IC}
-    u(0,x)  = \left\{
+We also consider Burgers' equation with a discontinuous
+square wave initial condition
+\begin{equation*}%\label{eq:burgers_discont_IC}
+    U(0,x)  = \left\{
                 \begin{array}{ll}
                   1, & \hbox{$0.5 \leq x \leq 1.5$} \\
                   0, & \hbox{otherwise.}
                 \end{array}
               \right.
-\end{equation}
+\end{equation*}
 Figure~\ref{fig:burgers_discont} shows the result of solving the 
 discontinuous problem using an ESSPRK-scheme, where $M$ is an 
-SSPRK($4,4,3$) method. 
-The scheme preservers monotonicity in the TV-norm since the starting 
-method $R$ is SSP. 
-This is illustrated in Figure~\ref{fig:burgers_starting_method} in which 
-the solution plotted after one step using methods $R$ and $S$ as the 
-starting procedures.
-
-\begin{figure}[t!]
+SSPRK($10,4,2$) method.
+\begin{figure}
     \centering
     \subfloat[$\sigma = 6.0$]{\label{fig:burgers_discont_a}
-      \includegraphics[width=0.5\textwidth]{Pictures/burgers_discont_tvd.eps}}
+      \includegraphics[width=0.45\textwidth]{Pictures/burgers_discont_tvd.eps}}
+    \quad
     \subfloat[$\sigma = 6.18$]{\label{fig:burgers_discont_b}
-      \includegraphics[width=0.5\textwidth]{Pictures/burgers_discont_no_tvd.eps}}
+      \includegraphics[width=0.45\textwidth]{Pictures/burgers_discont_no_tvd.eps}}
     \caption{Solution of Burgers' equation with discontinuous initial data, using a 
     $TM^{n-2}R$ scheme, where $M$ is SSPRK($10,4,2$) method. 
     The SSP coefficient is $ \sspcoef = 6.0$.
@@ -151,15 +149,43 @@ starting procedures.
     A positive sign indicates a violation of the TVD condition.}
     \label{fig:burgers_discont}
 \end{figure}
+In this case, \textbf{\red TODO $\sigma = x.yz$} appears to be the
+largest value of $\sigma$ for which the total variation has not
+increased at the final time.
+This is \textbf{\red TODO $xy\%$} larger than the SSP coefficient
+$\sspcoef = 6$.
 
-\begin{figure}[t!]
-    \centering
-	TODO
-	\yianniscomment{This should be cut out since if we optimize directly for R and T, we are not mentioning S.}
-    \caption{Solution of Burgers' equation with discontinuous initial data 
-    after one step, using a $TM^{n-2}R$ scheme, where $M$ is an 
-    SSPRK($5,4,2$) method. The solution is advanced one step by using (a) $R$ and 
-    (b) $S$}
-    \label{fig:burgers_starting_method}
-\end{figure}
+It is interesting to note that the stability prediction of the SSP
+coefficient for ESSPRK is quite tight compared to other SSP methods
+(c.f., \cite[Table 5.1]{Ketcheson/Gottlieb/Macdonald:TSRK}).
+This may make effective order methods an interesting test case for
+further research into both SSP time-discretizations as well as spatial
+discretizations with strong stability features.
+
+
+We also note the necessity of our $RM^{n-2}T$ approach: in this
+example if we were to use the original approach of $S$ and $S^{-1}$,
+the solution exhibits oscillations immediately following the
+application of the starting perturbation scheme $S$.
+%This is illustrated in Figure~\ref{fig:burgers_starting_method}
+
+
+% The ESSPRK-scheme preserves monotonicity in the TV-norm since the starting 
+% method $R$ is SSP.
+% Using the original approach with $S$ and $S^{-1}$, the results are not
+% SSP and the total-variation increases after the perturbation $S$.
+% This is illustrated in Figure~\ref{fig:burgers_starting_method} in which 
+% the solution is plotted after one application of methods $R$ and $S$ as the 
+% starting procedures.
+% % Note: its not really a step for %S% so I said application
+% \begin{figure}
+%     \centering
+% 	TODO
+% 	\yianniscomment{This should be cut out since if we optimize directly for R and T, we are not mentioning S.}
+%     \caption{Solution of Burgers' equation with discontinuous initial data 
+%     after one step, using a $TM^{n-2}R$ scheme, where $M$ is an 
+%     SSPRK($5,4,2$) method. The solution is advanced one step by using (a) $R$ and 
+%     (b) $S$}
+%     \label{fig:burgers_starting_method}
+% \end{figure}
 

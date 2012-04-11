@@ -1,56 +1,48 @@
-\section{Conclusion}\label{sec:Conclusion}
-The theory of strong-stability preserving time discretization has been 
-combined with the algebraic interpretation of effective order Runge--Kutta 
-methods. 
-Based on this concept, we succeeded in constructing the first explicit 
+\section{Conclusions}\label{sec:Conclusion}
+We used the theory of strong stability preserving time discretizations
+with Butcher's algebraic interpretation of order to construct
 effective order SSP Runge--Kutta (ESSPRK) methods. 
-These methods when accompanied with relative staring and finishing 
-procedures result to schemes that attain higher order than the order of 
-the constructing methods. 
-It is proved that explicit Runge--Kutta methods with strictly positive 
+These methods, when accompanied by starting and finishing 
+schemes, attain an order of accuracy higher than their (classical) order.
+We proved that explicit Runge--Kutta methods with strictly positive 
 weights have at most fourth effective order. 
-This generates a barrier for explicit effective order SSP methods and 
-hence we studied ESSPRK methods of third and fourth effective order.
+This extends the barrier already known in the case of classical order
+explicit SSPRK methods.
+%This generates a barrier for explicit effective order SSP methods.
 
-Optimal ESSPRK methods were constructed and we studied their SSP 
-properties in comparison with the classical SSPRK methods for linear and 
-nonlinear problems. 
-We were able to find families of third effective order ESSPRK methods. 
-Also, despite the non existence of four-stage, four-order SSPRK methods, 
-we found fourth effective order methods with four stages and of classical 
-order two and three. 
+ESSPRK methods of effective order three and four
+were constructed by numerical optimization
+and we studied their SSP 
+properties in comparison with the classical SSPRK methods.
+% for linear and nonlinear problems.
+Most of the methods found were optimal because they achieved
+the upper bound on the SSP coefficient known from linear
+problems.
+%We were able to find families of third effective order ESSPRK methods. 
+Also, despite the non-existence of four-stage, four-order explicit SSPRK methods, 
+we found fourth effective order methods with four stages (of classical 
+order two and three). 
 
-Going beyond the initial formulation of the effective order schemes, a 
-different choice of the starting and finishing methods allows the 
-formation of an overall SSP scheme. 
-The starting method not only perturbs but also advances the solution by 
-a single time-step.  
-Then the main ESSPRK method carries out the rest of the computation. 
-At the final step a correction is applied by using a finishing method which 
-basically eradicates the accumulated effect of the starting method. 
-As a result the numerical approximation has order of accuracy equal to 
-the effective order of the main method and thus higher than its classical 
-order. 
-The starting and finishing methods have minimal computation cost as 
+We proposed a new choice of starting and finishing methods to allow the 
+overall procedure to be SSP.
+\colintodo{I thought this was a bit long, what do you think without these details?}
+\sout{
+The starting method not only perturbs but also advances the solution
+by a single time-step.
+Then the main ESSPRK method carries out most
+of the computation: $n-2$ time-steps.
+For the final step, a correction is applied using the finishing method.
+The starting and finishing methods impose minimal additional computational cost as
 they contain at most two more stages than those of the main method.
+}
 
-Finally, we performed numerical tests on nonlinear problems. In this way 
-we showed that the schemes achieved their desired order. 
-Moreover, we emphasized the importance of the SSP coefficient as an 
-indicator of the maximum possible time-step for the solution of 
-hyperbolic pdes. 
-As shown in the case of Burgers' equation allowing slightly bigger time-steps 
-than the theoretical bounds results in a highly oscillatory numerical 
-approximation.  
+Finally, we performed numerical tests which confirmed the accuracy and
+SSP properties of the ESSPRK methods.
+Interestingly, compared to what is observed with standard SSPRK schemes,
+there was much closer agreement between the (theoretical) stability limit
+given by the SSP coefficient and that observed in practice
+(e.g., when measuring total variation of solutions of Burgers' equation).
 
-\subsection{Future Work}\label{subsec:future_work}
 The ideas here were applied to explicit Runge--Kutta methods, but they
-can be applied to implicit Runge--Kutta methods and General Linear
-Methods \cite{Butcher2008_book}.
-
-Also, other possible directions may be the investigation of low-storage 
-effective order SSP methods and advancing the SSP theory of effective 
-methods. 
-Finally, application of the effective order theory on other classes of 
-methods, for example Rosenbrock methods, is also worthy of future 
-research.
+could also be applied to other classes of methods including implicit
+Runge--Kutta methods, general linear methods, and Rosenbrock methods.
