@@ -80,7 +80,11 @@ For the method to be SSP, it must have a strictly positive SSP
 coefficient.
 
 We say that an SSP Runge--Kutta method is optimal if it has the largest possible SSP coefficient for a given order and a given number of stages.
-The search for these optimal methods was originally based on expressing the Runge--Kutta method as combinations of forward Euler steps (the Shu--Osher form) and solving a nonlinear optimization problem \cite{Gottlieb1998, Gottlieb2001, Spiteri2003a, Spiteri2003b, Ruuth2004}.
+The search for these optimal methods was originally based on
+expressing the Runge--Kutta method as combinations of forward Euler
+steps (the Shu--Osher form) and solving a nonlinear optimization
+problem \cite{Gottlieb1998, Gottlieb2001, Spiteri2003a, Spiteri2003b,
+  Ruuth2004, Ruuth:baron}.
 %The optimization process followed is similar with the one used in \cite{Ketcheson2008, Ketcheson2009} and the search for optimal explicit Runge-Kutta methods has been explored in \cite{Gottlieb1998, Gottlieb2001, Spiteri2003a, Spiteri2003b, Ruuth2004} by using the Shu-Osher form.
 However, the SSP coefficient is related to the \emph{radius of absolute monotonicity} \cite{Kraaijevanger1991} and, for irreducible Runge--Kutta methods, the two are equivalent \cite{Ferracina2004, Higueras2004}.
 This gives an algebraic characterization of the SSP coefficient.
