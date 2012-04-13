@@ -1,4 +1,4 @@
-\section{Algebraic representation of Runge--Kutta methods}\label{sec:Algebraic_RK}
+\section{Effective order Runge--Kutta methods}\label{sec:Algebraic_RK}
 
 The effective order of a Runge--Kutta method is defined in an abstract algebraic
 context introduced by Butcher \cite{Butcher1969} and developed further in
@@ -8,7 +8,7 @@ concepts of this representation which are then used to define
 effective order methods and their order conditions.
 
 
-\subsection{Formulation of the Runge--Kutta group}\label{sec:RK_group}
+\subsection{The Runge--Kutta group}\label{sec:RK_group}
 
 %In this characterization, we remove our attention from the numerical methods themselves and we concentrate on their counterparts in a certain group containing .
 
@@ -136,12 +136,12 @@ The following example demonstrates the idea of this product:
 
 If two Runge--Kutta methods map to the same element of $G$ then they
 are essentially the same method (up to reducibility).
-This is overly restrictive for practical purposes and we want a way to
+This\davidtodo{What?} is overly restrictive for practical purposes and we want a way to
 discuss equivalence of methods up to a particular order of accuracy.
 
 \begin{definition}\label{def:Equivalent_methods}
 	Two Runge--Kutta methods
-        are equivalent up to order $p$ if their corresponding elements in $G$, $\alpha$ and $\beta$ respectively, satisfy
+        are equivalent up to order $p$ if their corresponding elements in $G$, $\alpha$ and $\beta$, satisfy
 	\begin{displaymath}
 		\alpha(t) = \beta(t), \; \text{for every tree $t$ with $r(t) \leq p$},
 	\end{displaymath}

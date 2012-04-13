@@ -137,19 +137,22 @@
 	\input{trees} % creates trees
 	
 	\begin{abstract}
-  		In this work we apply the algebraic theory of Runge--Kutta methods
-  		and specifically the concept of effective order to strong stability
-  		preserving (SSP) Runge--Kutta methods. These methods of effective order
-  		satisfy relaxed order conditions when combined with special starting
-  		and stopping methods. We construct such methods up to effective
-  		order four and establish their optimality (many methods achieve a
-  		previously theoretical upper bound on the SSP coefficient). In
-  		particular, we present four-stage effective order four SSP explicit Runge--Kutta
-  		methods which is not possible using four stages and classical
-  		order. Numerical experiments demonstrate the feasibility of
-  		effective order in practice. We prove that methods of effective
-  		order five cannot have strictly positive weights. A direct
-  		corollary is the non-existence of effective order five SSP methods.
+  		We apply the concept of effective order to strong stability
+  		preserving (SSP) explicit Runge--Kutta methods. Relative to classical
+                Runge--Kutta methods, effective order methods are designed to satisfy 
+                a relaxed set of order conditions but yield higher order accuracy
+                when composed with special starting and stopping methods. 
+                The relaxed order conditions allow for greater freedom in the design
+                of effective order methods.  We show that this allows constuction of
+                four-stage SSP methods with effective order four (such methods cannot
+                have classical order four).  However, we also prove that effective order
+                five methods (like classical order five methods) require the use of
+                non-positive weights, and so cannot be SSP.
+                By numerical optimization, we construct explicit SSP
+                Runge--Kutta methods up to effective
+  		order four and establish the optimality of many of them.
+  		Numerical experiments demonstrate the effectiveness of
+  		these methods in practice.
 	\end{abstract}
 
 	%%% Main body %%%
