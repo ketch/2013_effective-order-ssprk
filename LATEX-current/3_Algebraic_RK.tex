@@ -136,17 +136,19 @@ The following example demonstrates the idea of this product:
 
 If two Runge--Kutta methods map to the same element of $G$ then they
 are essentially the same method (up to reducibility).
-This\davidtodo{What?} is overly restrictive for practical purposes and we want a way to
+This is overly restrictive for practical purposes and we want a way to
 discuss equivalence of methods up to a particular order of accuracy.
+\davidtodo{What?}
+\yiannistodo{being same method}
 
 \begin{definition}\label{def:Equivalent_methods}
-	Two Runge--Kutta methods
-        are equivalent up to order $p$ if their corresponding elements in $G$, $\alpha$ and $\beta$, satisfy
-	\begin{displaymath}
+	Two Runge--Kutta methods $A$ and $B$, are equivalent up to order 
+	$p$ if their corresponding elements in $G$, $\alpha$ and $\beta$, satisfy
+	\begin{align*}
 		\alpha(t) = \beta(t), \; \text{for every tree $t$ with $r(t) \leq p$},
-	\end{displaymath}
-	%Assume that $m$ and $\widetilde{m}$ are Runge-Kutta methods where the corresponding members of $G_1$ are $\alpha$ and $\widetilde{\alpha}$.
-        where $r(t)$ denotes the order of the tree (number of vertices).
+	\end{align*}
+	where $r(t)$ denotes the order of the tree (number of vertices).
+	We denote their equivalence relation by $A \equiv_p B$.        
 \end{definition}
 
 In this sense, methods have inverses: the product of $\alpha^{-1}$ and
@@ -310,6 +312,7 @@ $S^{-1}$
 in terms of the
 $\beta_i$ (see \cite[Table~386(III)]{Butcher2008_book}).
 \colintodo{Do we need a table of $\beta_i^{-1}$ to make it easier to follow the $R$ and $T$ discussion later?  I think probably not\ldots}
+\yiannitodo{No, because we never use the order conditions on $\beta_i^{-1}$.}
 
 Note that we follow the common convention is to set $\beta_1=0$
 \cite{Butcher2008_book}, i.e., the starting and finishing methods
