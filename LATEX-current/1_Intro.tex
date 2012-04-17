@@ -1,22 +1,18 @@
 \section{Introduction}\label{sec:Intro}
-\davidtodo{The second paragraph seems disconnected from the first.}\yiannistodo{What about now?}
 Solutions of nonlinear hyperbolic partial differential equations (PDEs) may 
 contain discontinuities even when the initial conditions are smooth.
 The challenge for the numerical solution of these systems is twofold. 
 It is desirable that the approximation be of high accuracy in regions where 
 the solution is smooth and that the discontinuities be captured without 
 exhibiting any oscillations or overshoots. 
-
-In the last twenty year major developments have been made towards the 
-development of high accurate non-oscillatory methods. \yiannistodo{... strongly stable or nonlinearly stable ..., which do you prefer?}
+In the last twenty years major developments have been made towards the 
+development of high accurate non-oscillatory methods.\davidtodo{developments towards the development?} \yiannistodo{... strongly stable or nonlinearly stable ..., which do you prefer?}
 Many of these numerical methods are based on a method-of-lines approach 
 where the problem is first discretized in space to yield a system of ODEs. 
 The spatial discretization is often chosen to ensure certain strong stability 
 properties of the original PDE problem (e.g., max-norm or TV-norm monotonicity \cite{Gottlieb/Ketcheson/Shu:2009}, 
 free of oscillations \cite{Shu/Osher:1988}, positivity \cite{Horvath:2005}, etc \yiannistodo{suggested citations}) are preserved 
 \emph{when coupled with first-order Forward Euler time integration}.
-Whenever the method is explicit, this combination is subject to a time step size restriction. 
-\davidtodo{It seems strange to say often, when what is meant is "whenever the method is explicit".} \yiannistodo{since implicit 1st order are unconditionally SSP}
 Strong stability preserving (SSP) time discretizations (formerly TVD
 discretizations \cite{Gottlieb/Shu:1998}) are high-order time
 discretizations that guarantee the same stability preservation, with a
@@ -37,7 +33,7 @@ least five stages \cite{Gottlieb/Shu:1998}.
 In contrast, we construct explicit SSP Runge--Kutta methods
 of effective order four with only four stages.
 Following this result, we had hoped to overcome the fifth-order
-barrier for explicit SSP Runge--Kutta \cite{Ruuth2002}; instead we
+barrier for explicit SSP Runge--Kutta methods \cite{Ruuth2002}; instead we
 establish that the barrier also holds for SSP methods of effective
 order five.
 This is established later as a corollary of a more general theorem.

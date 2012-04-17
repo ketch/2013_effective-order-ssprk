@@ -15,6 +15,13 @@ the solution $\bm{U}$ at discrete grid points and $\bm{F}$ is the spatial
 discretization. \yiannistodo{I think this was Colin's comment: TODO: do we need add something about F being more general than just HCL?}
 A time discretization then produces a sequence of solutions
 $\bm{u}^{n} \approx \bm{u}(t_n)$.
+In this work we study Runge--Kutta time discretizations.
+An explicit $s$-stage Runge--Kutta method takes the form
+\begin{align*}
+	\bm{u}^{n+1} &= \bm{u}^{n} + \Dt \sum_i^s b_i \bm{F}(t_n + c_i \Dt,\bm{Y}_i), \\
+	\text{where} \quad \bm{Y}_i &= \bm{u}^{n} + \Dt \sum_j^{i-1} a_{ij} \bm{F}(t_n + c_j \Dt,\bm{Y}_j)
+\end{align*}
+and $c_i = \sum_j^sa_{ij}$.
 
 Assume that the solution of \eqref{eq:ode_system} satisfies a monotonicity 
 property in some norm, seminorm, or convex functional.
@@ -29,8 +36,8 @@ is non-increasing in the same norm, seminorm, or convex functional:
     \|\bm{u}^{n+1}\| \le \|\bm{u}^n\|, \; \forall \bm{u},
 \end{align*}
 for some time-step restriction $\Dt \leq \Dt_{\text{FE}}$. \davidtodo{Does $\Dt_\textup{FE}$ depend on $u$?}
-If this is the case, then an SSP method also generates solutions which are 
-non-increasing in time, under a modified time-step restriction. \davidtodo{The term non-increasing could be misunderstood; maybe say non-increasing in time?}
+If this is the case, then an SSP method also generates a solution whose norm is
+non-increasing in time, under a modified time-step restriction. 
 \begin{definition}[Strong Stability Preserving]
 	Suppose $\bm{F}$ is a spatial discretization which satisfies
 	\begin{align*}
@@ -48,9 +55,8 @@ non-increasing in time, under a modified time-step restriction. \davidtodo{The t
 	\begin{align*}
 		\Dt \leq \sspcoef \Dt_{\text{FE}}.
 	\end{align*}
-\end{definition} \davidtodo{In this definition, it seems that the SSP property of a method depends on the choice of $F$.}
+\end{definition} \davidtodo{In this definition, it seems that the SSP property of a method depends on the choice of $F$.  Now it's even worse -- why do we care if $F$ is a spatial discretization?}
 
-\davidtodo{Should this really be a subsection?  We never refer to it.}
 The SSP coefficient $\sspcoef$ is a property only of the particular 
 time-stepping method and quantifies the allowable time step size relative 
 to that of the forward Euler method.
@@ -64,21 +70,6 @@ Note that the use of the word \emph{effective} here is unrelated to the
 concept of \emph{effective order} introduced in Section~\ref{sec:Algebraic_RK}.
 
 \subsection{Optimal SSP schemes}\label{subsec:Optimal_SSPRK}
-An explicit $s$-stage Runge--Kutta method generates a sequence of approximate solutions $\bm{u}^n \approx \bm{u}(t_n)$ via an update formula
-\begin{align*}
-	\bm{u}^{n+1} &= \bm{u}^{n} + \Dt \sum_i^s b_i \bm{F}(t_n + c_i \Dt,\bm{Y}_i), \\
-	\text{where} \quad \bm{Y}_i &= \bm{u}^{n} + \Dt \sum_j^{i-1} a_{ij} \bm{F}(t_n + c_j \Dt,\bm{Y}_j)
-\end{align*}
-and $c_i = \sum_j^sa_{ij}$. \davidtodo{This isn't very clear.}
-The accuracy of the method is determined by comparing terms of Taylor 
-expansions of the numerical and true solution. 
-Also the stability function is a fraction of polynomials on the coefficients of
-the method.
-Thus, we can fully characterize a Runge--Kutta method by the triple 
-$(A,\bm{b},\bm{c})$ \cite{Butcher2008_book}.
-%The accuracy and stability of the method depend on the coefficients $(A,\bm{b},\bm{c})$
-%\cite{Butcher2008_book}.
-
 We say that an SSP Runge--Kutta method is optimal if it has the largest 
 possible SSP coefficient for a given order and a given number of stages.
 The search for these optimal methods was originally based on
@@ -133,8 +124,9 @@ Exact optimal values of $\clin$ are known for many classes of methods; for
 example see \cite{Kraaijevanger1986,ketcheson2009a}.
 
 Following \cite{Ketcheson2008, Ketcheson/Macdonald/Gottlieb:2009}, 
-we will use the optimization problem \eqref{eq:SSP_opt} to perform a 
-numerical search for optimal explicit SSP Runge--Kutta methods. 
+we will numerically solve the optimization problem \eqref{eq:SSP_opt} to find
+optimal explicit SSP Runge--Kutta methods. \davidtodo{Do you mean effective order RK methods?
+I think it would be better to move section 2.1 into section 5.}
 However, we first need to define the order conditions $\Phi(K)$ for methods 
 of effective order.
 This is discussed in the next section.
