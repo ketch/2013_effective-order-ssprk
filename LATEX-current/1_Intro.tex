@@ -5,13 +5,16 @@ The challenge for the numerical solution of these systems is twofold.
 It is desirable that the approximation be of high accuracy in regions where 
 the solution is smooth and that the discontinuities be captured without 
 exhibiting any oscillations or overshoots. 
-In the last twenty years major progress has been made towards the 
-development of high accurate nonlinearly stable methods.\davidtodo{developments towards the development?} \yiannistodo{Missed that, sorry. Can we say nonlinearly stable methods?}
+
+There has been considerable effort to develop, for these and other
+problem classes, numerical methods which are \emph{strongly stable}.
+\yiannistodo{In the last twenty years major progress has been made towards the 
+development of high accurate nonlinearly (or strongly) stable methods.}
 Many of these numerical methods are based on a method-of-lines approach 
 where the problem is first discretized in space to yield a system of ODEs. 
 The spatial discretization is often chosen to ensure certain strong stability 
-properties of the original PDE problem (e.g., max-norm or TV-norm monotonicity \cite{Gottlieb/Ketcheson/Shu:2009}, 
-free of oscillations \cite{Shu/Osher:1988}, positivity \cite{Horvath:2005}, etc \yiannistodo{Are you ok with these citations?}) are preserved 
+properties of the original PDE problem (e.g., max-norm monotonicity, 
+total variation boundedness, positivity, etc) are preserved
 \emph{when coupled with first-order Forward Euler time integration}.
 Strong stability preserving (SSP) time discretizations (formerly TVD
 discretizations \cite{Gottlieb/Shu:1998}) are high-order time
@@ -21,8 +24,6 @@ possibly different step-size restriction.
 We examine the SSP properties of explicit Runge--Kutta methods of 
 \emph{effective order}. 
 Effective order methods use special starting and stopping procedures
-%which perturb the initial conditions and penultimate solution
-%approximation 
 in such a way that the method can achieve an order of
 accuracy higher than its classical design order.
 This allows the construction of high-order SSP Runge--Kutta schemes by
