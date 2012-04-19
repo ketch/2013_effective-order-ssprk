@@ -12,11 +12,19 @@ effective order methods and their order conditions.
 
 %In this characterization, we remove our attention from the numerical methods themselves and we concentrate on their counterparts in a certain group containing .
 
-The Runge--Kutta methods can be viewed as elements of an algebraic group 
-in which the product is related to the composition of two methods.
-Butcher \cite{Butcher1972} proposed the group $G$ of all real-valued maps on the
-set of rooted trees.\davidtodo{Did he propose the group (whatever that means),
+Runge--Kutta methods can be viewed as elements of an algebraic group
+in which the product corresponds to the composition of two methods.
+%corresponds to successive application of two methods.
+Let $G$ be the group of all real-valued maps on the set
+of rooted trees.
+\davidtodo{Did he propose the group (whatever that means),
 or did he show that it is isomorphic to the Runge--Kutta group?}
+\colintodo{My interpretation of Butcher is that ``the Runge--Kutta
+  group'' refers to $G$ (\S 383).
+  Confusingly, \S 382 is ``the group of Runge--Kutta methods'' which
+  refers to composition and equivalence classes.
+  I wish to avoid explicitly discussing more than one group.
+  Is it ok now?}
 Each function $\alpha \in G$ corresponds
 to an \emph{equivalence class} of Runge--Kutta methods and maps trees to specific
 algebraic expressions in the coefficients
@@ -73,7 +81,7 @@ by partitioning the input tree and
 computing over the resulting forest \cite{Butcher2008_book}.
 This product $\alpha\beta$ corresponds to the application
 of method $A$ followed by method $B$; we denote the resulting method by
-$BA$.\footnote{We write $BA$ to mean application of method $A$ followed by application of method $B$
+$BA$.\footnote{We write $BA$ to mean the application of method $A$ followed by the application of method $B$
   (following matrix and operator ordering convention) but when referring to products of elements of the
   Runge--Kutta group we use the reverse ordering ($\alpha\beta$) to match the convention in
   \cite{Butcher2008_book}.}
@@ -218,8 +226,12 @@ The starting method is applied at the beginning without advancing the
 solution.
 Instead, it introduces a perturbation on the solution.
 \davidtodo{I thought that we weren't using this approach anymore?}
+\colintodo{I added a sentence.}
 The main method \( M \) is then used for \( n \) time steps and finally the
 finishing method is used to correct the solution.
+In Section~\ref{subsec:starting_stopping}, we propose alternative
+starting and stopping procedures which allow the overall procedure to
+be SSP.
 
 %\begin{result}
 %  Let method $M$ have effective order $q$ with associated methods $S$
@@ -247,8 +259,8 @@ $(\beta\alpha)(t) = (E\beta)(t), \; \text{for all trees with $r(t) \leq q$,}$
 and using the product operation \eqref{eq:Group_operation}, we can find expressions for each tree $t$ with $r(t) \leq q$.
 For trees up to order five these are tabulated in \cite[Sec~389]{Butcher2008_book}
 and in Table~\ref{tab:effective_OCs_on_alpha}.
-In general, the effective order conditions have more degrees of
-freedom than the classical order conditions.\davidtodo{Don't we mean that the methods have more degrees of freedom?}
+In general, the effective order conditions allow more degrees of
+freedom on methods than the classical order conditions.
 Note that these conditions match the classical order conditions up to
 second order.
 Note also that for the tall trees $t_1, t_4, t_8, t_{17}, \dots$ the
@@ -314,8 +326,6 @@ We can also find the order conditions of
 $S^{-1}$
 in terms of the
 $\beta_i$ (see \cite[Table~386(III)]{Butcher2008_book}).
-\colintodo{Do we need a table of $\beta_i^{-1}$ to make it easier to follow the $R$ and $T$ discussion later?  I think probably not\ldots}
-\yiannistodo{No, because we never use the order conditions on $\beta_i^{-1}$.}
 
 Note that we follow the convention of setting $\beta_1=0$
 \cite{Butcher2008_book}, i.e., the starting and finishing methods
