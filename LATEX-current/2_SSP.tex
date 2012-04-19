@@ -13,8 +13,8 @@ A spatial discretization gives the system of ODEs
 \colintodo{not sure making $\bm{F}$ time-dep is good idea: makes 
 SSP defn harder?}
 \yiannistodo{I don't think so, in general it can depend on time and 
-after we say about a time-dependent F to define the nodes c_j. I made 
-some changes in the SSP definition.}
+later we say about a time-dependent F to define the nodes $c_j$. 
+I suggest a definition for SSP in comments.}
 where $\bm{u}$ is a vector of continuous-in-time grid values approximating 
 the solution $\bm{U}$ at discrete grid points.
 Of course, \eqref{eq:ode_system} can arise in many ways and $\bm{F}$
@@ -56,12 +56,12 @@ If this is the case, then an SSP method also generates a solution whose norm is
 non-increasing in time, under a modified time-step restriction. 
 \begin{definition}[Strong Stability Preserving]
 	Suppose function $\bm{F}$, convex functional $\|\cdot\|$, and
-	constant $\DtFE$ are any possible values
+	constant $\DtFE$ are such that
 	%any possible values, any possibilities, arbitrary members of ...??
-	such that
+	% you not need to say
 	\begin{align*}
-		\|\bm{u} + \Dt\bm{F}(\bm{u})\| \le \|\bm{u}\|,
-		\text{for all $\bm{u}$ and  for all  $\Dt \le \DtFE$.}
+		\|\bm{u} + \Dt\bm{F}(\bm{u})\| \le \|\bm{u}\|, \; \forall \bm{u}
+		\text{ and  for all } \Dt \le \DtFE.
 	\end{align*}
 	Then a time-stepping method is said to be \emph{strong stability
   	preserving} with \emph{SSP coefficient} $\sspcoef > 0$ if it
