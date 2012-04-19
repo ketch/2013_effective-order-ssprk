@@ -49,6 +49,7 @@ in some norm, seminorm, or convex functional:
     \|\bm{u}^{n+1}\| \le \|\bm{u}^n\|, \; \forall \bm{u}
 \end{align*}
 \colintodo{definitely not ``$\forall u$'', maybe $\forall n$ but not sure why we need this}
+\yiannistodo{Isn't that relate to `` $\DtFE$ is independent of $\bm{u}$"? Also it is mentioned later in the definition.}
 subject to a time-step restriction $\Dt \leq \DtFE$.
 Note that $\DtFE$ is independent of $\bm{u}$ and is a property of $\bm{F}$.
 If this is the case, then an SSP method also generates a solution whose norm is
@@ -59,7 +60,7 @@ non-increasing in time, under a modified time-step restriction.
 	%any possible values, any possibilities, arbitrary members of ...??
 	% you not need to say
 	\begin{align*}
-		\|\bm{u} + \Dt\bm{F}(\bm{u})\| \le \|\bm{u}\|, \; \forall \bm{u}
+		\|\bm{u} + \Dt\bm{F}(t,\bm{u})\| \le \|\bm{u}\|, \; \forall \bm{u}
 		\text{ and  for all } \Dt \le \DtFE.
 	\end{align*}
 	Then a time-stepping method is said to be \emph{strong stability
