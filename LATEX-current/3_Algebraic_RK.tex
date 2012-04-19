@@ -8,23 +8,41 @@ fundamental concepts of this representation which are then used to
 define effective order methods and their order conditions.
 
 \subsection{The Runge--Kutta group}\label{sec:RK_group}
+%The Runge--Kutta methods can be viewed as elements of an algebraic 
+%group in which the product is related to the composition of two methods.
+%Butcher \cite{Butcher1972} proposed the group $G$ of all real-valued 
+%maps on the set of rooted trees.
+%\davidtodo{Did he propose the group (whatever that means),
+%or did he show that it is isomorphic to the Runge--Kutta group?}\yiannistodo{He did both, de defined $G$ and proved is isomorphic to the 
+%composition group of RK methods. We had a long discussion with Colin on 
+%whether mentioning the composition group and decided not.}
+%Each function $\alpha \in G$ corresponds to an \emph{equivalence class} 
+%of Runge--Kutta methods and maps trees to specific algebraic expressions 
+%in the coefficients of a Runge--Kutta method, known as 
+%\emph{elementary weights}.
+%%The elementary weight of a tree $t$ is an algebraic expression 
+%%in the coefficients of a Runge--Kutta method.
+%Two Runge--Kutta methods belong to the same equivalence class 
+%(and hence called \emph{equivalent}) if they have the same elementary weight values.
 
-The Runge--Kutta methods can be viewed as elements of an algebraic 
-group in which the product is related to the composition of two methods.
-Butcher \cite{Butcher1972} proposed the group $G$ of all real-valued 
-maps on the set of rooted trees.
+Runge--Kutta methods can be viewed as elements of an algebraic group
+in which the product corresponds to the composition of two methods.
+%corresponds to successive application of two methods.
+Let $G$ be the group of all real-valued maps on the set
+of rooted trees.
+\yiannistodo{We still have to cite Butcher here.}
 \davidtodo{Did he propose the group (whatever that means),
-or did he show that it is isomorphic to the Runge--Kutta group?}\yiannistodo{He did both, de defined $G$ and proved is isomorphic to the 
-composition group of RK methods. We had a long discussion with Colin on 
-whether mentioning the composition group and decided not.}
-Each function $\alpha \in G$ corresponds to an \emph{equivalence class} 
-of Runge--Kutta methods and maps trees to specific algebraic expressions 
-in the coefficients of a Runge--Kutta method, known as 
-\emph{elementary weights}.
-%The elementary weight of a tree $t$ is an algebraic expression 
-%in the coefficients of a Runge--Kutta method.
-Two Runge--Kutta methods belong to the same equivalence class 
-(and hence called \emph{equivalent}) if they have the same elementary weight values.
+or did he show that it is isomorphic to the Runge--Kutta group?}
+\colintodo{I wish to avoid explicitly discussing more than one group.
+  Is it ok now?}
+Each function $\alpha \in G$ corresponds
+to an \emph{equivalence class} of Runge--Kutta methods and maps trees to specific
+algebraic expressions in the coefficients
+of a Runge--Kutta method, known as \emph{elementary weights}.
+%The elementary weight of a tree $t$ is an algebraic expression in the coefficients
+%of a Runge--Kutta method.
+Two Runge--Kutta methods belong to the same equivalence class (and hence 
+are equivalent) if they have the same elementary weight values.
 
 For every function $\alpha \in G$ we write the values of the
 elementary weights as $\alpha_{i} = \alpha(t_{i})$ for trees $t_{i}$
@@ -82,12 +100,12 @@ forest \cite{Butcher2008_book}.
 This product $\alpha\beta$ is related to the application
 of method $A$ followed by method $B$; 
 we denote the resulting method by $BA$. 
-\footnote{We write $BA$ to mean application of method $A$ 
-followed by application of method $B$ 
-(following matrix and operator ordering convention) 
-but when referring to products of elements of the Runge--Kutta group 
-we use the reverse ordering ($\alpha\beta$) to match the convection in 
-\cite[Theorem 384A]{Butcher2008_book}.}
+\footnote{We write $BA$ to mean the application of method $A$ 
+	followed by the application of method $B$ 
+	(following matrix and operator ordering convention) 
+	but when referring to products of elements of the
+	Runge--Kutta group we use the reverse ordering ($\alpha\beta$) 
+	to match the convention in \cite[Theorem 384A]{Butcher2008_book}.}
 The product is defined by
 \begin{equation}\label{eq:Group_operation}
 	(\alpha\beta)(t) = \sum_{w \lhd t} \biggl(\prod_{v \in t \setminus w} \alpha(v)\beta(w)\biggr),
@@ -226,8 +244,12 @@ The starting method is applied at the beginning without advancing the
 solution.
 Instead, it introduces a perturbation on the solution.
 \davidtodo{I thought that we weren't using this approach anymore?}
-The main method \( M \) is then used for \( n \) time steps and finally the
+\colintodo{I added a sentence.}
+The main method  $M$ is then used for $n$ time steps and finally the
 stopping method is used to correct the solution.
+In Section~\ref{subsec:starting_stopping}, we propose alternative
+starting and stopping procedures which allow the overall procedure to
+be SSP.
 
 %\begin{result}
 %  Let method $M$ have effective order $q$ with associated methods $S$
@@ -252,8 +274,8 @@ $(\beta\alpha)(t) = (E\beta)(t), \; \text{for all trees with $r(t) \leq q$,}$
 and using the product operation \eqref{eq:Group_operation}, we can find expressions for each tree $t$ with $r(t) \leq q$.
 For trees up to order five these are tabulated in \cite[Sec~389]{Butcher2008_book}
 and in Table~\ref{tab:effective_OCs_on_alpha}.
-In general, the effective order conditions have more degrees of
-freedom than the classical order conditions.\davidtodo{Don't we mean that the methods have more degrees of freedom?}
+In general, the effective order conditions allow more degrees of
+freedom on methods than the classical order conditions.
 Note that these conditions match the classical order conditions up to
 second order.
 Note also that for the tall trees $t_1, t_4, t_8, t_{17}, \dots$ the
@@ -319,8 +341,6 @@ We can also find the order conditions of
 $S^{-1}$
 in terms of the
 $\beta_i$ (see \cite[Table~386(III)]{Butcher2008_book}).
-\colintodo{Do we need a table of $\beta_i^{-1}$ to make it easier to follow the $R$ and $T$ discussion later?  I think probably not\ldots}
-\yiannistodo{No, because we never use the order conditions on $\beta_i^{-1}$.}
 
 Note that we follow the convention of setting $\beta_1=0$
 \cite{Butcher2008_book}, i.e., the starting and stopping methods

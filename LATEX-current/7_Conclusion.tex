@@ -1,10 +1,11 @@
 \section{Conclusions}\label{sec:Conclusion}
 \davidtodo{Do we need a conclusion?  Can we just state all of this in
 the introduction? (most of it is already there).}
+\colintodo{I vote leave it, but still needs editing}
 We used the theory of strong stability preserving time discretizations
 with Butcher's algebraic interpretation of order to construct
 effective order SSP Runge--Kutta (ESSPRK) methods. 
-These methods, when accompanied by starting and finishing 
+These methods, when accompanied by starting and stopping
 schemes, attain an order of accuracy higher than their (classical) order.
 We proved that explicit Runge--Kutta methods with strictly positive 
 weights have at most fourth effective order. 
@@ -13,32 +14,17 @@ explicit SSPRK methods.
 %This generates a barrier for explicit effective order SSP methods.
 
 ESSPRK methods of effective order three and four
-were constructed by numerical optimization
-and we studied their SSP 
-properties in comparison with the classical SSPRK methods.
-% for linear and nonlinear problems.
+were constructed by numerical optimization.
 Most of the methods found were optimal because they achieved
 the upper bound on the SSP coefficient known from linear
 problems.
-%We were able to find families of third effective order ESSPRK methods. 
 Also, despite the non-existence of four-stage, four-order explicit SSPRK methods, 
 we found fourth effective order methods with four stages (of classical 
 order two and three). 
-
-We proposed a new choice of starting and finishing methods to allow the 
+We proposed a new choice of starting and stopping methods to allow the
 overall procedure to be SSP.
-\colintodo{I thought this was a bit long, what do you think without these details?}
-\sout{
-The starting method not only perturbs but also advances the solution
-by a single time-step.
-Then the main ESSPRK method carries out most
-of the computation: $n-2$ time-steps.
-For the final step, a correction is applied using the finishing method.
-The starting and finishing methods impose minimal additional computational cost as
-they contain at most two more stages than those of the main method.
-}
 
-Finally, we performed numerical tests which confirmed the accuracy and
+We performed numerical tests which confirmed the accuracy and
 SSP properties of the ESSPRK methods.
 Interestingly, compared to what is observed with standard SSPRK schemes,
 there was much closer agreement between the (theoretical) stability limit
