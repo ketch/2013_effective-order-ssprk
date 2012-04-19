@@ -1,15 +1,15 @@
 \section{Strong stability preserving Runge--Kutta methods}\label{sec:SSP}
 Strong stability preserving time-stepping methods were originally introduced
 for time integration of hyperbolic conservation laws
-\cite{Shu/Osher:1988} 
-\begin{align}\label{eq:ode_system}
+\cite{Shu/Osher:1988}\label{eq:HCL}
+\begin{align}
 	\bm{U}_t + \nabla \cdot \bm{f}(\bm{U}) = 0,   
 \end{align}
 with appropriate initial and boundary conditions.
 A spatial discretization gives the system of ODEs
-\begin{align*}
+\begin{align}\label{eq:ode_system}
     \bm{u}'(t) = \bm{F}(t,\bm{u}(t)),
-\end{align*}
+\end{align}
 where $\bm{u}$ is a vector of continuous-in-time grid values approximating 
 the solution $\bm{U}$ at discrete grid points and $\bm{F}$ is the spatial 
 discretization. \yiannistodo{I think this was Colin's comment: TODO: do we need add something about F being more general than just HCL?}
@@ -23,7 +23,7 @@ An explicit $s$-stage Runge--Kutta method takes the form
 \end{align*}
 and $c_i = \sum_j^sa_{ij}$.
 
-Assume that the solution of \eqref{eq:ode_system} satisfies a monotonicity 
+Assume that the solution of \eqref{eq:HCL} satisfies a monotonicity 
 property in some norm, seminorm, or convex functional.
 Then many popular spatial discretizations are designed such that for a 
 suitable class of problems the solution $\bm{u}^{n}$ computed with the
@@ -39,13 +39,14 @@ for some time-step restriction $\Dt \leq \Dt_{\text{FE}}$. \davidtodo{Does $\Dt_
 If this is the case, then an SSP method also generates a solution whose norm is
 non-increasing in time, under a modified time-step restriction. 
 \begin{definition}[Strong Stability Preserving]
-	Suppose $\bm{F}$ is a spatial discretization which satisfies
+	Suppose that the Forward Euler method applied to \eqref{eq:HCL} 
+	is strongly stable in a norm, seminorm or convex functional $\|\cdot\|$, i.e.
 	\begin{align*}
-		\|\bm{u}^{n} + \Dt\bm{F}(\bm{u}^{n})\| \le \|\bm{u}^n\|, \forall \bm{u},
+		\|\bm{u}^{n} + \Dt\bm{F}(\bm{u}^{n})\| \le \|\bm{u}^n\|, \; \forall \bm{u},
 	\end{align*}
-	for suitably-restricted time steps $0 \le \Dt \le \Dt_{\text{FE}}$,
-	in a norm, seminorm, or convex functional $\|\cdot\|$ of interest.
-	Then a time-stepping method is said to be \emph{strong stability
+	under suitably-restricted time steps $0 \le \Dt \le \Dt_{\text{FE}}$,
+	in a norm, seminorm, or convex functional  of interest.
+	Then a high-order Runge--Kutta method is said to be \emph{strong stability
   	preserving} with \emph{SSP coefficient} $\sspcoef > 0$ if it
 	generates a sequence of solution values $\bm{u}^n$ such that
 	\begin{align*}
@@ -55,7 +56,27 @@ non-increasing in time, under a modified time-step restriction.
 	\begin{align*}
 		\Dt \leq \sspcoef \Dt_{\text{FE}}.
 	\end{align*}
-\end{definition} \davidtodo{In this definition, it seems that the SSP property of a method depends on the choice of $F$.  Now it's even worse -- why do we care if $F$ is a spatial discretization?}
+\end{definition}
+%\begin{definition}[Strong Stability Preserving]
+%	Suppose $\bm{F}$ is a spatial discretization which satisfies
+%	\begin{align*}
+%		\|\bm{u}^{n} + \Dt\bm{F}(\bm{u}^{n})\| \le \|\bm{u}^n\|, \forall \bm{u},
+%	\end{align*}
+%	for suitably-restricted time steps $0 \le \Dt \le \Dt_{\text{FE}}$,
+%	in a norm, seminorm, or convex functional $\|\cdot\|$ of interest.
+%	Then a time-stepping method is said to be \emph{strong stability
+%  	preserving} with \emph{SSP coefficient} $\sspcoef > 0$ if it
+%	generates a sequence of solution values $\bm{u}^n$ such that
+%	\begin{align*}
+%  		\|\bm{u}^{n+1}\| \le \|\bm{u}^n\|,
+%	\end{align*}
+%	for a time-step restriction
+%	\begin{align*}
+%		\Dt \leq \sspcoef \Dt_{\text{FE}}.
+%	\end{align*}
+%\end{definition} 
+\davidtodo{In this definition, it seems that the SSP property of a method depends on the choice of $F$.  Now it's even worse -- why do we care if $F$ is a spatial discretization?}
+\yiannistodo{I modified the definition.}
 
 The SSP coefficient $\sspcoef$ is a property only of the particular 
 time-stepping method and quantifies the allowable time step size relative 
@@ -117,7 +138,7 @@ monotonicity condition.
 We denote the SSP coefficient of a method for linear problems by $\clin$; 
 clearly for any method
 \begin{align*}
-	\sspcoef\le\clin,
+	\sspcoef\le\clin
 \end{align*}
 and the same inequality holds for the optimal coefficients over a given class.
 Exact optimal values of $\clin$ are known for many classes of methods; for
@@ -125,8 +146,8 @@ example see \cite{Kraaijevanger1986,ketcheson2009a}.
 
 Following \cite{Ketcheson2008, Ketcheson/Macdonald/Gottlieb:2009}, 
 we will numerically solve the optimization problem \eqref{eq:SSP_opt} to find
-optimal explicit SSP Runge--Kutta methods. \davidtodo{Do you mean effective order RK methods?
+optimal explicit SSP Runge--Kutta methods of effective order. \davidtodo{Do you mean effective order RK methods?
 I think it would be better to move section 2.1 into section 5.}
-However, we first need to define the order conditions $\Phi(K)$ for methods 
-of effective order.
+However, we first need to define when a Runge--Kutta method acquires an
+effective order and how its order conditions $\Phi(K)$ are derived.
 This is discussed in the next section.
