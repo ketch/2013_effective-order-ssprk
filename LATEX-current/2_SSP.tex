@@ -44,12 +44,11 @@ computed with the forward Euler scheme
     \bm{u}^{n+1} = \bm{u}^{n} + \Dt\bm{F}(t,\bm{u}^{n}),
 \end{align}
 is non-increasing (in time)
-\colintodo{can't say this: ODE/PDE are in different function spaces.}
-\yiannistodo{correct}
 in some norm, seminorm, or convex functional:
 \begin{align*}
     \|\bm{u}^{n+1}\| \le \|\bm{u}^n\|, \; \forall \bm{u}
 \end{align*}
+\colintodo{definitely not ``$\forall u$'', maybe $\forall n$ but not sure why we need this}
 subject to a time-step restriction $\Dt \leq \DtFE$.
 Note that $\DtFE$ is independent of $\bm{u}$ and is a property of $\bm{F}$.
 If this is the case, then an SSP method also generates a solution whose norm is
@@ -166,10 +165,10 @@ example see \cite{Kraaijevanger1986,ketcheson2009a}.
 Following \cite{Ketcheson2008, Ketcheson/Macdonald/Gottlieb:2009}, 
 we will numerically solve the optimization problem \eqref{eq:SSP_opt} to find
 optimal effective order explicit SSP Runge--Kutta methods.
- \davidtodo{Do you mean effective order RK methods?
-I think it would be better to move section 2.1 into section 5.}
+\davidtodo{I think it would be better to move section 2.1 into section 5.}
 \colintodo{Could do, I'm (yet) not convinced it matters.}
 \yiannistodo{I think is better to leave it here. }
-However, we first need to define when a Runge--Kutta method acquires an
-effective order and how its order conditions $\Phi(K)$ are derived.
+However, we first need to define the order conditions $\Phi(K)$ for methods
+of effective order.
 This is discussed in the next section.
+% I didn't like this edit so I reverted it
