@@ -1,50 +1,70 @@
 \section{Strong stability preserving Runge--Kutta methods}\label{sec:SSP}
-Strong stability preserving time-stepping methods were originally introduced
-for time integration of hyperbolic conservation laws
+Strong stability preserving (SSP) time-stepping methods were originally introduced
+for time integration of systems of hyperbolic conservation laws
 \cite{Shu/Osher:1988} 
-\begin{align}\label{eq:ode_system}
+\begin{align}\label{eq:pde}
 	\bm{U}_t + \nabla \cdot \bm{f}(\bm{U}) = 0,   
 \end{align}
 with appropriate initial and boundary conditions.
 A spatial discretization gives the system of ODEs
-\begin{align*}
+\begin{align}\label{eq:ode_system}
     \bm{u}'(t) = \bm{F}(t,\bm{u}(t)),
-\end{align*}
+\end{align}
+\colintodo{not sure making $\bm{F}$ time-dep is good idea: makes SSP defn harder?}
 where $\bm{u}$ is a vector of continuous-in-time grid values approximating 
-the solution $\bm{U}$ at discrete grid points and $\bm{F}$ is the spatial 
-discretization. \yiannistodo{I think this was Colin's comment: TODO: do we need add something about F being more general than just HCL?}
-A time discretization then produces a sequence of solutions
+the solution $\bm{U}$ at discrete grid points.
+% and $\bm{F}$ is the spatial discretization.
+Of course, \eqref{eq:ode_system} can arise in many ways and $\bm{F}$
+need not represent a spatial discretization.
+In any case, a time discretization then produces a sequence of
+solutions
 $\bm{u}^{n} \approx \bm{u}(t_n)$.
-In this work we study Runge--Kutta time discretizations.
+In this work we study explicit Runge--Kutta time discretizations.
 An explicit $s$-stage Runge--Kutta method takes the form
 \begin{align*}
 	\bm{u}^{n+1} &= \bm{u}^{n} + \Dt \sum_i^s b_i \bm{F}(t_n + c_i \Dt,\bm{Y}_i), \\
 	\text{where} \quad \bm{Y}_i &= \bm{u}^{n} + \Dt \sum_j^{i-1} a_{ij} \bm{F}(t_n + c_j \Dt,\bm{Y}_j)
 \end{align*}
 and $c_i = \sum_j^sa_{ij}$.
+The accuracy and stability of the method depend on the coefficients
+$(A,\bm{b},\bm{c})$ \cite{Butcher2008_book}.
 
-Assume that the solution of \eqref{eq:ode_system} satisfies a monotonicity 
+
+\sout{
+Assume that the solution of \eqref{eq:pde} satisfies a monotonicity
 property in some norm, seminorm, or convex functional.
-Then many popular spatial discretizations are designed such that for a 
-suitable class of problems the solution $\bm{u}^{n}$ computed with the
+}
+In some cases, the solution of \eqref{eq:pde} satisfies a monotonicity
+property.
+\colintodo{should motivate this better}
+For this reason,
+many popular spatial discretizations are designed such that, for a
+suitable class of problems, the solution $\bm{u}^{n}$ computed with the
 forward Euler scheme
 \begin{align}\label{eq:forwardEuler}
     \bm{u}^{n+1} = \bm{u}^{n} + \Dt\bm{F}(t,\bm{u}^{n}),
 \end{align}
-is non-increasing in the same norm, seminorm, or convex functional:
+is non-increasing (in time)
+\sout{the same}
+\colintodo{can't say this: ODE/PDE are in different function spaces.}
+in some norm, seminorm, or convex functional:
 \begin{align*}
-    \|\bm{u}^{n+1}\| \le \|\bm{u}^n\|, \; \forall \bm{u},
+    \|\bm{u}^{n+1}\| \le \|\bm{u}^n\|,
 \end{align*}
-for some time-step restriction $\Dt \leq \Dt_{\text{FE}}$. \davidtodo{Does $\Dt_\textup{FE}$ depend on $u$?}
+subject to a time-step restriction $\Dt \leq \Dt_{\text{FE}}$.
+Note that $\Dt_{\textup{FE}}$ is independent of $\bm{u}$ and is a
+property of $\bm{F}$.
 If this is the case, then an SSP method also generates a solution whose norm is
 non-increasing in time, under a modified time-step restriction. 
 \begin{definition}[Strong Stability Preserving]
-	Suppose $\bm{F}$ is a spatial discretization which satisfies
-	\begin{align*}
-		\|\bm{u}^{n} + \Dt\bm{F}(\bm{u}^{n})\| \le \|\bm{u}^n\|, \forall \bm{u},
-	\end{align*}
-	for suitably-restricted time steps $0 \le \Dt \le \Dt_{\text{FE}}$,
-	in a norm, seminorm, or convex functional $\|\cdot\|$ of interest.
+  Suppose function $\bm{F}$, convex functional $\|\cdot\|$, and
+  constant $\DtFE$ are any possible values
+  %any possible values, any possibilities, arbitrary members of ...??
+  such that
+  \begin{align*}
+    \|\bm{u} + \Dt\bm{F}(\bm{u})\| \le \|\bm{u}\|,
+    \text{for all $\bm{u}$ and  for all  $\Dt \le \DtFE$.}
+  \end{align*}
 	Then a time-stepping method is said to be \emph{strong stability
   	preserving} with \emph{SSP coefficient} $\sspcoef > 0$ if it
 	generates a sequence of solution values $\bm{u}^n$ such that
@@ -53,11 +73,13 @@ non-increasing in time, under a modified time-step restriction.
 	\end{align*}
 	for a time-step restriction
 	\begin{align*}
-		\Dt \leq \sspcoef \Dt_{\text{FE}}.
+		\Dt \leq \sspcoef \DtFE.
 	\end{align*}
 \end{definition} \davidtodo{In this definition, it seems that the SSP property of a method depends on the choice of $F$.  Now it's even worse -- why do we care if $F$ is a spatial discretization?}
+\colintodo{Does this help?}
+\colintodo{maybe want stage values SSP too...}
 
-The SSP coefficient $\sspcoef$ is a property only of the particular 
+The SSP coefficient $\sspcoef$ is a property of the particular
 time-stepping method and quantifies the allowable time step size relative 
 to that of the forward Euler method.
 Generally we want the SSP coefficient to be as large as possible for efficiency.
@@ -74,14 +96,14 @@ We say that an SSP Runge--Kutta method is optimal if it has the largest
 possible SSP coefficient for a given order and a given number of stages.
 The search for these optimal methods was originally based on
 expressing the Runge--Kutta method as combinations of forward Euler
-steps in the Shu--Osher form and solving a nonlinear optimization
+steps (the Shu--Osher form) and solving a nonlinear optimization
 problem \cite{Gottlieb/Shu:1998, Gottlieb2001, Spiteri2003a, Spiteri2003b,
   Ruuth2004, Ruuth:2006}.
 However, the SSP coefficient is related to the 
 \emph{radius of absolute monotonicity} \cite{Kraaijevanger1991} and, 
 for irreducible Runge--Kutta methods, the two are equivalent 
 \cite{Ferracina2004, Higueras2004}.
-This gives  simplified algebraic characterization of the SSP coefficient. 
+This gives a simplified algebraic characterization of the SSP coefficient.
 \cite{Ferracina2005}
 The optimization problem of finding optimal SSP Runge--Kutta methods
 can be written in terms of the coefficients $A$ and $\bm{b}$ as
@@ -125,8 +147,9 @@ example see \cite{Kraaijevanger1986,ketcheson2009a}.
 
 Following \cite{Ketcheson2008, Ketcheson/Macdonald/Gottlieb:2009}, 
 we will numerically solve the optimization problem \eqref{eq:SSP_opt} to find
-optimal explicit SSP Runge--Kutta methods. \davidtodo{Do you mean effective order RK methods?
-I think it would be better to move section 2.1 into section 5.}
+optimal effective order explicit SSP Runge--Kutta methods.
+\davidtodo{I think it would be better to move section 2.1 into section 5.}
+\colintodo{Could do, I'm (yet) not convinced it matters.}
 However, we first need to define the order conditions $\Phi(K)$ for methods 
 of effective order.
 This is discussed in the next section.

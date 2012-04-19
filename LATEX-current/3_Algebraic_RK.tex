@@ -136,11 +136,11 @@ The following example shows how to compute this product for one tree.
 
 If two Runge--Kutta methods map to the same element of $G$ then they
 are essentially the same method (up to reducibility).
-This is overly restrictive for practical purposes and we want a way to
+%This is overly restrictive for practical purposes and we want a way to
+For our purposes, we want a weaker condition: a way to
 discuss equivalence of methods up to a particular order of accuracy.
-\davidtodo{What?}
-\yiannistodo{being same method}
 \davidtodo{You need to fix the writing so that the meaning is clear.}
+\colintodo{double-check now}
 
 \begin{definition}\label{def:Equivalent_methods}
 	Two Runge--Kutta methods $A$ and $B$, are equivalent up to order 
@@ -202,16 +202,16 @@ In terms of functions in group $G$ this is leads to the following definition of 
 	\begin{equation}\label{eq:Effective_order_1}
 		(\beta\alpha\beta^{-1})(t) = E(t), \; \text{for every tree with $r(t) \leq q$,}
 	\end{equation}
-        \davidtodo{Have we defined $E(t)$ somewhere?}
         where $\beta^{-1}$ is an inverse of $\beta$ up to order $q$.
+        Recall that $E$ represents one exact step of the solution.
 \end{definition}
+\davidtodo{Have we defined $E(t)$ somewhere?}
+\colintodo{yes, briefly, added a note here too}
 The practical benefit of methods of effective order results from the
 observation that only $M$ need be used repeatedly, since
 \begin{displaymath}
-	P^n = (S^{-1}MS)^n = (S^{-1}MS) \cdots (S^{-1}MS) (S^{-1}MS) = S^{-1} M^n S.
+	P^n = (S^{-1}MS)^n = (S^{-1}MS) \cdots (S^{-1}MS) (S^{-1}MS) \underaccent{q}{\equiv} S^{-1} M^n S.
 \end{displaymath}
-\davidtodo{The last equality in this formula is not actually equality, only equivalence up
-to some order.}
 The starting method is applied at the beginning without advancing the
 solution.
 Instead, it introduces a perturbation on the solution.

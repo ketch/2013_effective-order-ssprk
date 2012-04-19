@@ -5,13 +5,18 @@ The challenge for the numerical solution of these systems is twofold.
 It is desirable that the approximation be of high accuracy in regions where 
 the solution is smooth and that the discontinuities be captured without 
 exhibiting any oscillations or overshoots. 
-In the last twenty years major developments have been made towards the 
-development of high accurate non-oscillatory methods.\davidtodo{developments towards the development?} \yiannistodo{... strongly stable or nonlinearly stable ..., which do you prefer?}
+There has been considerable effort to develop, for these and other
+problem classes, numerical methods which are \emph{strongly stable}.
 Many of these numerical methods are based on a method-of-lines approach 
 where the problem is first discretized in space to yield a system of ODEs. 
 The spatial discretization is often chosen to ensure certain strong stability 
-properties of the original PDE problem (e.g., max-norm or TV-norm monotonicity \cite{Gottlieb/Ketcheson/Shu:2009}, 
-free of oscillations \cite{Shu/Osher:1988}, positivity \cite{Horvath:2005}, etc \yiannistodo{suggested citations}) are preserved 
+properties of the original PDE problem
+(e.g., max-norm monotonicity, total variation boundedness,
+% (e.g., max-norm or TV-norm monotonicity
+% I meant citations re: such spatial discretizations
+% \cite{Gottlieb/Ketcheson/Shu:2009},
+% free of oscillations \cite{Shu/Osher:1988},
+positivity \cite{Horvath:2005}, etc) are preserved
 \emph{when coupled with first-order Forward Euler time integration}.
 Strong stability preserving (SSP) time discretizations (formerly TVD
 discretizations \cite{Gottlieb/Shu:1998}) are high-order time
