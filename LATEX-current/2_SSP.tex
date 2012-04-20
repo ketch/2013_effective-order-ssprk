@@ -39,30 +39,27 @@ are monotonic in the total variation seminorm.
 \yiannistodo{This is from David's paper \cite{Ketcheson2008}}
 For this reason, many popular spatial discretizations are designed such 
 that, for a suitable class of problems, the solution $\bm{u}^{n}$ 
-computed with the forward Euler scheme
+computed with the forward Euler scheme is non-increasing (in time)
+in some norm, seminorm, or convex functional; i.e.
 \begin{align}\label{eq:forwardEuler}
-    \bm{u}^{n+1} = \bm{u}^{n} + \Dt\bm{F}(t,\bm{u}^{n}),
+    \|\bm{u} + \Dt\bm{F}(t,\bm{u})\| \le \|\bm{u}\| \ \ \ \ \mbox{ for } 0\le\Dt\le \DtFE, \forall \bm{u}.
 \end{align}
-is non-increasing (in time)
-in some norm, seminorm, or convex functional:
-\begin{align*}
-    \|\bm{u}^{n+1}\| \le \|\bm{u}^n\|, \; \forall \bm{u}
-\end{align*}
 \colintodo{definitely not ``$\forall u$'', maybe $\forall n$ but not sure why we need this}
 \yiannistodo{Isn't that relate to `` $\DtFE$ is independent of $\bm{u}$"? Also it is mentioned later in the definition.}
-subject to a time-step restriction $\Dt \leq \DtFE$.
+\davidtodo{Colin, the FE condition is always assumed to hold for all $u$, and $\DtFE$ must be
+uniform.}
 Note that $\DtFE$ is independent of $\bm{u}$ and is a property of $\bm{F}$.
 If this is the case, then an SSP method also generates a solution whose norm is
 non-increasing in time, under a modified time-step restriction. 
 \begin{definition}[Strong Stability Preserving]
 	Suppose function $\bm{F}$, convex functional $\|\cdot\|$, and
-	constant $\DtFE$ are such that
+	constant $\DtFE$ satisfy \eqref{eq:forwardEuler}.
 	%any possible values, any possibilities, arbitrary members of ...??
 	% you not need to say
-	\begin{align*}
-		\|\bm{u} + \Dt\bm{F}(t,\bm{u})\| \le \|\bm{u}\|, \; \forall \bm{u}
-		\text{ and  for all } \Dt \le \DtFE.
-	\end{align*}
+	%\begin{align*}
+	%	\|\bm{u} + \Dt\bm{F}(t,\bm{u})\| \le \|\bm{u}\|, \; \forall \bm{u}
+	%	\text{ and  for all } \Dt \le \DtFE.
+	%\end{align*}
 	Then a time-stepping method is said to be \emph{strong stability
   	preserving} with \emph{SSP coefficient} $\sspcoef > 0$ if it
 	generates a sequence of solution values $\bm{u}^n$ such that
@@ -96,6 +93,9 @@ non-increasing in time, under a modified time-step restriction.
 \colintodo{Does this help?}
 \colintodo{maybe want stage values SSP too...}
 \yiannistodo{Colin made a suggestion and I have one in comments.}
+\davidtodo{Neither version is correct.  I can fix it if you want, but you (Yiannis) really 
+should be able to state it correctly.  If you give up, you can just copy what is on 
+page 11 of the SSP book.}
 
 The SSP coefficient $\sspcoef$ is a property of the particular
 time-stepping method and quantifies the allowable time step size relative 

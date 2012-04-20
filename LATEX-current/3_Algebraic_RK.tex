@@ -30,19 +30,14 @@ in which the product corresponds to the composition of two methods.
 %corresponds to successive application of two methods.
 Let $G$ be the group of all real-valued maps on the set
 of rooted trees.
-\yiannistodo{We still have to cite Butcher here.}
-\davidtodo{Did he propose the group (whatever that means),
-or did he show that it is isomorphic to the Runge--Kutta group?}
-\colintodo{I wish to avoid explicitly discussing more than one group.
-  Is it ok now?}
 Each function $\alpha \in G$ corresponds
 to an \emph{equivalence class} of Runge--Kutta methods and maps trees to specific
 algebraic expressions in the coefficients
 of a Runge--Kutta method, known as \emph{elementary weights}.
 %The elementary weight of a tree $t$ is an algebraic expression in the coefficients
 %of a Runge--Kutta method.
-Two Runge--Kutta methods belong to the same equivalence class (and hence 
-are equivalent) if they have the same elementary weight values.
+Two Runge--Kutta methods belong to the same equivalence class 
+if they have the same elementary weight values.
 
 For every function $\alpha \in G$ we write the values of the
 elementary weights as $\alpha_{i} = \alpha(t_{i})$ for trees $t_{i}$
@@ -172,8 +167,6 @@ then they are essentially the same method (up to reducibility).
 However, the definition of equivalence of methods is overly restrictive 
 for practical purposes. A weaker condition is established if we 
 discuss equivalence of methods up to a particular order of accuracy.
-\davidtodo{You need to fix the writing so that the meaning is clear.}
-\colintodo{double-check now}
 \begin{definition}\label{def:Equivalent_methods}
 	Two Runge--Kutta methods $A$ and $B$, are equivalent up to order 
 	$p$ if their corresponding elements in $G$, $\alpha$ and $\beta$, satisfy
@@ -191,8 +184,8 @@ element $E \in G$ which advances the exact solution by one step.
 All of this can be made considerably more precise using quotient
 groups of $G$ \cite{Butcher2008_book}.
 \begin{example}\label{ex:FE_inv_2}
-  Consider the forward Euler method \eqref{eq:forwardEuler}.
-  %$\bm{u}^{n+1} = \bm{u}^{n} + \Dt \bm{F}(\bm{u}^{n})$.
+  Consider the forward Euler method
+  $\bm{u}^{n+1} = \bm{u}^{n} + \Dt \bm{F}(\bm{u}^{n})$.
   To find an inverse, we seek a method that undoes the work of this method,
   recovering $\bm{u}^{n}$ from $\bm{u}^{n+1}$;
   one approach is to solve for $\bm{u}^{n}$, obtaining the backward Euler method
@@ -233,8 +226,6 @@ In terms of functions in group $G$ this is leads to the following definition of 
         where $\beta^{-1}$ is an inverse of $\beta$ up to order $q$.
         Recall that $E$ represents one exact step of the solution.
 \end{definition}
-\davidtodo{Have we defined $E(t)$ somewhere?}
-\colintodo{yes, briefly, added a note here too}
 The practical benefit of methods of effective order results from the
 observation that only $M$ need be used repeatedly, since
 \begin{displaymath}
@@ -243,8 +234,6 @@ observation that only $M$ need be used repeatedly, since
 The starting method is applied at the beginning without advancing the
 solution.
 Instead, it introduces a perturbation on the solution.
-\davidtodo{I thought that we weren't using this approach anymore?}
-\colintodo{I added a sentence.}
 The main method  $M$ is then used for $n$ time steps and finally the
 stopping method is used to correct the solution.
 In Section~\ref{subsec:starting_stopping}, we propose alternative

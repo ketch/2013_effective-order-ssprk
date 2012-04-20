@@ -3,7 +3,7 @@ In this section, we use the SSP theory and Butcher's theory of effective
 order (Sections \ref{sec:SSP} and \ref{sec:Algebraic_RK}) to find
 optimal explicit SSP Runge--Kutta schemes with prescribed effective
 order and classical order.
-Due to Theorem~\ref{cor:no_SSP_5}, there are no SSPRK methods of
+According to Theorem~\ref{cor:no_SSP_5}, there are no SSPRK methods of
 effective order five, and therefore we need only consider methods with
 effective order up to four.
 
@@ -21,16 +21,17 @@ method of order $q$.
 
 \subsection{The main method}\label{subsec:main_method}
 
-Our search for methods of effective order can be carried out in two
+Our search for methods of effective order is carried out in two
 steps, first searching for optimal main methods $M$ and then for
 possible corresponding methods $S$ and $S^{-1}$.
 For a given number of stages, effective order, and classical order,
-our aim is thus to find an optimal main method, that is one with the 
-largest possible SSP coefficient $\sspcoef$ for nonlinear problems.
+our aim is thus to find an optimal main method, meaning one with the 
+largest possible SSP coefficient $\sspcoef$.
 
 To find a method ESSPRK($s,q,p$) with Butcher tableau $(A, \bm{b},
 \bm{c})$, we consider the optimization problem~\eqref{eq:SSP_opt} 
 now with $\Phi_{q,p}(K)$ representing the conditions for effective order
+\davidtodo{$\Phi_{q,p}(K)$ does not appear in (2.4).}
 $q$ and classical order $p$ (as per Table~\ref{tab:effective_OCs}).
 The methods are found through numerical search, using 
 \textsc{MATLAB}'s optimization toolbox on the above constrained 
@@ -43,10 +44,10 @@ from random initial guesses are performed to help ensure the method with
 the largest possible SSP coefficient is found.
 
 \subsubsection{Optimal SSP coefficients}\label{subsubsec:optimal_SSP_coeff}
-The effective SSP coefficients for up to eleven stages are shown in 
+The effective SSP coefficients for methods with up to eleven stages are shown in 
 Table~\ref{tab:eff_SSP_coeff}. 
 Similarly to SSPRK($s,q$) methods, all ESSPRK($s,q,p$) methods 
-have $\ceff < 1$. 
+have $\ceff < 1$. \davidtodo{This is known a priori.}
 Since the effective order $q$ SSPRK methods (accompanied with relevant 
 starting and stopping methods) are used in a scheme that attains classical 
 order equal to $q$, it is reasonable to compare them to the SSPRK($s,q$) 
@@ -56,12 +57,17 @@ We then have the following results:
 	ESSPRK($s,q,p$) methods have SSP coefficients $\sspcoef$ greater than 
 	or equal to that of SSPRK($s,q$) methods.
 \end{result}
+\davidtodo{This is known a priori; it is a consequence of the definitions of these
+method classes.}
 \begin{result}
 	Many of the ESSPRK($s,q,p$) methods (and all of those with $s \ge 7$ 
 	stages) we have found by numerical search, have SSP coefficients 
 	$\sspcoef$ which achieve the linear bound. 
 	This shows they are optimal.  
 \end{result}
+\davidtodo{What is meant by ``the linear bound''?  I don't think that is a good
+description of what is meant.  Furthermore, I don't think the reader will remember
+what was mentioned briefly (and never again since) in Section 2.}
 
 \begin{table}
     \centering
@@ -93,8 +99,8 @@ up to 11 stages.
 In the cases of three and four stages, we were able to determine closed-form 
 families of solutions.
 \begin{theorem}\label{thm:ESSPRK(3,3,2)}
-	An optimal family of three-stage, third effective order SSP Runge--Kutta 
-	methods of classical order two, with SSP coefficient $\sspcoef=1$ is given by
+	A family of optimal three-stage, effective order three SSP Runge--Kutta 
+	methods of classical order two, with SSP coefficient $\sspcoef=1$, is given by
     \begin{displaymath}
     		\begin{split}
     			\bm{Y}_1 &= \bm{u}^n \\
@@ -142,8 +148,8 @@ For effective order four, the ESSPRK($s,4,p$) methods can have
 classical order $p=2$ or $3$.
 These methods have an SSP coefficient $\sspcoef$ which is at least as
 large as SSPRK($s, 4$) (in fact, they are all larger except in the
-case where $s =10$ where they are equal).
-For stages $s \ge 7$ the SSP coefficient of ESSPRK($s,4,2$) and
+case where $s =10$ where they are equal).\davidtodo{See my comment above.}
+For $7\le s\le 11$ stages, the SSP coefficient of ESSPRK($s,4,2$) and
 ESSPRK($s,4,3$) are the same and both achieve the linear bound
 $\clin$.
 ESSPRK($6,4,2$) is also optimal.
@@ -151,7 +157,7 @@ In the particular case of four-stage methods we have the following result:
 \begin{result}
 	In contrast with the non-existence of an SSPRK(4,\,4) method 
 	\cite{Gottlieb/Shu:1998,Ruuth2002}, 
-	we were are able to find ESSPRK(4,\,4,\,2) and ESSPRK(4,\,4,\,3) methods.
+	we are able to find ESSPRK(4,\,4,\,2) and ESSPRK(4,\,4,\,3) methods.
 	The coefficients of these methods are found in
 	Tables~\ref{tab:ESSPRK(4,4,2)_scheme}
 	and~\ref{tab:ESSPRK(4,4,3)_scheme}.
@@ -254,7 +260,6 @@ In practice, we maximize the objective function $\min(r_1,r_2)$, where $r_1$
 and $r_2$ are the absolute radii of monotonicity of the two Runge--Kutta 
 methods.
 
-\subsection{Resulting schemes}\label{subsec:resulting_schemes}
 We were able to construct starting and stopping schemes for each main 
 method, with an SSP coefficient at least as large as that of the main method.
 For each order, effective order and number of stages the computational cost

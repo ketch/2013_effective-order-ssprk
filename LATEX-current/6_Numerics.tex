@@ -73,8 +73,10 @@ coupled with Forward Euler method under time restriction
 $\Dt \leq {\Dt}_{\text{FE}} = (1 / \|U(0,x)\|_{\infty}) \Delta x$
 \cite{Laney:1998,Ketcheson/Macdonald/Gottlieb:2009}.
 \colintodo{David: who would you cite for this?}
-The SSP theory predicts that using a time-discretization with a SSP
-coefficient $\sspcoef$, the solution will be TVD for $\Dt \leq
+\davidtodo{Why cite?  It is just a consequence of the definition.  Any citation
+should go back at the definition, I think.}
+Recall that a time discretization with SSP
+coefficient $\sspcoef$, will give a TVD solution for $\Dt \leq
 \sspcoef {\Dt}_{\text{FE}}$.
 
 \colintodo{Is there a particular reason we use ESSPRK($10,4,2$)?  $(4,4,2)$ would seem more interesting/reproducible.}
