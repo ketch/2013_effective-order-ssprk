@@ -30,12 +30,10 @@ largest possible SSP coefficient $\sspcoef$.
 
 To find a method ESSPRK($s,q,p$) with Butcher tableau $(A, \bm{b},
 \bm{c})$, we consider the optimization problem~\eqref{eq:SSP_opt} 
-now with $\Phi_{q,p}(K)$ representing the conditions for effective order
-\davidtodo{$\Phi_{q,p}(K)$ does not appear in (2.4).}
+with $\Phi(K)$ representing the conditions for effective order
 $q$ and classical order $p$ (as per Table~\ref{tab:effective_OCs}).
 The methods are found through numerical search, using 
-\textsc{MATLAB}'s optimization toolbox on the above constrained 
-optimization problem. 
+\textsc{Matlab}'s optimization toolbox.
 Specifically, we use \texttt{fmincon} with a sequential quadratic 
 programming approach \cite{Ketcheson2008, Ketcheson/Macdonald/Gottlieb:2009}.
 This process does not guarantee a global minimizer, so many searches 
@@ -45,29 +43,25 @@ the largest possible SSP coefficient is found.
 
 \subsubsection{Optimal SSP coefficients}\label{subsubsec:optimal_SSP_coeff}
 The effective SSP coefficients for methods with up to eleven stages are shown in 
-Table~\ref{tab:eff_SSP_coeff}. 
-Similarly to SSPRK($s,q$) methods, all ESSPRK($s,q,p$) methods 
-have $\ceff < 1$. \davidtodo{This is known a priori.}
-Since the effective order $q$ SSPRK methods (accompanied with relevant 
-starting and stopping methods) are used in a scheme that attains classical 
-order equal to $q$, it is reasonable to compare them to the SSPRK($s,q$) 
-methods.
-We then have the following results:
+Table~\ref{tab:eff_SSP_coeff}.
+%Since the effective order $q$ SSPRK methods (accompanied with relevant
+%starting and stopping methods) are used in a scheme that attains classical
+%order equal to $q$, it is reasonable to compare them to the SSPRK($s,q$)
+%methods.
+The ESSPRK($s,q,p$) methods form a super class of the SSPRK($s,q$)
+methods and thus their SSP coefficients $\sspcoef$ must be greater
+than or equal to that of SSPRK($s,q$) methods.
+This is confirmed by comparing Table~\ref{tab:eff_SSP_coeff} with
+\cite[Table~5]{Ketcheson/Macdonald/Gottlieb:2009}.
+Recall from Section~\ref{subsec:Optimal_SSPRK} that $\clin$ (the SSP
+coefficient for linear constant-coefficients problems) gives known
+upper bound on the SSP coefficient \cite{Kraaijevanger1986, ketcheson2009a}.
+Based on this we have the following result:
 \begin{result}
-	ESSPRK($s,q,p$) methods have SSP coefficients $\sspcoef$ greater than 
-	or equal to that of SSPRK($s,q$) methods.
+	With a few exceptions, the ESSPRK($s,q,p$) methods
+	found by numerical search are optimal because they have SSP coefficients
+	$\sspcoef$ which achieve known values of $\clin$.
 \end{result}
-\davidtodo{This is known a priori; it is a consequence of the definitions of these
-method classes.}
-\begin{result}
-	Many of the ESSPRK($s,q,p$) methods (and all of those with $s \ge 7$ 
-	stages) we have found by numerical search, have SSP coefficients 
-	$\sspcoef$ which achieve the linear bound. 
-	This shows they are optimal.  
-\end{result}
-\davidtodo{What is meant by ``the linear bound''?  I don't think that is a good
-description of what is meant.  Furthermore, I don't think the reader will remember
-what was mentioned briefly (and never again since) in Section 2.}
 
 \begin{table}
     \centering
@@ -146,13 +140,18 @@ SSPRK($s$, $3$) method is a particular member.
 \subsubsection{Effective order four methods}\label{subsubsec:4th_ESSPRK}
 For effective order four, the ESSPRK($s,4,p$) methods can have
 classical order $p=2$ or $3$.
-These methods have an SSP coefficient $\sspcoef$ which is at least as
-large as SSPRK($s, 4$) (in fact, they are all larger except in the
-case where $s =10$ where they are equal).\davidtodo{See my comment above.}
-For $7\le s\le 11$ stages, the SSP coefficient of ESSPRK($s,4,2$) and
-ESSPRK($s,4,3$) are the same and both achieve the linear bound
+%These methods have an SSP coefficient $\sspcoef$ which is at least as
+%large as SSPRK($s, 4$) (in fact, they are all larger except in the
+%case where $s =10$ where they are equal).\davidtodo{See my comment above.}
+In either case, for $7 \le s \le 11$ stages the methods found are
+optimal because the SSP coefficient attains the upper bound of
 $\clin$.
-ESSPRK($6,4,2$) is also optimal.
+For fewer stages, the ESSPRK methods still have SSP coefficients up to
+30\% larger than that of explicit SSPRK($s,q$) methods.
+% the SSP coefficient of ESSPRK($s,4,2$) and
+%ESSPRK($s,4,3$) are the same and both achieve the linear bound
+%$\clin$.
+%ESSPRK($6,4,2$) is also optimal.
 In the particular case of four-stage methods we have the following result:
 \begin{result}
 	In contrast with the non-existence of an SSPRK(4,\,4) method 
@@ -164,7 +163,7 @@ In the particular case of four-stage methods we have the following result:
 \end{result}
 % Inside italics, notation looked funny with upright numerals, so
 % I removed math mode (and added "\," for some extra space)
-% GOOD!
+
 
 \subsection{Starting and stopping methods}\label{subsec:starting_stopping}
 Having constructed an ESSPRK($s,q,p$) scheme that can be used as the main 
@@ -237,8 +236,7 @@ It turns out that the order conditions from \eqref{eq:R_T_OCs} do not
 contradict the SSP requirements.
 We can thus find methods $R$ and $T$ using the optimization procedure
 described in Section~\ref{subsec:Optimal_SSPRK} with the order conditions 
-given by Table~\ref{tab:rho_tau_OCs} instead of the $\Phi_{p,q}$
-in \eqref{eq:SSP_opt}.
+given by Table~\ref{tab:rho_tau_OCs} for $\Phi(K)$ in \eqref{eq:SSP_opt}.
 
 For a given main method $M$, the values of $\alpha_i$ are already known.
 Also note that for effective order $q$, the algebraic expressions on

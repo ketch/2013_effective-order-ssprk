@@ -37,16 +37,14 @@ are monotonic in the total variation seminorm.
 \colintodo{should motivate this better}
 \yiannistodo{Added a line form David's paper \cite{Ketcheson2008}}
 For this reason, many popular spatial discretizations are designed such 
-that, for a suitable class of problems, the solution $\bm{u}$ in \eqref{eq:pde}
+that, for a suitable class of problems, the solution % $\bm{u}$ in \eqref{eq:pde}
+% can't be the PDE equation: forward Euler works on the ode system
 computed with the forward Euler scheme is non-increasing (in time)
-in some norm, seminorm, or convex functional; i.e.
+in some norm, seminorm, or convex functional; i.e.,
 \begin{align}\label{eq:forwardEuler}
     \|\bm{u} + \Dt\bm{F}(t,\bm{u})\| \le \|\bm{u}\|, \quad \forall \bm{u} \text{ and for } 0 \le \Dt \le \DtFE.
 \end{align}
-\colintodo{definitely not ``$\forall u$'', maybe $\forall n$ but not sure why we need this}
-\davidtodo{Colin, the FE condition is always assumed to hold for all $u$, and $\DtFE$ must be
-uniform.}
-Note that $\DtFE$ is independent of $\bm{u}$ and is a property of $\bm{F}$.
+Note that $\DtFE$ is a property of $\bm{F}$ (and is independent of $\bm{u}$).
 If this is the case, then an SSP method also generates a solution whose norm is
 non-increasing in time, under a modified time-step restriction. 
 \begin{definition}[Strong Stability Preserving]
