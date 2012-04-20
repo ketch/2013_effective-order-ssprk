@@ -113,7 +113,7 @@ families of solutions.
     ESSPRK($3,3,2$).
 \end{theorem}
 \begin{theorem}\label{thm:ESSPRK(4,3,2)}
-	An optimal family of four-stage, third effective order SSP Runge--Kutta 
+	An optimal family of four-stage, effective order three SSP Runge--Kutta 
 	methods of classical order two, with SSP coefficient $\sspcoef=2$ is given by
     \begin{displaymath}
     		\begin{split}
@@ -219,16 +219,15 @@ methods can be determined and are given in Table~\ref{tab:rho_tau_OCs}.
     		$\rho_2 = \alpha_2 + \beta_2$ & & $\tau_2 = \alpha_2 - \beta_2$ \\
     		$\rho_3 = \alpha_3 + \beta_3$ & & $\tau_3 = \alpha_3 - 2\alpha_1\beta_2 - \beta_3$ \\
     		$\rho_4 = \alpha_4 + \alpha_1\beta_2 + \beta_4$ & & $\tau_4 = \alpha_4 - \alpha_1\beta_2 - \beta_4$ \\
-                \hdashline[2pt/3pt]
+                \hdashline[2pt/3pt] \\[-10pt]
 		$\rho_5 = \alpha_5 + \beta_5$ & & $\tau_5 = \alpha_5 - 3\alpha_1^2\beta_2 - 3\alpha_1\beta_3 - \beta_5$ \\
 		$\rho_6 = \alpha_6 + \alpha_2\beta_2 + \beta_6$ & & $\tau_6 = \alpha_6 - (\alpha_1^2 + \alpha_2 -\beta_2)\beta_2 -\alpha_1\beta_3 - \alpha_1\beta_4 - \beta_6$ \\
 		$\rho_7 = \alpha_7 + \alpha_1\beta_3 + \beta_7$ & & $\tau_7 = \alpha_7 - 2\alpha_1\beta_4 - \alpha_1^2\beta_2 - \beta_7$ \\
 		$\rho_8 = \alpha_8 + \alpha_1\beta_4 + \alpha_2\beta_2 + \beta_8$ & & $\tau_8 = \alpha_8 - \alpha_1\beta_4 - \alpha_2\beta_2 + \beta_2^2 -  \beta_8$
   	\end{tabular}
-  	\caption{Order conditions on $\rho$ and $\tau$ up to fourth effective order for starting 
+  	\caption{Order conditions on $\rho$ and $\tau$ up to effective order four for starting
   	and stopping methods $R$ and $T$, respectively.
-        The upper block represents the third 
-  	effective order conditions.
+  	The upper block represents the effective order three conditions.
         \textbf{\red Colin: I see a change has been made here: Yiannis: are you sure these are correct?  Should I double-check them?}}
   	\label{tab:rho_tau_OCs}
 \end{table}
