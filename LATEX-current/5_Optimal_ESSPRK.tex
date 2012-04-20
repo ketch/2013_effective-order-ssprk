@@ -1,4 +1,4 @@
-\section{Optimal effective order SSP Runge--Kutta schemes}\label{sec:optimal_ESSPRK}
+\section{Optimal effective order explicit SSP Runge--Kutta schemes}\label{sec:optimal_ESSPRK}
 In this section, we use the SSP theory and Butcher's theory of effective
 order (Sections \ref{sec:SSP} and \ref{sec:Algebraic_RK}) to find
 optimal explicit SSP Runge--Kutta schemes with prescribed effective
@@ -30,7 +30,8 @@ largest possible SSP coefficient $\sspcoef$.
 
 To find a method ESSPRK($s,q,p$) with Butcher tableau $(A, \bm{b},
 \bm{c})$, we consider the optimization problem~\eqref{eq:SSP_opt} 
-now with $\Phi_{q,p}(K)$ representing the conditions for effective order
+by replacing now the order conditions $\Phi(K)$ with $\Phi_{q,p}(K)$,
+representing the conditions for effective order
 \davidtodo{$\Phi_{q,p}(K)$ does not appear in (2.4).}
 $q$ and classical order $p$ (as per Table~\ref{tab:effective_OCs}).
 The methods are found through numerical search, using 
@@ -52,13 +53,32 @@ Since the effective order $q$ SSPRK methods (accompanied with relevant
 starting and stopping methods) are used in a scheme that attains classical 
 order equal to $q$, it is reasonable to compare them to the SSPRK($s,q$) 
 methods.
-We then have the following results:
-\begin{result}
-	ESSPRK($s,q,p$) methods have SSP coefficients $\sspcoef$ greater than 
-	or equal to that of SSPRK($s,q$) methods.
-\end{result}
+A consequence of the definitions of these method classes is that the 
+ESSPRK($s,q,p$) methods have SSP coefficients $\sspcoef$ greater than 
+or equal to that of SSPRK($s,q$) methods.
+%We then have the following results:
+%\begin{result}
+%	ESSPRK($s,q,p$) methods have SSP coefficients $\sspcoef$ greater than 
+%	or equal to that of SSPRK($s,q$) methods.
+%\end{result}
 \davidtodo{This is known a priori; it is a consequence of the definitions of these
 method classes.}
+
+Furthermore, useful upper bounds for the optimization problem of effective order 
+SSP Runge--Kutta methods can be obtained by considering an important relaxation. 
+In the relaxed problem, the method is required to be accurate and strong 
+stability preserving only for linear, constant-coefficient initial value problems. 
+This leads to a reduced set of order conditions and a relaxed absolute 
+monotonicity condition.
+We denote the SSP coefficient of a method for linear problems by $\clin$; 
+clearly for any method
+\begin{align*}
+	\sspcoef\le\clin
+\end{align*}
+and the same inequality holds for the optimal coefficients over a given class.
+Exact optimal values of $\clin$ are known for many classes of methods; for
+example see \cite{Kraaijevanger1986,ketcheson2009a}. We then have the 
+next result.
 \begin{result}
 	Many of the ESSPRK($s,q,p$) methods (and all of those with $s \ge 7$ 
 	stages) we have found by numerical search, have SSP coefficients 
@@ -68,6 +88,8 @@ method classes.}
 \davidtodo{What is meant by ``the linear bound''?  I don't think that is a good
 description of what is meant.  Furthermore, I don't think the reader will remember
 what was mentioned briefly (and never again since) in Section 2.}
+\yiannistodo{OK. I removed Result 5.1 and bring the linear bound here. If it is better now
+we then remove it form sec2.}
 
 \begin{table}
     \centering
@@ -226,9 +248,8 @@ methods can be determined and are given in Table~\ref{tab:rho_tau_OCs}.
 		$\rho_8 = \alpha_8 + \alpha_1\beta_4 + \alpha_2\beta_2 + \beta_8$ & & $\tau_8 = \alpha_8 - \alpha_1\beta_4 - \alpha_2\beta_2 + \beta_2^2 -  \beta_8$
   	\end{tabular}
   	\caption{Order conditions on $\rho$ and $\tau$ up to effective order four for starting
-  	and stopping methods $R$ and $T$, respectively.
-  	The upper block represents the effective order three conditions.
-        \textbf{\red Colin: I see a change has been made here: Yiannis: are you sure these are correct?  Should I double-check them?}}
+  		and stopping methods $R$ and $T$, respectively.
+  		The upper block represents the effective order three conditions.}
   	\label{tab:rho_tau_OCs}
 \end{table}
 
@@ -239,6 +260,8 @@ We can thus find methods $R$ and $T$ using the optimization procedure
 described in Section~\ref{subsec:Optimal_SSPRK} with the order conditions 
 given by Table~\ref{tab:rho_tau_OCs} instead of the $\Phi_{p,q}$
 in \eqref{eq:SSP_opt}.
+\colintodo{I see a change has been made here: Yiannis: are you sure these are correct?  Should I double-check them?}
+\yiannistodo{The table as it is now is correct. I double-check it once more at a latter stage.}
 
 For a given main method $M$, the values of $\alpha_i$ are already known.
 Also note that for effective order $q$, the algebraic expressions on
@@ -274,6 +297,7 @@ themselves are first order accurate, whereas for classical order three they
 achieve second order accuracy. 
 }
 \colintodo{This isn't surprising from the OCs of $R$ and $T$, not sure what value there is in mentioning it.}
+\yiannistodo{We can omit it if you like}
 
 %\begin{table}
 %    \centering
