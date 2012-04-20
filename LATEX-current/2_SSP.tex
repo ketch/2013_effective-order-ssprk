@@ -13,8 +13,7 @@ A spatial discretization gives the system of ODEs
 \colintodo{not sure making $\bm{F}$ time-dep is good idea: makes 
 SSP defn harder?}
 \yiannistodo{I don't think so, in general it can depend on time and 
-later we say about a time-dependent F to define the nodes $c_j$. 
-I suggest a definition for SSP in comments.}
+later we say about a time-dependent F to define the nodes $c_j$.}
 where $\bm{u}$ is a vector of continuous-in-time grid values approximating 
 the solution $\bm{U}$ at discrete grid points.
 Of course, \eqref{eq:ode_system} can arise in many ways and $\bm{F}$
@@ -36,7 +35,7 @@ In some cases, the solutions of hyperbolic conservation laws satisfy a
 monotonicity property. For example, if \eqref{eq:pde} is scalar then solutions 
 are monotonic in the total variation seminorm.
 \colintodo{should motivate this better}
-\yiannistodo{This is from David's paper \cite{Ketcheson2008}}
+\yiannistodo{Added a line form David's paper \cite{Ketcheson2008}}
 For this reason, many popular spatial discretizations are designed such 
 that, for a suitable class of problems, the solution $\bm{u}$ in \eqref{eq:pde}
 computed with the forward Euler scheme is non-increasing (in time)
@@ -45,7 +44,6 @@ in some norm, seminorm, or convex functional; i.e.
     \|\bm{u} + \Dt\bm{F}(t,\bm{u})\| \le \|\bm{u}\|, \quad \forall \bm{u} \text{ and for } 0 \le \Dt \le \DtFE.
 \end{align}
 \colintodo{definitely not ``$\forall u$'', maybe $\forall n$ but not sure why we need this}
-\yiannistodo{Isn't that relate to `` $\DtFE$ is independent of $\bm{u}$"? Also it is mentioned later in the definition.}
 \davidtodo{Colin, the FE condition is always assumed to hold for all $u$, and $\DtFE$ must be
 uniform.}
 Note that $\DtFE$ is independent of $\bm{u}$ and is a property of $\bm{F}$.
@@ -145,9 +143,7 @@ we will numerically solve the optimization problem \eqref{eq:SSP_opt} to find
 optimal effective order explicit SSP Runge--Kutta methods.
 \davidtodo{I think it would be better to move section 2.1 into section 5.}
 \colintodo{Could do, I'm (yet) not convinced it matters.}
-\yiannistodo{I think is better to leave it here. }
+\yiannistodo{Leave it for now until sec 5 is finalized.}
 However, we first need to define the order conditions $\Phi(K)$ for methods
 of effective order.
 This is discussed in the next section.
-% I didn't like this edit so I reverted it
-% i didn't ike it too when I read it again and I wrote almost exactly what you did. 
