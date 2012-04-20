@@ -38,11 +38,11 @@ are monotonic in the total variation seminorm.
 \colintodo{should motivate this better}
 \yiannistodo{This is from David's paper \cite{Ketcheson2008}}
 For this reason, many popular spatial discretizations are designed such 
-that, for a suitable class of problems, the solution $\bm{u}^{n}$ 
+that, for a suitable class of problems, the solution $\bm{u}$ in \eqref{eq:pde}
 computed with the forward Euler scheme is non-increasing (in time)
 in some norm, seminorm, or convex functional; i.e.
 \begin{align}\label{eq:forwardEuler}
-    \|\bm{u} + \Dt\bm{F}(t,\bm{u})\| \le \|\bm{u}\| \ \ \ \ \mbox{ for } 0\le\Dt\le \DtFE, \forall \bm{u}.
+    \|\bm{u} + \Dt\bm{F}(t,\bm{u})\| \le \|\bm{u}\|, \quad \forall \bm{u} \text{ and for } 0 \le \Dt \le \DtFE.
 \end{align}
 \colintodo{definitely not ``$\forall u$'', maybe $\forall n$ but not sure why we need this}
 \yiannistodo{Isn't that relate to `` $\DtFE$ is independent of $\bm{u}$"? Also it is mentioned later in the definition.}
@@ -52,17 +52,13 @@ Note that $\DtFE$ is independent of $\bm{u}$ and is a property of $\bm{F}$.
 If this is the case, then an SSP method also generates a solution whose norm is
 non-increasing in time, under a modified time-step restriction. 
 \begin{definition}[Strong Stability Preserving]
-	Suppose function $\bm{F}$, convex functional $\|\cdot\|$, and
-	constant $\DtFE$ satisfy \eqref{eq:forwardEuler}.
-	%any possible values, any possibilities, arbitrary members of ...??
-	% you not need to say
-	%\begin{align*}
-	%	\|\bm{u} + \Dt\bm{F}(t,\bm{u})\| \le \|\bm{u}\|, \; \forall \bm{u}
-	%	\text{ and  for all } \Dt \le \DtFE.
-	%\end{align*}
+	Suppose that for the solution of \eqref{eq:ode_system}, there exists function $\bm{F}$, 
+	convex functional $\|\cdot\|$ and constant $\DtFE$,
+	 such that \eqref{eq:forwardEuler} holds.
 	Then a time-stepping method is said to be \emph{strong stability
   	preserving} with \emph{SSP coefficient} $\sspcoef > 0$ if it
-	generates a sequence of solution values $\bm{u}^n$ such that
+	generates a sequence of solution values $\bm{u}^n$, for which the 
+	Foward Euler condition \eqref{eq:forwardEuler} holds and
 	\begin{align*}
   		\|\bm{u}^{n+1}\| \le \|\bm{u}^n\|,
 	\end{align*}
@@ -71,28 +67,9 @@ non-increasing in time, under a modified time-step restriction.
 		\Dt \leq \sspcoef \DtFE.
 	\end{align*}
 \end{definition}
-%\begin{definition}[Strong Stability Preserving]
-%	Suppose that the Forward Euler method applied to \eqref{eq:pde} 
-%	is strongly stable in a norm, seminorm or convex functional $\|\cdot\|$, i.e.
-%	\begin{align*}
-%		\|\bm{u}^{n} + \Dt\bm{F}(\bm{u}^{n})\| \le \|\bm{u}^n\|, \; \forall \bm{u},
-%	\end{align*}
-%	under suitably-restricted time steps $0 \le \Dt \le \DtFE$.
-%	Then a high-order Runge--Kutta method is said to be \emph{strong stability
-%  	preserving} with \emph{SSP coefficient} $\sspcoef > 0$ if it
-%	generates a sequence of solution values $\bm{u}^n$ such that
-%	\begin{align*}
-%  		\|\bm{u}^{n+1}\| \le \|\bm{u}^n\|,
-%	\end{align*}
-%	for a time-step restriction
-%	\begin{align*}
-%		\Dt \leq \sspcoef \Dt_{\text{FE}}.
-%	\end{align*}
-%\end{definition} 
 \davidtodo{In this definition, it seems that the SSP property of a method depends on the choice of $F$.  Now it's even worse -- why do we care if $F$ is a spatial discretization?}
 \colintodo{Does this help?}
 \colintodo{maybe want stage values SSP too...}
-\yiannistodo{Colin made a suggestion and I have one in comments.}
 \davidtodo{Neither version is correct.  I can fix it if you want, but you (Yiannis) really 
 should be able to state it correctly.  If you give up, you can just copy what is on 
 page 11 of the SSP book.}
