@@ -85,22 +85,27 @@ up to degree five; a general recursive formula can be found in
 % method followed by another.  This multiplicative binary operation
 % makes $G$ a group.
 
-Let $\alpha, \beta \in G$ correspond to two Runge--Kutta 
-equivalence classes and assume $A$ and $B$ to be representative 
-methods of each group.
+Let $\alpha, \beta \in G$ correspond to Runge–Kutta methods A and B
+respectively.
+%Let $\alpha, \beta \in G$ correspond to two Runge--Kutta
+%equivalence classes and assume $A$ and $B$ to be representative
+%methods of each group.
 \yiannistodo{Just to agree with the way we define functions in $G$.}
+\colintodo{Reverted: I think its fine: $\alpha$ corresponds to $A$---maybe other things too}.
 A multiplicative group operation $\alpha\beta$ can be defined
 by partitioning the input tree and computing over the resulting 
 forest \cite{Butcher2008_book}.
 This product $\alpha\beta$ is related to the application
 of method $A$ followed by method $B$; 
-we denote the resulting method by $BA$. 
+we denote the resulting method by $BA$.
 \footnote{We write $BA$ to mean the application of method $A$ 
 	followed by the application of method $B$ 
 	(following matrix and operator ordering convention) 
 	but when referring to products of elements of the
 	Runge--Kutta group we use the reverse ordering ($\alpha\beta$) 
-	to match the convention in \cite[Theorem 384A]{Butcher2008_book}.}
+	to match the convention in \cite{Butcher2008_book}.}
+%\cite[Theorem 384A]{Butcher2008_book}.}
+% the convention is in the whole book, not much of a convention if just one theorem!
 The product is defined by
 \begin{equation}\label{eq:Group_operation}
 	(\alpha\beta)(t) = \sum_{w \lhd t} \biggl(\prod_{v \in t \setminus w} \alpha(v)\beta(w)\biggr),
@@ -109,8 +114,8 @@ where $w \lhd t$ indicates a subtree of $t$ which includes the
 root of $t$ and $w \setminus t$ indicates the forest induced
 by removing $w$ from $t$ \cite{Butcher2008_book}.
 Multiplicity in choosing $w$ must also be accounted for.
-The following example shows how to compute this product for 
-a particular tree.
+The following example shows how to compute this product for
+one particular tree.
 
 %\subsubsection*{longer version}
 % The group multiplicative operation $\alpha\beta$ corresponds to the
