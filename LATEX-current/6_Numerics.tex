@@ -77,47 +77,36 @@ Recall that a time discretization with SSP
 coefficient $\sspcoef$, will give a TVD solution for $\Dt \leq
 \sspcoef {\Dt}_{\text{FE}}$.
 
-\colintodo{Is there a particular reason we use ESSPRK($10,4,2$)?  $(4,4,2)$ would seem more interesting/reproducible.}
-\yiannistodo{No, I can change that.}
 Burgers' equation was solved using an SSP $TM^{n-2}R$ scheme with time-step
 restriction $\Dt \leq \sigma{\Dt}_{\text{FE}}$, where $\sigma$ indicates the size 
 of the time step. 
-We integrate to roughly time $t_{f} = 2.5$
-with $m = 256$ points in space.
-Figure~\ref{fig:burgers_cont} shows that if $\sigma$ stays below the SSP 
+We integrate to roughly time $t_{f} = 2.8$ with $m = 200$ points in space.
+Figure~\ref{fig:burgers_cont} shows that if $\sigma$ stays less the SSP 
 coefficient of the main method, then no oscillations are observed. 
 If this stability limit is violated, then oscillations may appear.
-\begin{figure}
-    \centering
-    \subfloat[$\sigma = 6.0$]{\label{fig:burgers_cont_a}
-      \includegraphics[width=0.45\textwidth]{Pictures/burgers_cont_tvd}}
-    \quad
-    \subfloat[$\sigma = 6.68$]{\label{fig:burgers_cont_b}
-      \includegraphics[width=0.45\textwidth]{Pictures/burgers_cont_no_tvd}}
-    \caption{Solution of Burgers' equation with continuous initial data, using a 
-    $TM^{n-2}R$ scheme, where $ M $ is ESSPRK($10,4,2$). 
-    The SSP coefficient is $\sspcoef = 6.0$. 
-    Here $TV$ denotes the difference between the $TV$-norms of the final and 
-    initial solution.
-    A positive sign indicates a violation of the TVD condition.}
-    \label{fig:burgers_cont}
-\end{figure}
-%\yiannistodo{Elaborate more: Sharpness of SSP coefficient} 
-%We were able to determine when exactly the nonlinear stability is not 
-%satisfied by computing the the total-variation (TV) norm at each step of the 
-%computation process. 
-%This indicates that the ESSPRK-scheme inherits the time-step restriction 
-%from the SSP coefficient of the main method $M$.
+
 We measure these oscillations by computing the total variation of the 
 numerical solution.
-It turns out that \textbf{\red TODO $\sigma = x.yz$}
-is the largest value of $\sigma$ for which the total variation has not
-increased at the final time.
-This is \textbf{\red TODO $xy\%$} larger the value SSP coefficient
-$\sspcoef = 6$.
-\colintodo{In the figures, I would prefer to just report the TV
-  itself, instead of this TV error.}
- \yiannistodo{Fine, I fix this.}
+It turns out that $\sigma = 2.44$ is the largest value of $\sigma$ 
+for which the total variation has not increased at the final time.
+This is $25\%$ larger the value SSP coefficient $\sspcoef = 1.95$.
+
+\begin{figure}
+    \centering
+    \subfloat[$\sigma = 1.95$]{\label{fig:burgers_cont_a}
+      \includegraphics[width=0.55\textwidth]{Pictures/burgers_cont_tvd}}
+    \subfloat[$\sigma = 2.44$]{\label{fig:burgers_cont_b}
+      \includegraphics[width=0.55\textwidth]{Pictures/burgers_cont_no_tvd}}
+    \caption{Solution of Burgers' equation with continuous initial data, using a 
+    $TM^{n-2}R$ scheme, where $ M $ is ESSPRK($5,4,2$). 
+    The SSP coefficient is $\sspcoef = 1.95$. 
+    Here $TV$ denotes the the $TV$-norm of the solution at the final time.
+    Figure~\ref{fig:burgers_cont_b} shows a zoom in the region where 
+    oscillations appear.
+    A value greater the TV-norm of the initial solution 
+    ($\text{TV}_{\text{initial}} = 1$) indicates a violation of the TVD condition.}
+    \label{fig:burgers_cont}
+\end{figure}
 
 We also consider Burgers' equation with a discontinuous
 square wave initial condition
@@ -130,34 +119,48 @@ square wave initial condition
               \right.
 \end{align*}
 Figure~\ref{fig:burgers_discont} shows the result of solving the 
-discontinuous problem using an ESSPRK-scheme, where $M$ is an 
-SSPRK($10,4,2$) method.
+discontinuous problem using an SSP $TM^{n-2}R$ scheme, where $M$ is an 
+SSPRK($4,4,2$) method.
+The solution consists of a rarefraction (i.e. an expansion fan ) at $x = 0.5$ and 
+a contact discontinuity at $x=1.5$. 
+Again we use $m = 200$ points in space and we compute the solution at 
+roughly time $t = 0.3$.
+When $\sigma$ is $22\%$ larger the value of SSP coefficient $\sspcoef = 0.88$, 
+the total variation is first increased at time $t = 0.096$. 
+However, any oscillations appeared do not propagate and are damped by 
+the stopping procedure, thus at the final time the solution is total--variation 
+preserving. 
+Increasing $\sigma$ further will cause oscillations to be unbounded. 
+In this case, $\sigma = 1.36$ appears to be the largest value of $\sigma$ 
+for which the total variation has not increased at the final time $t = 0.3$.
+This is $55\%$ larger the value of the SSP coefficient.
+Figure~\ref{fig:burgers_discont_b} shows part of the solution exhibiting 
+oscillations when $\sigma$ is $61\%$ larger the SSP coefficient.
+
 \begin{figure}
     \centering
-    \subfloat[$\sigma = 6.0$]{\label{fig:burgers_discont_a}
-      \includegraphics[width=0.45\textwidth]{Pictures/burgers_discont_tvd.eps}}
-    \quad
-    \subfloat[$\sigma = 6.18$]{\label{fig:burgers_discont_b}
-      \includegraphics[width=0.45\textwidth]{Pictures/burgers_discont_no_tvd.eps}}
+    \subfloat[$\sigma = 0.88$]{\label{fig:burgers_discont_a}
+      \includegraphics[width=0.55\textwidth]{Pictures/burgers_discont_tvd.eps}}
+    \subfloat[$\sigma = 1.41$]{\label{fig:burgers_discont_b}
+      \includegraphics[width=0.55\textwidth]{Pictures/burgers_discont_no_tvd.eps}}
     \caption{Solution of Burgers' equation with discontinuous initial data, using a 
-    $TM^{n-2}R$ scheme, where $M$ is SSPRK($10,4,2$) method. 
-    The SSP coefficient is $ \sspcoef = 6.0$.
-    Here $TV$ denotes the difference between the $TV$-norms of the final and 
-    initial solution.
-    A positive sign indicates a violation of the TVD condition.}
+    $TM^{n-2}R$ scheme, where $M$ is SSPRK($4,4,2$) method. 
+    The SSP coefficient is $ \sspcoef = 0.88$. 
+    Figure~\ref{fig:burgers_discont_b} shows a zoom in the region where 
+    oscillations appear.
+    Here $TV$ denotes the the $TV$-norm of the solution at the final time.
+    A value greater the TV-norm of the initial solution 
+    ($\text{TV}_{\text{initial}} = 2$) indicates a violation of the TVD condition.}
     \label{fig:burgers_discont}
 \end{figure}
-In this case, \textbf{\red TODO $\sigma = x.yz$} appears to be the
-largest value of $\sigma$ for which the total variation has not
-increased at the final time.
-This is \textbf{\red TODO $xy\%$} larger than the SSP coefficient
-$\sspcoef = 6$.
 
 It is interesting to note that the stability prediction of the SSP
 coefficient for ESSPRK is quite tight compared to other SSP methods
 (c.f., \cite[Table 5.1]{Ketcheson/Gottlieb/Macdonald:TSRK}).
-Also it becomes sharper as the number of spatial points increases,
-since the dissipation of the solution is decreased. 
+Moreover it becomes sharper as the number of spatial points increases,
+since the dissipation of the solution is decreased. \yiannistodo{Is this explanation enough?}
+The upper bound on the SSP coefficient is also sharper when schemes 
+with large number of stages are considered.
 This may make effective order methods an interesting test case for
 further research into both SSP time-discretizations as well as spatial
 discretizations with strong stability features.
