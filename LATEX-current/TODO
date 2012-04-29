@@ -1,22 +1,17 @@
 TODO list for effective order paper
 ===================================
 
-DONE * conclusion 
+* are we sure about this tighter SSP coef vs experimental TVD result?
 
-DONE * fix proofs
+    * Perhaps we should make a table a la [Ketcheson, Gottlieb,
+      Macdonald 2011].  As David suggests, maybe with a second-order
+      scheme in space.
 
-DONE * Colin: think about the R&T OCs
-
-DONE * Use R and rho not P in section 5.  (P was already used and doesn't go with rho anyway)
+    * Intro to section 6 says "accurately meaures"...
 
 
+* some bib entries are in need of attention.
 
-* abstract
-
-* double-check all \alpha\beta and BA orderings are correct.  Section 1,2,3 should be done.
-
-* some bib entries are in need of attention.  [LATER]
-
-* most bib entries do not have abbreviated/full JOURNAL/FJOURNAL (see Shu/Osher1988)  [LATER]
+* most bib entries do not have abbreviated/full JOURNAL/FJOURNAL (see Shu/Osher1988)
 
 
