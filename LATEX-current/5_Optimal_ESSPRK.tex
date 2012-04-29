@@ -53,15 +53,16 @@ methods and thus their SSP coefficients $\sspcoef$ must be greater
 than or equal to that of SSPRK($s,q$) methods.
 This is confirmed by comparing Table~\ref{tab:eff_SSP_coeff} with
 \cite[Table~5]{Ketcheson/Macdonald/Gottlieb:2009}.
-Recall from Section~\ref{subsec:Optimal_SSPRK} that $\clin$ (the SSP
-coefficient for linear constant-coefficients problems) gives known
+Recall from Section~\ref{subsec:Optimal_SSPRK} that $\clin$ (the optimal SSP
+coefficient for linear constant-coefficient problems) gives known
 upper bound on the SSP coefficient \cite{Kraaijevanger1986, ketcheson2009a}.
 Based on this we have the following result:
 \begin{result}
 	With a few exceptions, the ESSPRK($s,q,p$) methods
-	found by numerical search are optimal because they have SSP coefficients
-	$\sspcoef$ which achieve known values of $\clin$.
+	found by numerical search are optimal because they have SSP coefficient
+	$\sspcoef=\clin$.
 \end{result}
+\davidtodo{Could we call this a remark instead?}
 
 \begin{table}
     \centering
@@ -78,16 +79,16 @@ Based on this we have the following result:
     \end{tabular}
     \caption{Effective SSP coefficients $ \ceff = \sspcoef/s$ of best known explicit effective 
     		order ESSPRK($s,q,p$) methods. 
-    		Entries in bold achieve the linear bound on the SSP coefficient and are therefore optimal. 
+    		Entries in bold achieve the bound $\clin$ given by the linear SSP coefficient and are therefore optimal. 
     		If no positive $\sspcoef$ can be found, we use ``$-$'' to indicate non-existence. 
-    		The optimal fourth-order linear bounds for $s=4$ and $s=5$ are $0.25$ and $0.40$ 
-    		respectively.}
+    		The optimal fourth-order linear SSP coefficients are 
+                $\sspcoef^{\textnormal{lin}}_{4,4}=0.25$ and $\sspcoef^{\textnormal{lin}}_{5,4}=0.40$.}
     \label{tab:eff_SSP_coeff}
 \end{table}
 
 \subsubsection{Effective order three methods}\label{subsubsec:3rd_ESSPRK}
 Table~\ref{tab:eff_SSP_coeff} shows that ESSPRK($s,3,2$) are 
-optimal because they match the linear bounds. 
+optimal because they match the corresponding values of $\clin$.
 Note however that these bounds are also attained by SSPRK($s,3$) methods 
 up to 11 stages. 
 In the cases of three and four stages, we were able to determine closed-form 
@@ -103,11 +104,11 @@ families of solutions.
     			\bm{u}^{n+1} &= \bm{u}^n + \frac{5\gamma-1}{6\gamma}\Dt\bm{F}(\bm{Y}_1) + \frac{1}{6}\Dt\bm{F}(\bm{Y}_2) + \frac{1}{6\gamma}\Dt\bm{F}(\bm{Y}_3),
         \end{split}
     \end{displaymath}
-    where $1/4 \leq \gamma \leq 1$ is a free parameter. We denote the above family as 
-    ESSPRK($3,3,2$).
+    where $1/4 \leq \gamma \leq 1$ is a free parameter. We refer to the above family as 
+    ESSPRK($3,3,2$).\davidtodo{This is a bit strange, since that notation was defined to refer to a single method.}
 \end{theorem}
 \begin{theorem}\label{thm:ESSPRK(4,3,2)}
-	An optimal family of four-stage, effective order three SSP Runge--Kutta 
+	A family of optimal four-stage, effective order three SSP Runge--Kutta 
 	methods of classical order two, with SSP coefficient $\sspcoef=2$ is given by
     \begin{displaymath}
     		\begin{split}
@@ -118,13 +119,13 @@ families of solutions.
     			\bm{u}^{n+1} &= \bm{u}^n + \frac{8\gamma-1}{12\gamma}\Dt\bm{F}(\bm{Y}_1) + \frac{1}{6}\Dt\bm{F}(\bm{Y}_2) + \frac{1}{6}\Dt\bm{F}(\bm{Y}_3) + \frac{1}{12\gamma}\Dt\bm{F}(\bm{Y}_4),
         \end{split}
     \end{displaymath}
-    where $ 1/6 \leq \gamma \leq 1/2 $ is a free parameter. We denote the 
+    where $ 1/6 \leq \gamma \leq 1/2 $ is a free parameter. We refer to the 
     above family as ESSPRK($4,3,2$).
 \end{theorem}
 \begin{proof}
 	In either theorem, feasibility can be verified by direct calculation of the 
 	conditions in problem~\eqref{eq:SSP_opt}. Optimality follows because 
-	the families achieve the appropriate linear bound.
+	$\sspcoef=\clin$.
 \end{proof}
 
 Theorem~\ref{thm:ESSPRK(3,3,2)} gives a \emph{family} of three-stage 
@@ -307,7 +308,7 @@ stopping method, and then the starting method to start up again.
 
 \begin{table}
     \setlength{\tabcolsep}{2pt}
-    \centering
+    %\centering
     \scriptsize
     \subfloat[Main method $M$, ESSPRK($4,4,2$) \label{ESSPRK(4,4,2)_scheme_a}]{
         \begin{tabular}{c | c c c c}
@@ -349,7 +350,7 @@ stopping method, and then the starting method to start up again.
 
 \begin{table}
     \setlength{\tabcolsep}{2pt}
-    \centering
+    %\centering
     \scriptsize
     \subfloat[Main method $M$, ESSPRK($4,4,3$) \label{ESSPRK(4,4,3)_scheme_a}]{
         \begin{tabular}{c | c c c c}

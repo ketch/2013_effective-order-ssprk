@@ -116,22 +116,22 @@ by considering an important relaxation.
 In the relaxed problem, the method is required to be accurate and strong 
 stability preserving only for linear, constant-coefficient initial value problems. 
 This leads to a reduced set of order conditions and a relaxed absolute 
-monotonicity condition.
-We denote the SSP coefficient of a method for linear problems by $\clin$; 
-clearly for any method
-\begin{align*}
-	\sspcoef\le\clin
-\end{align*}
-and the same inequality holds for the optimal coefficients over a given class.
+monotonicity condition \cite{Kraaijevanger1986,Ketcheson2008,ketcheson2009a}.
+We denote the maximal SSP coefficient for linear problems
+(maximized over all methods with order $q$ and $s$ stages) by $\clin$.
+Clearly for any $s$-stage method of order $q$,
+\begin{align} \label{ineq:clin}
+	\sspcoef\le\clin.
+\end{align}
+Furthermore, since the effective and classical order conditions are the same for
+linear problems, \eqref{ineq:clin} also holds when $\sspcoef$ is the SSP coefficient
+of a method with effective order $q$.
 Exact optimal values of $\clin$ are known for many classes of methods; for
-example see \cite{Kraaijevanger1986,ketcheson2009a}.
+example see \cite{Kraaijevanger1986,Ketcheson2008,ketcheson2009a}.
 
 Following \cite{Ketcheson2008, Ketcheson/Macdonald/Gottlieb:2009}, 
 we will numerically solve the optimization problem \eqref{eq:SSP_opt} to find
 optimal effective order explicit SSP Runge--Kutta methods.
-\davidtodo{I think it would be better to move section 2.1 into section 5.}
-\colintodo{Could do, I'm (yet) not convinced it matters.}
-\yiannistodo{I think it can stay here, section 5 reads ok now.}
 However, we first need to define the order conditions $\Phi(K)$ for methods
 of effective order.
 This is discussed in the next section.
