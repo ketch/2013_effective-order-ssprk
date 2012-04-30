@@ -9,6 +9,12 @@ TODO list for effective order paper
 
     * Intro to section 6 says "accurately meaures"...
 
+* Burgers' sqr wave: "contact discontinuity".  I don't think that's
+  the right terminology.  Isn't the prototype of that advection of a
+  discontinuity (i.e., no collision of characteristics).
+
+* In smooth burgers' example, a TV-norm of < 1 could still indicate
+  violation; this is b/c the soln magnitude has descreased.
 
 * some bib entries are in need of attention.
 

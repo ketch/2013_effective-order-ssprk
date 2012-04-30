@@ -29,13 +29,13 @@ respect to stepsize is shown in Figure~\ref{fig:conv_study} on a logarithmic
 scale.
 \begin{figure}
 	\centering
-     \subfloat[SSPRK($s,3,2$)]{\label{fig:conv_study_a}
+     \subfloat[ESSPRK($s,3,2$)]{\label{fig:conv_study_a}
      \includegraphics[width=0.45\textwidth]{Pictures/convergence_3rd_ord}}
    \quad
-     \subfloat[SSPRK($s,4,2$)]{\label{fig:conv_study_b}
+     \subfloat[ESSPRK($s,4,2$)]{\label{fig:conv_study_b}
     \includegraphics[width=0.45\textwidth]{Pictures/convergence_4th_ord}}
     \caption{Convergence study of $TM^{n-2}R$ Runge--Kutta schemes when (a) $M$
-    is an SSPRK($s,3,2$) method and (b) $ M $ is an SSPRK($s,4,2$) method.}
+    is an ESSPRK($s,3,2$) method and (b) $ M $ is an ESSPRK($s,4,2$) method.}
     \label{fig:conv_study}
 \end{figure}
 The convergence study was performed for $TM^{n-2}R$ schemes with
@@ -66,9 +66,9 @@ using an upwind approximation to obtain the system of ODEs
 	\frac{\textrm{d}}{\textrm{d} t} u_i = \frac{f(u_{i}) - f(u_{i-1})}{\Delta x}.
 \end{align*}
 This spatial discretization is total-variation-diminishing (TVD) when
-coupled with Forward Euler method under time restriction
+coupled with the Forward Euler method under time restriction
 $\Dt \leq {\Dt}_{\text{FE}} = (1 / \|U(0,x)\|_{\infty}) \Delta x$
-\cite{Laney:1998} %,Ketcheson/Macdonald/Gottlieb:2009}.
+\cite{Laney:1998}.  %,Ketcheson/Macdonald/Gottlieb:2009}.
 Recall that a time discretization with SSP
 coefficient $\sspcoef$ will give a TVD solution for $\Dt \leq
 \sspcoef {\Dt}_{\text{FE}}$.
@@ -83,7 +83,8 @@ If this stability limit is violated, then oscillations may appear.
 
 We measure these oscillations by computing the total variation of the 
 numerical solution.
-It turns out that $\sigma = 2.44$ is the largest value of $\sigma$ 
+When $M$ is an ESSPRK($5,4,2$) method,
+it turns out that $\sigma = 2.44$ is the largest value of $\sigma$
 for which the total variation has not increased at the final time.
 This is $25\%$ larger the value of the SSP coefficient $\sspcoef = 1.95$.
 
@@ -115,25 +116,23 @@ square wave initial condition
                 \end{array}
               \right.
 \end{align*}
-Figure~\ref{fig:burgers_discont} shows the result of solving the 
-discontinuous problem using an SSP $TM^{n-2}R$ scheme, where $M$ is an 
-SSPRK($4,4,2$) method.
-The solution consists of a rarefaction (i.e., an expansion fan) around $x = 0.5$ and
-a contact discontinuity at $x=1.5$. 
+% TODO: following is only true initially, also I think contact discont is the wrong terminology.  Can just remove it.
+%The solution consists of a rarefaction (i.e., an expansion fan) around $x = 0.5$ and
+%a contact discontinuity at $x=1.5$.
 Again we use $m = 200$ points in space and we compute the solution until
 roughly time $t = 0.3$.
-\colintodo{We want TVD over the entire time, so 22\% is the right number.  I will fix this tomorrow if I have time.}
-When $\sigma$ is $22\%$ larger the value of SSP coefficient $\sspcoef = 0.88$, 
-the total variation is first increased at time $t = 0.096$. 
-However, any oscillations appeared do not propagate and are damped by 
-the stopping procedure, thus at the final time the solution is total--variation 
-preserving. 
-Increasing $\sigma$ further will cause oscillations to be unbounded. 
-In this case, $\sigma = 1.36$ appears to be the largest value of $\sigma$ 
-for which the total variation has not increased at the final time $t = 0.3$.
-This is $55\%$ larger the value of the SSP coefficient.
+Figure~\ref{fig:burgers_discont} shows the result of solving the
+discontinuous problem using an SSP $TM^{n-2}R$ scheme, where $M$ is an
+ESSPRK($4,4,2$) method with SSP coefficient $\sspcoef = 0.88$.
+In this case, $\sigma = 1.07$ appears to be the largest value
+for which the total variation has not increased at any time
+during the calculation.
+This is $22\%$ larger the value of the SSP coefficient.
 Figure~\ref{fig:burgers_discont_b} shows part of the solution exhibiting 
-oscillations when $\sigma$ is $61\%$ larger the SSP coefficient.
+oscillations when $\sigma$ is %$61\%$
+larger the SSP coefficient.
+
+
 
 \begin{figure}
     \centering
@@ -142,7 +141,7 @@ oscillations when $\sigma$ is $61\%$ larger the SSP coefficient.
     \subfloat[$\sigma = 1.41$]{\label{fig:burgers_discont_b}
       \includegraphics[width=0.5\textwidth]{Pictures/burgers_discont_no_tvd}}
     \caption{Solution of Burgers' equation with discontinuous initial data, using a 
-    $TM^{n-2}R$ scheme, where $M$ is SSPRK($4,4,2$) method. 
+    $TM^{n-2}R$ scheme, where $M$ is ESSPRK($4,4,2$) method. 
     The SSP coefficient is $ \sspcoef = 0.88$. 
     Figure~\ref{fig:burgers_discont_b} shows a zoom in the region where 
     oscillations appear.
@@ -151,6 +150,15 @@ oscillations when $\sigma$ is $61\%$ larger the SSP coefficient.
     }
     \label{fig:burgers_discont}
 \end{figure}
+
+We also note the necessity of our modified starting and stopping methods in the $RM^{n-2}T$ approach: in this
+example if we were to use the original approach of $S$ and $S^{-1}$,
+the solution exhibits oscillations immediately following the
+application of the starting perturbation scheme $S$.
+%This is illustrated in Figure~\ref{fig:burgers_starting_method}
+%\yiannistodo{Shall we include a plot about this?}
+%Colin: fine as is for now
+
 
 It is interesting to note that the stability prediction of the SSP
 coefficient for ESSPRK is quite tight compared to other SSP methods
@@ -165,13 +173,6 @@ discretizations with strong stability features.
 % TODO: we probably want a table here to support this...
 
 
-We also note the necessity of our modified starting and stopping methods in the $RM^{n-2}T$ approach: in this
-example if we were to use the original approach of $S$ and $S^{-1}$,
-the solution exhibits oscillations immediately following the
-application of the starting perturbation scheme $S$.
-%This is illustrated in Figure~\ref{fig:burgers_starting_method}
-%\yiannistodo{Shall we include a plot about this?}
-%Colin: fine as is for now
 
 % The ESSPRK-scheme preserves monotonicity in the TV-norm since the starting 
 % method $R$ is SSP.
