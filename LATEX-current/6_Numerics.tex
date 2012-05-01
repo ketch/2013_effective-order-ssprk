@@ -7,11 +7,11 @@ section, we now numerically verify their properties.
 Specifically, we use a convergence study to show that the procedure
 attains order of accuracy $q$, the effective order of $M$.
 We also demonstrate on Burgers' equation that the
-SSP coefficient accurately measures the maximal stepsize for which the
+SSP coefficient accurately measures the maximal time-step for which the
 methods are strong stability preserving.
 
 \subsection{Convergence study}\label{subsec:convergence}
-We consider the nonlinear ODE
+We consider the non-linear ODE
 \begin{align}\label{eq:conv_eq}
     u'(t) = -\frac{3}{2}u^{2}(t), \quad t \in [0,1], \quad \text{with } u(0) = 10,
 \end{align}
@@ -25,15 +25,15 @@ $k = 0, 1, 2, \dots, 6$.
 %hence the time-step used is $\Dt = \tfrac{1}{N} = \tfrac{2^{(1-k)}}{100}$ 
 %for each computation. 
 The error at $t=1$ with
-respect to stepsize is shown in Figure~\ref{fig:conv_study} on a logarithmic
+respect to time-step is shown in Figure~\ref{fig:conv_study} on a logarithmic
 scale.
 \begin{figure}
 	\centering
      \subfloat[ESSPRK($s,3,2$)]{\label{fig:conv_study_a}
-     \includegraphics[width=0.45\textwidth]{Pictures/convergence_3rd_ord}}
+     \includegraphics[width=0.48\textwidth]{Pictures/convergence_3rd_ord}}
    \quad
      \subfloat[ESSPRK($s,4,2$)]{\label{fig:conv_study_b}
-    \includegraphics[width=0.45\textwidth]{Pictures/convergence_4th_ord}}
+    \includegraphics[width=0.48\textwidth]{Pictures/convergence_4th_ord}}
     \caption{Convergence study of $TM^{n-2}R$ Runge--Kutta schemes when (a) $M$
     is an ESSPRK($s,3,2$) method and (b) $ M $ is an ESSPRK($s,4,2$) method.}
     \label{fig:conv_study}
@@ -91,9 +91,9 @@ This is $25\%$ larger the value of the SSP coefficient $\sspcoef = 1.95$.
 \begin{figure}
     \centering
     \subfloat[$\sigma = 1.95$]{\label{fig:burgers_cont_a}
-      \includegraphics[width=0.5\textwidth]{Pictures/burgers_cont_tvd}}
+      \includegraphics[width=0.49\textwidth]{Pictures/burgers_cont_tvd}}
     \subfloat[$\sigma = 2.44$]{\label{fig:burgers_cont_b}
-      \includegraphics[width=0.5\textwidth]{Pictures/burgers_cont_no_tvd}}
+      \includegraphics[width=0.49\textwidth]{Pictures/burgers_cont_no_tvd}}
     \caption{Solution of Burgers' equation with continuous initial data, using a 
     $TM^{n-2}R$ scheme, where $ M $ is ESSPRK($5,4,2$). 
     The SSP coefficient is $\sspcoef = 1.95$. 
@@ -117,8 +117,9 @@ square wave initial condition
               \right.
 \end{align*}
 % TODO: following is only true initially, also I think contact discont is the wrong terminology.  Can just remove it.
-%The solution consists of a rarefaction (i.e., an expansion fan) around $x = 0.5$ and
-%a contact discontinuity at $x=1.5$.
+% "shock" is correct.
+The solution consists of a rarefaction (i.e., an expansion fan) around $x = 0.5$ and
+a shock at $x=1.5$.
 Again we use $m = 200$ points in space and we compute the solution until
 roughly time $t = 0.3$.
 Figure~\ref{fig:burgers_discont} shows the result of solving the
@@ -137,9 +138,9 @@ larger the SSP coefficient.
 \begin{figure}
     \centering
     \subfloat[$\sigma = 0.88$]{\label{fig:burgers_discont_a}
-      \includegraphics[width=0.5\textwidth]{Pictures/burgers_discont_tvd}}
+      \includegraphics[width=0.49\textwidth]{Pictures/burgers_discont_tvd}}
     \subfloat[$\sigma = 1.41$]{\label{fig:burgers_discont_b}
-      \includegraphics[width=0.5\textwidth]{Pictures/burgers_discont_no_tvd}}
+      \includegraphics[width=0.49\textwidth]{Pictures/burgers_discont_no_tvd}}
     \caption{Solution of Burgers' equation with discontinuous initial data, using a 
     $TM^{n-2}R$ scheme, where $M$ is ESSPRK($4,4,2$) method. 
     The SSP coefficient is $ \sspcoef = 0.88$. 
