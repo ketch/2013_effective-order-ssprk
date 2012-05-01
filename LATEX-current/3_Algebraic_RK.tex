@@ -1,3 +1,29 @@
+\begin{table}[t]
+	\centering
+	\begin{smalltrees}
+		\begin{tabular}{ccccccc}
+    		\cline{1-3}\cline{5-7}
+    		$i$ & tree $t_i$ & elementary weight & & $i$ & tree $t_i$ & elementary weight \\
+    		\cline{1-3}\cline{5-7} \\[-10pt]
+    		0 & $\emptyset$ \hspace{15pt}  & 1 & & 9 & \hspace{15pt} \tree{9} & $\bm{b}^T\bm{c}^4$\\
+    		1 & \hspace{15pt}  \tree{1} &$\bm{b}^T\bm{e}$ & & 10 & \tree{10} \hspace{15pt} & $\bm{b}^TC^2A\bm{c}$ \\
+    		2 & \tree{2} \hspace{15pt}  &$\bm{b}^T\bm{c}$ & & 11 & \hspace{15pt} \tree{11} & $\bm{b}^TCA\bm{c}^2$ \\
+    		3 & \hspace{15pt}  \tree{3} & $\bm{b}^T\bm{c}^2$ & & 12 & \tree{12} \hspace{15pt} & $\bm{b}^TCA^2\bm{c}$ \\
+    		4 & \tree{4} \hspace{15pt}  & $\bm{b}^TA\bm{c}$ & & 13 & \hspace{15pt} \tree{13} & $\bm{b}^T(A\bm{c})^2$ \\
+    		5 & \hspace{15pt}  \tree{5} & $\bm{b}^T\bm{c}^3$ & & 14 & \tree{14} \hspace{15pt} & $\bm{b}^TA\bm{c}^3$ \\
+    		6 & \tree{6} \hspace{15pt}  & $\bm{b}^TCA\bm{c}$ & & 15 & \hspace{15pt} \tree{15} & $\bm{b}^TACA\bm{c}$ \\
+    		7 & \hspace{15pt}  \tree{7} & $\bm{b}^TA\bm{c}^2$ & & 16 & \tree{16} \hspace{15pt} & $\bm{b}^TA^2\bm{c}^2$ \\
+    		8 & \tree{8} \hspace{15pt}  & $\bm{b}^TA^2\bm{c}$ & &  17 & \hspace{15pt} \tree{17} & $\bm{b}^TA^3\bm{c}$ \\
+  		\end{tabular}
+  \end{smalltrees}
+  \caption{Elementary weights of trees up to fifth order for a 
+  		Runge--Kutta method $(A,\bm{b},\bm{c})$. 
+  		Here $C$ is a diagonal matrix with components 
+  		$c_{i} = \sum_j^s a_{ij}$ and exponents of vectors 
+  		represent component exponentiation.}
+  \label{tab:elementary_weights}
+\end{table}
+
 \section{Effective order Runge--Kutta methods}\label{sec:Algebraic_RK}
 The effective order of a Runge--Kutta method is defined in an abstract 
 algebraic context introduced by Butcher \cite{Butcher1969} and developed 
@@ -50,32 +76,6 @@ By convention $\alpha(t_{0}) = 1$, where $t_{0}$ denotes the empty tree.
 Table~\ref{tab:elementary_weights} lists these expressions for trees of 
 up to degree five; a general recursive formula can be found in 
 \cite[Definition 312A]{Butcher2008_book}. 
-
-\begin{table}
-	\centering
-	\begin{smalltrees}
-		\begin{tabular}{ccccccc}
-    		\cline{1-3}\cline{5-7}
-    		$i$ & tree $t_i$ & elementary weight & & $i$ & tree $t_i$ & elementary weight \\
-    		\cline{1-3}\cline{5-7} \\[-10pt]
-    		0 & $\emptyset$ \hspace{15pt}  & 1 & & 9 & \hspace{15pt} \tree{9} & $\bm{b}^T\bm{c}^4$\\
-    		1 & \hspace{15pt}  \tree{1} &$\bm{b}^T\bm{e}$ & & 10 & \tree{10} \hspace{15pt} & $\bm{b}^TC^2A\bm{c}$ \\
-    		2 & \tree{2} \hspace{15pt}  &$\bm{b}^T\bm{c}$ & & 11 & \hspace{15pt} \tree{11} & $\bm{b}^TCA\bm{c}^2$ \\
-    		3 & \hspace{15pt}  \tree{3} & $\bm{b}^T\bm{c}^2$ & & 12 & \tree{12} \hspace{15pt} & $\bm{b}^TCA^2\bm{c}$ \\
-    		4 & \tree{4} \hspace{15pt}  & $\bm{b}^TA\bm{c}$ & & 13 & \hspace{15pt} \tree{13} & $\bm{b}^T(A\bm{c})^2$ \\
-    		5 & \hspace{15pt}  \tree{5} & $\bm{b}^T\bm{c}^3$ & & 14 & \tree{14} \hspace{15pt} & $\bm{b}^TA\bm{c}^3$ \\
-    		6 & \tree{6} \hspace{15pt}  & $\bm{b}^TCA\bm{c}$ & & 15 & \hspace{15pt} \tree{15} & $\bm{b}^TACA\bm{c}$ \\
-    		7 & \hspace{15pt}  \tree{7} & $\bm{b}^TA\bm{c}^2$ & & 16 & \tree{16} \hspace{15pt} & $\bm{b}^TA^2\bm{c}^2$ \\
-    		8 & \tree{8} \hspace{15pt}  & $\bm{b}^TA^2\bm{c}$ & &  17 & \hspace{15pt} \tree{17} & $\bm{b}^TA^3\bm{c}$ \\
-  		\end{tabular}
-  \end{smalltrees}
-  \caption{Elementary weights of trees up to fifth order for a 
-  		Runge--Kutta method $(A,\bm{b},\bm{c})$. 
-  		Here $C$ is a diagonal matrix with components 
-  		$c_{i} = \sum_j^s a_{ij}$ and exponents of vectors 
-  		represent component exponentiation.}
-  \label{tab:elementary_weights}
-\end{table}
 
 % \subsubsection*{minimalist}
 % Given $\alpha, \beta \in G$, the product can be defined on each
@@ -142,7 +142,7 @@ one particular tree.
 	\begin{table}
 		\centering
     		\begin{tabular}{c cc|c|c|c|c|c|c|c|c|c}
-        		\multirow{2}{*}{\begin{largetrees}\treecell{$\tree{11}$}{$t_{11}$}\end{largetrees}} & & 
+        		\multirow{4}{*}{\begin{largetrees}\treecell{$\tree{11}$}{$t_{11}$}\end{largetrees}} & & 
         		$w$ & $\emptyset$ & $\tree{1}$ & $\tree{2}$ & $\tree{2}$ & $\tree{3}$ & $\tree{4}$ 
         		& $\tree{6}$ & $\tree{7}$ & $\tree{11}$ \\[3pt]
 	        \cline{3-12}

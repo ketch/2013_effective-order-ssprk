@@ -28,12 +28,12 @@ $(A,\bm{b},\bm{c})$ \cite{Butcher2008_book}.
 
 In some cases, the solutions of hyperbolic conservation laws satisfy a 
 monotonicity property. For example, if \eqref{eq:pde} is scalar then solutions 
-are monotonic in the total variation seminorm \cite{Ketcheson2008}.
+are monotonic in the total variation semi-norm \cite{Ketcheson2008}.
 % probably should be a ref about HCLs (not SSP) but good enough for now
 For this reason, many popular spatial discretizations are designed such 
 that, for a suitable class of problems, the solution $\bm{u}$ in 
 \eqref{eq:ode_system} computed with the forward Euler scheme is 
-non-increasing (in time) in some norm, seminorm, or convex functional; i.e.,
+non-increasing (in time) in some norm, semi-norm, or convex functional; i.e.,
 \begin{align}\label{eq:forwardEuler}
     \|\bm{u} + \Dt\bm{F}(t,\bm{u})\| \le \|\bm{u}\|, \quad \forall \bm{u} \text{ and for } 0 \le \Dt \le \DtFE.
 \end{align}
@@ -70,7 +70,7 @@ We say that an SSP Runge--Kutta method is optimal if it has the largest
 possible SSP coefficient for a given order and a given number of stages.
 The search for these optimal methods was originally based on
 expressing the Runge--Kutta method as combinations of forward Euler
-steps (the Shu--Osher form) and solving a nonlinear optimization
+steps (the Shu--Osher form) and solving a non-linear optimization
 problem \cite{Gottlieb/Shu:1998, Gottlieb2001, Spiteri2003a, Spiteri2003b, 
 Ruuth2004, Ruuth:2006}.
 However, the SSP coefficient is related to the 
