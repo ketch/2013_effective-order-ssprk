@@ -11,29 +11,31 @@ SSP coefficient accurately measures the maximal time-step for which the
 methods are strong stability preserving.
 
 \subsection{Convergence study}\label{subsec:convergence}
-We consider the non-linear ODE
-\begin{align}\label{eq:conv_eq}
-    u'(t) = -\frac{3}{2}u^{2}(t), \quad t \in [0,1], \quad \text{with } u(0) = 10,
-\end{align}
-with exact solution $u(t) = 10/(15t + 1)$.
+We consider non-stiff Van der Pol system
+\begin{equation}\label{eq:conv_eq}
+	\begin{split}
+    		u_1'(t) &= u_2(t), \\
+    		u_2'(t) &= 2\bigl(1 - u_1^2(t)\bigr)u_2(t) - u_1(t), 
+    \end{split}
+\end{equation}
+over the time interval $t \in [0, 50]$ with initial values $u_1(0) = 2$ and $u_2(0) = 1$.
+The reference solution for the convergence study is calculated by \textsc{Matlab}'s 
+\texttt{ode45} solver with relative and absolute tolerances set to $10^{-13}$.
+
 We solve the initial value problem \eqref{eq:conv_eq}
 using SSP $TM^{n-2}R$ schemes.
 % where $M$ is effective order three and four and classical order two.
-The solution is computed using $n = 50 \cdot 2^{k}$ time steps for
-$k = 0, 1, 2, \dots, 6$.
-% and 
-%hence the time-step used is $\Dt = \tfrac{1}{N} = \tfrac{2^{(1-k)}}{100}$ 
-%for each computation. 
-The error at $t=1$ with
-respect to time-step is shown in Figure~\ref{fig:conv_study} on a logarithmic
-scale.
+The solution is computed using $n = 100 \cdot 2^{k}$ time steps for
+$k = 2, \dots, 7$.
+The error at $t = 50$ with respect to time-step is shown in 
+Figure~\ref{fig:conv_study} on a logarithmic scale.
 \begin{figure}
 	\centering
      \subfloat[ESSPRK($s,3,2$)]{\label{fig:conv_study_a}
-     \includegraphics[width=0.48\textwidth]{Pictures/convergence_3rd_ord}}
+     \includegraphics[width=0.48\textwidth]{Pictures/convergence_3_order}}
    \quad
      \subfloat[ESSPRK($s,4,2$)]{\label{fig:conv_study_b}
-    \includegraphics[width=0.48\textwidth]{Pictures/convergence_4th_ord}}
+    \includegraphics[width=0.48\textwidth]{Pictures/convergence_4_order}}
     \caption{Convergence study of $TM^{n-2}R$ Runge--Kutta schemes when (a) $M$
     is an ESSPRK($s,3,2$) method and (b) $ M $ is an ESSPRK($s,4,2$) method.}
     \label{fig:conv_study}
