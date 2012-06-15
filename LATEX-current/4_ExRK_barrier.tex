@@ -4,14 +4,14 @@ than four \cite{Ruuth2002}.
 It turns out that the effective order of any explicit SSP Runge--Kutta method 
 also cannot be greater than four, although the proof of this result is much more
 involved.  
-%As Table~\ref{tab:Effective_oc} shows, if we consider an $s$-stage
+%As Table~\ref{tab:Effective_oc} shows, if we consider an $s$--stage
 %RK($s$,$5$,$2$) method, then the coefficients of the main method
 %depend on $\beta_2$.
 %In particular, the main method must satisfy
 %\begin{equation}\label{eq:2nd_order_con}
 %    \frac{1}{2}\alpha_3 - \frac{1}{6} = \beta_2 \; \text{ and } \; \frac{1}{4}\alpha_9 - \alpha_{10} + \alpha_{13} = (\beta_2)^2.
 %\end{equation}
-%For classical order $p \geq 3$ an $s$-stage RK($s$,$5$,$p$) method must satisfy
+%For classical order $p \geq 3$ an $s$--stage RK($s$,$5$,$p$) method must satisfy
 %\begin{equation}\label{eq:higher_order_con}
 %    \frac{1}{4}\alpha_9- \alpha_{10} + \alpha_{13} = 0,
 %\end{equation}
@@ -29,7 +29,7 @@ involved.
 In this section we prove an even stronger result,
 which is stated in the following lemma.
 \begin{lemma}\label{thm:effective_barrier}
-	Any Runge--Kutta method with positive weights $\bm{b}>0$
+	Any Runge--Kutta method with positive weights $\bm{b} > \bm{0}$
         has effective order at most four.
 \end{lemma}
 
@@ -37,7 +37,7 @@ Theorem \ref{cor:no_SSP_5} follows immediately from Lemma \ref{thm:effective_bar
 and the following well-known result.
 \begin{lemma}\label{lem:positive_b}(see \cite[Theorem~4.2]{Kraaijevanger1991},\cite[Lemma 4.2]{Ruuth2002})
 	Any irreducible Runge--Kutta method with positive SSP coefficient $\sspcoef>0$
-	must have positive weights $\bm{b}>0$.
+	must have positive weights $\bm{b} > \bm{0}$.
 \end{lemma}
 
 \begin{remark}
@@ -81,7 +81,7 @@ lemma.
 	\begin{equation*}
     		\sum_{j \neq k}b_j\sum_{i \neq k}b_i v_i^2 - \sum_{j \neq k}b_j v_j\sum_{i \neq k}b_i v_i \leq 0.
 	\end{equation*}
-	Noting that the terms corresponding to $i = j$ in the two double sums cancel gives
+	Noting that the terms corresponding to $i = j$ in the two double sums cancel and this gives
 	%\begin{equation*}
 		%    \sum_{j \neq k}b_{j}\sum_{i \neq k,j}b_{i}v_{i}^{2} - \sum_{j \neq k}b_{j}v_{j}\sum_{i \neq j,k}b_{i}v_{i} \leq 0,
 	%\end{equation*}
@@ -109,23 +109,26 @@ lemma.
 
     Let $(A,\bm{b},\bm{c})$ denote the coefficients of a Runge--Kutta method with
     effective order at least five, classical order at least two, and positive 
-    weights $\bm{b} > 0$.
+    weights $\bm{b} > \bm{0}$.
     The effective order five and classical order two conditions
     (see Table~\ref{tab:effective_OCs}) include the following:
     \begin{subequations}\label{eq:theorem_cond}
     		\begin{align}
-    			\bm{b}^T\bm{e} & = 1 \label{eq:theorem_cond_a} \\
-             	\bm{b}^TA\bm{c} &= \frac{1}{6} \label{eq:theorem_cond_b} \\
-            	\frac{1}{2}\bm{b}^T\bm{c}^2 - \frac{1}{6} &= \beta_2 \label{eq:theorem_cond_c} \\
+    			\bm{b}^T\bm{e} & = 1, \label{eq:theorem_cond_a} \\
+             	\bm{b}^TA\bm{c} &= \frac{1}{6}, \label{eq:theorem_cond_b} \\
+            	\frac{1}{2}\bm{b}^T\bm{c}^2 - \frac{1}{6} &= \beta_2, \label{eq:theorem_cond_c} \\
             	\frac{1}{4}\bm{b}^T\bm{c}^4 - \bm{b}^TC^2A\bm{c} + \bm{b}^T(A\bm{c})^2 &= \beta_2^2, \label{eq:theorem_cond_d}
         	\end{align}
 	\end{subequations}
 	where the powers on vectors are understood component-wise. 
 	Define
 	\begin{align*} 
-		\bm{v} = \frac{1}{2}\bm{c}^2 - A\bm{c}, \\
-		\bm{w} = \bm{v}^{2} - \beta_{2}\bm{v}.
+		\bm{v} = \frac{1}{2}\bm{c}^2 - A\bm{c}
 	\end{align*}
+	and
+	\begin{align}\label{eq:def_w}
+		\bm{w} = \bm{v}^{2} - \beta_{2}\bm{v}.
+	\end{align}
 	Then substituting \eqref{eq:theorem_cond_b} in \eqref{eq:theorem_cond_c} gives
 	\begin{equation}\label{eq:btv}
 		\beta_2 = \bm{b}^T\bm{v}.
@@ -148,68 +151,64 @@ lemma.
 	The remainder of our proof deals with classical order two, 
 	where $\beta_2 \neq 0$.
 
-	By the assumption $\bm{b}>0$, \eqref{eq:btw} implies that either
+	By the assumption $\bm{b} > \bm{0}$, \eqref{eq:btw} implies that either
 	$\bm{w} = \bm{0}$, or there is a least one negative and at least one positive 
 	element in $\bm{w}$.
 	We will show that both possibilities lead to a contradiction.
 
 	\paragraph{Case 1: $\bm{w} = \bm{0}$.}
-	By \eqref{eq:btw}, we have $v_i^2 - \beta_2 v_i = 0$ for all $i \in \{1, \dots, s\}$, 
-	so for each $i$ either $v_i = 0$ or $v_i = \beta_2$.
+	By the definition of $\bm{w}$ in \eqref{eq:def_w}, we have $v_i^2 - \beta_2 v_i = 0$ 
+	for all $i \in \{1, \dots, s\}$, 	so for each $i$ either $v_i = 0$ or $v_i = \beta_2$.
 	Let the set $I = \{i : v_i = \beta_2\}$. 
 	Then \eqref{eq:btv} implies 
 	\begin{equation*}
 		\beta_2 = \sum_{i=1}^s b_i v_i = \sum_{i \in I}b_i\beta_2 = \beta_2\sum_{i \in I}b_i.
 	\end{equation*}
 	Note that $v_1 = 0$ because the first row of matrix $A$ is identically zero. 
+	Then the cardinality of set $I$ is strictly less than $s$. 
 	Thus $\sum_{i\in I}b_i < \sum_{i=1}^s b_i$ and \eqref{eq:theorem_cond_a} 
 	implies
 	\begin{equation*}
-		\beta_2\sum_{i \in I}b_i< \beta_2,
-	\end{equation*} 
-	which leads to a contradiction.
+		\beta_2\sum_{i \in I}b_i < \beta_2 \quad \text{ or } \quad \beta_2\sum_{i \in I}b_i > \beta_2,
+	\end{equation*}
+	depending on the sign of $\beta_2$.
+	Hence, a contradiction.
 
 	\paragraph{Case 2: $\bm{w} \neq \bm{0}$.}
-	By \eqref{eq:btw} and the positivity of $\bm{b}$, we can choose
-	$i, j \in \{2, \dots, s\}$ such that $w_i < 0 < w_j$.
-	We will show that $0 < v_i < \beta_2 < v_j$.
+	Since $\bm{b} > \bm{0}$, \eqref{eq:btw} holds only if the vector 
+	$\bm{w}$ has both negative and positive elements. 
+	We can then choose distinct integers $i, j \in \{2, \dots, s\}$ such that 
+	$w_i < 0 < w_j$.
+	We will show that either $0 < v_i < \beta_2 < v_j$ or $v_j < \beta_2 < v_i< 0$
 
-    Since by \eqref{eq:btw} $v_i^2 < \beta_2 v_i$, using \eqref{eq:btv2} it follows that
-    \begin{equation}\label{eq:case_2}
-    		\beta_2^2 = \sum_{j=1}^s b_j v_j^2 < \sum_{j \neq i}^s b_j v_j^2 + \beta_2 b_i v_i.
-    	\end{equation}
-    	Substituting \eqref{eq:btv} in \eqref{eq:case_2} yields
+	Suppose first that $\beta_2 > 0$. 
+	Then since $w_i < 0$, \eqref{eq:def_w} yields $v_i^2 < \beta_2v_i$ 
+	and thus $v_i > 0$. 
+	This gives $v_i < \beta_2$.
+	If we assume that $v_j < 0$, then $v_j < 0 < v_i < \beta_2$.
+	Since the integers $i$ and $j$ are arbitrary chosen, $\beta_2$ is larger 
+	than all components of $\bm{v}$. 
+    	This leads to a contradiction since by using \eqref{eq:theorem_cond_a}
     	\begin{align*}
-    		\beta_2\sum_{j=1}^s b_j v_j &< \sum_{j \neq i}^s b_j v_j^2 + \beta_2 b_i v_i \\
-    		\beta_2\sum_{j \neq i}^s b_j v_j &< \sum_{j \neq i}^s b_j v_j^2 
+    		\beta_2 = \sum_{k=1}^s b_k v_k < \sum_{k=1}^s b_k\beta_2 = \beta_2.
     	\end{align*}
-    	so by \eqref{eq:btv2}
-    	\begin{equation}\label{eq:case_2_b}
-            \beta_2\sum_{j \neq i}^s b_j v_j < \beta_2^2.
-    \end{equation}
-    Suppose that $v_{i} < 0$. By positivity of $\bm{b}$ and using \eqref{eq:btv} we have
-    \begin{align*}
-    		\beta_2 = \sum_{j=1}^s b_j v_j < \sum_{j \neq i}^s b_j v_j,
-    	\end{align*}
-    	which contradicts \eqref{eq:case_2_b}. 
-    	Since $v_i \neq 0$, then $v_i > 0$ and in this case $0 < v_i < \beta_2$.
+    	If now $v_j > 0$, then since $w_j > 0$ it must be $v_j > \beta_2$ 
+    	and hence $0< v_i < \beta_2 < v_j$.
     	
-    	Similarly, note that $w_j > 0$ implies $v_j^2 > \beta_2 v_j$. 
-    	If $v_j < 0$, then $v_j < \beta_2$ and thus $v_j < 0 < v_i < \beta_2$. 
-    	Since indices $i, j$ are arbitrary chosen, $\beta_2$ is larger than all 
-    	components of $\bm{v}$. 
-    	This leads to a contradiction since
-    	\begin{align*}
-    		\beta_2 = \sum_{k=1}^s b_k v_k < \sum_{k=1}^s b_k\beta_2 < \beta_2.
-    	\end{align*}
-    	By our assumption $w_j>0$, we have $v_j \neq 0$, so $v_j > 0$ which gives $v_j > \beta_2$.
+    	Similarly, suppose that $\beta_2 < 0$. 
+    	Then $w_i <0$ gives $v_i < 0$ and hence $v_i > \beta_2$.
+    	If $v_j > 0$, then $v_j > 0 > v_i > \beta_2$ and as before we reach 
+    	a contradiction.
+    	On the other hand, if $v_j < 0$, then since $w_j >0$ it must be 
+    	$v_j < \beta_2$ and thus  $v_j < \beta_2 < v_i < 0$.
     	
-    	In summary, we have shown that
+    	In summary, we have shown that either 
     	\begin{equation}\label{eq:beta_2_condition}
-    		v_1 = 0 \quad \text{ and } \quad 0 < v_i < \beta_2 < v_j, \text{ for } i, j \in \{2, \dots, s\}.
+    		v_j < \beta_2  < v_i < 0 \quad \text{ or } \quad 0 < v_i < \beta_2 < v_j, \quad \text{ for some } i, j \in \{2, \dots, s\}.
     \end{equation}
-    Application of Lemma~\ref{Davids_lemma} reveals that all $v_i$ must
+    Application of Lemma~\ref{Davids_lemma} reveals that all $v_i$ must 
     be equal except for one.
-    But \eqref{eq:beta_2_condition} implies that $v_1, v_i$, and $v_j$ are
-    mutually distinct, which is a contradiction.
+    But since $v_1 = 0$, the statement \eqref{eq:beta_2_condition} implies that 
+    $v_1, v_i$, and $v_j$ are mutually distinct, which is a contradiction.
+
 \end{proof}
