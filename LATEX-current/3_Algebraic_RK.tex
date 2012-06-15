@@ -16,10 +16,10 @@
     		8 & \tree{8} \hspace{15pt}  & $\bm{b}^TA^2\bm{c}$ & &  17 & \hspace{15pt} \tree{17} & $\bm{b}^TA^3\bm{c}$ \\
   		\end{tabular}
   \end{smalltrees}
-  \caption{Elementary weights of trees up to fifth order for a 
+  \caption{Elementary weights of trees up to order five for a 
   		Runge--Kutta method $(A,\bm{b},\bm{c})$. 
   		Here $C$ is a diagonal matrix with components 
-  		$c_{i} = \sum_j^s a_{ij}$ and exponents of vectors 
+  		$c_{i} = \sum_{j=1}^{i-1} a_{ij}$ and exponents of vectors 
   		represent component exponentiation.}
   \label{tab:elementary_weights}
 \end{table}
@@ -185,18 +185,18 @@ element $E \in G$ which advances the exact solution by one step.
 All of this can be made considerably more precise using quotient
 groups of $G$ \cite{Butcher2008_book}.
 \begin{example}\label{ex:FE_inv_2}
-  Consider the forward Euler method
+  Consider the Forward Euler method
   $\bm{u}^{n+1} = \bm{u}^{n} + \Dt \bm{F}(\bm{u}^{n})$.
   To find an inverse, we seek a method that undoes the work of this method,
   recovering $\bm{u}^{n}$ from $\bm{u}^{n+1}$;
-  one approach is to solve for $\bm{u}^{n}$, obtaining the backward Euler method
+  one approach is to solve for $\bm{u}^{n}$, obtaining the Backward Euler method
   with a time-step of $-\Dt$.
-  Alternatively, let $\alpha \in G$ correspond to the forward Euler method and by
+  Alternatively, let $\alpha \in G$ correspond to the Forward Euler method and by
   \eqref{eq:Group_operation}, we have
   %\cite[Sec~382]{Butcher2008_book}, we have
   $(\alpha\alpha^{-1})(t_1) = \alpha(t_1) + \alpha^{-1}(t_1) = 0$,
   so any $\alpha^{-1}$ with $\alpha^{-1}(t_1) = -1$ will do.
-  For example, the forward Euler method with size $-\Delta t$ is also an
+  For example, the forward Euler method with a step of size $-\Dt$ is also an
   inverse (up to order $1$).
 \end{example}
 This example demonstrates that inverse methods up to order $p$ are not
@@ -306,7 +306,7 @@ for linear problems \cite{Butcher2008_book}.
     \caption{Effective order five conditions of the main and starting methods $M$ and $S$.}
     \label{tab:effective_OCs_on_alpha}
 \end{table}
-%Finally, we use the abbreviation RK($s$,$q$,$p$) for an $s$-stage Runge-Kutta method of effective order $q$ and classical order $p$.
+%Finally, we use the abbreviation RK($s$,$q$,$p$) for an $s$--stage Runge-Kutta method of effective order $q$ and classical order $p$.
 
 
 \subsection{Constructing effective order methods}
@@ -317,14 +317,14 @@ $\alpha_i$ and $\beta_i$ is mostly linear (although there are a few
 $\beta_2^2$ terms).
 It is thus straightforward to isolate the equations for $\alpha_i$,
 determining the $\beta_i$ as linear combination of the $\alpha_i$, and
-separate the effective order conditions into conditions on main method
+separate the effective order conditions into conditions on the main method
 $M$ and starting method $S$.
 This provides maximal degrees of freedom and minimizes the number of
 constraints when constructing the method $M$.
-Then when all functions on $\alpha$ are found, the relative order
+Then when all constraints on $\alpha$ are found, the relative order
 conditions on $\beta$ can be obtained.
 
-The resulting effective order conditions for main method $M$ are given
+The resulting effective order conditions for the main method $M$ are given
 in Table~\ref{tab:effective_OCs} (up to effective order five).
 The order conditions for the starting method $S$ are also given.
 We can also find the order conditions of
@@ -343,7 +343,7 @@ this assumption).
 	\centering
     \begin{tabular}{M{2mm}|M{2mm}|M{68mm}|M{67mm}}
     		\hline
-        q & p & Order conditions for the main method $M$ & Order conditions for the starting method $S$ \nline
+        $q$ & $p$ & Order conditions for the main method $M$ & Order conditions for the starting method $S$ \nline
         \hline
         \multirow{1}{*}{3} & \multirow{1}{*}{2} & {\small $\alpha_1 = 1$, $\alpha_2 = \frac{1}{2}$, $\alpha_4 = \frac{1}{6}$.} & {\small $\beta_1 = 0$, $\beta_2 = - \frac{1}{6} + \frac{1}{2}\alpha_3$.}\nline
         \hline
@@ -380,5 +380,5 @@ this assumption).
 
 
 % \begin{example}\label{ex:Effective_RK32}
-% Constructing an $s$-stage method of effective order 3 with classical order 2 requires satisfying the three conditions given in Table~\ref{tab:Effective_oc}. This is one less condition than constructing a method with classical order 3, since $\alpha_3$ is here a free parameter. After choosing a method and thus a value for $\alpha_3$, the order conditions for the starting method are now fixed as well.
+% Constructing an $s$--stage method of effective order 3 with classical order 2 requires satisfying the three conditions given in Table~\ref{tab:Effective_oc}. This is one less condition than constructing a method with classical order 3, since $\alpha_3$ is here a free parameter. After choosing a method and thus a value for $\alpha_3$, the order conditions for the starting method are now fixed as well.
 % \end{example}

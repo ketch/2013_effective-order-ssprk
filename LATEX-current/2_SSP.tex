@@ -17,12 +17,15 @@ need not necessarily represent a spatial discretization.
 In any case, a time discretization then produces a sequence of
 solutions $\bm{u}^{n} \approx \bm{u}(t_n)$.
 In this work we study explicit Runge--Kutta time discretizations.
-An explicit $s$-stage Runge--Kutta method takes the form
+An explicit $s$--stage Runge--Kutta method takes the form
 \begin{align*}
-	\bm{u}^{n+1} &= \bm{u}^{n} + \Dt \sum_i^s b_i \bm{F}(t_n + c_i \Dt,\bm{Y}_i), \\
-	\text{where} \quad \bm{Y}_i &= \bm{u}^{n} + \Dt \sum_j^{i-1} a_{ij} \bm{F}(t_n + c_j \Dt,\bm{Y}_j)
+	\bm{u}^{n+1} &= \bm{u}^{n} + \Dt \sum_i^s b_i \bm{F}(t_n + c_i \Dt,\bm{Y}_i), 
 \end{align*}
-and $c_i = \sum_j^sa_{ij}$.
+where
+\begin{align*}
+	\bm{Y}_i &= \bm{u}^{n} + \Dt \sum_j^{i-1} a_{ij} \bm{F}(t_n + c_j \Dt,\bm{Y}_j)
+\end{align*}
+and $c_i = \sum_{j=1}^{i-1}a_{ij}$.
 The accuracy and stability of the method depend on the coefficients
 $(A,\bm{b},\bm{c})$ \cite{Butcher2008_book}.
 
@@ -32,10 +35,10 @@ are monotonic in the total variation semi-norm \cite{Ketcheson2008}.
 % probably should be a ref about HCLs (not SSP) but good enough for now
 For this reason, many popular spatial discretizations are designed such 
 that, for a suitable class of problems, the solution $\bm{u}$ in 
-\eqref{eq:ode_system} computed with the forward Euler scheme is 
+\eqref{eq:ode_system} computed with the Forward Euler scheme is 
 non-increasing (in time) in some norm, semi-norm, or convex functional; i.e.,
 \begin{align}\label{eq:forwardEuler}
-    \|\bm{u} + \Dt\bm{F}(t,\bm{u})\| \le \|\bm{u}\|, \quad \forall \bm{u} \text{ and for } 0 \le \Dt \le \DtFE.
+    \|\bm{u} + \Dt\bm{F}(t,\bm{u})\| \le \|\bm{u}\|, \quad \text{for all } \bm{u} \text{ and for } 0 \le \Dt \le \DtFE.
 \end{align}
 Note that $\DtFE$ is a property of $\bm{F}$ (and is independent of $\bm{u}$).
 If this is the case, then an SSP method also generates a solution whose norm is
@@ -112,7 +115,7 @@ This leads to a reduced set of order conditions and a relaxed absolute
 monotonicity condition \cite{Kraaijevanger1986,Ketcheson2008,ketcheson2009a}.
 We denote the maximal SSP coefficient for linear problems
 (maximized over all methods with order $q$ and $s$ stages) by $\clin$.
-Thus in general for non-linear problems, for any $s$-stage Runge--Kutta
+Thus in general for non-linear problems, for any $s$--stage Runge--Kutta
 method of order $q$,
 \begin{align} \label{ineq:clin}
 	\sspcoef\le\clin.

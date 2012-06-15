@@ -16,7 +16,7 @@ the procedure to fix this issue.
 
 We denote by ESSPRK($s,q,p$) an $s$--stage explicit SSP Runge--Kutta 
 method of effective order $q$ and classical order $p$.
-Also we write SSPRK($s,q$) for a  $s$-stage explicit SSP Runge--Kutta 
+Also we write SSPRK($s,q$) for a  $s$--stage explicit SSP Runge--Kutta 
 method of order $q$.
 
 \subsection{The main method}\label{subsec:main_method}
@@ -143,7 +143,7 @@ classical order $p=2$ or $3$.
 %These methods have an SSP coefficient $\sspcoef$ which is at least as
 %large as SSPRK($s, 4$) (in fact, they are all larger except in the
 %case where $s =10$ where they are equal).\davidtodo{See my comment above.}
-In either case, for $7 \le s \le 11$ stages the methods found are
+In either case, for stages $7 \le s \le 11$ the methods found are
 optimal because the SSP coefficient attains the upper bound of
 $\clin$.
 For fewer stages, the ESSPRK methods still have SSP coefficients up to
@@ -257,10 +257,11 @@ methods.
 
 We were able to construct starting and stopping schemes for each main 
 method, with an SSP coefficient at least as large as that of the main method.
-%For each order, effective order and number of stages
+This allows the usage of a uniform time-step $\Dt \leq \sspcoef\DtFE$, 
+where $\sspcoef$ is the SSP coefficient of the main method.
 The additional computational cost
 of the starting and stopping methods is minimal:
-for methods $R$ and $T$ associated with an $s$-stage main method,
+for methods $R$ and $T$ associated with an $s$--stage main method,
 at most $s + 1$ and $s$ stages, respectively, appear to be required.
 %In some stages better results are obtained, for example if the main method is 
 %ESSPRK($3,3,2$), then its relative starting and stopping methods have only three 
@@ -359,7 +360,7 @@ stopping method, and then the starting method to start up again.
     }\\
     \subfloat[Starting method $R$ \label{ESSPRK(4,4,3)_scheme_b}]{
         \begin{tabular}{c | c c c c c}
-			$0$ & $0$ & & & & \\
+			$0$ &  & & & & \\
 			$0.385204035560722$ & $0.385204035560722$ & & & & \\
 			$0.742263414758097$ & $0.227463994461045$ & $0.514799420297052$ & & & \\
 			$0.340009657286032$ &$0.047916343610605$ & $0.108444881450098$ & $0.183648432225329$ & & \\

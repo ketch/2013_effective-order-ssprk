@@ -11,7 +11,7 @@ SSP coefficient accurately measures the maximal time-step for which the
 methods are strong stability preserving.
 
 \subsection{Convergence study}\label{subsec:convergence}
-We consider non-stiff Van der Pol system
+We consider the non-stiff Van der Pol system
 \begin{equation}\label{eq:conv_eq}
 	\begin{split}
     		u_1'(t) &= u_2(t), \\
@@ -78,7 +78,7 @@ coefficient $\sspcoef$ will give a TVD solution for $\Dt \leq
 Burgers' equation was solved using an SSP $TM^{n-2}R$ scheme with time-step
 restriction $\Dt \leq \sigma{\Dt}_{\text{FE}}$, where $\sigma$ indicates the size 
 of the time step. 
-We integrate to roughly time $t_{f} = 2.8$ with $m = 200$ points in space.
+We integrate to roughly time $t_{f} = 2.8$ with $200$ points in space.
 Figure~\ref{fig:burgers_cont} shows that if $\sigma$ is chosen less than the SSP
 coefficient of the main method, then no oscillations are observed. 
 If this stability limit is violated, then oscillations may appear.
@@ -88,7 +88,7 @@ numerical solution.
 When $M$ is an ESSPRK($5,4,2$) method,
 it turns out that $\sigma = 2.44$ is the largest value of $\sigma$
 for which the total variation has not increased at the final time.
-This is $25\%$ larger the value of the SSP coefficient $\sspcoef = 1.95$.
+This is $25\%$ larger than the value of the SSP coefficient $\sspcoef = 1.95$.
 
 \begin{figure}
     \centering
@@ -101,8 +101,8 @@ This is $25\%$ larger the value of the SSP coefficient $\sspcoef = 1.95$.
     The SSP coefficient is $\sspcoef = 1.95$. 
     Figure~\ref{fig:burgers_cont_b} shows a zoom in the region where 
     oscillations appear.
-    Here $TV$ denotes the $TV$-norm of the solution at the final time:
-    a value greater than 1 (the $TV$-norm of the initial condition)
+    Here $TV$ denotes the $TV$--norm of the solution at the final time:
+    a value greater than 1 (the $TV$--norm of the initial condition)
     indicates a violation of the TVD condition.
     }
     \label{fig:burgers_cont}
@@ -128,10 +128,10 @@ ESSPRK($4,4,2$) method with SSP coefficient $\sspcoef = 0.88$.
 In this case, $\sigma = 1.07$ appears to be the largest value
 for which the total variation has not increased at any time
 during the calculation.
-This is $22\%$ larger the value of the SSP coefficient.
+This is $22\%$ larger than the value of the SSP coefficient.
 Figure~\ref{fig:burgers_discont_b} shows part of the solution exhibiting 
 oscillations when $\sigma$ is %$61\%$
-larger the SSP coefficient.
+larger than the SSP coefficient.
 
 
 
@@ -146,7 +146,7 @@ larger the SSP coefficient.
     The SSP coefficient is $ \sspcoef = 0.88$. 
     Figure~\ref{fig:burgers_discont_b} shows a zoom in the region where 
     oscillations appear.
-    Here $TV$ denotes the $TV$-norm of the solution at the final time:
+    Here $TV$ denotes the $TV$--norm of the solution at the final time:
     a value greater than 2 indicates a violation of the TVD condition.
     }
     \label{fig:burgers_discont}
@@ -165,7 +165,7 @@ It is interesting to note that the stability prediction of the SSP
 coefficient for ESSPRK is quite tight compared to other SSP methods
 (c.f., \cite[Table 5.1]{Ketcheson/Gottlieb/Macdonald:TSRK}).
 Moreover it becomes sharper as the number of spatial points increases,
-since the dissipation of the solution is decreased.
+since the dissipation of the numerical solution is decreased.
 The upper bound on the SSP coefficient is also sharper when schemes 
 with large number of stages are considered.
 This may make effective order methods an interesting test case for
