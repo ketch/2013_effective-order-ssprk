@@ -104,7 +104,7 @@ lemma.
 \begin{proof}[Proof of Lemma~\ref{thm:effective_barrier}]
 	Any method of effective order five must have classical order at least two
 	(see \cite{Butcher2008_book} or Table~\ref{tab:effective_OCs}).
-    Thus it is sufficient to show that any method with all non-negative weights
+    Thus it is sufficient to show that any method with all positive weights
     cannot satisfy the conditions of effective order five and classical order two.
 
     Let $(A,\bm{b},\bm{c})$ denote the coefficients of a Runge--Kutta method with
@@ -142,6 +142,8 @@ lemma.
 	\begin{equation}\label{eq:btw}
 		\bm{b}^T\bm{w} = 0.
 	\end{equation}
+        We divide the analysis into three cases.
+	\paragraph{Case 1: $\beta_2 = 0$.}
 	First consider the case that $\beta_2 = 0$. 
 	Then $\bm{b}^T\bm{v}^2 = 0$, but $\bm{v }\neq 0$ because explicit methods
 	cannot have stage order two \cite{Ruuth2002}. This implies that $b_j \leq 0$ 
@@ -151,64 +153,23 @@ lemma.
 	The remainder of our proof deals with classical order two, 
 	where $\beta_2 \neq 0$.
 
-	By the assumption $\bm{b} > \bm{0}$, \eqref{eq:btw} implies that either
-	$\bm{w} = \bm{0}$, or there is a least one negative and at least one positive 
-	element in $\bm{w}$.
-	We will show that both possibilities lead to a contradiction.
-
-	\paragraph{Case 1: $\bm{w} = \bm{0}$.}
+	\paragraph{Case 2: $\bm{w} = \bm{0}, \beta_2\ne0$.}
 	By the definition of $\bm{w}$ in \eqref{eq:def_w}, we have $v_i^2 - \beta_2 v_i = 0$ 
 	for all $i \in \{1, \dots, s\}$, 	so for each $i$ either $v_i = 0$ or $v_i = \beta_2$.
 	Let the set $I = \{i : v_i = \beta_2\}$. 
 	Then \eqref{eq:btv} implies 
 	\begin{equation*}
-		\beta_2 = \sum_{i=1}^s b_i v_i = \sum_{i \in I}b_i\beta_2 = \beta_2\sum_{i \in I}b_i.
+            \beta_2 = \sum_{i=1}^s b_i v_i = \sum_{i \in I}b_i\beta_2 = \beta_2\sum_{i \in I}b_i,
 	\end{equation*}
-	Note that $v_1 = 0$ because the first row of matrix $A$ is identically zero. 
-	Then the cardinality of set $I$ is strictly less than $s$. 
-	Thus $\sum_{i\in I}b_i < \sum_{i=1}^s b_i$ and \eqref{eq:theorem_cond_a} 
-	implies
-	\begin{equation*}
-		\beta_2\sum_{i \in I}b_i < \beta_2 \quad \text{ or } \quad \beta_2\sum_{i \in I}b_i > \beta_2,
-	\end{equation*}
-	depending on the sign of $\beta_2$.
-	Hence, a contradiction.
+        which implies $\sum_{i\in I} b_i = 1$, but this contradicts \eqref{eq:theorem_cond_a}
+	(note that $v_1 = 0$ because the first row of matrix $A$ is identically zero).
 
-	\paragraph{Case 2: $\bm{w} \neq \bm{0}$.}
-	Since $\bm{b} > \bm{0}$, \eqref{eq:btw} holds only if the vector 
-	$\bm{w}$ has both negative and positive elements. 
-	We can then choose distinct integers $i, j \in \{2, \dots, s\}$ such that 
-	$w_i < 0 < w_j$.
-	We will show that either $0 < v_i < \beta_2 < v_j$ or $v_j < \beta_2 < v_i< 0$
-
-	Suppose first that $\beta_2 > 0$. 
-	Then since $w_i < 0$, \eqref{eq:def_w} yields $v_i^2 < \beta_2v_i$ 
-	and thus $v_i > 0$. 
-	This gives $v_i < \beta_2$.
-	If we assume that $v_j < 0$, then $v_j < 0 < v_i < \beta_2$.
-	Since the integers $i$ and $j$ are arbitrary chosen, $\beta_2$ is larger 
-	than all components of $\bm{v}$. 
-    	This leads to a contradiction since by using \eqref{eq:theorem_cond_a}
-    	\begin{align*}
-    		\beta_2 = \sum_{k=1}^s b_k v_k < \sum_{k=1}^s b_k\beta_2 = \beta_2.
-    	\end{align*}
-    	If now $v_j > 0$, then since $w_j > 0$ it must be $v_j > \beta_2$ 
-    	and hence $0< v_i < \beta_2 < v_j$.
-    	
-    	Similarly, suppose that $\beta_2 < 0$. 
-    	Then $w_i <0$ gives $v_i < 0$ and hence $v_i > \beta_2$.
-    	If $v_j > 0$, then $v_j > 0 > v_i > \beta_2$ and as before we reach 
-    	a contradiction.
-    	On the other hand, if $v_j < 0$, then since $w_j >0$ it must be 
-    	$v_j < \beta_2$ and thus  $v_j < \beta_2 < v_i < 0$.
-    	
-    	In summary, we have shown that either 
-    	\begin{equation}\label{eq:beta_2_condition}
-    		v_j < \beta_2  < v_i < 0 \quad \text{ or } \quad 0 < v_i < \beta_2 < v_j, \quad \text{ for some } i, j \in \{2, \dots, s\}.
-    \end{equation}
-    Application of Lemma~\ref{Davids_lemma} reveals that all $v_i$ must 
-    be equal except for one.
-    But since $v_1 = 0$, the statement \eqref{eq:beta_2_condition} implies that 
-    $v_1, v_i$, and $v_j$ are mutually distinct, which is a contradiction.
+	\paragraph{Case 3: $\bm{w} \neq \bm{0}, \beta_2\ne0$.}
+	Since $\bm{b} > \bm{0}$, \eqref{eq:btw} implies that we can choose
+	$i, j \in \{2, \dots, s\}$ such that $w_i < 0 < w_j$.
+        Clearly $v_i\ne 0$, $v_j\ne 0$, and $v_i\ne v_j$.  Furthermore,
+        $v_1=0$ for any explicit method.
+        Application of Lemma~\ref{Davids_lemma} reveals that all $v_i$ must 
+        be equal except for one, which is a contradiction.
 
 \end{proof}
