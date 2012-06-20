@@ -49,8 +49,8 @@ effective order can only be obtained after the stopping method is
 applied.
 Intermediate steps will typically only be order $p$ accurate (the classical
 order of the main method).
-Finally, we note that for a fixed time-step, increasing the number of stages
-generally decreases the error constant.
+Finally, we note that the methods with more stages generally exhibit smaller errors
+(for a given step size).
 
 \subsection{Burgers' equation}\label{subsubsec:burgers}
 The inviscid Burgers' equation consists of the scalar hyperbolic conservation law
@@ -65,11 +65,11 @@ The solution advances to the right where it eventually exhibits a shock.
 We perform a semi-discretization
 using an upwind approximation to obtain the system of ODEs
 \begin{align*}\label{eq:burgers_flux}
-	\frac{\textrm{d}}{\textrm{d} t} u_i = \frac{f(u_{i}) - f(u_{i-1})}{\Delta x}.
+	\frac{\textrm{d}}{\textrm{d} t} u_i = -\frac{f(u_{i}) - f(u_{i-1})}{\Delta x}.
 \end{align*}
 This spatial discretization is total-variation-diminishing (TVD) when
-coupled with the Forward Euler method under time restriction
-$\Dt \leq {\Dt}_{\text{FE}} = (1 / \|U(0,x)\|_{\infty}) \Delta x$
+coupled with the Forward Euler method under the restriction
+$$\Dt \leq {\Dt}_{\text{FE}} = \Delta x / \|U(0,x)\|_{\infty} $$
 \cite{Laney:1998}.  %,Ketcheson/Macdonald/Gottlieb:2009}.
 Recall that a time discretization with SSP
 coefficient $\sspcoef$ will give a TVD solution for $\Dt \leq
@@ -97,7 +97,7 @@ This is $25\%$ larger than the value of the SSP coefficient $\sspcoef = 1.95$.
     \subfloat[$\sigma = 2.44$]{\label{fig:burgers_cont_b}
       \includegraphics[width=0.49\textwidth]{Pictures/burgers_cont_no_tvd}}
     \caption{Solution of Burgers' equation with continuous initial data, using a 
-    $TM^{n-2}R$ scheme, where $ M $ is ESSPRK($5,4,2$). 
+    $TM^{n-2}R$ scheme, where $M$ is the optimal ESSPRK($5,4,2$). 
     The SSP coefficient is $\sspcoef = 1.95$. 
     Figure~\ref{fig:burgers_cont_b} shows a zoom in the region where 
     oscillations appear.
@@ -153,7 +153,7 @@ larger than the SSP coefficient.
 \end{figure}
 
 We also note the necessity of our modified starting and stopping methods in the $RM^{n-2}T$ approach: in this
-example if we were to use the original approach of $S$ and $S^{-1}$,
+example if we use the original approach of $S$ and $S^{-1}$,
 the solution exhibits oscillations immediately following the
 application of the starting perturbation scheme $S$.
 %This is illustrated in Figure~\ref{fig:burgers_starting_method}
@@ -161,16 +161,14 @@ application of the starting perturbation scheme $S$.
 %Colin: fine as is for now
 
 
-It is interesting to note that the stability prediction of the SSP
-coefficient for ESSPRK is quite tight compared to other SSP methods
-(c.f., \cite[Table 5.1]{Ketcheson/Gottlieb/Macdonald:TSRK}).
-Moreover it becomes sharper as the number of spatial points increases,
-since the dissipation of the numerical solution is decreased.
-The upper bound on the SSP coefficient is also sharper when schemes 
-with large number of stages are considered.
-This may make effective order methods an interesting test case for
-further research into both SSP time-discretizations as well as spatial
-discretizations with strong stability features.
+%It is interesting to note that the stability prediction of the SSP
+%coefficient for ESSPRK is quite tight compared to other SSP methods
+%(c.f., \cite[Table 5.1]{Ketcheson/Gottlieb/Macdonald:TSRK}).
+%Moreover it becomes sharper as the number of spatial points increases,
+%since the dissipation of the numerical solution is decreased.
+%This may make effective order methods an interesting test case for
+%further research into both SSP time-discretizations as well as spatial
+%discretizations with strong stability features.
 % TODO: we probably want a table here to support this...
 
 

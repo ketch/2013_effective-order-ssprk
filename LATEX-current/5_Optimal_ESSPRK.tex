@@ -10,9 +10,9 @@ effective order up to four.
 Recall from Section~\ref{sec:Algebraic_RK} that the methods of
 effective order involve a main method $M$ as well as starting and
 stopping methods $S$ and $S^{-1}$.
-It turns out that methods $S$ and $S^{-1}$ are not generally SSP, but
-we show below in Section~\ref{subsec:starting_stopping} how to modify
-the procedure to fix this issue.
+In Section~\ref{subsec:starting_stopping} we introduce a novel approach
+to construction of starting and stopping methods in order to allow
+them to be SSP.
 
 We denote by ESSPRK($s,q,p$) an $s$--stage explicit SSP Runge--Kutta 
 method of effective order $q$ and classical order $p$.
@@ -41,26 +41,33 @@ from random initial guesses are performed to help ensure the method with
 the largest possible SSP coefficient is found.
 
 \subsubsection{Optimal SSP coefficients}\label{subsubsec:optimal_SSP_coeff}
+Useful bounds on the optimal SSP coefficient can be obtained 
+by considering an important relaxation. 
+In the relaxed problem, the method is required to be accurate and strong 
+stability preserving only for linear, constant-coefficient initial value problems. 
+This leads to a reduced set of order conditions and a relaxed absolute 
+monotonicity condition \cite{Kraaijevanger1986,Ketcheson2008,ketcheson2009a}.
+We denote the maximal SSP coefficient for linear problems
+(maximized over all methods with order $q$ and $s$ stages) by $\clin$.
+
+Let $\sspcoef_{s,q}$ denote the maximal SSP coefficient (relevant to
+nonlinear problems) over all methods of $s$ stages with order $q$.  Let
+$\sspcoef_{s,q,p}$ denote the object of our study, i.e. the maximal SSP
+coefficient (relevant to nonlinear problems) over all methods of $s$ stages
+with effective order $q$ and classical order $p$.
+Since the ESSPRK($s,q,p$) methods form a super class of the SSPRK($s,q$)
+methods, we have
+\begin{align} \label{ineq:clin}
+        \sspcoef_{s,q} \le \sspcoef_{s,q,p} \le\clin.
+\end{align}
+Exact optimal values of $\clin$ are known for many classes of methods; for
+example see \cite{Kraaijevanger1986,Ketcheson2008,ketcheson2009a}.
+Those results and \eqref{ineq:clin} allow us to determine the optimal value
+of $\sspcoef_{s,q,p}$ {\em a priori} for the cases $q=1,2,3$ (for any $s$) and
+for $q=4,s=10$, since in those cases we have $\sspcoef_{s,q}=\clin$.
+The only remaining cases are $q=4, s\ne 10$; those are discussed below.
 The effective SSP coefficients for methods with up to eleven stages are shown in 
 Table~\ref{tab:eff_SSP_coeff}.
-%Since the effective order $q$ SSPRK methods (accompanied with relevant
-%starting and stopping methods) are used in a scheme that attains classical
-%order equal to $q$, it is reasonable to compare them to the SSPRK($s,q$)
-%methods.
-The ESSPRK($s,q,p$) methods form a super class of the SSPRK($s,q$)
-methods and thus their SSP coefficients $\sspcoef$ must be greater
-than or equal to that of SSPRK($s,q$) methods.
-This is confirmed by comparing Table~\ref{tab:eff_SSP_coeff} with
-\cite[Table~5]{Ketcheson/Macdonald/Gottlieb:2009}.
-Recall from Section~\ref{subsec:Optimal_SSPRK} that $\clin$ (the optimal SSP
-coefficient for linear constant-coefficient problems) gives known
-upper bound on the SSP coefficient \cite{Kraaijevanger1986, ketcheson2009a}.
-%Based on this we have the following result:
-\begin{remark}
-	With a few exceptions, the ESSPRK($s,q,p$) methods
-	found by numerical search are optimal because they have SSP coefficient
-	$\sspcoef=\clin$.
-\end{remark}
 
 \begin{table}
     \centering
@@ -85,12 +92,10 @@ upper bound on the SSP coefficient \cite{Kraaijevanger1986, ketcheson2009a}.
 \end{table}
 
 \subsubsection{Effective order three methods}\label{subsubsec:3rd_ESSPRK}
-Table~\ref{tab:eff_SSP_coeff} shows that ESSPRK($s,3,2$) are 
-optimal because they match the corresponding values of $\clin$.
-Note however that these bounds are also attained by SSPRK($s,3$) methods 
-up to 11 stages. 
-In the cases of three and four stages, we were able to determine closed-form 
-families of solutions.
+Since $\sspcoef_{s,q}=\clin$ for $q=3$, the optimal effective order three methods
+have SSP coefficient equal to the corresponding optimal classical order three methods.
+In the cases of three and four stages, we were able to determine exact coefficients of
+families of optimal effective order methods.
 \begin{theorem}\label{thm:ESSPRK(3,3,2)}
 	A family of optimal three-stage, effective order three SSP Runge--Kutta 
 	methods of classical order two, with SSP coefficient $\sspcoef=1$, is given by
@@ -165,7 +170,7 @@ In the particular case of four-stage methods we have the following:% result:
 % I removed math mode (and added "\," for some extra space)
 
 \subsection{Starting and stopping methods}\label{subsec:starting_stopping}
-Having constructed an ESSPRK($s,q,p$) scheme that can be used a the main 
+Having constructed an ESSPRK($s,q,p$) scheme that can be used as the main 
 method $M$, we want to find perturbation methods $S$ and $S^{-1}$ such that the 
 Runge--Kutta scheme $S^{-1}MS$ attains classical order $q$, equal to the 
 effective order of method $M$.
@@ -176,9 +181,9 @@ For this reason, starting and stopping methods $S, S^{-1}$ are usually
 designed to perturb the solution but not advance in time. 
 A drawback of this approach is that the resulting $S$ (and $S^{-1}$) scheme 
 is not SSP:
-the condition $\beta_1 = 0$ (i.e., $\sum_i b_i = 0$) implies negative
-weights and thus the scheme cannot be SSP.
-The overall $S^{-1}M^nS$ method will therefore also not be SSP.
+the condition $\beta_1 = 0$ (i.e., $\sum_i b_i = 0$) implies the presence of
+at least one negative
+weight and thus the scheme cannot be SSP.
 
 In order to overcome this problem and achieve ``bona fide'' effective order 
 SSPRK methods we need to choose different starting and stopping methods. 
@@ -236,7 +241,7 @@ We can thus find methods $R$ and $T$ using the optimization procedure
 described in Section~\ref{subsec:Optimal_SSPRK} with the order conditions 
 given by Table~\ref{tab:rho_tau_OCs} for $\Phi(K)$ in \eqref{eq:SSP_opt}.
 
-For a given main method $M$, the values of $\alpha_i$ are already known.
+The values of $\alpha_i$ are determined by the main method $M$.
 Also note that for effective order $q$, the algebraic expressions on
 $\beta$ up to order $q-1$ are already found by the optimization procedure of 
 the main method (see Table~\ref{tab:effective_OCs}). 
@@ -252,8 +257,7 @@ constraints given in \eqref{eq:R_T_OCs} and conditions on $\beta$ given by
 Table~\ref{tab:effective_OCs}. 
 The unknown elementary weights on $\beta$ are used as free parameters.
 In practice, we maximize the objective function $\min(r_1,r_2)$, where $r_1$ 
-and $r_2$ are the absolute radii of monotonicity of the two Runge--Kutta 
-methods.
+and $r_2$ are the radii of absolute monotonicity of the methods $R$ and $T$.
 
 We were able to construct starting and stopping schemes for each main 
 method, with an SSP coefficient at least as large as that of the main method.
