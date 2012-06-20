@@ -305,7 +305,9 @@ method is ESSPRK($4,4,2$) and ESSPRK($4,4,3$), respectively.
 
 It is important to note that in practice, if accurate values are needed at 
 any time other than the final time, the computation must invoke the 
-stopping method, and then the starting method to start up again.
+stopping method to obtain them.  Furthermore, changing stepsize would require first applying the stopping method with the old stepsize and then applying the starting method with the new stepsize.
+
+%, and then the starting method to start up again if the stepsize where to change.
 
 \begin{table}
     \setlength{\tabcolsep}{2pt}
