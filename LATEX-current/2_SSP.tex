@@ -107,25 +107,6 @@ while $\bm{e}_s$ denotes the vector of ones of length $s$,
 and \( \Phi(K) \) represents the  order conditions.
 The inequalities are understood component-wise.
 
-Useful upper bounds for the above optimization problem can be obtained 
-by considering an important relaxation. 
-In the relaxed problem, the method is required to be accurate and strong 
-stability preserving only for linear, constant-coefficient initial value problems. 
-This leads to a reduced set of order conditions and a relaxed absolute 
-monotonicity condition \cite{Kraaijevanger1986,Ketcheson2008,ketcheson2009a}.
-We denote the maximal SSP coefficient for linear problems
-(maximized over all methods with order $q$ and $s$ stages) by $\clin$.
-Thus in general for non-linear problems, for any $s$--stage Runge--Kutta
-method of order $q$,
-\begin{align} \label{ineq:clin}
-	\sspcoef\le\clin.
-\end{align}
-Furthermore, we shall see that the effective and classical order conditions are the same for
-linear problems, so \eqref{ineq:clin} also holds when $\sspcoef$ is the SSP coefficient
-of a method with effective order $q$.
-Exact optimal values of $\clin$ are known for many classes of methods; for
-example see \cite{Kraaijevanger1986,Ketcheson2008,ketcheson2009a}.
-
 Following \cite{Ketcheson2008, Ketcheson/Macdonald/Gottlieb:2009}, 
 we will numerically solve the optimization problem \eqref{eq:SSP_opt} to find
 optimal effective order explicit SSP Runge--Kutta methods.
