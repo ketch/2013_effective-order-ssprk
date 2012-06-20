@@ -185,13 +185,13 @@ element $E \in G$ which advances the exact solution by one step.
 All of this can be made considerably more precise using quotient
 groups of $G$ \cite{Butcher2008_book}.
 \begin{example}\label{ex:FE_inv_2}
-  Consider the Forward Euler method
+  Consider the forward Euler method
   $\bm{u}^{n+1} = \bm{u}^{n} + \Dt \bm{F}(\bm{u}^{n})$.
   To find an inverse, we seek a method that undoes the work of this method,
   recovering $\bm{u}^{n}$ from $\bm{u}^{n+1}$;
-  one approach is to solve for $\bm{u}^{n}$, obtaining the Backward Euler method
+  one approach is to solve for $\bm{u}^{n}$, obtaining the backward Euler method
   with a time-step of $-\Dt$.
-  Alternatively, let $\alpha \in G$ correspond to the Forward Euler method and by
+  Alternatively, let $\alpha \in G$ correspond to the forward Euler method and by
   \eqref{eq:Group_operation}, we have
   %\cite[Sec~382]{Butcher2008_book}, we have
   $(\alpha\alpha^{-1})(t_1) = \alpha(t_1) + \alpha^{-1}(t_1) = 0$,
@@ -306,7 +306,7 @@ for linear problems \cite{Butcher2008_book}.
     \caption{Effective order five conditions of the main and starting methods $M$ and $S$.}
     \label{tab:effective_OCs_on_alpha}
 \end{table}
-%Finally, we use the abbreviation RK($s$,$q$,$p$) for an $s$--stage Runge-Kutta method of effective order $q$ and classical order $p$.
+%Finally, we use the abbreviation RK($s$,$q$,$p$) for an $s$-stage Runge-Kutta method of effective order $q$ and classical order $p$.
 
 
 \subsection{Constructing effective order methods}
@@ -380,5 +380,5 @@ this assumption).
 
 
 % \begin{example}\label{ex:Effective_RK32}
-% Constructing an $s$--stage method of effective order 3 with classical order 2 requires satisfying the three conditions given in Table~\ref{tab:Effective_oc}. This is one less condition than constructing a method with classical order 3, since $\alpha_3$ is here a free parameter. After choosing a method and thus a value for $\alpha_3$, the order conditions for the starting method are now fixed as well.
+% Constructing an $s$-stage method of effective order 3 with classical order 2 requires satisfying the three conditions given in Table~\ref{tab:Effective_oc}. This is one less condition than constructing a method with classical order 3, since $\alpha_3$ is here a free parameter. After choosing a method and thus a value for $\alpha_3$, the order conditions for the starting method are now fixed as well.
 % \end{example}

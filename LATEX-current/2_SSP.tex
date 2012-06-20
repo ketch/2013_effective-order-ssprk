@@ -17,7 +17,7 @@ need not necessarily represent a spatial discretization.
 In any case, a time discretization then produces a sequence of
 solutions $\bm{u}^{n} \approx \bm{u}(t_n)$.
 In this work we study explicit Runge--Kutta time discretizations.
-An explicit $s$--stage Runge--Kutta method takes the form
+An explicit $s$-stage Runge--Kutta method takes the form
 \begin{align*}
 	\bm{u}^{n+1} &= \bm{u}^{n} + \Dt \sum_i^s b_i \bm{F}(t_n + c_i \Dt,\bm{Y}_i), 
 \end{align*}
@@ -35,7 +35,7 @@ are monotonic in the total variation semi-norm \cite{Ketcheson2008}.
 % probably should be a ref about HCLs (not SSP) but good enough for now
 For this reason, many popular spatial discretizations are designed such 
 that, for a suitable class of problems, the solution $\bm{u}$ in 
-\eqref{eq:ode_system} computed with the Forward Euler scheme is 
+\eqref{eq:ode_system} computed with the forward Euler scheme is
 non-increasing (in time) in some norm, semi-norm, or convex functional; i.e.,
 \begin{align}\label{eq:forwardEuler}
     \|\bm{u} + \Dt\bm{F}(t,\bm{u})\| \le \|\bm{u}\|, \quad \text{for all } \bm{u} \text{ and for } 0 \le \Dt \le \DtFE.
@@ -45,7 +45,7 @@ If this is the case, then an SSP method also generates a solution whose norm is
 non-increasing in time, under a modified time-step restriction.
 \begin{definition}[Strong Stability Preserving]
 	A Runge--Kutta method is said to be \emph{strong stability preserving} with
-	\emph{SSP coefficient} $\sspcoef > 0$ if, whenever the Forward Euler condition
+	\emph{SSP coefficient} $\sspcoef > 0$ if, whenever the forward Euler condition
 	\eqref{eq:forwardEuler} holds and 
 	\begin{align*}
 		0 \leq \Dt \leq \sspcoef \DtFE,

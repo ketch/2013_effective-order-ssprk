@@ -14,9 +14,9 @@ In Section~\ref{subsec:starting_stopping} we introduce a novel approach
 to construction of starting and stopping methods in order to allow
 them to be SSP.
 
-We denote by ESSPRK($s,q,p$) an $s$--stage explicit SSP Runge--Kutta 
+We denote by ESSPRK($s,q,p$) an $s$-stage explicit SSP Runge--Kutta
 method of effective order $q$ and classical order $p$.
-Also we write SSPRK($s,q$) for a  $s$--stage explicit SSP Runge--Kutta 
+Also we write SSPRK($s,q$) for an $s$-stage explicit SSP Runge--Kutta
 method of order $q$.
 
 \subsection{The main method}\label{subsec:main_method}
@@ -265,7 +265,7 @@ This allows the usage of a uniform time-step $\Dt \leq \sspcoef\DtFE$,
 where $\sspcoef$ is the SSP coefficient of the main method.
 The additional computational cost
 of the starting and stopping methods is minimal:
-for methods $R$ and $T$ associated with an $s$--stage main method,
+for methods $R$ and $T$ associated with an $s$-stage main method,
 at most $s + 1$ and $s$ stages, respectively, appear to be required.
 %In some stages better results are obtained, for example if the main method is 
 %ESSPRK($3,3,2$), then its relative starting and stopping methods have only three 

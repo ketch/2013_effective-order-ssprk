@@ -68,7 +68,7 @@ using an upwind approximation to obtain the system of ODEs
 	\frac{\textrm{d}}{\textrm{d} t} u_i = -\frac{f(u_{i}) - f(u_{i-1})}{\Delta x}.
 \end{align*}
 This spatial discretization is total-variation-diminishing (TVD) when
-coupled with the Forward Euler method under the restriction
+coupled with the forward Euler method under the restriction
 $$\Dt \leq {\Dt}_{\text{FE}} = \Delta x / \|U(0,x)\|_{\infty} $$
 \cite{Laney:1998}.  %,Ketcheson/Macdonald/Gottlieb:2009}.
 Recall that a time discretization with SSP
@@ -101,8 +101,8 @@ This is $25\%$ larger than the value of the SSP coefficient $\sspcoef = 1.95$.
     The SSP coefficient is $\sspcoef = 1.95$. 
     Figure~\ref{fig:burgers_cont_b} shows a zoom in the region where 
     oscillations appear.
-    Here $TV$ denotes the $TV$--norm of the solution at the final time:
-    a value greater than 1 (the $TV$--norm of the initial condition)
+    Here $TV$ denotes the $TV$-norm of the solution at the final time:
+    a value greater than 1 (the $TV$-norm of the initial condition)
     indicates a violation of the TVD condition.
     }
     \label{fig:burgers_cont}
@@ -146,7 +146,7 @@ larger than the SSP coefficient.
     The SSP coefficient is $ \sspcoef = 0.88$. 
     Figure~\ref{fig:burgers_discont_b} shows a zoom in the region where 
     oscillations appear.
-    Here $TV$ denotes the $TV$--norm of the solution at the final time:
+    Here $TV$ denotes the $TV$-norm of the solution at the final time:
     a value greater than 2 indicates a violation of the TVD condition.
     }
     \label{fig:burgers_discont}
