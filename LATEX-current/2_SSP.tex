@@ -68,6 +68,7 @@ To allow a fair comparison of different explicit methods, we consider the
 Note that the use of the word \emph{effective} here is unrelated to the 
 concept of \emph{effective order} introduced in Section~\ref{sec:Algebraic_RK}.
 
+
 \subsection{Optimal SSP schemes}\label{subsec:Optimal_SSPRK}
 We say that an SSP Runge--Kutta method is optimal if it has the largest 
 possible SSP coefficient for a given order and a given number of stages.
@@ -81,19 +82,14 @@ However, the SSP coefficient is related to the
 for irreducible Runge--Kutta methods, the two are equivalent 
 \cite{Ferracina2004, Higueras2004}.
 This gives a simplified algebraic characterization of the SSP coefficient
-\cite{Ferracina2005}.
-The optimization problem of finding optimal SSP Runge--Kutta methods
-can be written in terms of the coefficients $A$ and $\bm{b}$ as
-follows:
-\begin{equation}\label{eq:SSP_opt}
-    \max_{A, \bm{b}, r} \; r, \quad \text{subject to} \quad \left\{
-                                                 \begin{array}{ll}
-                                                   K(I + rA)^{-1} \geq 0 \\
-                                                   \bm{e}_{s+1} - rK(I + rA)^{-1}\bm{e}_{s} \geq 0 \\
-                                                   \Phi(K) = 0.
-                                                 \end{array}
-                                               \right.
-\end{equation}
+\cite{Ferracina2005}; it is the maximum value of $r$ such that the following
+conditions hold:
+\begin{subequations} \label{eq:absmon}
+\begin{align}
+    K(I + rA)^{-1} \geq 0 \\
+    \bm{e}_{s+1} - rK(I + rA)^{-1}\bm{e}_{s} \geq 0.
+\end{align}
+\end{subequations}
 Here
 \begin{equation*}
     K = \left(
@@ -103,9 +99,16 @@ Here
             \end{array}
          \right),
 \end{equation*}
-while $\bm{e}_s$ denotes the vector of ones of length $s$,
-and \( \Phi(K) \) represents the  order conditions.
+while $\bm{e}_s$ denotes the vector of ones of length $s$.
 The inequalities are understood component-wise.
+
+The optimization problem of finding optimal SSP Runge--Kutta methods
+can thus be written as follows:
+\begin{equation}\label{eq:SSP_opt}
+    \max_{A, \bm{b}, r} \; r \quad \text{subject to} \quad 
+                                           \text{\eqref{eq:absmon} and } \Phi(K) = 0.
+\end{equation}
+Here \( \Phi(K) \) represents the  order conditions.
 
 Following \cite{Ketcheson2008, Ketcheson/Macdonald/Gottlieb:2009}, 
 we will numerically solve the optimization problem \eqref{eq:SSP_opt} to find
