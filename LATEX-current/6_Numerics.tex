@@ -11,14 +11,15 @@ SSP coefficient accurately measures the maximal time-step for which the
 methods are strong stability preserving.
 
 \subsection{Convergence study}\label{subsec:convergence}
-We consider the non-stiff Van der Pol system
+We consider the van der Pol system \cite{Hairer1987_book}
 \begin{equation}\label{eq:conv_eq}
 	\begin{split}
     		u_1'(t) &= u_2(t), \\
-    		u_2'(t) &= 2\bigl(1 - u_1^2(t)\bigr)u_2(t) - u_1(t), 
+                u_2'(t) &= \mu \bigl(1 - u_1^2(t)\bigr)u_2(t) - u_1(t),
     \end{split}
 \end{equation}
-over the time interval $t \in [0, 50]$ with initial values $u_1(0) = 2$ and $u_2(0) = 1$.
+over the time interval $t \in [0, 50]$ with $\mu = 2$ and initial
+values $u_1(0) = 2$ and $u_2(0) = 1$.
 The reference solution for the convergence study is calculated by \textsc{Matlab}'s 
 \texttt{ode45} solver with relative and absolute tolerances set to $10^{-13}$.
 
@@ -69,8 +70,8 @@ using an upwind approximation to obtain the system of ODEs
 \end{align*}
 This spatial discretization is total-variation-diminishing (TVD) when
 coupled with the forward Euler method under the restriction
-$$\Dt \leq {\Dt}_{\text{FE}} = \Delta x / \|U(0,x)\|_{\infty} $$
-\cite{Laney:1998}.  %,Ketcheson/Macdonald/Gottlieb:2009}.
+\cite{Laney:1998}  %,Ketcheson/Macdonald/Gottlieb:2009}.
+$$\Dt \leq {\Dt}_{\text{FE}} = \Delta x / \|U(0,x)\|_{\infty}.$$
 Recall that a time discretization with SSP
 coefficient $\sspcoef$ will give a TVD solution for $\Dt \leq
 \sspcoef {\Dt}_{\text{FE}}$.
