@@ -311,6 +311,7 @@ for linear problems \cite{Butcher2008_book}.
 
 
 \subsection{Constructing effective order methods}
+\label{sec:construct_effect}
 The approach we adopt is to consider the $\beta_{i}$ as free
 parameters when determining the $\alpha_i$.
 The relationship in Table~\ref{tab:effective_OCs_on_alpha} between the
@@ -334,11 +335,16 @@ $S^{-1}$
 in terms of the
 $\beta_i$ (see \cite[Table~386(III)]{Butcher2008_book}).
 
-Note that we follow the convention of setting $\beta_1=0$
-\cite{Butcher2008_book}, i.e., the starting and stopping methods
-perturb the solution but do not advance the solution in time
-(Tables~\ref{tab:effective_OCs_on_alpha} and~\ref{tab:effective_OCs} both incorporate
-this assumption).
+Tables~\ref{tab:effective_OCs_on_alpha} and~\ref{tab:effective_OCs}
+both assume that $\beta_1=0$ (i.e., the starting and stopping methods
+perturb the solution but do not advance the solution in time).  This
+assumption is without loss of generality following \cite[Lemma
+389A]{Butcher2008_book}, the proof of which shows that if a method $M$
+has effective order $p$ with particular starting and stopping methods
+(for which $\beta_1 \neq 0$), then $M$ is also effective order $p$
+with another pair of starting and stopping methods which do have
+$\beta_1=0$.
+
 
 \begin{table}
 	\centering

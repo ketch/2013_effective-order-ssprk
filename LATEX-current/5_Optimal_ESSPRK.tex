@@ -180,15 +180,18 @@ method $M$, we want to find perturbation methods $S$ and $S^{-1}$ such that the
 Runge--Kutta scheme $S^{-1}MS$ attains classical order $q$, equal to the 
 effective order of method $M$.
 We also want the resulting overall process to be SSP.
-If method $S$ advances the solution in time, then $S^{-1}$ must evolve the 
-solution backward in time, which may be undesirable in some cases. 
-For this reason, starting and stopping methods $S, S^{-1}$ are usually 
-designed to perturb the solution but not advance in time. 
-A drawback of this approach is that the resulting $S$ (and $S^{-1}$) scheme 
-is not SSP:
-the condition $\beta_1 = 0$ (i.e., $\sum_i b_i = 0$) implies the presence of
-at least one negative
-weight and thus the scheme cannot be SSP.
+%If method $S$ advances the solution in time, then $S^{-1}$ must evolve the
+%solution backward in time, which may be undesirable in some cases.
+%For this reason, starting and stopping methods $S, S^{-1}$ are usually
+%designed to perturb the solution but not advance in time.
+%In any case, the resulting
+However at least one of the $S$ and $S^{-1}$ methods is not SSP:
+if $\beta_1 = 0$ then $\sum_i b_i = 0$ implies the presence of at
+least one negative weight and thus neither scheme can be SSP.
+Even if we consider methods with $\beta_1 \neq 0$, one of $S$ or
+$S^{-1}$ must step backwards and thus that method cannot be SSP
+(unless we consider the downwind operator
+\cite{Ruuth2004,Gottlieb/Ruuth:SSPfastdownwind,Ketcheson:2011:downwind}).
 
 In order to overcome this problem and achieve ``bona fide'' effective order 
 SSPRK methods we need to choose different starting and stopping methods. 
@@ -216,6 +219,11 @@ Then the equivalence is expressed as
 Rewriting the second condition in \eqref{eq:R_T_OCs} as 
 $(\tau\beta)(t) = \alpha(t)$, the order conditions for the starting and stopping 
 methods can be determined and are given in Table~\ref{tab:rho_tau_OCs}.
+These conditions could be constructed more generally but here we have
+assumed $\beta_1=0$ (see Section~\ref{sec:construct_effect}); this
+will be sufficient for constructing SSP starting and stopping
+conditions.
+
 
 \begin{table}
 	\centering
@@ -235,7 +243,8 @@ methods can be determined and are given in Table~\ref{tab:rho_tau_OCs}.
   	\end{tabular}
   	\caption{Order conditions on $\rho$ and $\tau$ up to effective order four for starting
   		and stopping methods $R$ and $T$, respectively.
-  		The upper block represents the effective order three conditions.}
+  		The upper block represents the effective order three conditions.
+              Here we assume $\beta_1 = 0$.}
   	\label{tab:rho_tau_OCs}
 \end{table}
 
