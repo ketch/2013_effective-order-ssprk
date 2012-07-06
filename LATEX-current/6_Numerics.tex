@@ -134,13 +134,13 @@ This is $22\%$ larger than the value of the SSP coefficient.
 Figure~\ref{fig:burgers_discont_b} shows part of the solution exhibiting 
 oscillations when $\sigma$ is %$61\%$
 larger than the SSP coefficient.
-% As is typically the case \cite{Gottlieb2011_book}, repeating
-Repeating these experiments for methods with more stages (results not
-included) shows increasing agreement between the SSP coefficient
-predicted by the theory and the maximal time-step for which the
-numerical solution is TVD.
-The maximum coefficients for which the solution remains TVD for the 
-whole computation are shown in Table \ref{tab:observed_SSP_coeff}. 
+For various schemes, Table~\ref{tab:observed_SSP_coeff} shows the
+maximum observed values of $\sigma$ for which the numerical solution
+is total variation decreasing for the entire computation.
+With the exception of the four-stage effective order four methods, we
+note good agreement between the SSP coefficient predicted by the
+theory and the maximal time-step for which the numerical solution is
+TVD.
 
 \begin{figure}
     \centering
@@ -173,8 +173,8 @@ whole computation are shown in Table \ref{tab:observed_SSP_coeff}.
         \hline
     \end{tabular}
     \caption{Maximal observed coefficients exhibiting the TVD property on 
-    the Burgers' equation with discontinuous data \eqref{eq:burgers_discont_IC}.
-    The numbers in parenthesis indicate the percentage increase with respect to 
+    the Burgers' equation example with discontinuous data \eqref{eq:burgers_discont_IC}.
+    The numbers in parenthesis indicate the increase relative to
     the relevant SSP coefficients.}
     \label{tab:observed_SSP_coeff}
 \end{table}
