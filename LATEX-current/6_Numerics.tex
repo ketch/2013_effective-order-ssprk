@@ -87,11 +87,9 @@ If this stability limit is violated, then oscillations may appear.
 We measure these oscillations by computing the total variation of the 
 numerical solution.
 When $M$ is an ESSPRK($5,4,2$) method,
-it turns out that $\sigma = 2.42$ is the largest value of $\sigma$
-for which the total variation is monotonically decreasing during the
-calculation.
-This is $24\%$ larger than the value of the SSP coefficient $\sspcoef
-= 1.95$.
+it turns out that $\sigma = 2.44$ is the largest value of $\sigma$
+for which the total variation has not increased at the final time.
+This is $25\%$ larger than the value of the SSP coefficient $\sspcoef = 1.95$.
 
 \begin{figure}
     \centering
@@ -113,14 +111,14 @@ This is $24\%$ larger than the value of the SSP coefficient $\sspcoef
 
 We also consider Burgers' equation with a discontinuous
 square wave initial condition
-\begin{align*}%\label{eq:burgers_discont_IC}
+\begin{equation}\label{eq:burgers_discont_IC}
     U(0,x)  = \left\{
                 \begin{array}{ll}
                   1, & \hbox{$0.5 \leq x \leq 1.5$} \\
                   0, & \hbox{otherwise.}
                 \end{array}
               \right.
-\end{align*}
+\end{equation}
 The solution consists of a rarefaction (i.e., an expansion fan) and a
 moving shock.
 Again we use $m = 200$ points in space and we compute the solution until
@@ -129,8 +127,8 @@ Figure~\ref{fig:burgers_discont} shows the result of solving the
 discontinuous problem using an SSP $TM^{n-2}R$ scheme, where $M$ is an
 ESSPRK($4,4,2$) method with SSP coefficient $\sspcoef = 0.88$.
 In this case, $\sigma = 1.07$ appears to be the largest value
-for which the total variation is monotonically decreasing during the
-calculation.
+for which the total variation has not increased at any time
+during the calculation.
 This is $22\%$ larger than the value of the SSP coefficient.
 Figure~\ref{fig:burgers_discont_b} shows part of the solution exhibiting 
 oscillations when $\sigma$ is %$61\%$
@@ -140,8 +138,8 @@ Repeating these experiments for methods with more stages (results not
 included) shows increasing agreement between the SSP coefficient
 predicted by the theory and the maximal time-step for which the
 numerical solution is TVD.
-
-
+The maximum coefficients for which the solution remains TVD for the 
+whole computation are shown in Table \ref{tab:observed_SSP_coeff}. 
 
 \begin{figure}
     \centering
@@ -160,6 +158,26 @@ numerical solution is TVD.
     \label{fig:burgers_discont}
 \end{figure}
 
+\begin{table}
+    \centering
+    \begin{tabular}{|c|c|c@{\hspace{5pt}} c@{\hspace{5pt}} c@{\hspace{5pt}} c@{\hspace{5pt}} c@{\hspace{5pt}} c@{\hspace{5pt}} c@{\hspace{5pt}} c@{\hspace{5pt}} c@{\hspace{5pt}}|}
+        \hline
+        \multicolumn{2}{|c|}{\backslashbox{\hspace{2pt}\vspace{1pt}$q\,,\,p$}{\vspace{-5.5pt}$s$}} & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ & $11$ \\
+        \hline
+        $q = 3$ & $p = 2$ & \small$1.04(4\%)$ & \small$2.00(0\%)$ & \small$2.65(0\%)$ & \small$3.52(0\%)$ & \small$4.29 (0\%)$ & \small$5.11(0\%)$ & \small$6.00(0\%)$ & \small$6.79(0\%)$ & \small$7.63(0\%)$\\
+        \hline
+        $q = 4$ & $p = 2$ & \small$-$ & \small$1.07(22\%)$ & \small$1.98(2\%)$ & \small$2.69(2\%)$ & \small$3.56(1\%)$ & \small$4.33(1\%)$ & \small$5.16(1\%)$ & \small$6.05(1\%)$ & \small$6.84(1\%)$ \\
+        \hline
+        $q = 4$ & $p = 3$ & \small$-$ & \small$1.05(35\%)$ & \small$1.89(3\%)$ & \small$2.63(2\%)$ & \small$3.53(1\%)$ & \small$4.31(1\%)$ & \small$5.16(1\%)$ & \small$6.04(1\%)$ & \small$6.85(1\%)$ \\
+        \hline
+    \end{tabular}
+    \caption{Maximal observed coefficients exhibiting the TVD property on 
+    the Burgers' equation with discontinuous data \eqref{eq:burgers_discont_IC}.
+    The numbers in parenthesis indicate the percentage increase with respect to 
+    the relevant SSP coefficients.}
+    \label{tab:observed_SSP_coeff}
+\end{table}
+    
 We also note the necessity of our modified starting and stopping methods in the $RM^{n-2}T$ approach: in this
 example if we use the original approach of $S$ and $S^{-1}$,
 the solution exhibits oscillations immediately following the
