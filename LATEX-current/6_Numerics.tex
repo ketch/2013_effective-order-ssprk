@@ -87,9 +87,11 @@ If this stability limit is violated, then oscillations may appear.
 We measure these oscillations by computing the total variation of the 
 numerical solution.
 When $M$ is an ESSPRK($5,4,2$) method,
-it turns out that $\sigma = 2.44$ is the largest value of $\sigma$
-for which the total variation has not increased at the final time.
-This is $25\%$ larger than the value of the SSP coefficient $\sspcoef = 1.95$.
+it turns out that $\sigma = 2.42$ is the largest value of $\sigma$
+for which the total variation is monotonically decreasing during the
+calculation.
+This is $24\%$ larger than the value of the SSP coefficient $\sspcoef
+= 1.95$.
 
 \begin{figure}
     \centering
@@ -127,8 +129,8 @@ Figure~\ref{fig:burgers_discont} shows the result of solving the
 discontinuous problem using an SSP $TM^{n-2}R$ scheme, where $M$ is an
 ESSPRK($4,4,2$) method with SSP coefficient $\sspcoef = 0.88$.
 In this case, $\sigma = 1.07$ appears to be the largest value
-for which the total variation has not increased at any time
-during the calculation.
+for which the total variation is monotonically decreasing during the
+calculation.
 This is $22\%$ larger than the value of the SSP coefficient.
 Figure~\ref{fig:burgers_discont_b} shows part of the solution exhibiting 
 oscillations when $\sigma$ is %$61\%$
