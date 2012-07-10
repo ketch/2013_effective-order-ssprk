@@ -1,0 +1,177 @@
+\documentclass[10pt,a4paper,oneside]{article}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Preamble %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+
+%%% packages %%%
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage[dvips]{graphicx} % [pdftex]
+\usepackage{pstricks,pst-node,pst-tree}
+\usepackage{bm}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{enumerate,cite}
+\usepackage{url}
+\usepackage{array}
+\usepackage{arydshln}
+\usepackage{subfig}
+\usepackage{caption} % [font=small,format=plain,labelfont=bf,up,textfont=it,up]
+\usepackage{verbatim}
+\usepackage{rotating}
+\usepackage{slashbox}
+\usepackage{booktabs}
+\usepackage{xkeyval}
+\usepackage[textsize=footnotesize]{todonotes}
+\definecolor{lightgray}{gray}{0.5}
+\definecolor{darkred}{rgb}{.6,0,0}
+\definecolor{darkblue}{rgb}{0,0,0.5}
+\usepackage[colorlinks=true,citecolor=darkblue,urlcolor=darkblue,linkcolor=darkred]{hyperref}
+\usepackage[normalem]{ulem}
+\usepackage{accents}
+%\usepackage[toc,page]{appendix}
+%\usepackage{diagrams}
+%\usepackage{nomencl}
+%\usepackage{cm-super}
+%\usepackage{ifthen}
+%\usepackage{maplestd2e}
+%\usepackage[numbered]{mcode}1
+%\usepackage{epsfig}
+%\usepackage{calc}
+%\usepackage{pbox}
+
+%%% Page layout %%%
+\setlength{\textwidth}{160mm}   
+\setlength{\textheight}{220mm}
+\setlength{\oddsidemargin}{0mm} 
+\setlength{\evensidemargin}{-5mm}
+\setlength{\topmargin}{0mm}
+\setlength{\marginparwidth}{35mm}
+\setlength{\parindent}{5mm}
+\setlength{\footskip}{20mm}     
+\setlength\footnotesep{4mm}
+
+
+%%% Page style %%%
+\pagestyle{plain}
+
+%%% New commands %%%
+\newcommand{\sspcoef}{\mathcal{C}}
+\newcommand{\ceff}{\sspcoef_{\textnormal{eff}}}
+%\newcommand{\clin}{\sspcoef_{\textnormal{lin}}}
+\newcommand{\clin}{\sspcoef^{\textnormal{lin}}_{s,q}}
+%\newcommand{\clin}{R_{s,q}}
+\newcommand{\pd}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\pdseconda}[2]{\frac{\partial^2{#1}}{\partial{{#2}^2}}}
+\newcommand{\pdsecondb}[3]{\frac{\partial^2{#1}}{\partial{#2}\partial{#3}}}
+\newcommand{\Dt}{\Delta t}
+\newcommand{\DtFE}{\Delta t_{\textnormal{FE}}}
+\newcommand{\equival}[1]{\mbox{{\large $\underaccent{\hspace{8pt}#1}{\simeq } \,$}}}
+\newcommand{\rowscell}[2]{\parbox{21pt}{\centering #1 \\ #2}}
+\newcommand{\treecell}[2]{\parbox{26pt}{\centering #1 \\\vspace{3pt} #2}}
+\newcommand{\nline}{\tabularnewline}
+\newcommand{\colintodo}[1]{\todo[color=orange!20]{\textbf{C:} #1}}
+\newcommand{\davidtodo}[1]{\todo[color=cyan!20]{\textbf{D:} #1}}
+\newcommand{\yiannistodo}[1]{\todo[color=green!20]{\textbf{Y:} #1}}
+\newcommand{\colincomment}[1]{\textcolor{blue}{\\\textbf{\footnotesize #1}\\}}
+\newcommand{\davidcomment}[1]{\textcolor{red}{\\\textbf{\footnotesize #1}\\}}
+\newcommand{\yianniscomment}[1]{\textcolor{OliveGreen}{\\\textbf{\footnotesize #1}\\}}
+
+%%% Renew commands %%%
+\renewcommand{\newline}{\vspace{10pt}}
+\renewcommand{\comment}[1]{\textcolor{gray}{\\#1\\}}
+\renewcommand{\indent}{\hspace{15pt}}
+
+%%% New theorems %%%
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{result}[theorem]{Result}
+\newtheorem{remark}[theorem]{Remark}
+
+%%% Miscellaneous %%%
+\numberwithin{theorem}{section}
+\numberwithin{equation}{section}
+\numberwithin{table}{section}
+\numberwithin{figure}{section}
+\newcolumntype{M}[1]{>{\vspace{2pt}\centering\hspace{0pt}\vspace{2pt}}m{#1}}
+%\numberwithin{theorem}{section}
+%\numberwithin{equation}{section}
+%\numberwithin{definition}{section}
+%\numberwithin{example}{section}
+%\setcounter{secnumdepth}{3}
+%\setcounter{tocdepth}{3}
+%\setcounter{table}{0}
+%\baselineskip=18pt plus1pt
+%\makenomenclature
+
+%%% General info %%%
+\title{Cover Letter}
+\author{}
+\date{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Main document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{flushright}
+Yiannis Hadjimichael \\
+4700 KAUST \\
+Thuwal, Jeddah 23955-6900 \\
+Kingdom of Saudi Arabia \\
+Telephone: +966-537110270 \\
+\end{flushright}
+
+
+Dear Sir/Madam,
+\newline
+
+Enclosed is a manuscript (in .pdf format) by Colin B. Macdonald, 
+David I. Ketcheson and myself titled, 
+``Effective order strong stability preserving Runge--Kutta methods''. 
+This manuscript is being submitted for possible publication in the 
+SIAM Journal of Numerical Analysis.
+\newline
+
+The manuscript is new and it has not been considered elsewhere. 
+Correspondence regarding this manuscript should be addressed to me at
+the address shown above or sent by e-mail to \\
+yiannis.hadjimichael@kaust.edu.sa.
+\newline
+\vspace{10pt}
+
+Suggested referees are listed below:
+\begin{enumerate}
+	\item W. Hundsdorfer, Centrum voor Wiskunde en Informatica (willem.hundsdorfer@cwi.nl)
+	\item I. Higueras, Universidad Publica de Navarra (higueras@unavarra.es)
+	\item S. Gottlieb, University of Massachusetts, Dartmouth (sgottlieb@umassd.edu)
+	\item M. Spijker, Leiden University (spijker@math.leidenuniv.nl)
+	\item S. Ruuth, Simon Fraser University (sruuth@sfu.ca)
+	\item R. Spiteri, University of Saskatchewan (spiteri@cs.usask.ca)
+	
+	\item W. Wright, University of Auckland (will@math.auckland.ac)
+	\item J. Butcher, University of Auckland (butcher@math.auckland.ac.nz)
+	\item M. Tokman, University of California, Merced (mtokman@ucmerced.edu)
+
+\end{enumerate}
+\vspace{10pt}
+
+Suggested editors are listed below:
+\begin{enumerate}
+	\item S. Gottlieb, University of Massachusetts, Dartmouth (sgottlieb@umassd.edu)
+\end{enumerate}
+\vspace{10pt}
+
+Thank you for your consideration of our manuscript. 
+\newline
+\vspace{20pt}
+
+Yours sincerely,
+\newline
+
+Yiannis Hadjimichael
+
+\end{document}
