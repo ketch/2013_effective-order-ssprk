@@ -41,7 +41,7 @@ Figure~\ref{fig:conv_study} on a logarithmic scale.
     is an ESSPRK($s,3,2$) method and (b) $ M $ is an ESSPRK($s,4,2$) method.}
     \label{fig:conv_study}
 \end{figure}
-The convergence study was performed for $TM^{n-2}R$ schemes with
+The convergence study is performed for $TM^{n-2}R$ schemes with
 various number of stages $s$ and the results show that the schemes
 attain an order of accuracy equal to the effective order of their main
 method $M$.
@@ -79,33 +79,35 @@ coefficient $\sspcoef$ will give a TVD solution for $\Dt \leq
 Burgers' equation was solved using an SSP $TM^{n-2}R$ scheme with time-step
 restriction $\Dt \leq \sigma{\Dt}_{\text{FE}}$, where $\sigma$ indicates the size 
 of the time step. 
-We integrate to roughly time $t_{f} = 2.8$ with $200$ points in space.
+We integrate to roughly time $t_\text{f} = 1.62$ with $200$ points in space.
 Figure~\ref{fig:burgers_cont} shows that if $\sigma$ is chosen less than the SSP
 coefficient of the main method, then no oscillations are observed. 
 If this stability limit is violated, then oscillations may appear.
 
 We measure these oscillations by computing the total variation of the 
 numerical solution.
-When $M$ is an ESSPRK($5,4,2$) method,
-it turns out that $\sigma = 2.42$ is the largest value of $\sigma$
+When $M$ is an ESSPRK($4,4,2$) method,
+it turns out that $\sigma = 1.57$ is the largest value of $\sigma$
 for which the total variation is monotonically decreasing during the
 calculation.
-This is $24\%$ larger than the value of the SSP coefficient $\sspcoef = 1.95$.
+This is $79\%$ larger than the value of the SSP coefficient $\sspcoef = 0.88$.
 
 \begin{figure}
     \centering
-    \subfloat[$\sigma = 1.95$]{\label{fig:burgers_cont_a}
-      \includegraphics[width=0.49\textwidth]{Pictures/burgers_cont_tvd}}
-    \subfloat[$\sigma = 2.44$]{\label{fig:burgers_cont_b}
-      \includegraphics[width=0.49\textwidth]{Pictures/burgers_cont_no_tvd}}
+    \subfloat[$\sigma = 0.88$]{\label{fig:burgers_cont_a}
+      \includegraphics[width=0.48\textwidth]{Pictures/burgers_cont}}\;
+    \subfloat[$\sigma = 1.60$]{\label{fig:burgers_cont_b}
+      \includegraphics[width=0.48\textwidth]{Pictures/burgers_cont_no_tvd}}
     \caption{Solution of Burgers' equation at the final time with continuous initial data, using a
-    $TM^{n-2}R$ scheme, where $M$ is the optimal ESSPRK($5,4,2$). 
-    The SSP coefficient is $\sspcoef = 1.95$. 
+    $TM^{n-2}R$ scheme, where $M$ is the optimal ESSPRK($4,4,2$). 
+    The SSP coefficient is $\sspcoef = 0.88$. 
     Figure~\ref{fig:burgers_cont_b} shows a zoom in the region of space where
     oscillations appear.
     Here $TV$ denotes the $TV$-norm of the solution at the final time:
     a value greater than 1 (the $TV$-norm of the initial condition)
     indicates a violation of the TVD condition.
+    Note that the solution in Figure~\ref{fig:burgers_cont_b} is 
+    monotonically increasing at intermediate steps as well.
     }
     \label{fig:burgers_cont}
 \end{figure}
@@ -122,39 +124,40 @@ square wave initial condition
 \end{equation}
 The solution consists of a rarefaction (i.e., an expansion fan) and a
 moving shock.
-Again we use $m = 200$ points in space and we compute the solution until
-roughly time $t = 0.3$.
+Again we use $200$ points in space and we compute the solution until
+roughly time $t_\text{f} = 0.6$.
 Figure~\ref{fig:burgers_discont} shows the result of solving the
 discontinuous problem using an SSP $TM^{n-2}R$ scheme, where $M$ is an
-ESSPRK($4,4,2$) method with SSP coefficient $\sspcoef = 0.88$.
-In this case, $\sigma = 1.07$ appears to be the largest value
+ESSPRK($5,4,2$) method with SSP coefficient $\sspcoef = 1.95$.
+In this case, $\sigma = 1.98$ appears to be the largest value
 for which the total variation is monotonically decreasing during the 
 calculation.
-This is $22\%$ larger than the value of the SSP coefficient.
+This is $2\%$ larger than the value of the SSP coefficient.
 Figure~\ref{fig:burgers_discont_b} shows part of the solution exhibiting 
-oscillations when $\sigma$ is %$61\%$
-larger than the SSP coefficient.
+oscillations when $\sigma$ is larger than the SSP coefficient.
 For various schemes, Table~\ref{tab:observed_SSP_coeff} shows the
 maximum observed values of $\sigma$ for which the numerical solution
 is total variation decreasing for the entire computation.
 With the exception of the four-stage effective order four methods, we
 note good agreement between the SSP coefficient predicted by the
-theory and the maximal time-step for which the numerical solution is
+theory and the maximum time-step for which the numerical solution is
 TVD.
 
 \begin{figure}
     \centering
-    \subfloat[$\sigma = 0.88$]{\label{fig:burgers_discont_a}
-      \includegraphics[width=0.49\textwidth]{Pictures/burgers_discont_tvd}}
-    \subfloat[$\sigma = 1.41$]{\label{fig:burgers_discont_b}
-      \includegraphics[width=0.49\textwidth]{Pictures/burgers_discont_no_tvd}}
+    \subfloat[$\sigma = 1.95$]{\label{fig:burgers_discont_a}
+      \includegraphics[width=0.48\textwidth]{Pictures/burgers_discont}}\;
+    \subfloat[$\sigma = 2.15$]{\label{fig:burgers_discont_b}
+      \includegraphics[width=0.48\textwidth]{Pictures/burgers_discont_no_tvd}}
     \caption{Solution of Burgers' equation at the final time with discontinuous initial data, using a
-    $TM^{n-2}R$ scheme, where $M$ is ESSPRK($4,4,2$) method. 
-    The SSP coefficient is $ \sspcoef = 0.88$. 
+    $TM^{n-2}R$ scheme, where $M$ is ESSPRK($5,4,2$) method. 
+    The SSP coefficient is $ \sspcoef = 1,95$. 
     Figure~\ref{fig:burgers_discont_b} shows a zoom in the region of space where
     oscillations appear.
     Here $TV$ denotes the $TV$-norm of the solution at the final time:
     a value greater than 2 indicates a violation of the TVD condition.
+    Note that the solution in Figure~\ref{fig:burgers_discont_b} is 
+    monotonically increasing at intermediate steps as well.
     }
     \label{fig:burgers_discont}
 \end{figure}
@@ -172,17 +175,17 @@ TVD.
         $q = 4$ & $p = 3$ & \small$-$ & \small$1.05(35\%)$ & \small$1.89(3\%)$ & \small$2.63(2\%)$ & \small$3.53(1\%)$ & \small$4.31(1\%)$ & \small$5.16(1\%)$ & \small$6.04(1\%)$ & \small$6.85(1\%)$ \\
         \hline
     \end{tabular}
-    \caption{Maximal observed coefficients exhibiting the TVD property on 
+    \caption{Maximum observed coefficients exhibiting the TVD property on 
     the Burgers' equation example with discontinuous data \eqref{eq:burgers_discont_IC}.
-    The numbers in parenthesis indicate the increase relative to
-    the relevant SSP coefficients.}
+    The numbers in parenthesis indicate the increase relative to the corresponding SSP
+    coefficients.}
     \label{tab:observed_SSP_coeff}
 \end{table}
     
 We also note the necessity of our modified starting and stopping methods in the $RM^{n-2}T$ approach: in this
 example if we use the original approach of $S$ and $S^{-1}$,
 the solution exhibits oscillations immediately following the
-application of the starting perturbation scheme $S$.
+application of the starting perturbation method $S$.
 %This is illustrated in Figure~\ref{fig:burgers_starting_method}
 %\yiannistodo{Shall we include a plot about this?}
 %Colin: fine as is for now
