@@ -22,14 +22,14 @@ involved.
 %This immediately suggests the non existence of fifth-effective order explicit Runge-Kutta methods with positive weights.
 %These results are established as follows.
 \begin{theorem}\label{cor:no_SSP_5}
-    Let $M$ denote a Runge--Kutta method with $\sspcoef>0$.
+    Let $M$ denote an explicit Runge--Kutta method with $\sspcoef>0$.
     Then $M$ has effective order of at most four.
 \end{theorem}
 
 In this section we prove an even stronger result,
 which is stated in the following lemma.
 \begin{lemma}\label{thm:effective_barrier}
-	Any Runge--Kutta method with positive weights $\bm{b} > \bm{0}$
+	Any explicit Runge--Kutta method with positive weights $\bm{b} > \bm{0}$
         has effective order at most four.
 \end{lemma}
 
@@ -42,7 +42,7 @@ and the following well-known result.
 
 \begin{remark}
 	Using Lemma~\ref{thm:effective_barrier} and \cite[Theorem~4.1]{dahlquist2006}, 
-  	we may also conclude that any Runge--Kutta method with positive radius of
+  	we may also conclude that any explicit Runge--Kutta method with positive radius of
   	circle contractivity has effective order at most four.
 \end{remark}
 
