@@ -86,7 +86,7 @@ up to degree five; a general recursive formula can be found in
 % method followed by another.  This multiplicative binary operation
 % makes $G$ a group.
 
-Let $\alpha, \beta \in G$ correspond to Runge--Kutta methods $A$ and $B$
+Let $\alpha, \beta \in G$ correspond to Runge--Kutta methods $M_1$ and $M_2$
 respectively.
 %Let $\alpha, \beta \in G$ correspond to two Runge--Kutta
 %equivalence classes and assume $A$ and $B$ to be representative
@@ -95,10 +95,10 @@ A multiplicative group operation $\alpha\beta$ can be defined
 by partitioning the input tree and computing over the resulting 
 forest \cite{Butcher2008_book}.
 This product $\alpha\beta$ is related to the application
-of method $A$ followed by method $B$; 
-we denote the resulting method by $BA$.\footnote{We write
-	$BA$ to mean the application of method $A$
-	followed by the application of method $B$ 
+of method $M_1$ followed by method $M_2$; 
+we denote the resulting method by $M_2M_1$.\footnote{We write
+	$M_2M_1$ to mean the application of method $M_1$
+	followed by the application of method $M_2$ 
 	(following matrix and operator ordering convention) 
 	but when referring to products of elements of the
 	Runge--Kutta group we use the reverse ordering ($\alpha\beta$) 
@@ -154,7 +154,7 @@ one particular tree.
 	        \rowscell{$\emptyset$}{ }
 	     \end{tabular}
 	     \vspace{5pt}
-	     \caption{Partitions of tree $t_{11}$ to all possible subtrees $w$ 
+	     \caption{Partitions of the tree $t_{11}$ to all possible subtrees $w$ 
 	     	and the corresponding forests $t_{11} \setminus w$. 
 	     	Multiplicity is indicated with $(\times2)$.}
 	     \label{tab:tree_partition}
@@ -170,13 +170,13 @@ However, the definition of equivalence of methods is overly restrictive
 for practical purposes. A weaker condition is established if we 
 discuss equivalence of methods up to a particular order of accuracy.
 \begin{definition}\label{def:Equivalent_methods}
-	Two Runge--Kutta methods $A$ and $B$, are equivalent up to order 
+	Two Runge--Kutta methods $M_1$ and $M_2$, are equivalent up to order 
 	$p$ if their corresponding elements in $G$, $\alpha$ and $\beta$, satisfy
 	\begin{align*}
 		\alpha(t) = \beta(t), \; \text{for every tree $t$ with $r(t) \leq p$},
 	\end{align*}
 	where $r(t)$ denotes the order of the tree (number of vertices).
-	We denote this equivalence relation by $A \equival{p} B$. 
+	We denote this equivalence relation by $M_1 \equival{p} M_2$. 
 \end{definition}
 
 In this sense, methods have inverses: the product of $\alpha^{-1}$ and
@@ -213,10 +213,10 @@ and then a \emph{stopping method} $S^{-1}$.
 We denote by $\alpha$ and $\beta$ the elements of $G$ associated with the methods $M$ and $S$, respectively.
 %Thus $\beta^{-1}$ corresponds to Runge--Kutta method $S^{-1}$ that annihilates the work of the starting method $S$ (up to order $q$).
 The successive use of these three methods results in a method $P = S^{-1}MS$, of which the corresponding element of $G$ is $\beta\alpha\beta^{-1}$.
-We want $P$ to have order $q$ whereas $M$ might have lower classical
+We want $P$ to have order $q$, whereas $M$ might have lower classical
 order $p < q$.
-In terms of functions in group $G$ this is leads to the following definition of the effective order of the Runge--Kutta method $M$.
-\begin{definition}\cite{Butcher1987_book}\label{def:Effective_order}
+In terms of functions in group $G$ this leads to the following definition of the effective order of the Runge--Kutta method $M$.
+\begin{definition}\cite[Section~389]{Butcher2008_book}\label{def:Effective_order}
   % Let $\alpha$ and $\beta be the corresponding functions in $G$ of a
   % Runge--Kutta methods $M$ and $S$, respectively.
   Suppose $M$ is a Runge--Kutta method with corresponding $\alpha \in G$.
@@ -229,9 +229,9 @@ In terms of functions in group $G$ this is leads to the following definition of 
         Recall that $E$ represents one exact step of the solution.
 \end{definition}
 The practical benefit of methods of effective order results from the
-observation that only $M$ need be used repeatedly, since
+observation that only method $M$ need be used repeatedly, since
 \begin{displaymath}
-	P^n = (S^{-1}MS)^n = (S^{-1}MS) \cdots (S^{-1}MS) (S^{-1}MS) \equival{q} S^{-1} M^n S.
+	P^n = (S^{-1}MS)^n = \underbrace{(S^{-1}MS) \cdots (S^{-1}MS) (S^{-1}MS)}_{n\text{-times}} \equival{q} S^{-1} M^n S.
 \end{displaymath}
 The starting method is applied at the beginning without advancing the
 solution.
@@ -261,10 +261,12 @@ That is, the Runge--Kutta method $M$ corresponding to the function $\alpha$ must
 \emph{effective order conditions} relative to the order conditions of the
 method $S$ corresponding to the function $\beta$.
 We rewrite \eqref{eq:Effective_order_1} as
-$(\beta\alpha)(t) = (E\beta)(t), \; \text{for all trees with $r(t) \leq q$,}$
-and using the product operation \eqref{eq:Group_operation}, we can find expressions for each tree $t$ with $r(t) \leq q$.
-For trees up to order five these are tabulated in \cite[Sec~389]{Butcher2008_book}
-and in Table~\ref{tab:effective_OCs_on_alpha}.
+$(\beta\alpha)(t) = (E\beta)(t)$, for all trees with $r(t) \leq q$ 
+and using the product operation \eqref{eq:Group_operation} we can find 
+expressions for each tree $t$ with $r(t) \leq q$.
+Each expression can be simplified by substituting values of $\alpha_i$ found 
+from previous conditions \cite{Butcher2008_book}.
+For trees up to order five these are tabulated in Table~\ref{tab:effective_OCs_on_alpha}.
 In general, the effective order conditions allow more degrees of
 freedom on methods than the classical order conditions.
 Note that these conditions match the classical order conditions up to
@@ -304,7 +306,8 @@ for linear problems \cite{Butcher2008_book}.
     	\end{align*}%
         %\vfill
     \end{multicols}
-    \caption{Effective order five conditions of the main and starting methods $M$ and $S$.}
+    \caption{Effective order five conditions of the main and starting methods $M$ and $S$. 
+    We assume that $\beta_1=0$.}
     \label{tab:effective_OCs_on_alpha}
 \end{table}
 %Finally, we use the abbreviation RK($s$,$q$,$p$) for an $s$-stage Runge-Kutta method of effective order $q$ and classical order $p$.
@@ -318,7 +321,7 @@ The relationship in Table~\ref{tab:effective_OCs_on_alpha} between the
 $\alpha_i$ and $\beta_i$ is mostly linear (although there are a few
 $\beta_2^2$ terms).
 It is thus straightforward to isolate the equations for $\alpha_i$,
-determining the $\beta_i$ as linear combination of the $\alpha_i$, and
+determining the $\beta_i$ as linear combination of the $\alpha_i$ and
 separate the effective order conditions into conditions on the main method
 $M$ and starting method $S$.
 This provides maximal degrees of freedom and minimizes the number of
