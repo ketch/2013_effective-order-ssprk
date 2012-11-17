@@ -1,18 +1,23 @@
 \documentclass[12pt]{article}
-\usepackage{amsmath,amssymb,amsfonts,amsthm,graphicx,subfigure,color,multicol}
+\usepackage{amsmath,amssymb,amsfonts,amsthm,graphicx,subfigure,multicol}
 \usepackage[hmargin=1.0in]{geometry}
 \usepackage{empheq}
-\usepackage{amssymb}
 \usepackage{epstopdf}
 \usepackage{bm}
 \usepackage{hyperref}
 \usepackage{float,topcapt}
+\usepackage[usenames,dvipsnames]{color}
 
 \newcommand{\remark}[2]{\vspace{25pt} \noindent \textbf{Remark #1:\newline} \textit{#2}\vspace{15pt}}
 \renewcommand{\newline}{\vspace{15pt}\\}
 \newcommand{\sspcoef}{\mathcal{C}}
 \newcommand{\ceff}{\sspcoef_{\textnormal{eff}}}
 \newcommand{\clin}{\sspcoef^{\textnormal{lin}}_{s,q}}
+
+\newcommand{\colin}[1]{\textcolor{blue}{\\\textbf{C: \footnotesize #1}\\}}
+\newcommand{\david}[1]{\textcolor{red}{\\\textbf{D: \footnotesize #1}\\}}
+\newcommand{\yiannis}[1]{\textcolor{OliveGreen}{\\\textbf{Y: \footnotesize #1}\\}}
+\newcommand{\jim}[1]{\textcolor{magenta}{\\\textbf{J: \footnotesize #1}\\}}
 
 \begin{document}
 
@@ -41,13 +46,17 @@ methods use \dots", is incorrect.
 The same comment is valid for the title of section 3.}
 
 The title has been changed to ``Explicit strong stability preserving Runge--Kutta methods
-of effective order of accuracy". 
+with effective order of accuracy". 
 Also all instances of ``effective order methods" are now corrected.
 Particularly, the title of section 3 is now ``Runge--Kutta methods with effective order 
 of accuracy" and lines 2 and 4 are changed to ``methods of effective order" and
 ``methods with effective order of accuracy", respectively.
 The introduction is redone and care has been taken so that ``effective order" 
 is correctly used.
+
+\yiannis{Other possible titles may be:\\
+``Explicit SSPRK of effective order $q$", ``On the effective order of SSPRK methods",
+``The effective order of SSPRK methods".}
 
 \remark{2}{
 The introduction should be redone. 
@@ -108,10 +117,10 @@ Tables 3.1 and 3.2 are included and we add the line:
 ``Recall that $\alpha_i$ and $\beta_i$ are the elementary weights associated 
 with the index $i$ in Table 3.1",
 as mentioned.
-Table 3.2 and examples of first part of this section are omitted. 
+Table 3.2 and examples in the first part of this section are omitted. 
 Finally in line 9 page 6, we add:
 ``For a fixed classical and effective order, these are the equality constraints 
-$\Phi(K)$ in the optimization problem (2.5)."
+$\Phi(K)$ in the optimization problem (2.5)"
 to explain how Table 3.3 is used in practice.
 In line 11 page 6, we add the following:
 ``The classical order of the main method $M$ is increased by setting $\beta_i$
@@ -140,7 +149,7 @@ The authors should explain that the proofs will be done later on.
 The authors should stress the beginning of proof of Lemma 4.2 (in a quick reading, 
 it is difficult to find it).}
 
-We rearranged the material in this section as suggested.
+We rearrange the material in this section as suggested.
 We also state that the proof of Lemma 4.2 can be found at the end of the section.
 
 \remark{7}{
@@ -152,8 +161,11 @@ We have added the following line before Remark 4.4:
 remark regarding circle contractive irreducible methods."
 
 We believe that this is a simple application of Lemma 4.2 and Theorem 4.1
-from [6] and requires no further proof. We believe that this remark may be useful for
+from [6] and requires no further proof. In our opinion this remark may be useful for
 relevant studies.
+
+\yiannis{The above may seems that we are arguing with the referee, so we should think 
+carefully how to  him/her on the importance of the remark (if we decide to keep it). }
 
 \remark{8}{
 Proof of Lemma 4.2, Case 2: Just after defining the set $I$, the authors should stress that
@@ -176,7 +188,7 @@ Lemma 4.2, Case 3 has been changed to:
 
 ``Since $\bm{b} > \bm{0}$, (4.6) implies that $\bm{w}$ contains both positive 
 and negative elements. 
-Furthermore, $v_1=0$ for any explicit method.
+Furthermore, $v_1=0$ for any explicit method, thus $w_1=0$.
 Then, we can choose $i, j \in \{2, \dots, s\}$ such that $w_i < 0 < w_j$.
 By (4.3) $v_i\ne 0$, $v_j\ne 0$, and $v_i\ne v_j$.
 Application of Lemma 4.5 reveals that all $v_k$ for 
@@ -189,17 +201,20 @@ For $q \leq 5$ inequalities (5.1) are true because for $q \leq 5$ methods with e
 order $q$ have order $q$ for linear problems. 
 For $q \geq 5$, they are also true because by Theorem 4.1 $\sspcoef_{s,q,p}  = 0$.}
 
-We agree with this argument, however Remark 3.3 is much stronger. For any RK method
-the effective order conditions $q$ include the classical order $q$ conditions, i.e. the 
-conditions on the tall trees. As we state in Remark 3.3 this can be easily proved by 
-inductively applying the formula (3.1) on tall trees. Then one can see that for a given order 
-the effective order conditions on tall trees match the order conditions for liner problems.
+We agree with this argument, however Remark 3.3 is much stronger. 
+For any RK method the effective order conditions $q$ include the classical order $q$ 
+conditions for linear problems, i.e. the conditions on the tall trees. 
+As we state in Remark 3.3 this can be easily proved by inductively applying the formula 
+(3.1) on tall trees. 
+Then one can see that for a given order the effective order conditions on tall trees 
+match the order conditions for linear problems.
 
 Thus we add the following line before inequalities (5.1):
 
 ``From Remark 3.3 and the fact that the ESSPRK($s,q,p$) methods 
 form a super class of the SSPRK($s,q$) methods, we have \dots"
 
+\yiannis{Same comment as remark 7.}
 
 \remark{11}{
 Legend in Table 5.1: Please, include the value of $\sspcoef^{\textnormal{lin}}_{6,4}$.}
@@ -224,8 +239,7 @@ We follow your suggestion.
 \remark{2}{
 Section 2: Please, explain the meaning of $A, b$ and $c$.}
 
-The coefficients $A, b$ and $c$ of an RK method are explained after we give its definition 
-in page 2:
+The coefficients $A, b$ and $c$ of an RK method are explained after its definition in page 2:
 
 ``Such methods are characterized by the coefficient matrix $A = (a_{ij}) \in 
 \mathbb{R}^{s \times s}$, the weight vector $\bm{b} = (b_i) \in \mathbb{R}^s$
@@ -240,8 +254,8 @@ We clarify this in Table 3.1 as well.
 Equations (2.4): Please, explain that $I$ is the identity matrix. Observe that $I$ is used to
 denote the identity matrix and certain set in the proof of Lemma 4.2 (Case 2).}
 
-We defined that $I$ is the $s \times s$ identity matrix in (2.4).
-We also changed set $I$ in proof of Lemma 4.2. to $J$.
+We define that $I$ is the $s \times s$ identity matrix in (2.4).
+We also change the set $I$ in proof of Lemma 4.2 to $J$ to remove any ambiguity.
 
 \remark{4}{
 Table 5.2, first row: I think is better to write $\tau(t) = (\alpha\beta^{-1})(t)$.}
@@ -265,10 +279,6 @@ However, clearly the authors in this case mean the ``implicit Euler with a time-
 of $-\Delta t$", so perhaps it would remove the ambiguity to say it this way.}
 
 We agree with your comment, however we decided to remove the particular example 
-after a suggestion from the other referee.
-
-
-
-
+as suggested by the other referee.
 
 \end{document}
