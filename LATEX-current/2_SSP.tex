@@ -92,9 +92,10 @@ conditions hold:
 \begin{subequations} \label{eq:absmon}
 \begin{align}
     K(I + rA)^{-1} \geq 0 \\
-    \bm{e}_{s+1} - rK(I + rA)^{-1}\bm{e}_{s} \geq 0.
+    \bm{e}_{s+1} - rK(I + rA)^{-1}\bm{e}_{s} \geq 0,
 \end{align}
 \end{subequations}
+provided that $I + rA$ is invertible.
 Here
 \begin{equation*}
     K = \left(
@@ -104,7 +105,8 @@ Here
             \end{array}
          \right),
 \end{equation*}
-while $\bm{e}_s$ denotes the vector of ones of length $s$.
+while $\bm{e}_s$ denotes the vector of ones of length $s$ and $I$ is the
+$s \times s$ identity matrix.
 The inequalities are understood component-wise.
 
 The optimization problem of finding optimal SSP Runge--Kutta methods

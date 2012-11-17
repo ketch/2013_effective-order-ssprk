@@ -192,14 +192,14 @@ We can now prove  Lemma~\ref{lem:effective_barrier}:
 	\paragraph{Case 2: $\bm{w} = \bm{0}, \beta_2\ne0$.}
 	By the definition of $\bm{w}$ in \eqref{eq:def_w}, we have $v_i^2 - \beta_2 v_i = 0$ 
 	for all $i \in \{1, \dots, s\}$, 	so for each $i$ either $v_i = 0$ or $v_i = \beta_2$.
-	Let the set $I = \{i : v_i = \beta_2\}$. 
+	Let the set $J = \{i : v_i = \beta_2\}$. 
 	Note that $v_1 = 0$ because the first row of matrix $A$ is identically zero.
-	Since $\beta_2 \neq 0$ and $ \bm{v} \neq \bm{0}$, the set $I$ is not empty.
+	Since $\beta_2 \neq 0$ and $ \bm{v} \neq \bm{0}$, the set $J$ is not empty.
 	Then \eqref{eq:btv} yields 
 	\begin{equation*}
-            \beta_2 = \sum_{i=1}^s b_i v_i = \sum_{i \in I}b_i\beta_2 = \beta_2\sum_{i \in I}b_i,
+            \beta_2 = \sum_{i=1}^s b_i v_i = \sum_{i \in J}b_i\beta_2 = \beta_2\sum_{i \in J}b_i,
 	\end{equation*}
-        which implies $\sum_{i\in I} b_i = 1$, but this contradicts \eqref{eq:theorem_cond_a}
+        which implies $\sum_{i\in J} b_i = 1$, but this contradicts \eqref{eq:theorem_cond_a}
 
 	\paragraph{Case 3: $\bm{w} \neq \bm{0}, \beta_2\ne0$.}
 	Since $\bm{b} > \bm{0}$, \eqref{eq:btw} implies that $\bm{w}$ contains both positive 
