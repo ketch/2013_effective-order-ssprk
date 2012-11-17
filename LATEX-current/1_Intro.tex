@@ -17,7 +17,7 @@ strong stability preserving methods.
 
 Explicit SSP Runge--Kutta methods cannot have order greater
 than four \cite{Ruuth2002}.  However, a Runge--Kutta method may 
-achieve an effective order of accuracy higher than its classical order of accuracy
+achieve an effective order of accuracy higher than its classical order 
 by the use of special starting and stopping procedures.
 The conditions for a method to have effective order $q$ are 
 in general less restrictive than the conditions for a method
@@ -35,13 +35,13 @@ classical order of the methods.
 Three natural questions are:
 \begin{itemize}
     \item Can an SSP Runge--Kutta method have effective order of accuracy greater than four?
-    \item If we only require methods to have {\em effective} order $q$, it is possible to achieve larger
+    \item If we only require methods to have {\em effective} order $q$, is it possible to achieve larger
             SSP coefficient compared to methods with {\em classical} order $q$?
     \item SSP Runge--Kutta methods of order four require at least five stages.  Can SSP methods of 
           effective order four have fewer stages?
           
 \end{itemize}
-We show in Section \ref{sec:ExRK_barrier} that the answer to the first question is no.
+We show in Section \ref{sec:ExRK_barrier} that the answer to the first question is negative.
 We answer the second question by numerically solving the problem of optimizing
 the SSP coefficient over the class of methods with effective order $q$;
 see Section~\ref{sec:optimal_ESSPRK}.  
