@@ -202,11 +202,13 @@ We can now prove  Lemma~\ref{lem:effective_barrier}:
         which implies $\sum_{i\in I} b_i = 1$, but this contradicts \eqref{eq:theorem_cond_a}
 
 	\paragraph{Case 3: $\bm{w} \neq \bm{0}, \beta_2\ne0$.}
-	Since $\bm{b} > \bm{0}$, \eqref{eq:btw} implies that we can choose
-	$i, j \in \{2, \dots, s\}$ such that $w_i < 0 < w_j$.
-        By \eqref{eq:def_w} $v_i\ne 0$, $v_j\ne 0$, and $v_i\ne v_j$.  Furthermore,
-        $v_1=0$ for any explicit method.
-        Application of Lemma~\ref{Davids_lemma} reveals that all $v_k$ must
-        be equal except for one, which is a contradiction.
+	Since $\bm{b} > \bm{0}$, \eqref{eq:btw} implies that $\bm{w}$ contains both positive 
+	and negative elements. 
+	Furthermore, $v_1=0$ for any explicit method.
+	Then, we can choose $i, j \in \{2, \dots, s\}$ such that $w_i < 0 < w_j$.
+     By \eqref{eq:def_w} $v_i\ne 0$, $v_j\ne 0$, and $v_i\ne v_j$. 
+     Application of Lemma~\ref{Davids_lemma} reveals that all $v_k$ for 
+     $k \in\{1,2,\dots,s\}$ must be equal except for one, which is a contradiction
+     since $v_1 = 0$.
 
 \end{proof}
