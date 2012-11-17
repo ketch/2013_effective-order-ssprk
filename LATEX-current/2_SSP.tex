@@ -8,22 +8,24 @@ for time integration of systems of hyperbolic conservation laws
 with appropriate initial and boundary conditions.
 A spatial discretization gives the system of ODEs
 \begin{align}\label{eq:ode_system}
-    \bm{u}'(t) = \bm{F}(t,\bm{u}(t)),
+    \bm{u}'(t) = \bm{F}(\bm{u}(t)),
 \end{align}
 where $\bm{u}$ is a vector of continuous-in-time grid values approximating 
 the solution $\bm{U}$ at discrete grid points.
 Of course, \eqref{eq:ode_system} can arise in many ways and $\bm{F}$
 need not necessarily represent a spatial discretization.
+Particularly, $\bm{F}$ may be time-dependent, but we can always make a 
+transformation to an autonomous form.
 In any case, a time discretization then produces a sequence of
 solutions $\bm{u}^{n} \approx \bm{u}(t_n)$.
-In this work we study explicit Runge--Kutta time discretizations.
+This work studies explicit Runge--Kutta time discretizations.
 An explicit $s$-stage Runge--Kutta method takes the form
 \begin{align*}
-	\bm{u}^{n+1} &= \bm{u}^{n} + \Dt \sum_i^s b_i \bm{F}(t_n + c_i \Dt,\bm{Y}_i), 
+	\bm{u}^{n+1} &= \bm{u}^{n} + \Dt \sum_i^s b_i \bm{F}(\bm{Y}_i), 
 \end{align*}
 where
 \begin{align*}
-	\bm{Y}_i &= \bm{u}^{n} + \Dt \sum_j^{i-1} a_{ij} \bm{F}(t_n + c_j \Dt,\bm{Y}_j)
+	\bm{Y}_i &= \bm{u}^{n} + \Dt \sum_j^{i-1} a_{ij} \bm{F}(\bm{Y}_j)
 \end{align*}
 and $c_i = \sum_{j=1}^{i-1}a_{ij}$.
 The accuracy and stability of the method depend on the coefficients
@@ -38,7 +40,7 @@ that, for a suitable class of problems, the solution $\bm{u}$ in
 \eqref{eq:ode_system} computed with the forward Euler scheme is
 non-increasing (in time) in some norm, semi-norm, or convex functional; i.e.,
 \begin{align}\label{eq:forwardEuler}
-    \|\bm{u} + \Dt\bm{F}(t,\bm{u})\| \le \|\bm{u}\|, \quad \text{for all } \bm{u} \text{ and for } 0 \le \Dt \le \DtFE.
+    \|\bm{u} + \Dt\bm{F}(\bm{u})\| \le \|\bm{u}\|, \quad \text{for all } \bm{u} \text{ and for } 0 \le \Dt \le \DtFE.
 \end{align}
 Note that $\DtFE$ is a property of $\bm{F}$ (and is independent of $\bm{u}$).
 If this is the case, then an SSP method also generates a solution whose norm is
