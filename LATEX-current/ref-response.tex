@@ -58,6 +58,9 @@ is correctly used.
 ``Explicit SSPRK of effective order $q$", ``On the effective order of SSPRK methods",
 ``The effective order of SSPRK methods".}
 
+\david{I'm not totally happy with this, since ``Runge--Kutta methods with order of accuracy"
+sounds a bit strange (with nothing following), but I can't think of something better.}
+
 \remark{2}{
 The introduction should be redone. 
 In the introduction section I expect to have an introduction to the problem, the 
@@ -83,6 +86,10 @@ changed to the autonomous form.
 Also, after line 5 of Section 2, the following phrase is added:
 ``Particularly, $\bm{F}$ may be time-dependent, but we can always make a transformation 
 to an autonomous form."
+
+We agree that the symbol $t$ is overloaded.  However, we think that changing it would cause more
+confusion due to its strong traditional use in both senses.  We have kept the current notation since
+it is consistent with the literature and the meaning is generally clear from context.
 
 \remark{4}{
 Section 3: The authors try to summarize in few pages the nontrivial theory of effective
@@ -141,6 +148,10 @@ $t_1, t_4, t_8, t_{17}, \dots$ match the classical order conditions
 and these are precisely the order conditions for linear problems.
 This follows directly from inductive application of (3.1)
 on the tall trees.
+Therefore, methods of effective order $q$ have order at least $q$ for linear problems.
+
+\david{Here and in one other place, the referee seems to imply that this fact does not
+hold for $q>5$, but we claim that it does.  We should make sure of this.}
 
 \remark{6}{
 Section 4 is a bit messy, and I propose to change the order of the material in it. 
@@ -152,20 +163,21 @@ it is difficult to find it).}
 We rearrange the material in this section as suggested.
 We also state that the proof of Lemma 4.2 can be found at the end of the section.
 
+\david{The sentence before Lemma 4.2 makes no sense to me.  If Lemma 4.2 is the main 
+result, it should be a theorem and 4.3 should be a corollary.  Also, it seems silly to state
+Theorem 4.3 in that sentence, when it appears one inch lower on the page.
+}
+
 \remark{7}{
 It is not clear to me the relevance of Remark 4.4 in this paper.}
 
-We have added the following line before Remark 4.4:
+The remark now reads:
 
-``As a direct consequence of Lemma 4.2 we have the following 
-remark regarding circle contractive irreducible methods."
-
-We believe that this is a simple application of Lemma 4.2 and Theorem 4.1
-from [6] and requires no further proof. In our opinion this remark may be useful for
-relevant studies.
-
-\yiannis{The above may looks that we are arguing with the referee, so we should think 
-carefully how to convince him/her of the importance of this remark (if we decide to keep it). }
+        It is worth noting here an additional result that lies outside the scope of
+        this paper but follows directly from what we have proved.
+	Using Lemma~4.2 and [6, Theorem 4.1],
+  	we see that any irreducible explicit Runge--Kutta method with positive radius of
+  	circle contractivity has effective order at most four.
 
 \remark{8}{
 Proof of Lemma 4.2, Case 2: Just after defining the set $I$, the authors should stress that
@@ -216,13 +228,12 @@ form a super class of the SSPRK($s,q$) methods, we have \dots"
 
 \yiannis{Same comment as remark 7.}
 
+\david{Perhaps we don't want to emphasize the difference between our explanation and that of the referee.}
+
 \remark{11}{
 Legend in Table 5.1: Please, include the value of $\sspcoef^{\textnormal{lin}}_{6,4}$.}
 
-We include $\sspcoef^{\textnormal{lin}}_{6,4}=0.44$.
-However, as mentioned in the previous line in Table 5.1 caption, entries in bold correspond to 
-the optimal bound $\clin$ for linear problems. Thus, the ESSPRK($6,4,2$) method achieves the 
-optimal SSP coefficient.
+We now explicitly state that $\sspcoef^{\textnormal{lin}}_{6,4}=0.44$.
 \vspace{20pt}
 
 \noindent \textbf{\large Minor remarks:}
