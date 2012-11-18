@@ -174,31 +174,39 @@ In the particular case of four-stage methods we have the following:% result:
 % Inside italics, notation looked funny with upright numerals, so
 % I removed math mode (and added "\," for some extra space)
 
-Similarly to \cite[Section~6.2.2]{Gottlieb2011a} we are able to find a family of 
+
+Additionally, we find a family of
 methods with effective order four, for which $\ceff$ asymptotically approaches unity.
-The family consists of second order methods with $n^2+1$ stages and 
+The family consists of second order methods with $s = n^2+1$ stages and 
 SSP coefficient $n^2-n$.
-It is convenient to express the coefficients in the Shu-Osher form,
-because of the sparsity of the matrices $\alpha$ and $\beta$.
+It is convenient to express the coefficients in the Shu--Osher form
+\textbf{\red [todo: citation]},
+because of the sparsity of the $s+1 \times s$ matrices $\alpha$ and $\beta$.
 For $n \geq 3$ the non-zero elements are given by
 \begin{align*}
-	\alpha_{n^2-2n+4,(n-2)^2} &= \frac{n^2-1 \pm \sqrt{n^3-3n^2+n+1}}{4n^2-6n+2} \\
-	\alpha_{n^2+1,1} &= \frac{2}{(n^2+1)\bigl((n-1)^2+1\bigr)} \\
-	\alpha_{n^2+1,n^2-2n+2} &= 1 - \alpha_{n^2+1,1} - \frac{n(n-1)^2}{(2n-1)(n^2+1)(1-\alpha_{n^2-2n+4,(n-2)^2})} \\\\
+	\alpha_{n^2-2n+4,(n-2)^2} &= \frac{n^2-1 \pm \sqrt{n^3-3n^2+n+1}}{4n^2-6n+2},
+        \qquad\quad
+	\alpha_{n^2+1,1} = \frac{2}{(n^2+1)\bigl((n-1)^2+1\bigr)}, \\
+	\alpha_{n^2+1,n^2-2n+2} &= 1 - \alpha_{n^2+1,1} - \frac{n(n-1)^2}{(2n-1)(n^2+1)(1-\alpha_{n^2-2n+4,(n-2)^2})}, \\
 	\alpha_{i+1,i} &= \begin{cases} 
-								1 - \alpha_{i+1,(n-2)^2}, & i = n^2-2n+3 \\\\
-								1 - \alpha_{i+1,1} - \alpha_{i+1,n^2-2n+2}, & i = n^2+1 \\\\
+								1 - \alpha_{i+1,(n-2)^2}, & i = n^2-2n+3 \\
+								1 - \alpha_{i+1,1} - \alpha_{i+1,n^2-2n+2}, & i = n^2+1 \\
 								1,  &\mbox{otherwise,}
 							\end{cases}
 \end{align*}
 where $ 1 \leq i \leq n^2+1$ and 
 \begin{align*}
 	\beta_{i,j} & = \begin{cases} 
-								0,  &i = n^2+2, j = 1 \\\\
+								0,  &i = n^2+2, j = 1 \\
 								\dfrac{\alpha_{i,j}}{n^2-n}, & \mbox{otherwise,}
 						\end{cases}
 \end{align*}
 for $ 1 \leq i \leq n^2+2$ and $ 1 \leq j \leq n^2+1$.
+\textbf{\red TODO: what is the purpose of $\beta_{n^2 + 2, 1} := 0$?  Isn't the appropriate $\alpha$ also zero?}
+In \cite[Section~6.2.2]{Gottlieb2011a}, a similar pattern was found
+for SSPRK methods of fourth-order methods with $s=XX$ stages
+\textbf{\red TODO: i.e., some more info: I don't have the book in front of me.}
+\textbf{\red TODO: $\pm$ makes this look like \emph{two} families to me...}
 
 \subsection{Starting and stopping methods}\label{subsec:starting_stopping}
 Having constructed an ESSPRK($s,q,p$) scheme that can be used as the main 
