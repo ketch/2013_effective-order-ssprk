@@ -76,19 +76,25 @@ for $q=4,s=10$, since in those cases we have $\sspcoef_{s,q}=\clin$.
 
 \begin{table}
     \centering
-    \begin{tabular}{|c|c|ccccccccccc|}
+    \begin{tabular}{ccccccccccccc}
         \hline
-        \multicolumn{2}{|c|}{\backslashbox{\hspace{2pt}\vspace{1pt}$q\,,\,p$}{\vspace{-5.5pt}$s$}} & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ & $11$ \\
+        %\multicolumn{2}{|c|}{\backslashbox{\hspace{2pt}\vspace{1pt}$q\,,\,p$}{\vspace{-5.5pt}$s$}} & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ & $11$ \\
+        \multirow{2}{*}{$q$} &
+        \multirow{2}{*}{$p$}
+            & \multicolumn{11}{c}{stages $s$} \\
+            \cline{3-13}
+& & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ & $11$ \\
         \hline
-        $q = 3$ & $p = 2$ & $-$ & $-$ & $\bf 0.33$ & $\bf 0.50$ & $\bf 0.53$ & $\bf 0.59$ & $\bf 0.61$ & $\bf 0.64$ & $\bf 0.67$ & $\bf 0.68$ & $\bf 0.69$\\
-        \hline
-        $q = 4$ & $p = 2$ & $-$ & $-$ & $-$ & $0.22$ & $0.39$ & $\bf 0.44$ & $\bf 0.50$ & $\bf 0.54$ & $\bf 0.57$ & $\bf 0.60$ & $\bf 0.62$ \\
-        \hline
-        $q = 4$ & $p = 3$ & $-$ & $-$ & $-$ & $0.19$ & $0.37$ & $0.43$ & $\bf 0.50$ & $\bf 0.54$ & $\bf 0.57$ & $\bf 0.60$ & $\bf 0.62$ \\
-        \hline
+        $3$ & $2$ & $-$ & $-$ & $\bf 0.33$ & $\bf 0.50$ & $\bf 0.53$ & $\bf 0.59$ & $\bf 0.61$ & $\bf 0.64$ & $\bf 0.67$ & $\bf 0.68$ & $\bf 0.69$\\
+        %\hline
+        $4$ & $2$ & $-$ & $-$ & $-$ & $0.22$ & $0.39$ & $\bf 0.44$ & $\bf 0.50$ & $\bf 0.54$ & $\bf 0.57$ & $\bf 0.60$ & $\bf 0.62$ \\
+        %\hline
+        $4$ & $3$ & $-$ & $-$ & $-$ & $0.19$ & $0.37$ & $0.43$ & $\bf 0.50$ & $\bf 0.54$ & $\bf 0.57$ & $\bf 0.60$ & $\bf 0.62$ \\
+        %\hline
     \end{tabular}
-    \caption{Effective SSP coefficients $ \ceff = \sspcoef/s$ of best known explicit effective 
-    		order ESSPRK($s,q,p$) methods. 
+    \caption{Effective SSP coefficients $ \ceff = \sspcoef/s$ of the best known
+      %explicit effective order
+      ESSPRK($s,q,p$) methods.
     		Entries in bold achieve the bound $\clin$ given by the linear SSP coefficient and are therefore optimal. 
     		If no positive $\sspcoef$ can be found, we use ``$-$'' to indicate non-existence. 
     		The optimal fourth-order linear SSP coefficients are $\sspcoef^{\textnormal{lin}}_{4,4}=0.25$,
