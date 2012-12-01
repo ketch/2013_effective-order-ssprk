@@ -1,6 +1,6 @@
-\section{Runge--Kutta methods with effective order of accuracy}\label{sec:Algebraic_RK}
+\section{The effective order of Runge--Kutta methods}\label{sec:Algebraic_RK}
 
-The definition, construction, and application of methods with
+The definition, construction, and application of methods with an
 effective order of accuracy relies on the use of starting and stopping
 methods.
 %The successive application of these methods results in a scheme that attains
@@ -42,7 +42,7 @@ derivation of the effective order conditions.
 In Butcher's algebraic theory of Runge--Kutta methods
 \cite{Butcher2008_book}, methods are viewed as elements in an group
 $G$, consisting of real-valued functions on the set of rooted trees.
-\textbf{todo: next sentence needs work?}
+\textbf{\red todo: next sentence needs work?}
 The connection between Runge--Kutta methods and functions in $G$ is
 made via \emph{elementary weights} $\Phi(t)$, which are polynomial
 expressions in the coefficients of a method, with each expression
@@ -77,8 +77,8 @@ the multiplicative group operation $\alpha\beta$.\footnote{We write
         we use the reverse ordering ($\alpha\beta$)
 	to match the convention in \cite{Butcher2008_book}.}
 This is defined by partitioning the input tree and computing
-over the resulting forest \cite[\textbf{refer section}]{Butcher2008_book}.
-% TODO: I removed this re: referee's comment but could put it back
+over the resulting forest \cite[\S~383]{Butcher2008_book}.
+\textbf{\red note removed defn, ok?}
 %\begin{equation}\label{eq:Group_operation}
 %       (\alpha\beta)(t) = \sum_{w \lhd t} \biggl(\prod_{v \in t \setminus w} \alpha(v)\beta(w)\biggr),
 %\end{equation}
@@ -130,7 +130,7 @@ $\alpha$ must match the identity method up to order $p$.
 %methods of explicit methods need not be implicit.
 We can then define the effective order of accuracy of a method $M$
 with starting method $S$ and stopping method $S^{-1}$. % as $S^{-1}MS \equival{q} E$.
-\begin{definition}\cite[Section~389]{Butcher2008_book}\label{def:Effective_order}
+\begin{definition}\cite[\S~389]{Butcher2008_book}\label{def:Effective_order}
   Suppose $M$ is a Runge--Kutta method with corresponding $\alpha \in G$.
   Then the method $M$ is of effective order $q$ if there exists a method
   $S$ (with corresponding $\beta \in G$) such that

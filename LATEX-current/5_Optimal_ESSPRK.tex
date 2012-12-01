@@ -1,4 +1,4 @@
-\section{Optimal effective order explicit SSP Runge--Kutta schemes}\label{sec:optimal_ESSPRK}
+\section{Optimal explicit SSP Runge--Kutta schemes with maximal effective order}\label{sec:optimal_ESSPRK}
 In this section, we use the SSP theory and Butcher's theory of effective
 order (Sections \ref{sec:SSP} and \ref{sec:Algebraic_RK}) to find
 optimal explicit SSP Runge--Kutta schemes with prescribed effective
@@ -7,8 +7,8 @@ According to Theorem~\ref{the:no_SSP_5}, there are no explicit SSPRK methods of
 effective order five, and therefore we need only consider methods with
 effective order up to four.
 
-Recall from Section~\ref{sec:Algebraic_RK} that the methods of
-effective order involve a main method $M$ as well as starting and
+Recall from Section~\ref{sec:Algebraic_RK} that the methods with
+an effective order of accuracy involve a main method $M$ as well as starting and
 stopping methods $S$ and $S^{-1}$.
 In Section~\ref{subsec:starting_stopping} we introduce a novel approach
 to construction of starting and stopping methods in order to allow
@@ -21,7 +21,7 @@ method of order $q$.
 
 \subsection{The main method}\label{subsec:main_method}
 
-Our search for methods of effective order is carried out in two
+Our search is carried out in two
 steps, first searching for optimal main methods $M$ and then for
 possible corresponding methods $S$ and $S^{-1}$.
 For a given number of stages, effective order, and classical order,
@@ -65,8 +65,8 @@ The effective SSP coefficients for methods with up to eleven stages are shown in
 Table~\ref{tab:eff_SSP_coeff}.
 Recall from Section~\ref{sec:ExRK_barrier} that $q=5$ implies a zero
 SSP coefficient and from Section~\ref{sec:Algebraic_RK} that for
-$q=1,2$, the class of explicit Runge--Kutta methods of effective order
-is the simply the class of explicit Runge--Kutta methods.  % (of orders one and two)
+$q=1,2$, the class of explicit Runge--Kutta methods with effective order $q$
+is the simply the class of explicit Runge--Kutta methods with order $q$.  % (of orders one and two)
 Therefore we consider only methods of effective order $q=3$ and $q=4$.
 Exact optimal values of $\clin$ are known for many classes of methods; for
 example see \cite{Kraaijevanger1986,Ketcheson2008,ketcheson2009a}.
@@ -105,8 +105,8 @@ for $q=4,s=10$, since in those cases we have $\sspcoef_{s,q}=\clin$.
 \subsubsection{Effective order three methods}\label{subsubsec:3rd_ESSPRK}
 Since $\sspcoef_{s,q}=\clin$ for $q=3$, the optimal effective order three methods
 have SSP coefficients equal to the corresponding optimal classical order three methods.
-In the cases of three and four stages, we are able to determine exact coefficients of
-families of optimal effective order methods.
+In the cases of three and four stages, we are able to determine exact coefficients for
+families of optimal methods of effective order three.
 \begin{theorem}\label{thm:ESSPRK(3,3,2)}
 	A family of optimal three-stage, effective order three SSP Runge--Kutta 
 	methods of classical order two, with SSP coefficient $\sspcoef=1$, is given by
@@ -154,15 +154,14 @@ ESSPRK($s, 3, 2$) methods may form a family in which an optimal
 SSPRK($s$, $3$) method is a particular member. 
 
 \subsubsection{Effective order four methods}\label{subsubsec:4th_ESSPRK}
-For effective order four, the ESSPRK($s,4,p$) methods can have
-classical order $p=2$ or $3$.
+The ESSPRK($s,4,p$) methods can have classical order $p=2$ or $3$.
 %These methods have an SSP coefficient $\sspcoef$ which is at least as
 %large as SSPRK($s, 4$) (in fact, they are all larger except in the
 %case where $s =10$ where they are equal).\davidtodo{See my comment above.}
 In either case, for stages $7 \le s \le 11$ the methods found are
 optimal because the SSP coefficient attains the upper bound of
 $\clin$.
-For fewer stages, the ESSPRK methods still have SSP coefficients up to
+For fewer stages, the new methods still have SSP coefficients up to
 30\% larger than that of explicit SSPRK($s,q$) methods.
 % the SSP coefficient of ESSPRK($s,4,2$) and
 %ESSPRK($s,4,3$) are the same and both achieve the linear bound
@@ -233,8 +232,8 @@ $S^{-1}$ must step backwards and thus that method cannot be SSP
 (unless we consider the downwind operator
 \cite{Ruuth2004,Gottlieb/Ruuth:SSPfastdownwind,Ketcheson:2011:downwind}).
 
-In order to overcome this problem and achieve ``bona fide'' effective order 
-SSPRK methods we need to choose different starting and stopping methods. 
+In order to overcome this problem and achieve ``bona fide''
+SSPRK methods with an effective order of accuracy, we need to choose different starting and stopping methods. 
 We consider methods $R$ and $T$ which each take a positive step such that 
 $R \equival{q} MS$ and $T \equival{q} S^{-1}M$.
 That is, the order conditions of $R$ and $T$ must match those of
@@ -355,7 +354,7 @@ at most $s + 1$ and $s$ stages, respectively, appear to be required.
 %    \label{tab:RT_stages}
 %\end{table}
 Tables \ref{tab:ESSPRK(4,4,2)_scheme} and \ref{tab:ESSPRK(4,4,3)_scheme} 
-show the coefficients of the effective SSP schemes in the case the main 
+show the coefficients of the schemes where the main 
 method is ESSPRK($4,4,2$) and ESSPRK($4,4,3$), respectively. 
 
 It is important to note that in practice, if accurate values are needed at 
