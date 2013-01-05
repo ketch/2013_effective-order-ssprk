@@ -51,33 +51,34 @@ We first state the following well-known result.
 	must have positive weights $\bm{b} > \bm{0}$.
 \end{lemma}
 
-The main result of this section can be summarised in the next lemma, which allows 
-to prove the non-existence of explicit SSP Runge-Kutta of effective order more than four,
- as stated in Theorem~\ref{the:no_SSP_5}. 
-\begin{lemma}\label{lem:effective_barrier}
+The main result of this section can be summarised in the next theorem.%, which allows 
+%to prove the non-existence of explicit SSP Runge-Kutta of effective order more than four,
+%as stated in Theorem~\ref{the:no_SSP_5}. 
+\begin{theorem}\label{thm:effective_barrier}
 	Any explicit Runge--Kutta method with positive weights $\bm{b} > \bm{0}$ 
 	has effective order at most four.
-\end{lemma}
-The proof of Lemma \ref{lem:effective_barrier} is stated at the end of this section.
-
-\begin{theorem}\label{the:no_SSP_5}
+\end{theorem}
+The proof of Theorem~\ref{thm:effective_barrier} relies on a lemma and it is stated 
+at the end of this section.
+We concluse in the following result.
+\begin{corollary}\label{cor:no_SSP_5}
     Let $M$ denote an irreducible explicit Runge--Kutta method with $\sspcoef>0$.
     Then $M$ has effective order of at most four.
-\end{theorem}
+\end{corollary}
 \begin{proof}
 	The proof follows immediately from Lemma~\ref{lem:positive_b} and 
-	Lemma~\ref{lem:effective_barrier}.
+	Theorem~\ref{thm:effective_barrier}.
 \end{proof}
 
 \begin{remark}
-        It is worth noting here an additional result that lies outside the scope of
-        this paper but follows directly from what we have proved.
-	Using Lemma~\ref{lem:effective_barrier} and \cite[Theorem~4.1]{dahlquist2006}, 
+    It is worth noting here an additional result that lies outside the scope of
+    this paper but follows directly from what we have proved.
+	Using Theorem~\ref{thm:effective_barrier} and \cite[Theorem~4.1]{dahlquist2006}, 
   	we see that any irreducible explicit Runge--Kutta method with positive radius of
   	circle contractivity has effective order at most four.
 \end{remark}
 
-The proof of Lemma~\ref{lem:effective_barrier} makes use of the following 
+The proof of Theorem~\ref{thm:effective_barrier} makes use of the following 
 lemma.
 \begin{lemma}\label{Davids_lemma}
 	Let $\bm{b},\bm{v} \in \mathbb{R}^{n}$ be given such that
@@ -134,8 +135,8 @@ lemma.
 	for all $i, j \neq k$.
 \end{proof}
 
-We can now prove  Lemma~\ref{lem:effective_barrier}:
-\begin{proof}[Proof of Lemma~\ref{lem:effective_barrier}]
+We can now prove Theorem~\ref{thm:effective_barrier}:
+\begin{proof}[Proof of Theorem~\ref{thm:effective_barrier}]
 	Any method of effective order five must have classical order at least two
 	(see \cite{Butcher2008_book} or Table~\ref{tab:effective_OCs}).
     Thus it is sufficient to show that any method with all positive weights
