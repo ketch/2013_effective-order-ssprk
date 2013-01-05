@@ -3,7 +3,7 @@ In this section, we use the SSP theory and Butcher's theory of effective
 order (Sections \ref{sec:SSP} and \ref{sec:Algebraic_RK}) to find
 optimal explicit SSP Runge--Kutta schemes with prescribed effective
 order and classical order.
-According to Theorem~\ref{the:no_SSP_5}, there are no explicit SSPRK methods of
+According to Corollary~\ref{cor:no_SSP_5}, there are no explicit SSPRK methods of
 effective order five, and therefore we need only consider methods with
 effective order up to four.
 
@@ -179,39 +179,41 @@ In the particular case of four-stage methods we have the following:% result:
 % Inside italics, notation looked funny with upright numerals, so
 % I removed math mode (and added "\," for some extra space)
 
-
-Additionally, we find a family of
-methods with effective order four, for which $\ceff$ asymptotically approaches unity.
-The family consists of second order methods with $s = n^2+1$ stages and 
-SSP coefficient $n^2-n$.
-It is convenient to express the coefficients in the Shu--Osher form
-\textbf{\red [todo: citation]},
-because of the sparsity of the $s+1 \times s$ matrices $\alpha$ and $\beta$.
+Additionally, we find two families of methods with effective order four, 
+for which $\ceff$ asymptotically approaches unity.
+The families consist of second order methods with $s = n^2+1$ stages and 
+SSP coefficient $\sspcoef = n^2-n$.
+They are optimal since $\sspcoef = \sspcoef^{\textnormal{lin}}_{4,2}$ 
+\cite[Theorem~5.2(c)]{Kraaijevanger1986}.
+It is convenient to express the coefficients in the modified Shu--Osher form
+%\textbf{\red [todo: citation]},
+\cite{Gottlieb2011a}
+\begin{align*}
+	\bm{Y}_i &= v_i\bm{u}^n + \sum_{j=1}^{i-1}(\alpha_{ij}\bm{Y}_j + \Dt\beta_{ij}\bm{F}(\bm{Y}_j)), \; 1 \leq i \leq s+1 \\
+	\bm{u}^{n+1} &= \bm{Y}_{s+1},
+\end{align*}
+because of the sparsity of the matrices $\alpha, \beta \in \mathbb{R}^(s+1)\times s$
+and vector $\bm{v} \in \mathbb{R}^s$.
 For $n \geq 3$ the non-zero elements are given by
 \begin{align*}
-	\alpha_{n^2-2n+4,(n-2)^2} &= \frac{n^2-1 \pm \sqrt{n^3-3n^2+n+1}}{4n^2-6n+2},
-        \qquad\quad
-	\alpha_{n^2+1,1} = \frac{2}{(n^2+1)\bigl((n-1)^2+1\bigr)}, \\
-	\alpha_{n^2+1,n^2-2n+2} &= 1 - \alpha_{n^2+1,1} - \frac{n(n-1)^2}{(2n-1)(n^2+1)(1-\alpha_{n^2-2n+4,(n-2)^2})}, \\
+	v_1 &= 0, \quad\quad v_{n^2+2} = \frac{2}{(n^2+1)\bigl((n-1)^2+1\bigr)}, \\
+	\alpha_{n^2-2n+4,(n-2)^2} &= \frac{n^2-1 \pm \sqrt{n^3-3n^2+n+1}}{4n^2-6n+2}, \\ 		
+	\alpha_{n^2+2,n^2+1} &= \frac{n(n-1)^2}{(2n-1)(n^2+1)(1-\alpha_{n^2-2n+4,(n-2)^2})}, \\
+	\alpha_{n^2+2,n^2-2n+2} &= 1 - v_{n^2+2,1} - \alpha_{n^2+2,n^2+1}, \\
 	\alpha_{i+1,i} &= \begin{cases} 
 								1 - \alpha_{i+1,(n-2)^2}, & i = n^2-2n+3 \\
-								1 - \alpha_{i+1,1} - \alpha_{i+1,n^2-2n+2}, & i = n^2+1 \\
 								1,  &\mbox{otherwise,}
 							\end{cases}
 \end{align*}
-where $ 1 \leq i \leq n^2+1$ and 
+where $ 1 \leq i \leq n^2$ and 
 \begin{align*}
-	\beta_{i,j} & = \begin{cases} 
-								0,  &i = n^2+2, j = 1 \\
-								\dfrac{\alpha_{i,j}}{n^2-n}, & \mbox{otherwise,}
-						\end{cases}
+	\beta_{i,j} & = \frac{\alpha_{i,j}}{n^2-n}, \quad 1 \leq i \leq n^2+2, \;\; 1 \leq j \leq n^2+1.
 \end{align*}
-for $ 1 \leq i \leq n^2+2$ and $ 1 \leq j \leq n^2+1$.
-\textbf{\red TODO: what is the purpose of $\beta_{n^2 + 2, 1} := 0$?  Isn't the appropriate $\alpha$ also zero?}
-In \cite[Section~6.2.2]{Gottlieb2011a}, a similar pattern was found
-for SSPRK methods of fourth-order methods with $s=XX$ stages
-\textbf{\red TODO: i.e., some more info: I don't have the book in front of me.}
-\textbf{\red TODO: $\pm$ makes this look like \emph{two} families to me...}
+%\textbf{\red TODO: what is the purpose of $\beta_{n^2 + 2, 1} := 0$?  Isn't the appropriate $\alpha$ also zero?}
+In \cite[\S~6.2.2]{Gottlieb2011a}, a similar pattern was found
+for SSPRK($s,3$) methods.
+%\textbf{\red TODO: i.e., some more info: I don't have the book in front of me.}
+%\textbf{\red TODO: $\pm$ makes this look like \emph{two} families to me...}
 
 \subsection{Starting and stopping methods}\label{subsec:starting_stopping}
 Having constructed an ESSPRK($s,q,p$) scheme that can be used as the main 
@@ -240,7 +242,7 @@ That is, the order conditions of $R$ and $T$ must match those of
 $MS$ and $S^{-1}M$, respectively, up to order $q$.
 This gives a new $TM^{n-2}R$ scheme which is equivalent up to order $q$ 
 to the $S^{-1}M^nS$ scheme and attains classical order $q$.
-The starting and stopping procedures now each take a positive step forward 
+Each starting and stopping procedures now take a positive step forward 
 in time.
 
 To derive order conditions for the $R$ and $T$ methods, consider their
@@ -257,7 +259,7 @@ Then the equivalence is expressed as
 %\end{equation}
 Rewriting the second condition in \eqref{eq:R_T_OCs} as 
 $(\tau\beta)(t) = \alpha(t)$, the order conditions for the starting and stopping 
-methods can be determined and are given in Table~\ref{tab:rho_tau_OCs}.
+methods can be determined by \eqref{eq:Group_operation} and are given in Table~\ref{tab:rho_tau_OCs}.
 These conditions could be constructed more generally but here we have
 assumed $\beta_1=0$ (see Section~\ref{subsubsec:Main_starting_conditions}); this
 will be sufficient for constructing SSP starting and stopping
@@ -283,7 +285,7 @@ conditions.
   	\caption{Order conditions on $\rho$ and $\tau$ up to effective order four for starting
   		and stopping methods $R$ and $T$, respectively.
   		The upper block represents the effective order three conditions.
-         As in Tables~\ref{tab:effective_OCs_on_alpha} and \ref{tab:effective_OCs} we assume 
+         As in Table~\ref{tab:effective_OCs_on_alpha} and Table~\ref{tab:effective_OCs} we assume 
          $\beta_1 = 0$.}
   	\label{tab:rho_tau_OCs}
 \end{table}
