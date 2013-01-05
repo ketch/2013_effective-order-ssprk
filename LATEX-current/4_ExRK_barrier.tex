@@ -23,7 +23,7 @@ involved.
 %These results are established as follows.
 %\begin{theorem}\label{cor:no_SSP_5}
 %    Let $M$ denote an explicit Runge--Kutta method with $\sspcoef>0$.
-%    Then $M$ has effective order of at most four.
+%    Then $M$ has effective order at most four.
 %\end{theorem}
 %
 %In this section we prove an even stronger result,
@@ -45,25 +45,23 @@ involved.
 %  	we may also conclude that any explicit Runge--Kutta method with positive radius of
 %  	circle contractivity has effective order at most four.
 %\end{remark}
-We first state the following well-known result.
+We begin by recalling a well-known result.
 \begin{lemma}\label{lem:positive_b}(see \cite[Theorem~4.2]{Kraaijevanger1991},\cite[Lemma 4.2]{Ruuth2002})
 	Any irreducible Runge--Kutta method with positive SSP coefficient $\sspcoef>0$
 	must have positive weights $\bm{b} > \bm{0}$.
 \end{lemma}
-
-The main result of this section can be summarised in the next theorem.%, which allows 
+The main result of this section is
 %to prove the non-existence of explicit SSP Runge-Kutta of effective order more than four,
 %as stated in Theorem~\ref{the:no_SSP_5}. 
 \begin{theorem}\label{thm:effective_barrier}
 	Any explicit Runge--Kutta method with positive weights $\bm{b} > \bm{0}$ 
 	has effective order at most four.
 \end{theorem}
-The proof of Theorem~\ref{thm:effective_barrier} relies on a lemma and it is stated 
-at the end of this section.
-We concluse in the following result.
+The proof of Theorem~\ref{thm:effective_barrier} is deferred to
+the end of this section.
 \begin{corollary}\label{cor:no_SSP_5}
     Let $M$ denote an irreducible explicit Runge--Kutta method with $\sspcoef>0$.
-    Then $M$ has effective order of at most four.
+    Then $M$ has effective order at most four.
 \end{corollary}
 \begin{proof}
 	The proof follows immediately from Lemma~\ref{lem:positive_b} and 
@@ -71,11 +69,11 @@ We concluse in the following result.
 \end{proof}
 
 \begin{remark}
-    It is worth noting here an additional result that lies outside the scope of
-    this paper but follows directly from what we have proved.
-	Using Theorem~\ref{thm:effective_barrier} and \cite[Theorem~4.1]{dahlquist2006}, 
-  	we see that any irreducible explicit Runge--Kutta method with positive radius of
-  	circle contractivity has effective order at most four.
+    It is worth noting here an additional result that 
+    follows directly from what we have proved.
+    Using Theorem~\ref{thm:effective_barrier} and \cite[Theorem~4.1]{dahlquist2006}, 
+    it follows that any irreducible explicit Runge--Kutta method with positive radius of
+    circle contractivity has effective order at most four.
 \end{remark}
 
 The proof of Theorem~\ref{thm:effective_barrier} makes use of the following 
