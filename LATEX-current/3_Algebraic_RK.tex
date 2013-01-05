@@ -36,13 +36,39 @@ others.
 We follow the book \cite{Butcher2008_book} in our description and
 derivation of the effective order conditions.
 
+\begin{table}
+	\centering
+	\begin{smalltrees}
+		\begin{tabular}{ccccccccc}
+    		\cline{1-4}\cline{6-9}
+    		$i$ & tree $t_i$ & elementary weight & $\gamma(t_i)$ & & $i$ & tree $t_i$ & elementary weight & $\gamma(t_i)$ \\
+    		\cline{1-4}\cline{6-9} \\[-10pt]
+    		0 & $\emptyset$ \hspace{15pt}  & 1 & 0 & & 9 & \hspace{15pt} \tree{9} & $\bm{b}^T\bm{c}^4$ & 5 \\
+    		1 & \hspace{15pt} \tree{1} & $\bm{b}^T\bm{e}$ & 1 & & 10 & \tree{10} \hspace{15pt} & $\bm{b}^TC^2A\bm{c}$ & 10 \\
+    		2 & \tree{2} \hspace{15pt}  & $\bm{b}^T\bm{c}$ & 2 & & 11 & \hspace{15pt} \tree{11} & $\bm{b}^TCA\bm{c}^2$ & 15 \\
+    		3 & \hspace{15pt} \tree{3} & $\bm{b}^T\bm{c}^2$ & 3 & & 12 & \tree{12} \hspace{15pt} & $\bm{b}^TCA^2\bm{c}$ & 30 \\
+    		4 & \tree{4} \hspace{15pt}  & $\bm{b}^TA\bm{c}$ & 6 & & 13 & \hspace{15pt} \tree{13} & $\bm{b}^T(A\bm{c})^2$ & 20 \\
+    		5 & \hspace{15pt} \tree{5} & $\bm{b}^T\bm{c}^3$ & 4 & & 14 & \tree{14} \hspace{15pt} & $\bm{b}^TA\bm{c}^3$ & 20 \\
+    		6 & \tree{6} \hspace{15pt}  & $\bm{b}^TCA\bm{c}$ & 8 & & 15 & \hspace{15pt} \tree{15} & $\bm{b}^TACA\bm{c}$ & 40 \\
+    		7 & \hspace{15pt} \tree{7} & $\bm{b}^TA\bm{c}^2$ & 12 & & 16 & \tree{16} \hspace{15pt} & $\bm{b}^TA^2\bm{c}^2$ & 60 \\
+    		8 & \tree{8} \hspace{15pt}  & $\bm{b}^TA^2\bm{c}$ & 24 & & 17 & \hspace{15pt} \tree{17} & $\bm{b}^TA^3\bm{c}$ & 120 \\
+  		\end{tabular}
+  \end{smalltrees}
+  \caption{Elementary weights of trees up to order five for a 
+  		Runge--Kutta method with Butcher tableau $(A,\bm{b},\bm{c})$. 
+  		Here $C$ is a diagonal matrix with components 
+  		$c_{i} = \sum_{j=1}^{i-1} a_{ij}$ and exponents of vectors 
+  		represent component exponentiation.
+  		By convention $\alpha_0 = \alpha(t_{0}) = 1$, where $t_{0}$ 
+  		denotes the empty tree.}
+  \label{tab:elementary_weights}
+\end{table}
 
 \subsection{The algebraic representation of Runge--Kutta methods}\label{subsec:Algebraic_representation}
 
 In Butcher's algebraic theory of Runge--Kutta methods
 \cite{Butcher2008_book}, methods are viewed as elements in an group
 $G$, consisting of real-valued functions on the set of rooted trees.
-\textbf{\red todo: next sentence needs work?}
 A Runge--Kutta method corresponds to the map that takes each rooted tree $t$
 to the corresponding elementary weight $\Phi(t)$ of that Runge--Kutta method.
 %Each elementary weight is an expression $\Phi(t)$ on a rooted tree
@@ -57,11 +83,11 @@ elementary weights as $\alpha_{i} = \alpha(t_{i})$ for tree $t_{i}$.
 A special element of the group $E \in G$ corresponds to the
 (hypothetical) method which takes one exact step of the
 solution.
-The values of $E(t)$ are denoted $1/\gamma(t)$ and these are included in
-Table~\ref{tab:elementary_weights}; (classical) order conditions
-follow from comparing the elementary weights of a method with these
-values.
-
+The values of $E(t)$ are denoted $1/\gamma(t)$, where $\gamma(t)$ denotes 
+the density of tree $t$ \cite{Butcher2008_book} and these are included in
+Table~\ref{tab:elementary_weights}.
+Classical order conditions follow from comparing the elementary weights 
+of a method with these values.
 
 Let $\alpha, \beta \in G$ correspond to Runge--Kutta methods $M_1$ and $M_2$
 respectively.
@@ -76,44 +102,14 @@ the multiplicative group operation $\alpha\beta$.\footnote{We write
 	to match the convention in \cite{Butcher2008_book}.}
 This is defined by partitioning the input tree and computing
 over the resulting forest \cite[\S~383]{Butcher2008_book}.
-\textbf{\red note removed defn, ok?}
-%\begin{equation}\label{eq:Group_operation}
-%       (\alpha\beta)(t) = \sum_{w \lhd t} \biggl(\prod_{v \in t \setminus w} \alpha(v)\beta(w)\biggr),
-%\end{equation}
-%where $w \lhd t$ indicates a subtree of $t$ which includes the
-%root of $t$ and $w \setminus t$ indicates the forest induced
-%by removing $w$ from $t$ \cite{Butcher2008_book}.
-%Multiplicity in choosing $w$ must also be accounted for.
-
-
-
-\begin{table}
-	\centering
-	\begin{smalltrees}
-		\begin{tabular}{ccccccc}
-    		\cline{1-3}\cline{5-7}
-    		$i$ & tree $t_i$ & elementary weight & & $i$ & tree $t_i$ & elementary weight \\
-    		\cline{1-3}\cline{5-7} \\[-10pt]
-    		0 & $\emptyset$ \hspace{15pt}  & 1 & & 9 & \hspace{15pt} \tree{9} & $\bm{b}^T\bm{c}^4$\\
-    		1 & \hspace{15pt}  \tree{1} &$\bm{b}^T\bm{e}$ & & 10 & \tree{10} \hspace{15pt} & $\bm{b}^TC^2A\bm{c}$ \\
-    		2 & \tree{2} \hspace{15pt}  &$\bm{b}^T\bm{c}$ & & 11 & \hspace{15pt} \tree{11} & $\bm{b}^TCA\bm{c}^2$ \\
-    		3 & \hspace{15pt}  \tree{3} & $\bm{b}^T\bm{c}^2$ & & 12 & \tree{12} \hspace{15pt} & $\bm{b}^TCA^2\bm{c}$ \\
-    		4 & \tree{4} \hspace{15pt}  & $\bm{b}^TA\bm{c}$ & & 13 & \hspace{15pt} \tree{13} & $\bm{b}^T(A\bm{c})^2$ \\
-    		5 & \hspace{15pt}  \tree{5} & $\bm{b}^T\bm{c}^3$ & & 14 & \tree{14} \hspace{15pt} & $\bm{b}^TA\bm{c}^3$ \\
-    		6 & \tree{6} \hspace{15pt}  & $\bm{b}^TCA\bm{c}$ & & 15 & \hspace{15pt} \tree{15} & $\bm{b}^TACA\bm{c}$ \\
-    		7 & \hspace{15pt}  \tree{7} & $\bm{b}^TA\bm{c}^2$ & & 16 & \tree{16} \hspace{15pt} & $\bm{b}^TA^2\bm{c}^2$ \\
-    		8 & \tree{8} \hspace{15pt}  & $\bm{b}^TA^2\bm{c}$ & &  17 & \hspace{15pt} \tree{17} & $\bm{b}^TA^3\bm{c}$ \\
-  		\end{tabular}
-  \end{smalltrees}
-  \caption{Elementary weights of trees up to order five for a 
-  		Runge--Kutta method with Butcher tableau $(A,\bm{b},\bm{c})$. 
-  		Here $C$ is a diagonal matrix with components 
-  		$c_{i} = \sum_{j=1}^{i-1} a_{ij}$ and exponents of vectors 
-  		represent component exponentiation.
-  		\textbf{TODO: add $\gamma(t)$ values.}}
-  \label{tab:elementary_weights}
-\end{table}
-
+It is expressed by
+\begin{equation}\label{eq:Group_operation}
+       (\alpha\beta)(t) = \sum_{w \lhd t} \biggl(\prod_{v \in t \setminus w} \alpha(v)\beta(w)\biggr),
+\end{equation}
+where $w \lhd t$ indicates a subtree of $t$ which includes the
+root of $t$ and $w \setminus t$ indicates the forest induced
+by removing $w$ from $t$ \cite{Butcher2008_book}.
+Multiplicity in choosing $w$ must also be accounted for.
 
 Two Runge--Kutta methods $M_1$ and $M_2$, are equivalent up to order
 $p$ if their corresponding elements in $G$, $\alpha$ and $\beta$, satisfy
@@ -121,11 +117,11 @@ $\alpha(t) = \beta(t)$, for every tree $t$ with $r(t) \leq p$,
 where $r(t)$ denotes the order of the tree (number of vertices).
 We denote this equivalence relation by
 $$M_1 \equival{p} M_2,$$
-(although this notation is not used in \cite{Butcher2008_book}.)
+%(although this notation is not used in \cite{Butcher2008_book}.)
 In this sense, methods have inverses: the product of $\alpha^{-1}$ and
 $\alpha$ must match the identity method up to order $p$.
-%Note that inverse methods up to order $p$ are not unique and inverse 
-%methods of explicit methods need not be implicit.
+Note that inverse methods up to order $p$ are not unique and inverse 
+methods of explicit methods need not be implicit.
 We can then define the effective order of accuracy of a method $M$
 with starting method $S$ and stopping method $S^{-1}$. % as $S^{-1}MS \equival{q} E$.
 \begin{definition}\cite[\S~389]{Butcher2008_book}\label{def:Effective_order}
@@ -138,28 +134,6 @@ with starting method $S$ and stopping method $S^{-1}$. % as $S^{-1}MS \equival{q
         where $\beta^{-1}$ is an inverse of $\beta$ up to order $q$.
         Recall that $E$ represents one exact step of the solution.
 \end{definition}
-
-\subsection{Effective order conditions}\label{sec:effOrderCond}
-For the main method $M$ to have effective order $q$ its coefficients,
-and those of the starting and stopping methods, must satisfy a set of
-algebraic conditions.
-These \emph{effective order conditions} can be found
-by rewriting \eqref{eq:Effective_order_1} as
-$(\beta\alpha)(t) = (E\beta)(t)$  %, for all trees with $r(t) \leq q$
-and applying the product operation \cite{Butcher2008_book}.
-For trees up to order five these are tabulated in Table~\ref{tab:effective_OCs_on_alpha} (and also in \cite[Sec~389]{Butcher2008_book}).
-In general, the effective order conditions allow more degrees of
-freedom on methods than the classical order conditions.
-Note that these conditions match the classical order conditions up to
-second order.
-\begin{remark}\label{rem:talltrees}
-	The effective order conditions of the main method for the ``tall" trees 
-	$t_1, t_2, t_4, t_8, t_{17}, \dots$ match the classical order conditions
-	and these are precisely the order conditions for linear problems.
-	This follows from inductive application of the product operation \cite{Butcher2008_book}
-	on the tall trees.  Therefore, methods of effective order $q$ have order at least
-        $q$ for linear problems.
-\end{remark}
 
 \begin{table}
   \setlength{\extrarowheight}{3pt}
@@ -198,7 +172,7 @@ second order.
     \caption{Effective order five conditions on $\alpha$ (main
       method $M$) in terms of order conditions on $\beta$
       (starting method $S$).
-      See also \cite[Sec~389]{Butcher2008_book}.
+      See also \cite[\S~389]{Butcher2008_book}.
       Recall that $\alpha_i$ and $\beta_i$
       are the elementary weights associated with the index $i$ in
       Table~\ref{tab:elementary_weights}.
@@ -206,6 +180,31 @@ second order.
       Section~\ref{subsubsec:Main_starting_conditions}).}
     \label{tab:effective_OCs_on_alpha}
 \end{table}
+
+\subsection{Effective order conditions}\label{sec:effOrderCond}
+For the main method $M$ to have effective order $q$ its coefficients,
+and those of the starting and stopping methods, must satisfy a set of
+algebraic conditions.
+These \emph{effective order conditions} can be found
+by rewriting \eqref{eq:Effective_order_1} as
+$(\beta\alpha)(t) = (E\beta)(t)$  %, for all trees with $r(t) \leq q$
+and applying the product operation \eqref{eq:Group_operation}.
+For trees up to order five these are tabulated in Table~\ref{tab:effective_OCs_on_alpha} (and also in \cite[\S~389]{Butcher2008_book}).
+In general, the effective order conditions allow more degrees of
+freedom on methods than the classical order conditions.
+Note that these conditions match the classical order conditions up to
+second order.
+\begin{remark}\label{rem:talltrees}
+	The effective order conditions of the main method for the ``tall" trees 
+	$t_1, t_2, t_4, t_8, t_{17}, \dots$ match the classical order conditions
+	and these are precisely the order conditions for linear problems.
+	This follows from inductive application of the product operation \cite{Butcher2008_book}
+	on the tall trees. 
+	Therefore, methods of effective order $q$ have classical order at least $q$ 
+	for linear problems.
+\end{remark}
+
+
 %Finally, we use the abbreviation RK($s$,$q$,$p$) for an $s$-stage Runge-Kutta method of effective order $q$ and classical order $p$.
 
 \subsubsection{Order conditions of the main and starting methods}\label{subsubsec:Main_starting_conditions}
@@ -237,20 +236,6 @@ in setting more of the $\beta_i$ to zero.
 %to zero.
 %Essentially, for a given effective order $q$ if all $\beta_i$ are zero, then
 %the main method has classical order $q$.
-
-Tables~\ref{tab:effective_OCs_on_alpha} and~\ref{tab:effective_OCs}
-both assume that $\beta_1=0$ (i.e., the starting and stopping methods
-perturb the solution but do not advance the solution in time).  This
-assumption is without loss of generality following \cite[Lemma
-389A]{Butcher2008_book}, the proof of which shows that we can always find 
-starting procedures with $\beta_1 = 0$ for which the main method has 
-effective order $q$, whenever this holds for a starting method with 
-$\beta_1 \neq 0$.
-%the proof of which shows that if a method $M$
-%has effective order $p$ with particular starting and stopping methods
-%(for which $\beta_1 \neq 0$), then $M$ is also effective order $p$
-%with another equivalent pair of starting and stopping methods which do have
-%$\beta_1=0$.
 
 \begin{table}
   \centering
@@ -295,5 +280,21 @@ $\beta_1 \neq 0$.
     \caption{Effective order $q$, classical order $p$ conditions on $ \alpha $ and $ \beta $ for the main and starting methods, $M$ and $S$ respectively.}
     \label{tab:effective_OCs}
 \end{table}
+
+Tables~\ref{tab:effective_OCs_on_alpha} and~\ref{tab:effective_OCs}
+both assume that $\beta_1=0$ (i.e., the starting and stopping methods
+perturb the solution but do not advance the solution in time).  This
+assumption is without loss of generality following \cite[Lemma
+389A]{Butcher2008_book}, the proof of which shows that we can always find 
+starting procedures with $\beta_1 = 0$ for which the main method has 
+effective order $q$, whenever this holds for a starting method with 
+$\beta_1 \neq 0$.
+%the proof of which shows that if a method $M$
+%has effective order $p$ with particular starting and stopping methods
+%(for which $\beta_1 \neq 0$), then $M$ is also effective order $p$
+%with another equivalent pair of starting and stopping methods which do have
+%$\beta_1=0$.
+
+
 
 
