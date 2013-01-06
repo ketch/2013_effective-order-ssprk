@@ -1,0 +1,211 @@
+\section{Explicit SSP Runge--Kutta methods have effective order at most four}\label{sec:ExRK_barrier}
+The classical order of any explicit SSP Runge--Kutta method cannot be greater
+than four \cite{Ruuth2002}.
+It turns out that the effective order of any explicit SSP Runge--Kutta method 
+also cannot be greater than four, although the proof of this result is more
+involved.
+%As Table~\ref{tab:Effective_oc} shows, if we consider an $s$-stage
+%RK($s$,$5$,$2$) method, then the coefficients of the main method
+%depend on $\beta_2$.
+%In particular, the main method must satisfy
+%\begin{equation}\label{eq:2nd_order_con}
+%    \frac{1}{2}\alpha_3 - \frac{1}{6} = \beta_2 \; \text{ and } \; \frac{1}{4}\alpha_9 - \alpha_{10} + \alpha_{13} = (\beta_2)^2.
+%\end{equation}
+%For classical order $p \geq 3$ an $s$-stage RK($s$,$5$,$p$) method must satisfy
+%\begin{equation}\label{eq:higher_order_con}
+%    \frac{1}{4}\alpha_9- \alpha_{10} + \alpha_{13} = 0,
+%\end{equation}
+%since $\beta_2 = 0$.
+%If we require positive weights then the equations \eqref{eq:2nd_order_con},
+%$\alpha_4 = \frac{1}{6}$ and $\alpha_1 = 1$ can not be solved simultaneously.
+%Also the equation \eqref{eq:higher_order_con} is not compatible with the main method having stage order one.
+%This immediately suggests the non existence of fifth-effective order explicit Runge-Kutta methods with positive weights.
+%These results are established as follows.
+%\begin{theorem}\label{cor:no_SSP_5}
+%    Let $M$ denote an explicit Runge--Kutta method with $\sspcoef>0$.
+%    Then $M$ has effective order at most four.
+%\end{theorem}
+%
+%In this section we prove an even stronger result,
+%which is stated in the following lemma.
+%\begin{lemma}\label{thm:effective_barrier}
+%	Any explicit Runge--Kutta method with positive weights $\bm{b} > \bm{0}$
+%        has effective order at most four.
+%\end{lemma}
+%
+%Theorem \ref{cor:no_SSP_5} follows immediately from Lemma \ref{thm:effective_barrier}
+%and the following well-known result.
+%\begin{lemma}\label{lem:positive_b}(see \cite[Theorem~4.2]{Kraaijevanger1991},\cite[Lemma 4.2]{Ruuth2002})
+%	Any irreducible Runge--Kutta method with positive SSP coefficient $\sspcoef>0$
+%	must have positive weights $\bm{b} > \bm{0}$.
+%\end{lemma}
+%
+%\begin{remark}
+%	Using Lemma~\ref{thm:effective_barrier} and \cite[Theorem~4.1]{dahlquist2006}, 
+%  	we may also conclude that any explicit Runge--Kutta method with positive radius of
+%  	circle contractivity has effective order at most four.
+%\end{remark}
+We begin by recalling a well-known result.
+\begin{lemma}\label{lem:positive_b}(see \cite[Theorem~4.2]{Kraaijevanger1991},\cite[Lemma 4.2]{Ruuth2002})
+	Any irreducible Runge--Kutta method with positive SSP coefficient $\sspcoef>0$
+	must have positive weights $\bm{b} > \bm{0}$.
+\end{lemma}
+The main result of this section is
+%to prove the non-existence of explicit SSP Runge-Kutta of effective order more than four,
+%as stated in Theorem~\ref{the:no_SSP_5}. 
+\begin{theorem}\label{thm:effective_barrier}
+	Any explicit Runge--Kutta method with positive weights $\bm{b} > \bm{0}$ 
+	has effective order at most four.
+\end{theorem}
+The proof of Theorem~\ref{thm:effective_barrier} is deferred to
+the end of this section.
+\begin{corollary}\label{cor:no_SSP_5}
+    Let $M$ denote an irreducible explicit Runge--Kutta method with $\sspcoef>0$.
+    Then $M$ has effective order at most four.
+\end{corollary}
+\begin{proof}
+	The proof follows immediately from Lemma~\ref{lem:positive_b} and 
+	Theorem~\ref{thm:effective_barrier}.
+\end{proof}
+
+\begin{remark}
+    It is worth noting here an additional result that 
+    follows directly from what we have proved.
+    Using Theorem~\ref{thm:effective_barrier} and \cite[Theorem~4.1]{dahlquist2006}, 
+    it follows that any irreducible explicit Runge--Kutta method with positive radius of
+    circle contractivity has effective order at most four.
+\end{remark}
+
+The proof of Theorem~\ref{thm:effective_barrier} makes use of the following 
+lemma.
+\begin{lemma}\label{Davids_lemma}
+	Let $\bm{b},\bm{v} \in \mathbb{R}^{n}$ be given such that
+    \begin{subequations}\label{eq:DavidsLemma}
+    		\begin{align}
+    			b_i & > 0 \mbox{ for all } i, \label{eq:DavidsLemma_a} \\
+    			\sum_{i=1}^n b_i & = 1, \label{eq:DavidsLemma_b} \\
+    			\sum_{i=1}^n b_i v_i^2 & = \biggl(\sum_{i=1}^n b_i v_i\biggr)^{\!\! 2}. \label{eq:DavidsLemma_c}
+    		\end{align}
+    	\end{subequations}
+    	Then all $v_i$ are equal but at most one; in other words, there exists 
+    	$\mu \in \mathbb{R}$ and an integer $k$ such that $v_i = \mu$ for 
+    	all $i \ne k$.
+\end{lemma}
+
+\begin{proof}
+    First observe that in the case that $v_i=0$ for all $i$, the stated
+    result holds.  Otherwise, let $k$ be an integer between $1$ and $n$
+    such that $v_k\ne 0$.
+    Then by collecting terms in powers of $v_k$, \eqref{eq:DavidsLemma_c} 
+    can be written as
+    \begin{equation*}
+    		b_k(1-b_k)v_k^2 - 2b_k v_k\sum_{i \neq k}b_i v_i + \sum_{i \neq k}b_i v_i^2 - \biggl(\sum_{i \neq k}b_i v_i\biggr)^{\!\! 2} = 0.  		
+	\end{equation*}
+	This is a quadratic equation in $v_k$ whose roots are real if and only if
+	\begin{equation*}
+    		4b_k^2\biggl(\sum_{i \neq k}b_i v_i\biggr)^{\!\! 2} - 4b_k(1-b_k)\Biggl(\sum_{i \neq k}b_i v_i^2 - \biggl(\sum_{i \neq k}b_i v_i\biggr)^{\!\! 2}\Biggr) \geq 0.
+	\end{equation*}
+	Expanding and canceling terms yields
+	\begin{equation*}
+    (1-b_k)\sum_{i \neq k}b_i v_i^2 - \biggl(\sum_{i \neq k}b_i v_i\biggr)^{\!\! 2} \leq 0.
+	\end{equation*}
+	By \eqref{eq:DavidsLemma_b}, $1-b_k = \sum_{j \ne k}b_j$, so we have
+	\begin{equation*}
+    		\sum_{j \neq k}b_j\sum_{i \neq k}b_i v_i^2 - \sum_{j \neq k}b_j v_j\sum_{i \neq k}b_i v_i \leq 0.
+	\end{equation*}
+	Noting that the terms corresponding to $i = j$ in the two double sums cancel and this gives
+	%\begin{equation*}
+		%    \sum_{j \neq k}b_{j}\sum_{i \neq k,j}b_{i}v_{i}^{2} - \sum_{j \neq k}b_{j}v_{j}\sum_{i \neq j,k}b_{i}v_{i} \leq 0,
+	%\end{equation*}
+	%or
+	\begin{equation*}
+    		\sum_{j \neq k}b_j\sum_{i \neq k,j}b_i v_i(v_i - v_j) \leq 0.
+	\end{equation*}
+	Adding the left hand side to itself, but with $i, j$ reversed, yields
+	\begin{equation*}
+    		\sum_{j \neq k}b_j\sum_{i \neq k, j}b_i v_i(v_i - v_j) - \sum_{i \neq k}b_i\sum_{j \neq k, i}b_j v_j(v_i - v_j) \leq 0.
+	\end{equation*}
+	This simplifies to
+	\begin{equation*}
+    		\sum_{j \neq k}\sum_{i \neq k, j}b_j b_i(v_i - v_j)^2 \leq 0.
+	\end{equation*}
+	Together with \eqref{eq:DavidsLemma_a}, this implies that $v_i = v_j$ 
+	for all $i, j \neq k$.
+\end{proof}
+
+We can now prove Theorem~\ref{thm:effective_barrier}:
+\begin{proof}[Proof of Theorem~\ref{thm:effective_barrier}]
+	Any method of effective order five must have classical order at least two
+	(see \cite{Butcher2008_book} or Table~\ref{tab:effective_OCs}).
+    Thus it is sufficient to show that any method with all positive weights
+    cannot satisfy the conditions of effective order five and classical order two.
+
+    Let $(A,\bm{b},\bm{c})$ denote the coefficients of an explicit Runge--Kutta method with
+    effective order at least five, classical order at least two, and positive 
+    weights $\bm{b} > \bm{0}$.
+    The effective order five and classical order two conditions
+    (see Table~\ref{tab:effective_OCs}) include the following:
+    \begin{subequations}\label{eq:theorem_cond}
+    		\begin{align}
+    			\bm{b}^T\bm{e} & = 1, \label{eq:theorem_cond_a} \\
+             	\bm{b}^TA\bm{c} &= \frac{1}{6}, \label{eq:theorem_cond_b} \\
+            	\frac{1}{2}\bm{b}^T\bm{c}^2 - \frac{1}{6} &= \beta_2, \label{eq:theorem_cond_c} \\
+            	\frac{1}{4}\bm{b}^T\bm{c}^4 - \bm{b}^TC^2A\bm{c} + \bm{b}^T(A\bm{c})^2 &= \beta_2^2, \label{eq:theorem_cond_d}
+        	\end{align}
+	\end{subequations}
+	where the powers on vectors are understood component-wise. 
+	Define
+	\begin{align*} 
+		\bm{v} = \frac{1}{2}\bm{c}^2 - A\bm{c}
+	\end{align*}
+	and
+	\begin{align}\label{eq:def_w}
+		\bm{w} = \bm{v}^{2} - \beta_{2}\bm{v}.
+	\end{align}
+	Then substituting \eqref{eq:theorem_cond_b} in \eqref{eq:theorem_cond_c} gives
+	\begin{equation}\label{eq:btv}
+		\beta_2 = \bm{b}^T\bm{v}.
+	\end{equation}
+	Also, \eqref{eq:theorem_cond_d} can be expressed as
+	\begin{equation}\label{eq:btv2}
+		\beta_2^2 = \bm{b}^T\bm{v}^2.
+	\end{equation}
+        Multiplying \eqref{eq:btv} by $\beta_2$ and subtracting
+        from \eqref{eq:btv2} gives
+	\begin{equation}\label{eq:btw}
+		\bm{b}^T\bm{w} = 0.
+	\end{equation}
+        We divide the analysis into three cases.
+	\paragraph{Case 1: $\beta_2 = 0$.}
+	First consider the case that $\beta_2 = 0$. 
+	Then $\bm{b}^T\bm{v}^2 = 0$, but $\bm{v }\neq \bm{0}$ because explicit methods
+	cannot have stage order two \cite{Ruuth2002}. This implies that $b_j \leq 0$ 
+	for some $j$, which is a contradiction.
+	So far we have proven the result for classical order $p \ge 3$ 
+	and the proof is similar to the result mentioned in \cite{Ruuth2002}. 
+	The remainder of our proof deals with classical order two, 
+	where $\beta_2 \neq 0$.
+
+	\paragraph{Case 2: $\bm{w} = \bm{0}, \beta_2\ne0$.}
+	By the definition of $\bm{w}$ in \eqref{eq:def_w}, we have $v_i^2 - \beta_2 v_i = 0$ 
+	for all $i \in \{1, \dots, s\}$, 	so for each $i$ either $v_i = 0$ or $v_i = \beta_2$.
+	Let the set $J = \{i : v_i = \beta_2\}$. 
+	Note that $v_1 = 0$ because the first row of matrix $A$ is identically zero.
+	Since $\beta_2 \neq 0$ and $ \bm{v} \neq \bm{0}$, the set $J$ is not empty.
+	Then \eqref{eq:btv} yields 
+	\begin{equation*}
+            \beta_2 = \sum_{i=1}^s b_i v_i = \sum_{i \in J}b_i\beta_2 = \beta_2\sum_{i \in J}b_i,
+	\end{equation*}
+        which implies $\sum_{i\in J} b_i = 1$, but this contradicts \eqref{eq:theorem_cond_a}
+
+	\paragraph{Case 3: $\bm{w} \neq \bm{0}, \beta_2\ne0$.}
+	Since $\bm{b} > \bm{0}$, \eqref{eq:btw} implies that $\bm{w}$ contains both positive 
+	and negative elements. 
+	Furthermore, $v_1=0$ for any explicit method, thus $w_1=0$.
+	Then, we can choose $i, j \in \{2, \dots, s\}$ such that $w_i < 0 < w_j$.
+     By \eqref{eq:def_w} $v_i\ne 0$, $v_j\ne 0$, and $v_i\ne v_j$. 
+     Application of Lemma~\ref{Davids_lemma} reveals that all $v_k$ for 
+     $k \in\{1,2,\dots,s\}$ must be equal except for one, which is a contradiction
+     since $v_1 = 0$.
+
+\end{proof}

@@ -1,0 +1,31 @@
+TODO list for effective order paper
+===================================
+
+* are we sure about this tighter SSP coef vs experimental TVD result?
+
+    * Perhaps we should make a table a la [Ketcheson, Gottlieb,
+      Macdonald 2011].  As David suggests, maybe with a second-order
+      scheme in space.
+
+    * Intro to section 6 says "accurately meaures"...
+
+* In smooth burgers' example, a TV-norm of < 1 could still indicate
+  violation; this is b/c the soln magnitude has descreased.
+
+* some bib entries are in need of attention.
+
+* most bib entries do not have abbreviated/full JOURNAL/FJOURNAL (see Shu/Osher1988)
+
+
+Journals
+========
+
+I think we said we should try SINUM.
+
+Jim Verner also suggested:
+
+> Have you thought of a Journal for Publication.  If you have not
+> thought about it, I might suggest Numerical Algorithms.  I have a
+> good rapport with Claude Brezinski since I have refereed a number of
+> papers and had several published through submission through his
+> office.

@@ -1,0 +1,185 @@
+\documentclass[10pt,a4paper,oneside]{article}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Preamble %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+
+%%% packages %%%
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage[dvips]{graphicx} % [pdftex]
+\usepackage{pstricks,pst-node,pst-tree}
+\usepackage{bm}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{enumerate,cite}
+\usepackage{url}
+\usepackage{array}
+\usepackage{arydshln}
+\usepackage{subfig}
+\usepackage{caption} % [font=small,format=plain,labelfont=bf,up,textfont=it,up]
+\usepackage{verbatim}
+\usepackage{rotating}
+\usepackage{slashbox}
+\usepackage{booktabs}
+\usepackage{xkeyval}
+\usepackage[textsize=footnotesize]{todonotes}
+\definecolor{lightgray}{gray}{0.5}
+\definecolor{darkred}{rgb}{.6,0,0}
+\definecolor{darkblue}{rgb}{0,0,0.5}
+\usepackage[colorlinks=true,citecolor=darkblue,urlcolor=darkblue,linkcolor=darkred]{hyperref}
+\usepackage[normalem]{ulem}
+\usepackage{accents}
+%\usepackage[toc,page]{appendix}
+%\usepackage{diagrams}
+%\usepackage{nomencl}
+%\usepackage{cm-super}
+%\usepackage{ifthen}
+%\usepackage{maplestd2e}
+%\usepackage[numbered]{mcode}1
+%\usepackage{epsfig}
+%\usepackage{calc}
+%\usepackage{pbox}
+
+%%% Page layout %%%
+\setlength{\textwidth}{160mm}   
+\setlength{\textheight}{220mm}
+\setlength{\oddsidemargin}{0mm} 
+\setlength{\evensidemargin}{-5mm}
+\setlength{\topmargin}{0mm}
+\setlength{\marginparwidth}{35mm}
+\setlength{\parindent}{5mm}
+\setlength{\footskip}{20mm}     
+\setlength\footnotesep{4mm}
+
+
+%%% Page style %%%
+\pagestyle{plain}
+
+%%% New commands %%%
+\newcommand{\sspcoef}{\mathcal{C}}
+\newcommand{\ceff}{\sspcoef_{\textnormal{eff}}}
+%\newcommand{\clin}{\sspcoef_{\textnormal{lin}}}
+\newcommand{\clin}{\sspcoef^{\textnormal{lin}}_{s,q}}
+%\newcommand{\clin}{R_{s,q}}
+\newcommand{\pd}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\pdseconda}[2]{\frac{\partial^2{#1}}{\partial{{#2}^2}}}
+\newcommand{\pdsecondb}[3]{\frac{\partial^2{#1}}{\partial{#2}\partial{#3}}}
+\newcommand{\Dt}{\Delta t}
+\newcommand{\DtFE}{\Delta t_{\textnormal{FE}}}
+\newcommand{\equival}[1]{\mbox{{\large $\underaccent{\hspace{8pt}#1}{\simeq } \,$}}}
+\newcommand{\rowscell}[2]{\parbox{21pt}{\centering #1 \\ #2}}
+\newcommand{\treecell}[2]{\parbox{26pt}{\centering #1 \\\vspace{3pt} #2}}
+\newcommand{\nline}{\tabularnewline}
+\newcommand{\colintodo}[1]{\todo[color=orange!20]{\textbf{C:} #1}}
+\newcommand{\davidtodo}[1]{\todo[color=cyan!20]{\textbf{D:} #1}}
+\newcommand{\yiannistodo}[1]{\todo[color=green!20]{\textbf{Y:} #1}}
+\newcommand{\colincomment}[1]{\textcolor{blue}{\\\textbf{\footnotesize #1}\\}}
+\newcommand{\davidcomment}[1]{\textcolor{red}{\\\textbf{\footnotesize #1}\\}}
+\newcommand{\yianniscomment}[1]{\textcolor{OliveGreen}{\\\textbf{\footnotesize #1}\\}}
+
+%%% Renew commands %%%
+\renewcommand{\newline}{\vspace{10pt}}
+\renewcommand{\comment}[1]{\textcolor{gray}{\\#1\\}}
+\renewcommand{\indent}{\hspace{15pt}}
+
+%%% New theorems %%%
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{result}[theorem]{Result}
+\newtheorem{remark}[theorem]{Remark}
+
+%%% Miscellaneous %%%
+\numberwithin{theorem}{section}
+\numberwithin{equation}{section}
+\numberwithin{table}{section}
+\numberwithin{figure}{section}
+\newcolumntype{M}[1]{>{\vspace{2pt}\centering\hspace{0pt}\vspace{2pt}}m{#1}}
+%\numberwithin{theorem}{section}
+%\numberwithin{equation}{section}
+%\numberwithin{definition}{section}
+%\numberwithin{example}{section}
+%\setcounter{secnumdepth}{3}
+%\setcounter{tocdepth}{3}
+%\setcounter{table}{0}
+%\baselineskip=18pt plus1pt
+%\makenomenclature
+
+%%% General info %%%
+\title{Strong stability preserving explicit Runge--Kutta methods of maximal effective order}
+\author{
+	Yiannis Hadjimichael\footnote{4700 King Abdullah University of Science \& Technology, 
+	(KAUST), Mathematical and Computer Sciences and Engineering Division, Thuwal 23955, 
+	Saudi Arabia
+	(\url{yiannis.hadjimichael@kaust.edu.sa}, 
+	\url{david.ketcheson@kaust.edu.sa}).
+	The work of these authors is supported by Award No. FIC/2010/05, made by King 
+	Abdullah University of Science and Technology (KAUST).}
+    	\and 
+    	Colin B.~Macdonald\thanks{Mathematical Institute, University of Oxford, OX1\,3LB, UK 
+    	(\url{macdonald@maths.ox.ac.uk}).
+    	The work of this author was supported by NSERC 
+    	Canada and by Award No KUK-C1-013-04 made by King Abdullah University of Science 
+    	and Technology (KAUST).}
+    	\and 
+    	David I.~Ketcheson\footnotemark[1]
+    	\and 
+    	James H.~Verner\thanks{Department of Mathematics, Simon Fraser University,
+    	Burnaby, British Columbia, V5A\,1S6, Canada
+    	(\url{jverner@pims.math.ca}).
+    	The work of this author was supported by Simon Fraser University.}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Main document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+	\maketitle
+	
+	%%% Supporting macros %%%
+	\input{trees} % creates trees
+	
+	\begin{abstract}
+  		We apply the concept of effective order to strong stability preserving 
+  		(SSP) explicit Runge--Kutta methods.
+  		Relative to classical Runge--Kutta methods, methods with an effective order of accuracy
+  		are designed to satisfy a relaxed set of order conditions, but yield higher 
+  		order accuracy  when composed with special starting and stopping methods. 
+         %The relaxed order conditions allow for greater freedom in the design
+         %of methods with effective order of accuracy. 
+         We show that this allows the construction of four-stage SSP methods with 
+         effective order four (such methods cannot have classical order four). 
+         However, we also prove that effective order five methods---like classical
+         order five methods---require the use of non-positive weights and so cannot
+         be SSP.
+         By numerical optimization, we construct explicit SSP Runge--Kutta methods 
+         up to effective order four and establish the optimality of many of them.
+  		Numerical experiments demonstrate the validity of these methods in
+  		practice.
+	\end{abstract}
+
+	%%% Main body %%%
+	\input{1_Intro}
+	\input{2_SSP}
+	\input{3_Algebraic_RK}
+	\input{4_ExRK_barrier}
+	\input{5_Optimal_ESSPRK}
+	\input{6_Numerics}
+	\input{7_Conclusion}
+
+	\section*{Acknowledgments}{
+		The authors would like to thank the anonymous referees for their helpful 
+		and valuable suggestions on the paper.
+	}
+
+	%%% Appendix and Bibliography %%%
+	%\appendix
+	%\include{AppendixA}
+	\bibliographystyle{acm} %apalike
+	\bibliography{bibliography2}
+
+\end{document}

@@ -1,0 +1,64 @@
+\section{Introduction}\label{sec:Intro}
+Strong stability preserving time discretization methods were originally
+developed for the solution of nonlinear hyperbolic 
+partial differential equations (PDEs).  Solutions of such PDEs may 
+contain discontinuities even when the initial conditions are smooth.
+Many numerical methods for their solution are based on a method-of-lines approach 
+in which the problem is first discretized in space to yield a system of ODEs. 
+The spatial discretization is often chosen to ensure the solution is total variation diminishing (TVD),
+in order to avoid the appearance of spurious oscillations near discontinuities,
+\emph{when coupled with first-order forward Euler time integration}.
+Strong stability preserving (SSP) time discretizations (also known as TVD
+discretizations \cite{Gottlieb/Shu:1998}) are high-order time
+discretizations that guarantee the TVD property (or other convex functional bounds), with a
+possibly different step-size restriction \cite{Gottlieb2011a}.
+Section~\ref{sec:SSP} reviews Runge--Kutta methods and the concept of
+strong stability preserving methods.
+
+Explicit SSP Runge--Kutta methods cannot have order greater
+than four \cite{Ruuth2002}.  However, a Runge--Kutta method may 
+achieve an effective order of accuracy higher than its classical order 
+by the use of special starting and stopping procedures.
+The conditions for a method to have effective order $q$ are 
+in general less restrictive than the conditions for a method
+to have classical order $q$.
+Section~\ref{sec:Algebraic_RK} presents a brief overview of the
+algebraic representation of Runge--Kutta methods, following Butcher
+\cite{Butcher2008_book}.
+This includes the concept of effective order and a list of effective
+order conditions.
+
+We examine the SSP properties of explicit Runge--Kutta methods whose
+effective order is greater than their classical order.
+Previous studies of SSP Runge--Kutta method have considered only the
+classical order of the methods.
+Three natural questions are:
+\begin{itemize}
+    \item Can an SSP Runge--Kutta method have effective order of accuracy greater than four?
+    \item If we only require methods to have {\em effective} order $q$, is it possible to achieve larger
+            SSP coefficient compared to methods with {\em classical} order $q$?
+    \item SSP Runge--Kutta methods of order four require at least five stages.  Can SSP methods of 
+          effective order four have fewer stages?
+          
+\end{itemize}
+We show in Section \ref{sec:ExRK_barrier} that the answer to the first question is negative.
+We answer the second question by numerically solving the problem of optimizing
+the SSP coefficient over the class of methods with effective order $q$;
+see Section~\ref{sec:optimal_ESSPRK}.  
+Most of the methods we find are shown to be optimal, as they achieve a certain theoretical
+upper bound on the SSP coefficient that is obtained by considering only
+linear problems \cite{Kraaijevanger1986}.
+We answer the last question affirmatively
+by construction, also in Section~\ref{sec:optimal_ESSPRK}.
+
+%Explicit SSP Runge--Kutta methods of order four require at 
+%least five stages \cite{Gottlieb/Shu:1998}. 
+%In contrast, we construct explicit SSP Runge--Kutta methods
+%of effective order four with only four stages.
+%Following this result, we had hoped to overcome the fifth-order
+%barrier for explicit SSP Runge--Kutta methods \cite{Ruuth2002}; instead we
+%prove that the barrier also holds for SSP methods of effective
+%order five.
+The paper concludes with numerical experiments in
+Section~\ref{sec:numerics} and conclusions in
+Section~\ref{sec:Conclusion}.

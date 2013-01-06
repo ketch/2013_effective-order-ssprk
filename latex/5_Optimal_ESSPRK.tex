@@ -1,0 +1,448 @@
+\section{Optimal explicit SSP Runge--Kutta schemes with maximal effective order}\label{sec:optimal_ESSPRK}
+In this section, we use the SSP theory and Butcher's theory of effective
+order (Sections \ref{sec:SSP} and \ref{sec:Algebraic_RK}) to find
+optimal explicit SSP Runge--Kutta schemes with prescribed effective
+order and classical order.
+According to Corollary~\ref{cor:no_SSP_5}, there are no explicit SSPRK methods of
+effective order five, and therefore we need only consider methods with
+effective order up to four.
+
+Recall from Section~\ref{sec:Algebraic_RK} that the methods with
+an effective order of accuracy involve a main method $M$ as well as starting and
+stopping methods $S$ and $S^{-1}$.
+In Section~\ref{subsec:starting_stopping} we introduce a novel approach
+to construction of starting and stopping methods in order to allow
+them to be SSP.
+
+We denote by ESSPRK($s,q,p$) an $s$-stage explicit SSP Runge--Kutta
+method of effective order $q$ and classical order $p$.
+Also we write SSPRK($s,q$) for an $s$-stage explicit SSP Runge--Kutta
+method of order $q$.
+
+\subsection{The main method}\label{subsec:main_method}
+
+Our search is carried out in two
+steps, first searching for optimal main methods $M$ and then for
+possible corresponding methods $S$ and $S^{-1}$.
+For a given number of stages, effective order, and classical order,
+our aim is thus to find an optimal main method, meaning one with the 
+largest possible SSP coefficient $\sspcoef$.
+
+To find a method ESSPRK($s,q,p$) with Butcher tableau $(A, \bm{b},
+\bm{c})$, we consider the optimization problem~\eqref{eq:SSP_opt} 
+with $\Phi(K)$ representing the conditions for effective order
+$q$ and classical order $p$ (as per Table~\ref{tab:effective_OCs}).
+The methods are found through numerical search, using 
+\textsc{Matlab}'s optimization toolbox.
+Specifically, we use \texttt{fmincon} with a sequential quadratic 
+programming approach \cite{Ketcheson2008, Ketcheson/Macdonald/Gottlieb:2009}.
+This process does not guarantee a global minimizer, so many searches 
+from random initial guesses are performed to help ensure the method with
+the largest possible SSP coefficient is found.
+
+\subsubsection{Optimal SSP coefficients}\label{subsubsec:optimal_SSP_coeff}
+Useful bounds on the optimal SSP coefficient can be obtained 
+by considering an important relaxation. 
+In the relaxed problem, the method is required to be accurate and strong 
+stability preserving only for linear, constant-coefficient initial value problems. 
+This leads to a reduced set of order conditions and a relaxed absolute 
+monotonicity condition \cite{Kraaijevanger1986,Ketcheson2008,ketcheson2009a}.
+We denote the maximal SSP coefficient for linear problems
+(maximized over all methods with order $q$ and $s$ stages) by $\clin$.
+
+Let $\sspcoef_{s,q}$ denote the maximal SSP coefficient (relevant to
+non-linear problems) over all methods of $s$ stages with order $q$.  Let
+$\sspcoef_{s,q,p}$ denote the object of our study, i.e. the maximal SSP
+coefficient (relevant to non-linear problems) over all methods of $s$ stages
+with effective order $q$ and classical order $p$.
+From Remark~\ref{rem:talltrees} and the fact that the ESSPRK($s,q,p$) methods
+form a super class of the SSPRK($s,q$) methods, we have
+\begin{align} \label{ineq:clin}
+        \sspcoef_{s,q} \le \sspcoef_{s,q,p} \le\clin.
+\end{align}
+
+The effective SSP coefficients for methods with up to eleven stages are shown in 
+Table~\ref{tab:eff_SSP_coeff}.
+Recall from Section~\ref{sec:ExRK_barrier} that $q=5$ implies a zero
+SSP coefficient and from Section~\ref{sec:Algebraic_RK} that for
+$q=1,2$, the class of explicit Runge--Kutta methods with effective order $q$
+is the simply the class of explicit Runge--Kutta methods with order $q$.  % (of orders one and two)
+Therefore we consider only methods of effective order $q=3$ and $q=4$.
+Exact optimal values of $\clin$ are known for many classes of methods; for
+example see \cite{Kraaijevanger1986,Ketcheson2008,ketcheson2009a}.
+Those results and \eqref{ineq:clin} allow us to determine the optimal value
+of $\sspcoef_{s,q,p}$ {\em a priori} for the cases $q=3$ (for any $s$) and
+for $q=4,s=10$, since in those cases we have $\sspcoef_{s,q}=\clin$.
+
+\begin{table}
+    \centering
+    \begin{tabular}{ccccccccccccc}
+        \hline
+        %\multicolumn{2}{|c|}{\backslashbox{\hspace{2pt}\vspace{1pt}$q\,,\,p$}{\vspace{-5.5pt}$s$}} & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ & $11$ \\
+        \multirow{2}{*}{$q$} &
+        \multirow{2}{*}{$p$}
+            & \multicolumn{11}{c}{stages $s$} \\
+            \cline{3-13}
+& & $1$ & $2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ & $11$ \\
+        \hline
+        $3$ & $2$ & $-$ & $-$ & $\bf 0.33$ & $\bf 0.50$ & $\bf 0.53$ & $\bf 0.59$ & $\bf 0.61$ & $\bf 0.64$ & $\bf 0.67$ & $\bf 0.68$ & $\bf 0.69$\\
+        %\hline
+        $4$ & $2$ & $-$ & $-$ & $-$ & $0.22$ & $0.39$ & $\bf 0.44$ & $\bf 0.50$ & $\bf 0.54$ & $\bf 0.57$ & $\bf 0.60$ & $\bf 0.62$ \\
+        %\hline
+        $4$ & $3$ & $-$ & $-$ & $-$ & $0.19$ & $0.37$ & $0.43$ & $\bf 0.50$ & $\bf 0.54$ & $\bf 0.57$ & $\bf 0.60$ & $\bf 0.62$ \\
+        %\hline
+    \end{tabular}
+    \caption{Effective SSP coefficients $ \ceff = \sspcoef/s$ of the best known
+      %explicit effective order
+      ESSPRK($s,q,p$) methods.
+    		Entries in bold achieve the bound $\clin$ given by the linear SSP coefficient and are therefore optimal. 
+    		If no positive $\sspcoef$ can be found, we use ``$-$'' to indicate non-existence. 
+    		The optimal fourth-order linear SSP coefficients are $\sspcoef^{\textnormal{lin}}_{4,4}=0.25$,
+    		$\sspcoef^{\textnormal{lin}}_{5,4}=0.40$ and $\sspcoef^{\textnormal{lin}}_{6,4}=0.44$.}
+    \label{tab:eff_SSP_coeff}
+\end{table}
+
+\subsubsection{Effective order three methods}\label{subsubsec:3rd_ESSPRK}
+Since $\sspcoef_{s,q}=\clin$ for $q=3$, the optimal effective order three methods
+have SSP coefficients equal to the corresponding optimal classical order three methods.
+In the cases of three and four stages, we are able to determine exact coefficients for
+families of optimal methods of effective order three.
+\begin{theorem}\label{thm:ESSPRK(3,3,2)}
+	A family of optimal three-stage, effective order three SSP Runge--Kutta 
+	methods of classical order two, with SSP coefficient $\sspcoef=1$, is given by
+    \begin{displaymath}
+    		\begin{split}
+    			\bm{Y}_1 &= \bm{u}^n, \\
+    			\bm{Y}_2 &= \bm{u}^n + \Dt\bm{F}(\bm{Y}_1), \\
+    			\bm{Y}_3 &= \bm{u}^n + \gamma\Dt\bm{F}(\bm{Y}_1) + \gamma\Dt\bm{F}(\bm{Y}_2), \\
+    			\bm{u}^{n+1} &= \bm{u}^n + \frac{5\gamma-1}{6\gamma}\Dt\bm{F}(\bm{Y}_1) + \frac{1}{6}\Dt\bm{F}(\bm{Y}_2) + \frac{1}{6\gamma}\Dt\bm{F}(\bm{Y}_3),
+        \end{split}
+    \end{displaymath}
+    where $1/4 \leq \gamma \leq 1$ is a free parameter.
+    %We refer to the above family as ESSPRK($3,3,2$).
+    %\davidtodo{This is a bit strange, since that notation was defined to refer to a single method.}
+\end{theorem}
+\begin{theorem}\label{thm:ESSPRK(4,3,2)}
+	A family of optimal four-stage, effective order three SSP Runge--Kutta 
+	methods of classical order two, with SSP coefficient $\sspcoef=2$ is given by
+    \begin{displaymath}
+    		\begin{split}
+    			\bm{Y}_1 &= \bm{u}^n, \\
+    			\bm{Y}_2 &= \bm{u}^n + \frac{1}{2}\Dt\bm{F}(\bm{Y}_1), \\
+    			\bm{Y}_3 &= \bm{u}^n + \frac{1}{2}\Dt\bm{F}(\bm{Y}_1) + \frac{1}{2}\Dt\bm{F}(\bm{Y}_2), \\
+    			\bm{Y}_4 &= \bm{u}^n + \gamma\Dt\bm{F}(\bm{Y}_1) + \gamma\Dt\bm{F}(\bm{Y}_2) + + \gamma\Dt\bm{F}(\bm{Y}_3), \\
+    			\bm{u}^{n+1} &= \bm{u}^n + \frac{8\gamma-1}{12\gamma}\Dt\bm{F}(\bm{Y}_1) + \frac{1}{6}\Dt\bm{F}(\bm{Y}_2) + \frac{1}{6}\Dt\bm{F}(\bm{Y}_3) + \frac{1}{12\gamma}\Dt\bm{F}(\bm{Y}_4),
+        \end{split}
+    \end{displaymath}
+    where $ 1/6 \leq \gamma \leq 1/2 $ is a free parameter.
+    %We refer to the above family as ESSPRK($4,3,2$).
+\end{theorem}
+\begin{proof}
+	In either theorem, feasibility can be verified by direct calculation of the 
+	conditions in problem~\eqref{eq:SSP_opt}. Optimality follows because 
+	$\sspcoef=\clin$.
+\end{proof}
+
+Theorem~\ref{thm:ESSPRK(3,3,2)} gives a \emph{family} of three-stage 
+methods. 
+The particular value of $\gamma = 1/4$ corresponds to the classical
+Shu--Osher SSPRK($3,3$) method \cite{Gottlieb/Shu:1998}.
+Similarly, in Theorem~\ref{thm:ESSPRK(4,3,2)} the particular value of 
+$\gamma = 1/6$ corresponds to the usual SSPRK($4,3$) method.
+It seems possible that for each number of stages, the 
+ESSPRK($s, 3, 2$) methods may form a family in which an optimal 
+SSPRK($s$, $3$) method is a particular member. 
+
+\subsubsection{Effective order four methods}\label{subsubsec:4th_ESSPRK}
+The ESSPRK($s,4,p$) methods can have classical order $p=2$ or $3$.
+%These methods have an SSP coefficient $\sspcoef$ which is at least as
+%large as SSPRK($s, 4$) (in fact, they are all larger except in the
+%case where $s =10$ where they are equal).\davidtodo{See my comment above.}
+In either case, for stages $7 \le s \le 11$ the methods found are
+optimal because the SSP coefficient attains the upper bound of
+$\clin$.
+For fewer stages, the new methods still have SSP coefficients up to
+30\% larger than that of explicit SSPRK($s,q$) methods.
+% the SSP coefficient of ESSPRK($s,4,2$) and
+%ESSPRK($s,4,3$) are the same and both achieve the linear bound
+%$\clin$.
+%ESSPRK($6,4,2$) is also optimal.
+In the particular case of four-stage methods we have the following:% result:
+\begin{remark}
+	In contrast with the non-existence of an SSPRK(4,\,4) method 
+	\cite{Gottlieb/Shu:1998,Ruuth2002}, 
+	we are able to find ESSPRK(4,\,4,\,2) and ESSPRK(4,\,4,\,3) methods.
+	The coefficients of these methods are found in
+	Tables~\ref{tab:ESSPRK(4,4,2)_scheme}
+	and~\ref{tab:ESSPRK(4,4,3)_scheme}.
+\end{remark}
+% Inside italics, notation looked funny with upright numerals, so
+% I removed math mode (and added "\," for some extra space)
+
+Additionally, we find two families of methods with effective order four, 
+for which $\ceff$ asymptotically approaches unity.
+The families consist of second order methods with $s = n^2+1$ stages and 
+SSP coefficient $\sspcoef = n^2-n$.
+They are optimal since $\sspcoef = \sspcoef^{\textnormal{lin}}_{4,2}$ 
+\cite[Theorem~5.2(c)]{Kraaijevanger1986}.
+It is convenient to express the coefficients in the modified Shu--Osher form
+%\textbf{\red [todo: citation]},
+\cite{Gottlieb2011a}
+\begin{align*}
+	\bm{Y}_i &= v_i\bm{u}^n + \sum_{j=1}^{i-1}(\alpha_{ij}\bm{Y}_j + \Dt\beta_{ij}\bm{F}(\bm{Y}_j)), \; 1 \leq i \leq s+1 \\
+	\bm{u}^{n+1} &= \bm{Y}_{s+1},
+\end{align*}
+because of the sparsity of the matrices $\alpha, \beta \in \mathbb{R}^{(s+1)\times s}$
+and vector $\bm{v} \in \mathbb{R}^s$.
+For $n \geq 3$ the non-zero elements are given by
+\begin{align*}
+	v_1 &= 0, \quad\quad v_{n^2+2} = \frac{2}{(n^2+1)\bigl((n-1)^2+1\bigr)}, \\
+	\alpha_{n^2-2n+4,(n-2)^2} &= \frac{n^2-1 \pm \sqrt{n^3-3n^2+n+1}}{4n^2-6n+2}, \\ 		
+	\alpha_{n^2+2,n^2+1} &= \frac{n(n-1)^2}{(2n-1)(n^2+1)(1-\alpha_{n^2-2n+4,(n-2)^2})}, \\
+	\alpha_{n^2+2,n^2-2n+2} &= 1 - v_{n^2+2,1} - \alpha_{n^2+2,n^2+1}, \\
+	\alpha_{i+1,i} &= \begin{cases} 
+								1 - \alpha_{i+1,(n-2)^2}, & i = n^2-2n+3 \\
+								1,  &\mbox{otherwise,}
+							\end{cases}
+\end{align*}
+where $ 1 \leq i \leq n^2$ and 
+\begin{align*}
+	\beta_{i,j} & = \frac{\alpha_{i,j}}{n^2-n}, \quad 1 \leq i \leq n^2+2, \;\; 1 \leq j \leq n^2+1.
+\end{align*}
+%\textbf{\red TODO: what is the purpose of $\beta_{n^2 + 2, 1} := 0$?  Isn't the appropriate $\alpha$ also zero?}
+In \cite[\S~6.2.2]{Gottlieb2011a}, a similar pattern was found
+for SSPRK($s,3$) methods.
+%\textbf{\red TODO: i.e., some more info: I don't have the book in front of me.}
+%\textbf{\red TODO: $\pm$ makes this look like \emph{two} families to me...}
+
+\subsection{Starting and stopping methods}\label{subsec:starting_stopping}
+Having constructed an ESSPRK($s,q,p$) scheme that can be used as the main 
+method $M$, we want to find perturbation methods $S$ and $S^{-1}$ such that the 
+Runge--Kutta scheme $S^{-1}MS$ attains classical order $q$, equal to the 
+effective order of method $M$.
+We also want the resulting overall process to be SSP.
+%If method $S$ advances the solution in time, then $S^{-1}$ must evolve the
+%solution backward in time, which may be undesirable in some cases.
+%For this reason, starting and stopping methods $S, S^{-1}$ are usually
+%designed to perturb the solution but not advance in time.
+%In any case, the resulting
+However at least one of the $S$ and $S^{-1}$ methods is not SSP:
+if $\beta_1 = 0$ then $\sum_i b_i = 0$ implies the presence of at
+least one negative weight and thus neither scheme can be SSP.
+Even if we consider methods with $\beta_1 \neq 0$, one of $S$ or
+$S^{-1}$ must step backwards and thus that method cannot be SSP
+(unless we consider the downwind operator
+\cite{Ruuth2004,Gottlieb/Ruuth:SSPfastdownwind,Ketcheson:2011:downwind}).
+
+In order to overcome this problem and achieve ``bona fide''
+SSPRK methods with an effective order of accuracy, we need to choose different starting and stopping methods. 
+We consider methods $R$ and $T$ which each take a positive step such that 
+$R \equival{q} MS$ and $T \equival{q} S^{-1}M$.
+That is, the order conditions of $R$ and $T$ must match those of
+$MS$ and $S^{-1}M$, respectively, up to order $q$.
+This gives a new $TM^{n-2}R$ scheme which is equivalent up to order $q$ 
+to the $S^{-1}M^nS$ scheme and attains classical order $q$.
+Each starting and stopping procedures now take a positive step forward 
+in time.
+
+To derive order conditions for the $R$ and $T$ methods, consider their
+corresponding functions in group $G$ to be $\rho$ and $\tau$
+respectively.
+Then the equivalence is expressed as
+\begin{equation} \label{eq:R_T_OCs}
+    \rho(t) = (\beta\alpha)(t) \text{ and } \tau(t) = (\alpha\beta^{-1})(t), \quad \text{for all 
+    trees $t$ with $r(t) \leq q$.}
+\end{equation}
+%and equivalently,
+%\begin{equation} \label{eq:RMT_OCs}
+%    \rho\alpha\tau(t) = E^3(t), \quad \text{for all trees $t$ with $r(t) \leq q$.}
+%\end{equation}
+Rewriting the second condition in \eqref{eq:R_T_OCs} as 
+$(\tau\beta)(t) = \alpha(t)$, the order conditions for the starting and stopping 
+methods can be determined by \eqref{eq:Group_operation} and are given in Table~\ref{tab:rho_tau_OCs}.
+These conditions could be constructed more generally but here we have
+assumed $\beta_1=0$ (see Section~\ref{subsubsec:Main_starting_conditions}); this
+will be sufficient for constructing SSP starting and stopping
+conditions.
+
+
+\begin{table}
+	\centering
+	\begin{tabular}{lcl}
+		\hline
+    		\multicolumn{1}{c}{$\rho(t) = (\beta\alpha)(t)$} & & \multicolumn{1}{c}{$\tau(t) = (\alpha\beta^{-1})(t)$} \\
+    		\hline
+    		 $\rho_1 = \alpha_1$ & & $\tau_1 = \alpha_1$ \\
+    		$\rho_2 = \alpha_2 + \beta_2$ & & $\tau_2 = \alpha_2 - \beta_2$ \\
+    		$\rho_3 = \alpha_3 + \beta_3$ & & $\tau_3 = \alpha_3 - 2\alpha_1\beta_2 - \beta_3$ \\
+    		$\rho_4 = \alpha_4 + \alpha_1\beta_2 + \beta_4$ & & $\tau_4 = \alpha_4 - \alpha_1\beta_2 - \beta_4$ \\
+                \hdashline[2pt/3pt] \\[-10pt]
+		$\rho_5 = \alpha_5 + \beta_5$ & & $\tau_5 = \alpha_5 - 3\alpha_1^2\beta_2 - 3\alpha_1\beta_3 - \beta_5$ \\
+		$\rho_6 = \alpha_6 + \alpha_2\beta_2 + \beta_6$ & & $\tau_6 = \alpha_6 - (\alpha_1^2 + \alpha_2 -\beta_2)\beta_2 -\alpha_1\beta_3 - \alpha_1\beta_4 - \beta_6$ \\
+		$\rho_7 = \alpha_7 + \alpha_1\beta_3 + \beta_7$ & & $\tau_7 = \alpha_7 - 2\alpha_1\beta_4 - \alpha_1^2\beta_2 - \beta_7$ \\
+		$\rho_8 = \alpha_8 + \alpha_1\beta_4 + \alpha_2\beta_2 + \beta_8$ & & $\tau_8 = \alpha_8 - \alpha_1\beta_4 - \alpha_2\beta_2 + \beta_2^2 -  \beta_8$
+  	\end{tabular}
+  	\caption{Order conditions on $\rho$ and $\tau$ up to effective order four for starting
+  		and stopping methods $R$ and $T$, respectively.
+  		The upper block represents the effective order three conditions.
+         As in Table~\ref{tab:effective_OCs_on_alpha} and Table~\ref{tab:effective_OCs} we assume 
+         $\beta_1 = 0$.}
+  	\label{tab:rho_tau_OCs}
+\end{table}
+
+\subsubsection{Optimizing the starting and stopping methods}\label{subsubsec:opt_methods}
+It turns out that the order conditions from \eqref{eq:R_T_OCs} do not
+contradict the SSP requirements.
+We can thus find methods $R$ and $T$ using the optimization procedure
+described in Section~\ref{subsec:Optimal_SSPRK} with the order conditions 
+given by Table~\ref{tab:rho_tau_OCs} for $\Phi(K)$ in \eqref{eq:SSP_opt}.
+
+The values of $\alpha_i$ are determined by the main method $M$.
+Also note that for effective order $q$, the algebraic expressions on
+$\beta$ up to order $q-1$ are already found by the optimization procedure of 
+the main method (see Table~\ref{tab:effective_OCs}). 
+However, the values of the order $q$ elementary weights on $\beta$ are not 
+known; these are $\beta_3$ and $\beta_4$ for effective order three and
+$\beta_5$, $\beta_6$, $\beta_7$ and $\beta_8$ for effective order four.
+From Table~\ref{tab:rho_tau_OCs}, we see that both the $R$ and $T$
+methods depend on these parameters.
+Our approach is to optimize for both methods at once: we solve a
+modified version of the optimization problem \eqref{eq:SSP_opt} where
+we simultaneously maximize both SSP coefficients subject to the
+constraints given in \eqref{eq:R_T_OCs} and conditions on $\beta$ given by 
+Table~\ref{tab:effective_OCs}. 
+The unknown elementary weights on $\beta$ are used as free parameters.
+In practice, we maximize the objective function $\min(r_1,r_2)$, where $r_1$ 
+and $r_2$ are the radii of absolute monotonicity of the methods $R$ and $T$.
+
+We were able to construct starting and stopping schemes for each main 
+method, with an SSP coefficient at least as large as that of the main method.
+This allows the usage of a uniform time-step $\Dt \leq \sspcoef\DtFE$, 
+where $\sspcoef$ is the SSP coefficient of the main method.
+The additional computational cost
+of the starting and stopping methods is minimal:
+for methods $R$ and $T$ associated with an $s$-stage main method,
+at most $s + 1$ and $s$ stages, respectively, appear to be required.
+%In some stages better results are obtained, for example if the main method is 
+%ESSPRK($3,3,2$), then its relative starting and stopping methods have only three 
+%stages.
+%\begin{table}
+%    \centering
+%	\centering
+%	\begin{tabular}{ccc}
+%          $q$ & $p$ & number of stages each for $R$ and $T$\\
+%          \hline
+%          3 & 2 & s+1 ??? \\
+%          4 & 2 & s+1??? \\
+%          4 & 3 & s+2???
+%  	\end{tabular}
+%        \qquad
+%    \begin{tabular}{|c|c|cccccccc|}
+%        \hline
+%        \multicolumn{2}{|c|}{\backslashbox{\hspace{1pt}\vspace{1pt}$p$}{\vspace{-5pt}$s$}} & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ & $11$ \\
+%        \hline
+%        \multirow{2}{*}{$2$} & $R$ & $5$ & $7$ & $7$ & $8$ & $9$ & $10$ & $11$ & $12$ \\
+%        & $T$ & $5$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ & $11$ \\
+%        \hline
+%        \multirow{2}{*}{$3$}& $R$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ & $11$ & $12$ \\
+%        & $T$ & $5$ & $5$ & $7$ & $8$ & $8$ & $10$ & $11$ & $12$ \\
+%        \hline
+%    \end{tabular}
+%    \caption{Minimum number of stages required for the starting and
+%          stopping method $R$ and $T$ for each ESSPRK($s,4,p$)
+%          main method.
+%          \textbf{TODO: double check these, then decide which table we want.}
+%        }
+%    \label{tab:RT_stages}
+%\end{table}
+Tables \ref{tab:ESSPRK(4,4,2)_scheme} and \ref{tab:ESSPRK(4,4,3)_scheme} 
+show the coefficients of the schemes where the main 
+method is ESSPRK($4,4,2$) and ESSPRK($4,4,3$), respectively. 
+
+It is important to note that in practice, if accurate values are needed at 
+any time other than the final time, the computation must invoke the 
+stopping method to obtain them.  Furthermore, changing step-size would require first applying the stopping method with the old step-size and then applying the starting method with the new step-size.
+
+%, and then the starting method to start up again if the stepsize where to change.
+
+\begin{table}
+    \setlength{\tabcolsep}{2pt}
+    %\centering
+    \footnotesize
+    \subfloat[Main method $M$, ESSPRK($4,4,2$) \label{ESSPRK(4,4,2)_scheme_a}]{
+        \begin{tabular}{c | c c c c}
+             $0$ & & & & \\
+             $0.730429885783319$ & $0.730429885783319$ & & & \\
+             $0.644964638145795$ & $0.251830917810810$ & $0.393133720334985$ & & \\
+             $1.000000000000000$ & $0.141062771617064$ & $0.220213358584678$ & $0.638723869798257$ & \\
+             \hline
+             & $0.384422161080494$ & $0.261154113377550$ & $0.127250689937518$ & $0.227173035604438$
+        \end{tabular}
+    }\\
+    \subfloat[Starting method $R$ \label{ESSPRK(4,4,2)_scheme_b}]{
+        \begin{tabular}{c | c c c c c}
+			$0$ & & & & & \\
+			$0.545722177514735$ & $0.545722177514735$ & & & & \\
+			$0.842931687441527$ & $0.366499989048164$ & $0.476431698393363$ & & & \\
+			$0.574760809487828$ & $0.135697968350722$ & $0.176400587890242$ & $0.262662253246864$ & & \\
+			$0.980872743236632$ & $0.103648417776838$ & $0.134737771331049$ & $0.200625899485633$ & $0.541860654643112$ & \\		
+             \hline
+             & $0.233699169638954$ & $0.294263351266422$ & $0.065226988215286$ & $0.176168374199685$ & $0.230642116679654$ 
+        \end{tabular}        
+    }\\
+    \subfloat[Stopping method $T$ \label{ESSPRK(4,4,2)_scheme_c}]{
+        \begin{tabular}{c | c c c c}
+			$0$ & & & & \\
+			$0.509877496215340$ & $0.509877496215340$ & & & \\
+			$0.435774135529007$ & $0.182230305923759$ & $0.253543829605247$ & & \\
+			$0.933203341300203$ & $0.148498121305090$ & $0.206610981494095$ & $0.578094238501017$ & \\
+             \hline            
+             & $0.307865440399752$ & $0.171863794704750$ & $0.233603236964822$ & $0.286667527930676$
+        \end{tabular}
+    }
+    \caption{ESSPRK(4,4,2): an effective order four SSPRK method with
+      four stages and classical order two with its associated starting
+      and stopping methods.}
+    \label{tab:ESSPRK(4,4,2)_scheme}
+\end{table}
+
+\begin{table}
+    \setlength{\tabcolsep}{2pt}
+    %\centering
+    \footnotesize
+    \subfloat[Main method $M$, ESSPRK($4,4,3$) \label{ESSPRK(4,4,3)_scheme_a}]{
+        \begin{tabular}{c | c c c c}
+             $0$ & & & & \\
+             $0.601245068769724$ & $0.601245068769724$ & & & \\
+             $0.436888719886063$ & $0.139346829159954$ & $0.297541890726109$ & & \\
+             $0.747760163757110$ & $0.060555450075478$ & $0.129301708677891$ & $0.557903005003740$ & \\
+             \hline
+             & $0.220532078662434$ & $0.180572397883936$ & $0.181420582644840$ & $0.417474940808790$
+        \end{tabular}  
+    }\\
+    \subfloat[Starting method $R$ \label{ESSPRK(4,4,3)_scheme_b}]{
+        \begin{tabular}{c | c c c c c}
+			$0$ &  & & & & \\
+			$0.438463764036947$ & $0.438463764036947$ & & & & \\
+			$0.639336395725557$ & $0.213665532574654$ & $0.425670863150903$ & & & \\
+			$0.434353425654020$ &$0.061345094040860$ & $0.122213530726218$ & $0.250794800886942$ & & \\
+			$0.843416464962307$ & $0.039559973266996$ & $0.078812561688700$ & $0.161731525131914$ & $0.563312404874697$ & \\			
+             \hline
+             & $0.154373542967849$ & $0.307547588471376$ & $0.054439037790856$ & $0.189611674483496$ & $0.294028156286422$
+        \end{tabular}
+    }\\
+    \subfloat[Stopping method $T$ \label{ESSPRK(4,4,3)_scheme_c}]{
+        \begin{tabular}{c | c c c c}
+			$0$ & & & & \\
+			$0.556337718891090$ & $0.556337718891090$ & & & \\
+			$0.428870688216872$ & $0.166867537553458$ & $0.262003150663414$ & & \\
+			$0.815008947642716$ & $0.104422177204659$ & $0.163956032598547$ & $0.546630737839510$ & \\		
+             \hline
+             & $0.203508169408374$ & $0.096469758967330$ & $0.321630956102914$ & $0.378391115521382$
+        \end{tabular}
+    }
+    \caption{ESSPRK(4,4,3): an effective order four SSPRK method with
+      four stages and classical order three with its associated starting
+      and stopping methods.}
+    \label{tab:ESSPRK(4,4,3)_scheme}
+\end{table}

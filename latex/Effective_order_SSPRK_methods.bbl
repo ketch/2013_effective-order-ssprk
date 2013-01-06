@@ -1,0 +1,165 @@
+\begin{thebibliography}{10}
+
+\bibitem{Butcher1969}
+{\sc Butcher, J.~C.}
+\newblock The effective order of {R}unge-{K}utta methods.
+\newblock In {\em Conf. on {N}umerical {S}olution of {D}ifferential {E}quations
+  ({D}undee, 1969)}. Springer, 1969, pp.~133--139.
+
+\bibitem{Butcher1972}
+{\sc Butcher, J.~C.}
+\newblock An algebraic theory of integration methods.
+\newblock {\em Math. Comp. 26}, 117 (1972), 79--106.
+
+\bibitem{Butcher1998}
+{\sc Butcher, J.~C.}
+\newblock Order and effective order.
+\newblock {\em Appl. Numer. Math. 28}, 2-4 (1998), 179--191.
+\newblock Eighth Conference on the Numerical Treatment of Differential
+  Equations (Alexisbad, 1997).
+
+\bibitem{Butcher2008_book}
+{\sc Butcher, J.~C.}
+\newblock {\em Numerical methods for ordinary differential equations},
+  second~ed.
+\newblock Wiley, 2008.
+
+\bibitem{Butcher1996}
+{\sc Butcher, J.~C., and Sanz-Serna, J.~M.}
+\newblock The number of conditions for a {R}unge-{K}utta method to have
+  effective order {$p$}.
+\newblock {\em Appl. Numer. Math. 22}, 1-3 (1996), 103--111.
+
+\bibitem{dahlquist2006}
+{\sc Dahlquist, G., and Jeltsch, R.}
+\newblock Reducibility and contractivity of {R}unge-{K}utta methods revisited.
+\newblock {\em BIT 46}, 3 (2006), 567--587.
+
+\bibitem{Ferracina2004}
+{\sc Ferracina, L., and Spijker, M.~N.}
+\newblock Stepsize restrictions for the total-variation-diminishing property in
+  general {R}unge-{K}utta methods.
+\newblock {\em SIAM J. Numer. Anal. 42}, 3 (2004), 1073--1093.
+
+\bibitem{Ferracina2005}
+{\sc Ferracina, L., and Spijker, M.~N.}
+\newblock An extension and analysis of the {S}hu-{O}sher representation of
+  {R}unge-{K}utta methods.
+\newblock {\em Math. Comp. 74}, 249 (2005), 201--219.
+
+\bibitem{Gottlieb2011a}
+{\sc Gottlieb, S., Ketcheson, D.~I., and Shu, C.-W.}
+\newblock {\em {Strong Stability Preserving Runge-Kutta And Multistep Time
+  Discretizations}}.
+\newblock World Scientific, Jan. 2011.
+
+\bibitem{Gottlieb/Ruuth:SSPfastdownwind}
+{\sc Gottlieb, S., and Ruuth, S.~J.}
+\newblock Optimal strong-stability-preserving time-stepping schemes with fast
+  downwind spatial discretizations.
+\newblock {\em J. Sci. Comput. 27}, 1-3 (2006), 289--303.
+
+\bibitem{Gottlieb/Shu:1998}
+{\sc Gottlieb, S., and Shu, C.-W.}
+\newblock Total variation diminishing {R}unge-{K}utta schemes.
+\newblock {\em Math. Comp. 67}, 221 (1998), 73--85.
+
+\bibitem{Gottlieb2001}
+{\sc Gottlieb, S., Shu, C.-W., and Tadmor, E.}
+\newblock Strong stability-preserving high-order time discretization methods.
+\newblock {\em SIAM Rev. 43}, 1 (2001), 89--112.
+
+\bibitem{Hairer1987_book}
+{\sc Hairer, E., N{\o}rsett, S.~P., and Wanner, G.}
+\newblock {\em Solving ordinary differential equations {I}: Nonstiff problems},
+  vol.~8 of {\em Springer Series in Computational Mathematics}.
+\newblock Springer-Verlag, 1987.
+
+\bibitem{Hairer1974}
+{\sc Hairer, E., and Wanner, G.}
+\newblock On the {B}utcher group and general multi-value methods.
+\newblock {\em Computing 13}, 1 (1974), 1--15.
+
+\bibitem{Higueras2004}
+{\sc Higueras, I.}
+\newblock On strong stability preserving time discretization methods.
+\newblock {\em J. Sci. Comput. 21}, 2 (2004), 193--223.
+
+\bibitem{Ketcheson2008}
+{\sc Ketcheson, D.~I.}
+\newblock Highly efficient strong stability-preserving {R}unge-{K}utta methods
+  with low-storage implementations.
+\newblock {\em SIAM J. Sci. Comput. 30}, 4 (2008), 2113--2136.
+
+\bibitem{ketcheson2009a}
+{\sc Ketcheson, D.~I.}
+\newblock Computation of optimal monotonicity preserving general linear
+  methods.
+\newblock {\em Math. Comp. 78}, 267 (2009), 1497--1513.
+
+\bibitem{Ketcheson:2011:downwind}
+{\sc Ketcheson, D.~I.}
+\newblock Step sizes for strong stability preservation with downwind-biased
+  operators.
+\newblock {\em SIAM J. Numer. Anal. 49}, 4 (2011), 1649--1660.
+
+\bibitem{Ketcheson/Macdonald/Gottlieb:2009}
+{\sc Ketcheson, D.~I., Macdonald, C.~B., and Gottlieb, S.}
+\newblock Optimal implicit strong stability preserving {R}unge-{K}utta methods.
+\newblock {\em Appl. Numer. Math. 59}, 2 (2009), 373--392.
+
+\bibitem{Kraaijevanger1986}
+{\sc Kraaijevanger, J. F. B.~M.}
+\newblock Absolute monotonicity of polynomials occurring in the numerical
+  solution of initial value problems.
+\newblock {\em Numer. Math. 48}, 3 (1986), 303--322.
+
+\bibitem{Kraaijevanger1991}
+{\sc Kraaijevanger, J. F. B.~M.}
+\newblock Contractivity of {R}unge-{K}utta methods.
+\newblock {\em BIT 31}, 3 (1991), 482--528.
+
+\bibitem{Laney:1998}
+{\sc Laney, C.~B.}
+\newblock {\em Computational gasdynamics}.
+\newblock Cambridge University Press, 1998.
+
+\bibitem{Ruuth:2006}
+{\sc Ruuth, S.~J.}
+\newblock Global optimization of explicit strong-stability-preserving
+  {R}unge-{K}utta methods.
+\newblock {\em Math. Comp. 75}, 253 (2006), 183--207.
+
+\bibitem{Ruuth2002}
+{\sc Ruuth, S.~J., and Spiteri, R.~J.}
+\newblock Two barriers on strong-stability-preserving time discretization
+  methods.
+\newblock In {\em Proceedings of the {F}ifth {I}nternational {C}onference on
+  {S}pectral and {H}igh {O}rder {M}ethods ({ICOSAHOM}-01) ({U}ppsala)\/}
+  (2002), vol.~17, pp.~211--220.
+
+\bibitem{Ruuth2004}
+{\sc Ruuth, S.~J., and Spiteri, R.~J.}
+\newblock High-order strong-stability-preserving {R}unge-{K}utta methods with
+  downwind-biased spatial discretizations.
+\newblock {\em SIAM J. Numer. Anal. 42}, 3 (2004), 974--996.
+
+\bibitem{Shu/Osher:1988}
+{\sc Shu, C.-W., and Osher, S.}
+\newblock Efficient implementation of essentially nonoscillatory
+  shock-capturing schemes.
+\newblock {\em J. Comput. Phys. 77}, 2 (1988), 439--471.
+
+\bibitem{Spiteri2003a}
+{\sc Spiteri, R.~J., and Ruuth, S.~J.}
+\newblock A new class of optimal high-order strong-stability-preserving time
+  discretization methods.
+\newblock {\em SIAM J. Numer. Anal. 40}, 2 (2002), 469--491.
+
+\bibitem{Spiteri2003b}
+{\sc Spiteri, R.~J., and Ruuth, S.~J.}
+\newblock Non-linear evolution using optimal fourth-order
+  strong-stability-preserving {R}unge-{K}utta methods.
+\newblock {\em Math. Comput. Simulation 62}, 1-2 (2003), 125--135.
+
+\end{thebibliography}

@@ -1,0 +1,97 @@
+\textbf{Copy-paste job from TSRK paper}
+
+\subsection{Buckley--Leverett}
+
+The Buckley--Leverett equation is a model for two-phase flow through
+porous media and consists of the conservation law
+%\eqref{eq:HCL} with flux function
+\begin{equation*}
+U_t + f(U)_x = 0, \quad \text{with} \quad
+f(U) = \frac{U^2}{U^2 + a(1-U)^2}.
+\end{equation*}
+We use $a=\frac{1}{3}$ and initial conditions 
+%$u(0,x) = \frac{1}{2}H(x-1/2)$
+\begin{equation*}
+  u(x,0)= \left\{  \begin{array}{ll}
+      1 & \mbox{if $x \le \frac{1}{2}$,} \\
+      0 & \mbox{otherwise,} \\ \end{array} \right.
+\end{equation*}
+on $x \in [0,1)$ with periodic boundary conditions.  Our spatial
+discretization uses $100$ points and following
+\cite{Hundsdorfer/Verwer:2003, Ketcheson2009_article} we use a conservative scheme with Koren limiter.  We
+compute the solution until $t_f = \frac{1}{8}$.  For this problem, the
+Euler solution is total variation diminishing (TVD) for $\dt \le \DtFE
+= 0.0025$ \cite{Ketcheson2009_article}.  As
+discussed above, we must also satisfy the SSP time-step restriction
+for the starting method.
+
+
+%The Buckley--Leverett equation is a model for two-phase flow through
+%porous media.  As described in
+%\cite{Ferracina/Spijker:2007:SDIRKssp,Ketcheson2009_article}, we use it as a
+%test case by computing numerical solutions using the various SSP TSRK
+%schemes.  We measure the total variation at each time step and make
+%sure it is not increasing (i.e., that the solution has the ``TVD''
+%property).  We compute the maximal TVD time step as $\dt =
+%\sigma_{\text{BL}} \DtFE$ and compare it to $\dt = \sspcoef \DtFE$.
+
+
+
+Figure~\ref{fig:bucklev} shows typical solutions using an TSRK scheme
+with timestep $\dt = \sigma \DtFE$.  Table~\ref{tab:bucklev_TVD} shows
+the maximal TVD time-step sizes, expressed as $\dt =
+\sigma_{\text{BL}} \DtFE$, for the Buckley--Leverett test problem.
+The results show that the SSP coefficient is a lower bound for what is
+observed in practice, confirming the theoretical importance of the SSP
+coefficient.
+
+\begin{figure}
+  %\centerline{%
+  %\includegraphics[width=0.45\textwidth]{figures/bl_tsrk128_s0p9}%
+  %\includegraphics[width=0.45\textwidth]{figures/bl_tsrk128_s5p5}%
+  %}
+  %\centerline{%
+  %\includegraphics[width=0.45\textwidth]{figures/bl_tsrk125_s5p2}%
+  %\includegraphics[width=0.45\textwidth]{figures/bl_tsrk125_s9}%
+  %}
+  \centerline{%
+  \includegraphics[width=0.45\textwidth]{figures/bl_tsrk85_s3p5}%
+  \includegraphics[width=0.45\textwidth]{figures/bl_tsrk85_s5p6}%
+  }
+  \caption{Two numerical solutions of the Buckley--Leverett test
+    problem.  Left: time-step satisfies the SSP time-step restriction
+    (TSRK(8,5) using $\dt = 3.5\DtFE$).  Right: time-step
+    does not satisfy the restriction ($\dt = 5.6\DtFE$) 
+    and visible oscillations have formed, increasing the total variation
+    of the solution.}
+  \label{fig:bucklev}
+\end{figure}
+
+
+\begin{table}
+  \caption{SSP coefficients versus largest time steps exhibiting
+    the TVD property ($\dt = \sigma_{\text{BL}} \DtFE$) on
+    the Buckley--Leverett example, for
+    some of the SSP TSRK($s$,$p$) schemes.  The effective SSP
+    coefficient $\ceff$ should be a lower bound for
+    $\sigma_{\text{BL}} / s$ and indeed this is observed.
+    SSPRK(10,4) \cite{Ketcheson2008_article} is used as the first step
+    in the starting procedure.}
+  \label{tab:bucklev_TVD}
+  \center
+  \begin{tabular}{l|cc|cc}
+    \hline
+    Method & \multicolumn{2}{c|}{theoretical} & \multicolumn{2}{c}{observed} \\
+                  & $\sspcoef$ & $\ceff$&  $\sigma_{\text{BL}}$  & $\sigma_{\text{BL}} / s$  \\ \hline
+      TSRK(4,4)   & 1.5917   &  0.398     &   2.16 &  0.540   \\
+      %TSRK(5,5)   & 1.6213   &  0.324     &   2.53 &  0.506  \\
+      TSRK(8,5)   & 3.5794   &  0.447     &   4.41 &  0.551  \\
+      TSRK(12,5)  & 5.2675   &  0.439     &   6.97 &  0.581  \\
+      TSRK(12,6)  & 4.3838   &  0.365     &   6.80 &  0.567  \\
+      TSRK(12,7)  & 2.7659   &  0.231     &   4.86 &  0.405  \\
+      TSRK(12,8)  & 0.94155  &  0.0785    &   4.42 &  0.368  \\
+      \hline
+  \end{tabular}
+\end{table}
+
+
