@@ -1,7 +1,7 @@
 \documentclass[12pt]{article}
 \usepackage{amsmath,amssymb,amsfonts,amsthm,graphicx,subfigure,multicol}
 \usepackage[hmargin=1.0in]{geometry}
-\usepackage{empheq}
+%\usepackage{empheq}
 \usepackage{epstopdf}
 \usepackage{bm}
 \usepackage{hyperref}
@@ -22,13 +22,16 @@
 \begin{document}
 
 \title{Revision of "Effective order strong stability preserving Runge--Kutta methods"}
-\author{Yiannis Hadjimichael, Colin B.~Macdonald, David I.~Ketcheson \\ and  Jim.~H.~Verner}
+\author{Yiannis Hadjimichael, Colin B.~Macdonald, David I.~Ketcheson \\ and  James.~H.~Verner}
 
 \maketitle
 
 The authors would like to thank the reviewers for their constructive comments and the
 editor for the time invested. 
-We have revised the paper according to the comments and suggestions. 
+We have revised the paper according to the comments and suggestions.
+In addition we were able to find a pattern for the coefficients of effective order four, 
+classical order two ESSPRK methods.
+These are included in Section~5.1.3.
 Answers to the comments of the reviewers have been included below.
 \vspace{30pt}
 
@@ -45,21 +48,20 @@ In a similar way, in the third paragraph of the introduction section, the senten
 methods use \dots", is incorrect.
 The same comment is valid for the title of section 3.}
 
-The title has been changed to ``Explicit strong stability preserving Runge--Kutta methods
-with effective order of accuracy". 
+The title has been changed to ``Strong stability preserving explicit Runge--Kutta methods of maximal effective order". 
 Also all instances of ``effective order methods" are now corrected.
-Particularly, the title of section 3 is now ``Runge--Kutta methods with effective order 
-of accuracy" and lines 2 and 4 are changed to ``methods of effective order" and
-``methods with effective order of accuracy", respectively.
+Particularly, the title of section 3 now reads ``The effective order of Runge--Kutta 
+methods". %and lines 2 and 4 are changed to ``methods of effective order" and
+%``methods with effective order of accuracy", respectively.
 The introduction is redone and care has been taken so that ``effective order" 
 is correctly used.
 
-\yiannis{Other possible titles may be:\\
-``Explicit SSPRK of effective order $q$", ``On the effective order of SSPRK methods",
-``The effective order of SSPRK methods".}
-
-\david{I'm not totally happy with this, since ``Runge--Kutta methods with order of accuracy"
-sounds a bit strange (with nothing following), but I can't think of something better.}
+%\yiannis{Other possible titles may be:\\
+%``Explicit SSPRK of effective order $q$", ``On the effective order of SSPRK methods",
+%``The effective order of SSPRK methods".}
+%
+%\david{I'm not totally happy with this, since ``Runge--Kutta methods with order of accuracy"
+%sounds a bit strange (with nothing following), but I can't think of something better.}
 
 \remark{2}{
 The introduction should be redone. 
@@ -69,7 +71,7 @@ These lines are not followed by the authors, and after reading the introduction,
 reader does not get the ideas of the problem and how it is going to be solved.}
 
 Following your suggestions we have rewritten the introduction. 
-We emphasize the main problems of our study and how these are being addressed.
+We emphasized the main problems of our study and how these are being addressed.
 
 \remark{3}{
 A spatial discretization of (2.1) gives rise to autonomous ODEs, but the ODE in (2.2) is
@@ -83,13 +85,15 @@ variable in the ODE (2.2) and the trees (see e.g., (3.1)).}
 
 The equations (2.2), (2.3) and the definition of the RK methods in page 2 have been
 changed to the autonomous form. 
-Also, after line 5 of Section 2, the following phrase is added:
+Also, in Section 2, line 6 the following phrase is added:
 ``Particularly, $\bm{F}$ may be time-dependent, but we can always make a transformation 
 to an autonomous form."
 
 We agree that the symbol $t$ is overloaded.  However, we think that changing it would cause more
 confusion due to its strong traditional use in both senses.  We have kept the current notation since
 it is consistent with the literature and the meaning is generally clear from context.
+
+\pagebreak
 
 \remark{4}{
 Section 3: The authors try to summarize in few pages the nontrivial theory of effective
@@ -107,7 +111,7 @@ On the other hand, it is not easy for the reader to understand how Table 3.3 sho
 used. It is not clear either why in Table 3.4, methods with classical order e.g. 3, have
 $\beta_0 = \beta_1 = 0$. \\
 As the aim of the authors is to construct methods with effective order p, the authors
-should begin with the material in section 3.3.1, and include a previous section to explain
+should begin with the material in Section 3.3.1, and include a previous section to explain
 as brief as possible the idea of effective order (composition of methods, starting and
 stopping procedures, and so on).
 Tables 3.1 and 3.3 can be included, but the authors should stress that, $\alpha_i$ in 
@@ -120,90 +124,95 @@ Based on your suggestions we briefly review J. Butcher theory about the algebrai
 of RK methods, focusing on the structure of the RK group which yields the concepts of classical 
 and effective order.
 Then a section on how to construct RK methods of effective order follows.
-Tables 3.1 and 3.2 are included and we add the line:
+Tables 3.1 and 3.2 are included and we added the following line in Table 3.2:
 ``Recall that $\alpha_i$ and $\beta_i$ are the elementary weights associated 
 with the index $i$ in Table 3.1",
 as mentioned.
-Table 3.2 and examples in the first part of this section are omitted. 
-Finally in line 9 page 6, we add:
-``For a fixed classical and effective order, these are the equality constraints 
-$\Phi(K)$ in the optimization problem (2.5)"
+Examples and relevant tables in the first part of this section are omitted. 
+Finally in page 6, line 6 we added:
+``For a specified classical and effective order, these are the equality constraints
+$\Phi(K)$ in the optimization problem (2.5) for method $M$"
 to explain how Table 3.3 is used in practice.
-In line 11 page 6, we add the following:
-``The classical order of the main method $M$ is increased by setting $\beta_i$
-to zero. 
-Essentially, for a given effective order $q$ if all $\beta_i$ are zero, then
-the main method has classical order $q$."
+In page 10, line 11 we added the following:
+``We note that increasing the classical order of the main method results
+in setting more of the $\beta_i$ to zero."
 This clarifies the relation between the classical order and $\beta_i$.
+
+\pagebreak
 
 \remark{5}{
 The fact that, for $q \leq 5$, methods with effective order $q$ have order $q$ 
 for linear problems is important for inequality (5.1). 
-This information is given at the end of section 3.1.1, but I think it should be given as a Remark.}
+This information is given at the end of Section~3.1.1, but I think it should be given as a Remark.}
 
-Thanks for the comment. We state this with a remark at the end of section 3.2.1: 
+Thanks for the comment. We stated this with Remark~3.2 in Section~3.2:
 
-\textbf{Remark 3.3:} The effective order conditions of the main method for the ``tall" trees 
-$t_1, t_4, t_8, t_{17}, \dots$ match the classical order conditions
+``The effective order conditions of the main method for the ``tall" trees 
+$t_1, t_2, t_4, t_8, t_{17}, \dots$ match the classical order conditions
 and these are precisely the order conditions for linear problems.
-This follows directly from inductive application of (3.1)
-on the tall trees.
-Therefore, methods of effective order $q$ have order at least $q$ for linear problems.
+This follows from inductive application of the product operation (3.1)
+on the tall trees. 
+Therefore, methods of effective order $q$ have classical order at least $q$ 
+for linear problems.''
 
 \david{Here and in one other place, the referee seems to imply that this fact does not
 hold for $q>5$, but we claim that it does.  We should make sure of this.}
 
+\yiannis{Our claim as stated in this remark is correct.}
+
 \remark{6}{
 Section 4 is a bit messy, and I propose to change the order of the material in it. 
-I propose to state Lemma 4.3, then state Lemma 4.2, and then state Theorem 4.1. 
+I propose to state Lemma~4.3, then state Lemma~4.2, and then state Theorem~4.1. 
 The authors should explain that the proofs will be done later on. 
-The authors should stress the beginning of proof of Lemma 4.2 (in a quick reading, 
+The authors should stress the beginning of proof of Lemma~4.2 (in a quick reading, 
 it is difficult to find it).}
 
-We rearrange the material in this section as suggested.
-We also state that the proof of Lemma 4.2 can be found at the end of the section.
+We rearranged the material in this section as suggested.
+We also stated that the proof of Theorem~4.2 can be found at the end of the section.
 
-\david{The sentence before Lemma 4.2 makes no sense to me.  If Lemma 4.2 is the main 
-result, it should be a theorem and 4.3 should be a corollary.  Also, it seems silly to state
-Theorem 4.3 in that sentence, when it appears one inch lower on the page.
-}
+%\david{The sentence before Lemma~4.2 makes no sense to me.  If Lemma~4.2 is the main 
+%result, it should be a theorem and 4.3 should be a corollary.  Also, it seems silly to state
+%Theorem~4.3 in that sentence, when it appears one inch lower on the page.
+%}
 
 \remark{7}{
-It is not clear to me the relevance of Remark 4.4 in this paper.}
+It is not clear to me the relevance of Remark~4.4 in this paper.}
 
 The remark now reads:
 
-        It is worth noting here an additional result that lies outside the scope of
-        this paper but follows directly from what we have proved.
-	Using Lemma~4.2 and [6, Theorem 4.1],
-  	we see that any irreducible explicit Runge--Kutta method with positive radius of
-  	circle contractivity has effective order at most four.
+``It is worth noting here an additional result that 
+follows directly from what we have proved.
+Using Theorem~4.2 and [6, Theorem~4.1], 
+it follows that any irreducible explicit Runge--Kutta method with positive radius of
+circle contractivity has effective order at most four."
 
 \remark{8}{
-Proof of Lemma 4.2, Case 2: Just after defining the set $I$, the authors should stress that
+Proof of Lemma~4.2, Case 2: Just after defining the set $I$, the authors should stress that
 $I \neq \emptyset$ because $v_1 = 0$ and $\beta_2 \neq 0$.
 The explanation of why $v_1 = 0$ should be included
 here.}
 
 The explanation why $v_1 \neq 0$ is now after set $I$ is defined. The text reads:
 
-``	Let the set $I = \{i : v_i = \beta_2\}$. 
+``Let the set $J = \{i : v_i = \beta_2\}$. 
 Note that $v_1 = 0$ because the first row of matrix $A$ is identically zero.
-Since $\beta_2 \neq 0$ and $ \bm{v} \neq \bm{0}$, the set $I$ is not empty.
-Then (4.2a) yields, \dots".
+Since $\beta_2 \neq 0$ and $ \bm{v} \neq \bm{0}$, the set $J$ is not empty.
+Then (4.4) yields \dots".
+
+Note that set $I$ is changed to $J$.
 	
 \remark{9}{
-Proof of Lemma 4.2, Case 3: The authors should explain, that, as $v_1 = 0$, the 
+Proof of Lemma~4.2, Case 3: The authors should explain, that, as $v_1 = 0$, the 
 indexes $i,j$ are in $\{2,\dots,s\}$.}
 
-Lemma 4.2, Case 3 has been changed to:
+Lemma~4.2, Case 3 has been changed to:
 
 ``Since $\bm{b} > \bm{0}$, (4.6) implies that $\bm{w}$ contains both positive 
 and negative elements. 
 Furthermore, $v_1=0$ for any explicit method, thus $w_1=0$.
 Then, we can choose $i, j \in \{2, \dots, s\}$ such that $w_i < 0 < w_j$.
 By (4.3) $v_i\ne 0$, $v_j\ne 0$, and $v_i\ne v_j$.
-Application of Lemma 4.5 reveals that all $v_k$ for 
+Application of Lemma~4.5 reveals that all $v_k$ for 
 $k \in\{1,2,\dots,s\}$ must be equal except for one, which is a contradiction
 since $v_1 = 0$."
 
@@ -211,41 +220,42 @@ since $v_1 = 0$."
 The authors should explain the inequality $\sspcoef_{s,q,p} \leq \clin$ in formula (5.1). 
 For $q \leq 5$ inequalities (5.1) are true because for $q \leq 5$ methods with effective 
 order $q$ have order $q$ for linear problems. 
-For $q \geq 5$, they are also true because by Theorem 4.1 $\sspcoef_{s,q,p}  = 0$.}
+For $q \geq 5$, they are also true because by Theorem~4.1 $\sspcoef_{s,q,p}  = 0$.}
 
-We agree with this argument, however Remark 3.3 is much stronger. 
-For any RK method the effective order conditions $q$ include the classical order $q$ 
-conditions for linear problems, i.e. the conditions on the tall trees. 
-As we state in Remark 3.3 this can be easily proved by inductively applying the formula 
-(3.1) on tall trees. 
-Then one can see that for a given order the effective order conditions on tall trees 
-match the order conditions for linear problems.
+Please note that Remark~3.2 is sufficient for the inequality 
+$\sspcoef_{s,q,p} \leq \clin$ to hold.
+%We agree with this argument, however Remark~3.2 is much stronger. 
+%For any RK method the effective order conditions $q$ include the classical order $q$ 
+%conditions for linear problems, i.e. the conditions on the tall trees. 
+%As we state in Remark~3.2 this can be easily proved by inductively applying the formula 
+%(3.1) on tall trees. 
+%Then one can see that for a given order the effective order conditions on tall trees 
+%match the order conditions for linear problems.
+We added the following line before inequalities (5.1):
 
-Thus we add the following line before inequalities (5.1):
-
-``From Remark 3.3 and the fact that the ESSPRK($s,q,p$) methods 
+``From Remark~3.2 and the fact that the ESSPRK($s,q,p$) methods 
 form a super class of the SSPRK($s,q$) methods, we have \dots"
 
-\yiannis{Same comment as remark 7.}
-
 \david{Perhaps we don't want to emphasize the difference between our explanation and that of the referee.}
+
+\yiannis{I removed the redundant text so we dont emphasize this difference.}
 
 \remark{11}{
 Legend in Table 5.1: Please, include the value of $\sspcoef^{\textnormal{lin}}_{6,4}$.}
 
-We now explicitly state that $\sspcoef^{\textnormal{lin}}_{6,4}=0.44$.
+We now explicitly stated that $\sspcoef^{\textnormal{lin}}_{6,4}=0.44$.
 \vspace{20pt}
 
 \noindent \textbf{\large Minor remarks:}
 
 \remark{1}{
-Page 1, line 10 in section 1: the authors say that SSP ``time discretizations (formerly
+Page 1, line 10 in Section 1: the authors say that SSP ``time discretizations (formerly
 TVD discretizatons \dots". 
 In some contexts, the term TVD discretizations are also used nowadays. 
 I would suggest to change the term ``formely" and use ``also known as TVD discretizations" 
 (or something similar).}
 
-We follow your suggestion.
+We followed your suggestion.
 
 \remark{2}{
 Section 2: Please, explain the meaning of $A, b$ and $c$.}
@@ -259,19 +269,20 @@ $c_i = \sum_{j=1}^{i-1}a_{ij}$.
 The accuracy and stability of the method depend on the coefficients of the 
 Butcher tableau $(A,\bm{b},\bm{c})$ [4]."
 
-We clarify this in Table 3.1 as well.
+We clarified this in Table 3.1 as well.
 
 \remark{3}{
 Equations (2.4): Please, explain that $I$ is the identity matrix. Observe that $I$ is used to
-denote the identity matrix and certain set in the proof of Lemma 4.2 (Case 2).}
+denote the identity matrix and certain set in the proof of Lemma~4.2 (Case 2).}
 
-We define that $I$ is the $s \times s$ identity matrix in (2.4).
-We also change the set $I$ in proof of Lemma 4.2 to $J$ to remove any ambiguity.
+We defined that $I$ is the $s \times s$ identity matrix in (2.4).
+In the proof of Theorem~4.2, we also changed the set $I$ to $J$ to remove any ambiguity.
 
 \remark{4}{
 Table 5.2, first row: I think is better to write $\tau(t) = (\alpha\beta^{-1})(t)$.}
 
-We follow your suggestion.
+We followed your suggestion.
+
 \vspace{50pt}
 
 \section*{Referee \#2}
@@ -279,7 +290,7 @@ We follow your suggestion.
 On page 3, where the effective SSP coefficient is defined, it would be clearer to say
 ``To allow a fair comparison of explicit methods with different number of stages, we consider \dots". }
 
-We follow your suggestion.
+We followed your suggestion.
 
 \remark{2}{
 On page 5, in Example 3.3, the use of the phrase ``backward Euler" has been used 
