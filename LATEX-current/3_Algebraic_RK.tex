@@ -10,7 +10,7 @@ Specifically, we consider a \emph{starting method} $S$, a \emph{main
 %: i.e., the inverse of $S$ which
 %annihilates the work of the starting method (up to order $q$).
 The successive use of these three methods results in a method $P =
-S^{-1}MS$, which denotes the application method $S$, followed by
+S^{-1}MS$, which denotes the application of method $S$, followed by
 method $M$, followed by method $S^{-1}$.
 We want $P$ to have order $q$, whereas $M$ might have lower classical
 order $p < q$.
@@ -66,9 +66,9 @@ derivation of the effective order conditions.
 
 \subsection{The algebraic representation of Runge--Kutta methods}\label{subsec:Algebraic_representation}
 
-In Butcher's algebraic theory of Runge--Kutta methods
-\cite{Butcher2008_book}, methods are viewed as elements in an group
-$G$, consisting of real-valued functions on the set of rooted trees.
+In Butcher's algebraic theory, Runge--Kutta methods
+are placed in one-to-one correspondence with elements of a group
+$G$, consisting of real-valued functions on the set of rooted trees \cite{Butcher2008_book}.
 A Runge--Kutta method corresponds to the map that takes each rooted tree $t$
 to the corresponding elementary weight $\Phi(t)$ of that Runge--Kutta method.
 %Each elementary weight is an expression $\Phi(t)$ on a rooted tree
@@ -76,17 +76,19 @@ to the corresponding elementary weight $\Phi(t)$ of that Runge--Kutta method.
 Table~\ref{tab:elementary_weights} lists the elementary weights for trees of
 up to degree five; a general recursive formula can be found in
 \cite[Definition 312A]{Butcher2008_book}.
+The ordering of trees given in Table~\ref{tab:elementary_weights} is used
+throughout the remainder of this work; thus $t_9$ refers to the tree with
+elementary weight $\bm{b}^T \bm{c}^4$.
 For a function $\alpha \in G$ we write the values of the
 elementary weights as $\alpha_{i} = \alpha(t_{i})$ for tree $t_{i}$.
 %By convention $\alpha_0 = \alpha(t_{0}) = 1$, where $t_{0}$ denotes the empty tree.
 %For example $\alpha_1 = \bm{b}^T\bm{e}$, $\alpha_2 = \bm{b}^T\bm{c}$ and so on.
 A special element of the group $E \in G$ corresponds to the
-(hypothetical) method which takes one exact step of the
-solution.
+(hypothetical) method that evolves the solution exactly.
 The values of $E(t)$ are denoted $1/\gamma(t)$, where $\gamma(t)$ denotes 
 the density of tree $t$ \cite{Butcher2008_book} and these are included in
 Table~\ref{tab:elementary_weights}.
-Classical order conditions follow from comparing the elementary weights 
+Classical order conditions are obtained by comparing the elementary weights 
 of a method with these values.
 
 Let $\alpha, \beta \in G$ correspond to Runge--Kutta methods $M_1$ and $M_2$
@@ -100,16 +102,16 @@ the multiplicative group operation $\alpha\beta$.\footnote{We write
 	but when referring to products of elements of $G$
         we use the reverse ordering ($\alpha\beta$)
 	to match the convention in \cite{Butcher2008_book}.}
-This is defined by partitioning the input tree and computing
+This product is defined by partitioning the input tree and computing
 over the resulting forest \cite[\S~383]{Butcher2008_book}.
-It is expressed by
-\begin{equation}\label{eq:Group_operation}
-       (\alpha\beta)(t) = \sum_{w \lhd t} \biggl(\prod_{v \in t \setminus w} \alpha(v)\beta(w)\biggr),
-\end{equation}
-where $w \lhd t$ indicates a subtree of $t$ which includes the
-root of $t$ and $w \setminus t$ indicates the forest induced
-by removing $w$ from $t$ \cite{Butcher2008_book}.
-Multiplicity in choosing $w$ must also be accounted for.
+%It is expressed by
+%\begin{equation}\label{eq:Group_operation}
+%       (\alpha\beta)(t) = \sum_{w \lhd t} \biggl(\prod_{v \in t \setminus w} \alpha(v)\beta(w)\biggr),
+%\end{equation}
+%where $w \lhd t$ indicates a subtree of $t$ which includes the
+%root of $t$ and $w \setminus t$ indicates the forest induced
+%by removing $w$ from $t$ \cite{Butcher2008_book}.
+%Multiplicity in choosing $w$ must also be accounted for.
 
 Two Runge--Kutta methods $M_1$ and $M_2$, are equivalent up to order
 $p$ if their corresponding elements in $G$, $\alpha$ and $\beta$, satisfy
@@ -126,13 +128,15 @@ We can then define the effective order of accuracy of a method $M$
 with starting method $S$ and stopping method $S^{-1}$. % as $S^{-1}MS \equival{q} E$.
 \begin{definition}\cite[\S~389]{Butcher2008_book}\label{def:Effective_order}
   Suppose $M$ is a Runge--Kutta method with corresponding $\alpha \in G$.
-  Then the method $M$ is of effective order $q$ if there exists a method
-  $S$ (with corresponding $\beta \in G$) such that
+  Then the method $M$ is of effective order $q$ if there exist methods
+  $S,S^{-1}$ (with corresponding $\beta, \beta^{-1} \in G$) such that
 	\begin{equation}\label{eq:Effective_order_1}
-		(\beta\alpha\beta^{-1})(t) = E(t), \; \text{for every tree with $r(t) \leq q$,}
+		(\beta\alpha\beta^{-1})(t) \equival{q} E(t)%, \; \text{for every tree with $r(t) \leq q$,}
 	\end{equation}
-        where $\beta^{-1}$ is an inverse of $\beta$ up to order $q$.
-        Recall that $E$ represents one exact step of the solution.
+        where $\beta^{-1}$ is an inverse of $\beta$ up to order $q$; i.e.
+        $$\beta^{-1}\beta \equival{q} 1$$
+        where $1\in G$ is the identity element
+        and $E\in G$ is the exact evolution operator.
 \end{definition}
 
 \begin{table}
@@ -182,23 +186,23 @@ with starting method $S$ and stopping method $S^{-1}$. % as $S^{-1}MS \equival{q
 \end{table}
 
 \subsection{Effective order conditions}\label{sec:effOrderCond}
-For the main method $M$ to have effective order $q$ its coefficients,
-and those of the starting and stopping methods, must satisfy a set of
+For the main method $M$ to have effective order $q$, its coefficients
+and those of the starting and stopping methods must satisfy a set of
 algebraic conditions.
 These \emph{effective order conditions} can be found
 by rewriting \eqref{eq:Effective_order_1} as
 $(\beta\alpha)(t) = (E\beta)(t)$  %, for all trees with $r(t) \leq q$
-and applying the product operation \eqref{eq:Group_operation}.
+and applying the group product operation.
 For trees up to order five these are tabulated in Table~\ref{tab:effective_OCs_on_alpha} (and also in \cite[\S~389]{Butcher2008_book}).
 In general, the effective order conditions allow more degrees of
-freedom on methods than the classical order conditions.
-Note that these conditions match the classical order conditions up to
+freedom for method design than do the classical order conditions.
+Note that the effective order conditions match the classical order conditions up to
 second order.
 \begin{remark}\label{rem:talltrees}
 	The effective order conditions of the main method for the ``tall" trees 
 	$t_1, t_2, t_4, t_8, t_{17}, \dots$ match the classical order conditions
 	and these are precisely the order conditions for linear problems.
-	This follows from inductive application of the product operation \eqref{eq:Group_operation}
+	This follows from inductive application of the group product
 	on the tall trees. 
 	Therefore, methods of effective order $q$ have classical order at least $q$ 
 	for linear problems.
@@ -209,8 +213,8 @@ second order.
 
 \subsubsection{Order conditions of the main and starting methods}\label{subsubsec:Main_starting_conditions}
 As recommended in \cite{Butcher2008_book},
-we consider the $\beta_{i}$ as free
-parameters when determining the $\alpha_i$.
+we consider the elementary weights $\beta_{i}$ of the starting method as free
+parameters when determining the elementary weights $\alpha_i$ of the main method.
 The relationship in Table~\ref{tab:effective_OCs_on_alpha} between the
 $\alpha_i$ and $\beta_i$ is mostly linear (although there are a few
 $\beta_2^2$ terms).
@@ -228,10 +232,10 @@ and we obtain a set of order conditions on $\beta$ (for that
 particular choice of $M$).  These are given in the right-half of
 Table~\ref{tab:effective_OCs}.
 %The order conditions for the starting method $S$ are also given in the table.
-We can also find the order conditions of $S^{-1}$ in terms of the
+We can also find the order conditions on $S^{-1}$ in terms of the
 $\beta_i$ (see \cite[Table~386(III)]{Butcher2008_book}).
-We note that increasing the classical order of the main method results
-in setting more of the $\beta_i$ to zero.
+We note that increasing the classical order of the main method requires
+setting more of the $\beta_i$ to zero.
 %The classical order of the main method $M$ is increased by setting $\beta_i$
 %to zero.
 %Essentially, for a given effective order $q$ if all $\beta_i$ are zero, then
