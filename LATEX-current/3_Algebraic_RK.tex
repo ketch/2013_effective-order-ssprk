@@ -131,11 +131,13 @@ with starting method $S$ and stopping method $S^{-1}$. % as $S^{-1}MS \equival{q
   Then the method $M$ is of effective order $q$ if there exist methods
   $S,S^{-1}$ (with corresponding $\beta, \beta^{-1} \in G$) such that
 	\begin{equation}\label{eq:Effective_order_1}
-		(\beta\alpha\beta^{-1})(t) \equival{q} E(t)%, \; \text{for every tree with $r(t) \leq q$,}
+		(\beta\alpha\beta^{-1})(t) = E(t), \; \text{for every tree with } r(t) \leq q,
 	\end{equation}
         where $\beta^{-1}$ is an inverse of $\beta$ up to order $q$; i.e.
-        $$\beta^{-1}\beta \equival{q} 1$$
-        where $1\in G$ is the identity element
+        \begin{align*}
+        		(\beta^{-1}\beta)(t) = 1(t), \; \text{for every tree with } r(t) \leq q.
+		\end{align*}	        
+        Here $1\in G$ is the identity element
         and $E\in G$ is the exact evolution operator.
 \end{definition}
 
@@ -234,8 +236,8 @@ Table~\ref{tab:effective_OCs}.
 %The order conditions for the starting method $S$ are also given in the table.
 We can also find the order conditions on $S^{-1}$ in terms of the
 $\beta_i$ (see \cite[Table~386(III)]{Butcher2008_book}).
-We note that increasing the classical order of the main method requires
-setting more of the $\beta_i$ to zero.
+We note that increasing the classical order of the main method requires 
+$\alpha_i = 1/\gamma(t_i)$ and thus more of the $\beta_i$ are set to zero.
 %The classical order of the main method $M$ is increased by setting $\beta_i$
 %to zero.
 %Essentially, for a given effective order $q$ if all $\beta_i$ are zero, then
