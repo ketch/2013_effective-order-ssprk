@@ -186,7 +186,6 @@ SSP coefficient $\sspcoef = n^2-n$.
 They are optimal since $\sspcoef = \sspcoef^{\textnormal{lin}}_{4,2}$ 
 \cite[Theorem~5.2(c)]{Kraaijevanger1986}.
 It is convenient to express the coefficients in the modified Shu--Osher form
-%\textbf{\red [todo: citation]},
 \cite{Gottlieb2011a}
 \begin{align*}
 	\bm{Y}_i &= v_i\bm{u}^n + \sum_{j=1}^{i-1}(\alpha_{ij}\bm{Y}_j + \Dt\beta_{ij}\bm{F}(\bm{Y}_j)), \; 1 \leq i \leq s+1 \\
@@ -213,7 +212,7 @@ where $ 1 \leq i \leq n^2$ and
 In \cite[\S~6.2.2]{Gottlieb2011a}, a similar pattern was found
 for SSPRK($s,3$) methods.
 %\textbf{\red TODO: i.e., some more info: I don't have the book in front of me.}
-%\textbf{\red TODO: $\pm$ makes this look like \emph{two} families to me...}
+
 
 \subsection{Starting and stopping methods}\label{subsec:starting_stopping}
 Having constructed an ESSPRK($s,q,p$) scheme that can be used as the main 
@@ -242,7 +241,7 @@ That is, the order conditions of $R$ and $T$ must match those of
 $MS$ and $S^{-1}M$, respectively, up to order $q$.
 This gives a new $TM^{n-2}R$ scheme which is equivalent up to order $q$ 
 to the $S^{-1}M^nS$ scheme and attains classical order $q$.
-Each starting and stopping procedures now take a positive step forward 
+Each starting and stopping procedure now takes a positive step forward
 in time.
 
 To derive order conditions for the $R$ and $T$ methods, consider their

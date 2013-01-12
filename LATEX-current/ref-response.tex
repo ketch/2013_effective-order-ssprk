@@ -21,19 +21,19 @@
 
 \begin{document}
 
-\title{Revision of ``Effective order strong stability preserving Runge--Kutta methods" \\\vspace{10pt}
-	\large{(SINUM manuscript \#088420)}}
+%\title{Revision of ``Effective order strong stability preserving Runge--Kutta methods" \\\vspace{10pt}
+%	\large{(SINUM manuscript \#088420)}}
+\title{Revision of SINUM manuscript \#088420}
 \author{Yiannis Hadjimichael, Colin B.~Macdonald, David I.~Ketcheson \\ and  James.~H.~Verner}
 
 \maketitle
 
-The authors would like to thank the reviewers for their constructive comments and the
-editor for the time invested. 
+The authors thank the reviewers for their constructive comments.
 We have revised the paper according to the comments and suggestions.
-In addition we were able to find a pattern for the coefficients of effective order four, 
-classical order two ESSPRK methods.
-These are included in Section~5.1.3.
-Answers to the comments of the reviewers have been included below.
+During our revisions, we discovered a pattern for the coefficients of some effective order four, 
+classical order two SSP methods.
+These are included in a Section~5.1.3.
+Responses to the comments of the reviewers have been included below.
 \vspace{30pt}
 
 \section*{Referee \#1}
@@ -50,12 +50,12 @@ methods use \dots", is incorrect.
 The same comment is valid for the title of section 3.}
 
 The title has been changed to ``Strong stability preserving explicit Runge--Kutta methods of maximal effective order". 
-Also all instances of ``effective order methods" are now corrected.
-Particularly, the title of section 3 now reads ``The effective order of Runge--Kutta 
-methods". %and lines 2 and 4 are changed to ``methods of effective order" and
+Also incorrect instances throughout the paper of ``effective order methods'' and similar are now corrected.
+%Particularly, the title of section 3 now reads ``The effective order of Runge--Kutta 
+%methods". %and lines 2 and 4 are changed to ``methods of effective order" and
 %``methods with effective order of accuracy", respectively.
-The introduction is redone and care has been taken so that ``effective order" 
-is correctly used.
+%The introduction is redone and care has been taken so that ``effective order" 
+%is correctly used.
 
 %\yiannis{Other possible titles may be:\\
 %``Explicit SSPRK of effective order $q$", ``On the effective order of SSPRK methods",
@@ -92,7 +92,7 @@ to an autonomous form."
 
 We agree that the symbol $t$ is overloaded.  However, we think that changing it would cause more
 confusion due to its strong traditional use in both senses.  We have kept the current notation since
-it is consistent with the literature and the meaning is generally clear from context.
+it is consistent with the literature and we hope the meaning is clear from context.
 
 \pagebreak
 
@@ -120,10 +120,10 @@ Table 3.3 is the elementary weight associated to the index $i$ in Table 3.1.
 \newline
 The interested reader can read [4] so see all the details.}
 
-Following the referee's suggestions, we start with the material from section 3.3.1.
+Following the referee's suggestions, we start with the material from (the old) Section 3.3.1 and concentrate on deriving the effective order conditions.
 Examples 3.1 and 3.3 and Table 3.2 from the original submission have been deleted.
 Table 3.3 (now Table 3.2) has been more clearly integrated with the text.
-The reset of section 3 has been shortened and tightly focused in order to provide the elements
+The rest of section 3 has been shortened and tightly focused in order to provide the elements
 of effective order theory most essential to the discussion at hand.
 To clarify the significance of Table 3.1, we added the following:
 ``The ordering of trees given in Table~3.1 is used
@@ -139,15 +139,17 @@ elementary weight $\bm{b}^T \bm{c}^4$.''
 %with the index $i$ in Table 3.1",
 %as mentioned.
 %Examples and relevant tables in the first part of this section are omitted. 
-On page 6, line 6 we added
+On page 6, below Table 3.3 we added a phrase to explain how the table is used in practice:
 ``For a specified classical and effective order, these are the equality constraints
 $\Phi(K)$ in the optimization problem (2.5) for method $M$"
-to explain how Table 3.3 is used in practice.
-In page 10, line 11 we added the following:
+
+Later on that page, we added
 ``We note that increasing the classical order of the main method requires 
-$\alpha_i = 1/\gamma(t_i)$ and thus more of the $\beta_i$ are set to zero."
+$\alpha_i = 1/\gamma(t_i)$ and
+thus by Table~3.2 requires more of the $\beta_i$ to be zero.''
 %This clarifies the relation between the classical order and $\beta_i$.
-\david{But it doesn't explain why; is there any simple explanation of why?}
+%\david{But it doesn't explain why; is there any simple explanation of why?}
+%Colin: not sure, but I pointed the reader at Table~3.2 where it can be seen.  I guess the most fundamental reason, is that if you want a high-order method, the correct perturbation is no perturbation at all.
 
 \pagebreak
 
@@ -165,6 +167,7 @@ This follows from inductive application of the product operation (3.1)
 on the tall trees. 
 Therefore, methods of effective order $q$ have classical order at least $q$ 
 for linear problems.''
+
 
 \remark{6}{
 Section 4 is a bit messy, and I propose to change the order of the material in it. 
@@ -230,8 +233,8 @@ For $q \leq 5$ inequalities (5.1) are true because for $q \leq 5$ methods with e
 order $q$ have order $q$ for linear problems. 
 For $q \geq 5$, they are also true because by Theorem~4.1 $\sspcoef_{s,q,p}  = 0$.}
 
-Please note that Remark~3.2 is sufficient for the inequality 
-$\sspcoef_{s,q,p} \leq \clin$ to hold.
+We note that Remark~3.2 is sufficient for the inequality 
+$\sspcoef_{s,q,p} \leq \clin$ to hold and we now say so before the inequalities (5.1):
 %We agree with this argument, however Remark~3.2 is much stronger. 
 %For any RK method the effective order conditions $q$ include the classical order $q$ 
 %conditions for linear problems, i.e. the conditions on the tall trees. 
@@ -239,7 +242,7 @@ $\sspcoef_{s,q,p} \leq \clin$ to hold.
 %(3.1) on tall trees. 
 %Then one can see that for a given order the effective order conditions on tall trees 
 %match the order conditions for linear problems.
-We added the following line before inequalities (5.1):
+%We added the following line before inequalities (5.1):
 
 ``From Remark~3.2 and the fact that the ESSPRK($s,q,p$) methods 
 form a super class of the SSPRK($s,q$) methods, we have \dots"
@@ -266,14 +269,7 @@ We followed your suggestion.
 \remark{2}{
 Section 2: Please, explain the meaning of $A, b$ and $c$.}
 
-The coefficients $A, b$ and $c$ of an RK method are explained after its definition in page 2:
-
-``Such methods are characterized by the coefficient matrix $A = (a_{ij}) \in 
-\mathbb{R}^{s \times s}$, the weight vector $\bm{b} = (b_i) \in \mathbb{R}^s$
-and the abscissa $\bm{c} = (c_i) \in \mathbb{R}^s$, where 
-$c_i = \sum_{j=1}^{i-1}a_{ij}$.
-The accuracy and stability of the method depend on the coefficients of the 
-Butcher tableau $(A,\bm{b},\bm{c})$ [4]."
+The coefficients $A, b$ and $c$ of an RK method are explained after its definition in page 2.
 
 We clarified this in Table 3.1 as well.
 
@@ -282,7 +278,7 @@ Equations (2.4): Please, explain that $I$ is the identity matrix. Observe that $
 denote the identity matrix and certain set in the proof of Lemma~4.2 (Case 2).}
 
 We defined that $I$ is the $s \times s$ identity matrix in (2.4).
-In the proof of Theorem~4.2, we also changed the set $I$ to $J$ to remove any ambiguity.
+In the proof of Theorem~4.2, we also changed the set $I$ to $J$ to remove this ambiguity.
 
 \remark{4}{
 Table 5.2, first row: I think is better to write $\tau(t) = (\alpha\beta^{-1})(t)$.}

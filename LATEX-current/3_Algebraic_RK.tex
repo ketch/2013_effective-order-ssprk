@@ -33,7 +33,7 @@ The effective order of a Runge--Kutta method is defined in an abstract
 algebraic context introduced by Butcher \cite{Butcher1969} and developed 
 further in \cite{Butcher1972, Hairer1974, Butcher1996, Butcher1998} and 
 others.
-We follow the book \cite{Butcher2008_book} in our description and
+We follow the book \cite{Butcher2008_book} in our %description and
 derivation of the effective order conditions.
 
 \begin{table}
@@ -85,8 +85,9 @@ elementary weights as $\alpha_{i} = \alpha(t_{i})$ for tree $t_{i}$.
 %For example $\alpha_1 = \bm{b}^T\bm{e}$, $\alpha_2 = \bm{b}^T\bm{c}$ and so on.
 A special element of the group $E \in G$ corresponds to the
 (hypothetical) method that evolves the solution exactly.
-The values of $E(t)$ are denoted $1/\gamma(t)$, where $\gamma(t)$ denotes 
-the density of tree $t$ \cite{Butcher2008_book} and these are included in
+The values of $E(t)$ are denoted $1/\gamma(t)$ \cite{Butcher2008_book}
+%, where $\gamma(t)$ denotes the density of tree $t$ \cite{Butcher2008_book}
+and the values of $\gamma(t)$ are included in
 Table~\ref{tab:elementary_weights}.
 Classical order conditions are obtained by comparing the elementary weights 
 of a method with these values.
@@ -237,7 +238,7 @@ Table~\ref{tab:effective_OCs}.
 We can also find the order conditions on $S^{-1}$ in terms of the
 $\beta_i$ (see \cite[Table~386(III)]{Butcher2008_book}).
 We note that increasing the classical order of the main method requires 
-$\alpha_i = 1/\gamma(t_i)$ and thus more of the $\beta_i$ are set to zero.
+$\alpha_i = 1/\gamma(t_i)$ and thus by Table~\ref{tab:effective_OCs_on_alpha} requires more of the $\beta_i$ to be zero.
 %The classical order of the main method $M$ is increased by setting $\beta_i$
 %to zero.
 %Essentially, for a given effective order $q$ if all $\beta_i$ are zero, then
