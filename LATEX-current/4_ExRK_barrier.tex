@@ -87,15 +87,16 @@ lemma.
     			\sum_{i=1}^n b_i v_i^2 & = \biggl(\sum_{i=1}^n b_i v_i\biggr)^{\!\! 2}. \label{eq:DavidsLemma_c}
     		\end{align}
     	\end{subequations}
-    	Then all $v_i$ are equal but at most one; in other words, there exists 
-    	$\mu \in \mathbb{R}$ and an integer $k$ such that $v_i = \mu$ for 
-    	all $i \ne k$.
+    	Then all $v_i$, $i  \in \{1, \dots, n\}$ are equal.
+    	%but at most one; in other words, there exists 
+    	%$\mu \in \mathbb{R}$ and an integer $k$ such that $v_i = \mu$ for 
+    	%all $i \ne k$.
 \end{lemma}
 
 \begin{proof}
     First observe that in the case that $v_i=0$ for all $i$, the stated
-    result holds.  Otherwise, let $k$ be an integer between $1$ and $n$
-    such that $v_k\ne 0$.
+    result holds.  Otherwise, let $k$ be an integer,  $1 \leq k \leq n$,
+    such that $v_k \ne 0$.
     Then by collecting terms in powers of $v_k$, \eqref{eq:DavidsLemma_c} 
     can be written as
     \begin{equation*}
@@ -129,8 +130,19 @@ lemma.
 	\begin{equation*}
     		\sum_{j \neq k}\sum_{i \neq k, j}b_j b_i(v_i - v_j)^2 \leq 0.
 	\end{equation*}
-	Together with \eqref{eq:DavidsLemma_a}, this implies that $v_i = v_j$ 
-	for all $i, j \neq k$.
+	Together with \eqref{eq:DavidsLemma_a}, this implies there exist a real number $\mu$
+	such that $v_i = \mu$, $i \neq k$.
+	Now to show that $v_k = \mu$, first observe that $\mu \neq 0$.
+	Otherwise, since $v_k \neq 0$, $b_k = 1$ from \eqref{eq:DavidsLemma_c}.
+	Then either $b_i = 0$, $i \neq k$ from \eqref{eq:DavidsLemma_b} or $n = 1$ and the proof is 
+	complete.
+	For $\mu \neq 0$, divide \eqref{eq:DavidsLemma_c} by $\mu^2$ on both sides.
+	Subsequent simplification by \eqref{eq:DavidsLemma_b} yields
+	\begin{align*}
+		b_k(b_k -1)\Bigl(\frac{v_k}{\mu} - 1\Bigr) = 0.
+	\end{align*}
+	Since $\bm{b} > 0$ and $b_k \neq 1$ for $n  > 1$, we have $v_k = \mu$ and the result follows. 
+	
 \end{proof}
 
 We can now prove Theorem~\ref{thm:effective_barrier}:
