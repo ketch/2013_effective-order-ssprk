@@ -83,17 +83,19 @@ of the time step.
 We integrate to roughly time $t_\text{f} = 1.62$ with $200$ points in space.
 Figure~\ref{fig:burgers_cont} shows that if $\sigma$ is chosen less than the SSP
 coefficient of the main method, then no oscillations are observed. 
-If this stability limit is violated, then oscillations may appear.
-
-We measure these oscillations by computing the total variation of the 
+If this stability limit is violated, then oscillations may appear,
+as shown in Figure~\ref{fig:burgers_cont_b}.
+We measure these oscillations by computing the total variation of the
 numerical solution.
-When $M$ is an ESSPRK($4,4,2$) method,
-it turns out that $\sigma = 1.57$ is the largest value of $\sigma$
-for which the total variation is monotonically decreasing during the
-calculation.
-This is $79\%$ larger than the value of the SSP coefficient $\sspcoef = 0.88$.
-Values of $\sigma$ much larger than the SSP coefficient lead to oscillations as
-shown in Figure~\ref{fig:burgers_cont_b}.
+
+% Colin: potential for confusion here since this doesn't line up with
+% Table 6.1, Of course its a different problem) but I still don't see
+% the value of including this:
+%When $M$ is an ESSPRK($4,4,2$) method,
+%it turns out that $\sigma = 1.57$ is the largest value of $\sigma$
+%for which the total variation is monotonically decreasing during the
+%calculation.
+%This is $79\%$ larger than the value of the SSP coefficient $\sspcoef = 0.88$.
 
 \begin{figure}
     \centering
@@ -103,12 +105,17 @@ shown in Figure~\ref{fig:burgers_cont_b}.
       \includegraphics[width=0.48\textwidth]{Pictures/burgers_cont_no_tvd}}
     \caption{Solution of Burgers' equation at the final time with continuous initial data, using a
     $TM^{n-2}R$ scheme, where $M$ is the optimal ESSPRK($4,4,2$).
-    The time-step used is $\Dt = \sigma{\Dt}_{\text{FE}}$.
-    From Table~\ref{tab:eff_SSP_coeff} the SSP coefficient is $ \sspcoef = s \times 0.22 = 0.88$.
-    Figure~\ref{fig:burgers_cont_b} shows a zoom in the region of space where
-    oscillations appear.
-    Here $TV$ denotes the $TV$-norm of the solution at the final time:
-    a value greater than 1 (the $TV$-norm of the initial condition)
+    The time-step used is $\Dt = \sigma{\Dt}_{\text{FE}}$:
+    in (a) we take $\sigma$ as the SSP coefficient
+    $\sigma = \sspcoef = s \times 0.22 = 0.88$
+    (see Table~\ref{tab:eff_SSP_coeff}) and no oscillations are observed.
+    However, in (b) we take $\sigma > \sspcoef$ and we observe oscillations
+    (note (b) is magnified to show these).
+    %From Table~\ref{tab:eff_SSP_coeff} the SSP coefficient is $ \sspcoef = s \times 0.22 = 0.88$.
+    %Figure~\ref{fig:burgers_cont_b} shows a zoom in the region of space where
+    %oscillations appear.
+    Here $TV$ denotes the discrete total variation of the solution at the final time:
+    a value greater than 1 (the total variation of the initial condition)
     indicates a violation of the TVD condition.
     %Note that the solution in Figure~\ref{fig:burgers_cont_b} is
     %monotonically increasing at intermediate steps as well.
@@ -136,16 +143,9 @@ ESSPRK($5,4,2$) method with SSP coefficient $\sspcoef = 1.95$.
 In this case, $\sigma = 1.98$ appears to be the largest value
 for which the total variation is monotonically decreasing during the 
 calculation.
-This is $2\%$ larger than the value of the SSP coefficient.
+This is only $2\%$ larger than the value of the SSP coefficient.
 Figure~\ref{fig:burgers_discont_b} shows part of the solution exhibiting 
 oscillations when $\sigma$ is larger than the SSP coefficient.
-For various schemes, Table~\ref{tab:observed_SSP_coeff} shows the
-maximum observed values of $\sigma$ for which the numerical solution
-is total variation decreasing for the entire computation.
-With the exception of the four-stage effective order four methods, we
-note good agreement between the SSP coefficient predicted by the
-theory and the maximum time-step for which the numerical solution is
-TVD.
 
 \begin{figure}
     \centering
@@ -155,17 +155,30 @@ TVD.
       \includegraphics[width=0.48\textwidth]{Pictures/burgers_discont_no_tvd}}
     \caption{Solution of Burgers' equation at the final time with discontinuous initial data, using a
     $TM^{n-2}R$ scheme, where $M$ is ESSPRK($5,4,2$) method.
-    The time-step used is $\Dt = \sigma{\Dt}_{\text{FE}}$.
-    From Table~\ref{tab:eff_SSP_coeff} the SSP coefficient is $ \sspcoef = s \times 0.39 = 1.95$.
-    Figure~\ref{fig:burgers_discont_b} shows a zoom in the region of space where
-    oscillations appear.
-    Here $TV$ denotes the $TV$-norm of the solution at the final time:
-    a value greater than 2 indicates a violation of the TVD condition.
+    The time-step used is $\Dt = \sigma{\Dt}_{\text{FE}}$:
+    in (a) we take $\sigma$ as the SSP coefficient
+    $\sigma = \sspcoef = s \times 0.39 = 1.95$
+    %(see Table~\ref{tab:eff_SSP_coeff})
+    and no oscillations are observed.
+    However, in (b) we take $\sigma > \sspcoef$ and, when magnified,
+    we observe oscillations.
+    %From Table~\ref{tab:eff_SSP_coeff} the SSP coefficient is $ \sspcoef = s \times 0.39 = 1.95$.
+    %Figure~\ref{fig:burgers_discont_b} shows a zoom in the region of space where
+    %oscillations appear.
+    Here $TV$ denotes the total variation semi-norm of the solution at the final time:
+    a value greater than 2 indicates an increase in total variation.
     %Note that the solution in Figure~\ref{fig:burgers_discont_b} is
     %monotonically increasing at intermediate steps as well.
     }
     \label{fig:burgers_discont}
 \end{figure}
+
+For various schemes, Table~\ref{tab:observed_SSP_coeff} shows the
+maximum observed values of $\sigma$ for which the numerical solution
+is total variation decreasing for the entire computation.  With the
+exception of the four-stage effective order four methods, we note good
+agreement between these experimental values and the SSP coefficients
+predicted by the theory.
 
 \begin{table}
     \centering
