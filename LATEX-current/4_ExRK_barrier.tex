@@ -130,18 +130,19 @@ lemma.
 	\begin{equation*}
     		\sum_{j \neq k}\sum_{i \neq k, j}b_j b_i(v_i - v_j)^2 \leq 0.
 	\end{equation*}
-	Together with \eqref{eq:DavidsLemma_a}, this implies there exist a real number $\mu$
-	such that $v_i = \mu$, $i \neq k$.
-	Now to show that $v_k = \mu$, first observe that $\mu \neq 0$.
-	Otherwise, since $v_k \neq 0$, $b_k = 1$ from \eqref{eq:DavidsLemma_c}.
-	Then either $b_i = 0$, $i \neq k$ from \eqref{eq:DavidsLemma_b} or $n = 1$ and the proof is 
-	complete.
-	For $\mu \neq 0$, divide \eqref{eq:DavidsLemma_c} by $\mu^2$ on both sides.
+	Together with \eqref{eq:DavidsLemma_a}, this implies there exists a real number $\mu$
+	such that $v_i = \mu$ for all $i \neq k$.
+
+	Now we show that $v_k = \mu$ also.  First, suppose that $\mu = 0$;
+	then by \eqref{eq:DavidsLemma_c} we have $b_k = 1$.
+        Then by \eqref{eq:DavidsLemma_a} and \eqref{eq:DavidsLemma_b} it must
+        be that $n = 1$, and the result is trivially true.
+	Finally, suppose that $\mu \neq 0$.  Divide \eqref{eq:DavidsLemma_c} by $\mu^2$ on both sides.
 	Subsequent simplification by \eqref{eq:DavidsLemma_b} yields
 	\begin{align*}
 		b_k(b_k -1)\Bigl(\frac{v_k}{\mu} - 1\Bigr) = 0.
 	\end{align*}
-	Since $\bm{b} > 0$ and $b_k \neq 1$ for $n  > 1$, we have $v_k = \mu$ and the result follows. 
+	Since $\bm{b} > 0$ and $b_k \neq 1$ for $n  > 1$, we have $v_k = \mu$.
 	
 \end{proof}
 
@@ -182,42 +183,10 @@ We can now prove Theorem~\ref{thm:effective_barrier}:
 	\begin{equation}\label{eq:btv2}
 		\beta_2^2 = \bm{b}^T\bm{v}^2.
 	\end{equation}
-        Multiplying \eqref{eq:btv} by $\beta_2$ and subtracting
-        from \eqref{eq:btv2} gives
-	\begin{equation}\label{eq:btw}
-		\bm{b}^T\bm{w} = 0.
-	\end{equation}
-        We divide the analysis into three cases.
-	\paragraph{Case 1: $\beta_2 = 0$.}
-	First consider the case that $\beta_2 = 0$. 
-	Then $\bm{b}^T\bm{v}^2 = 0$, but $\bm{v }\neq \bm{0}$ because explicit methods
-	cannot have stage order two \cite{Ruuth2002}. This implies that $b_j \leq 0$ 
-	for some $j$, which is a contradiction.
-	So far we have proven the result for classical order $p \ge 3$ 
-	and the proof is similar to the result mentioned in \cite{Ruuth2002}. 
-	The remainder of our proof deals with classical order two, 
-	where $\beta_2 \neq 0$.
-
-	\paragraph{Case 2: $\bm{w} = \bm{0}, \beta_2\ne0$.}
-	By the definition of $\bm{w}$ in \eqref{eq:def_w}, we have $v_i^2 - \beta_2 v_i = 0$ 
-	for all $i \in \{1, \dots, s\}$, 	so for each $i$ either $v_i = 0$ or $v_i = \beta_2$.
-	Let the set $J = \{i : v_i = \beta_2\}$. 
-	Note that $v_1 = 0$ because the first row of matrix $A$ is identically zero.
-	Since $\beta_2 \neq 0$ and $ \bm{v} \neq \bm{0}$, the set $J$ is not empty.
-	Then \eqref{eq:btv} yields 
-	\begin{equation*}
-            \beta_2 = \sum_{i=1}^s b_i v_i = \sum_{i \in J}b_i\beta_2 = \beta_2\sum_{i \in J}b_i,
-	\end{equation*}
-        which implies $\sum_{i\in J} b_i = 1$, but this contradicts \eqref{eq:theorem_cond_a}
-
-	\paragraph{Case 3: $\bm{w} \neq \bm{0}, \beta_2\ne0$.}
-	Since $\bm{b} > \bm{0}$, \eqref{eq:btw} implies that $\bm{w}$ contains both positive 
-	and negative elements. 
-	Furthermore, $v_1=0$ for any explicit method, thus $w_1=0$.
-	Then, we can choose $i, j \in \{2, \dots, s\}$ such that $w_i < 0 < w_j$.
-     By \eqref{eq:def_w} $v_i\ne 0$, $v_j\ne 0$, and $v_i\ne v_j$. 
-     Application of Lemma~\ref{Davids_lemma} reveals that all $v_k$ for 
-     $k \in\{1,2,\dots,s\}$ must be equal, which is a contradiction
-     since $v_1 = 0$.
-
+        Observe that $v_1=0$ for any explicit method.  Using  \eqref{eq:btv},
+        \eqref{eq:btv2}, \eqref{eq:theorem_cond_a}, and the assumption $\bm{b}>\bm{0}$, we
+        apply Lemma \ref{Davids_lemma} to deduce that $\bm{v}=0$.
+        That implies the method has stage order two, which is not possible for
+        explicit methods \cite{Ruuth2002}.  This contradiction completes the proof.
+    
 \end{proof}
