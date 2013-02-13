@@ -61,97 +61,12 @@ The main result of this section is:
 	Any explicit Runge--Kutta method with positive weights $\bm{b} > \bm{0}$ 
 	has effective order at most four.
 \end{theorem}
-The proof of Theorem~\ref{thm:effective_barrier} is deferred to
-the end of this section.
-\begin{corollary}\label{cor:no_SSP_5}
-    Let $M$ denote an irreducible explicit Runge--Kutta method with $\sspcoef>0$.
-    Then $M$ has effective order at most four.
-\end{corollary}
-\begin{proof}
-	The proof follows immediately from Lemma~\ref{lem:positive_b} and 
-	Theorem~\ref{thm:effective_barrier}.
-\end{proof}
 
-\begin{remark}
-    It is worth noting here an additional result that 
-    follows directly from what we have proved.
-    Using Theorem~\ref{thm:effective_barrier} and \cite[Theorem~4.1]{dahlquist2006}, 
-    it follows that any irreducible explicit Runge--Kutta method with positive radius of
-    circle contractivity has effective order at most four.
-\end{remark}
+%The proof of Theorem~\ref{thm:effective_barrier} is deferred to
+%the end of this section.
 
-The proof of Theorem~\ref{thm:effective_barrier} makes use of the following 
-lemma.
-\begin{lemma}\label{Davids_lemma}
-	Let $\bm{b},\bm{v} \in \mathbb{R}^{n}$ be given such that
-    \begin{subequations}\label{eq:DavidsLemma}
-    		\begin{align}
-    			b_i & > 0 \mbox{ for all } i, \label{eq:DavidsLemma_a} \\
-    			\sum_{i=1}^n b_i & = 1, \label{eq:DavidsLemma_b} \\
-    			\sum_{i=1}^n b_i v_i^2 & = \biggl(\sum_{i=1}^n b_i v_i\biggr)^{\!\! 2}. \label{eq:DavidsLemma_c}
-    		\end{align}
-    	\end{subequations}
-    	Then all $v_i$, $i  \in \{1, \dots, n\}$ are equal.
-    	%but at most one; in other words, there exists 
-    	%$\mu \in \mathbb{R}$ and an integer $k$ such that $v_i = \mu$ for 
-    	%all $i \ne k$.
-\end{lemma}
-
-\begin{proof}
-    First observe that in the case that $v_i=0$ for all $i$, the stated
-    result holds.  Otherwise, let $k$ be an integer,  $1 \leq k \leq n$,
-    such that $v_k \ne 0$.
-    Then by collecting terms in powers of $v_k$, \eqref{eq:DavidsLemma_c} 
-    can be written as
-    \begin{equation*}
-    		b_k(1-b_k)v_k^2 - 2b_k v_k\sum_{i \neq k}b_i v_i + \sum_{i \neq k}b_i v_i^2 - \biggl(\sum_{i \neq k}b_i v_i\biggr)^{\!\! 2} = 0.  		
-	\end{equation*}
-	This is a quadratic equation in $v_k$ whose roots are real if and only if
-	\begin{equation*}
-    		4b_k^2\biggl(\sum_{i \neq k}b_i v_i\biggr)^{\!\! 2} - 4b_k(1-b_k)\Biggl(\sum_{i \neq k}b_i v_i^2 - \biggl(\sum_{i \neq k}b_i v_i\biggr)^{\!\! 2}\Biggr) \geq 0.
-	\end{equation*}
-	Expanding and canceling terms yields
-	\begin{equation*}
-    (1-b_k)\sum_{i \neq k}b_i v_i^2 - \biggl(\sum_{i \neq k}b_i v_i\biggr)^{\!\! 2} \leq 0.
-	\end{equation*}
-	By \eqref{eq:DavidsLemma_b}, $1-b_k = \sum_{j \ne k}b_j$, so we have
-	\begin{equation*}
-    		\sum_{j \neq k}b_j\sum_{i \neq k}b_i v_i^2 - \sum_{j \neq k}b_j v_j\sum_{i \neq k}b_i v_i \leq 0.
-	\end{equation*}
-	Noting that the terms corresponding to $i = j$ in the two double sums cancel and this gives
-	%\begin{equation*}
-		%    \sum_{j \neq k}b_{j}\sum_{i \neq k,j}b_{i}v_{i}^{2} - \sum_{j \neq k}b_{j}v_{j}\sum_{i \neq j,k}b_{i}v_{i} \leq 0,
-	%\end{equation*}
-	%or
-	\begin{equation*}
-    		\sum_{j \neq k}b_j\sum_{i \neq k,j}b_i v_i(v_i - v_j) \leq 0.
-	\end{equation*}
-	Adding the left hand side to itself, but with $i, j$ reversed, yields
-	\begin{equation*}
-    		\sum_{j \neq k}b_j\sum_{i \neq k, j}b_i v_i(v_i - v_j) - \sum_{i \neq k}b_i\sum_{j \neq k, i}b_j v_j(v_i - v_j) \leq 0.
-	\end{equation*}
-	This simplifies to
-	\begin{equation*}
-    		\sum_{j \neq k}\sum_{i \neq k, j}b_j b_i(v_i - v_j)^2 \leq 0.
-	\end{equation*}
-	Together with \eqref{eq:DavidsLemma_a}, this implies there exists a real number $\mu$
-	such that $v_i = \mu$ for all $i \neq k$.
-
-	Now we show that $v_k = \mu$ also.  First, suppose that $\mu = 0$;
-	then by \eqref{eq:DavidsLemma_c} we have $b_k = 1$.
-        Then by \eqref{eq:DavidsLemma_a} and \eqref{eq:DavidsLemma_b} it must
-        be that $n = 1$, and the result is trivially true.
-	Finally, suppose that $\mu \neq 0$.  Divide \eqref{eq:DavidsLemma_c} by $\mu^2$ on both sides.
-	Subsequent simplification by \eqref{eq:DavidsLemma_b} yields
-	\begin{align*}
-		b_k(b_k -1)\Bigl(\frac{v_k}{\mu} - 1\Bigr) = 0.
-	\end{align*}
-	Since $\bm{b} > 0$ and $b_k \neq 1$ for $n  > 1$, we have $v_k = \mu$.
-	
-\end{proof}
-
-We can now prove Theorem~\ref{thm:effective_barrier}:
-\begin{proof}[Proof of Theorem~\ref{thm:effective_barrier}]
+%We can now prove Theorem~\ref{thm:effective_barrier}:
+\begin{proof}%[Proof of Theorem~\ref{thm:effective_barrier}]
 	Any method of effective order five must have classical order at least two
 	(see \cite{Butcher2008_book} or Table~\ref{tab:effective_OCs}).
     Thus it is sufficient to show that any method with all positive weights
@@ -172,21 +87,52 @@ We can now prove Theorem~\ref{thm:effective_barrier}:
 	\end{subequations}
 	where the powers on vectors are understood component-wise. 
 	Let
-	\begin{align*} 
-		\bm{v} = \frac{1}{2}\bm{c}^2 - A\bm{c}.
+	%\begin{align*}
+		$\bm{v} = \frac{1}{2}\bm{c}^2 - A\bm{c}$.
+	%\end{align*}
+	Then substituting \eqref{eq:theorem_cond_b} into \eqref{eq:theorem_cond_c} and expressing \eqref{eq:theorem_cond_d} in terms of $\bm{v}$ gives
+        %\begin{subequations}
+	\begin{align*}
+		\bm{b}^T\bm{v} &= \beta_2, \\% \label{eq:btv} \\
+        %\end{equation}
+	%Also, \eqref{eq:theorem_cond_d} can be expressed as
+	%\begin{equation}
+		\bm{b}^T\bm{v}^2 &= \beta_2^2. % \label{eq:btv2}
 	\end{align*}
-	Then substituting \eqref{eq:theorem_cond_b} in \eqref{eq:theorem_cond_c} gives
-	\begin{equation}\label{eq:btv}
-		\beta_2 = \bm{b}^T\bm{v}.
-	\end{equation}
-	Also, \eqref{eq:theorem_cond_d} can be expressed as
-	\begin{equation}\label{eq:btv2}
-		\beta_2^2 = \bm{b}^T\bm{v}^2.
-	\end{equation}
-        Observe that $v_1=0$ for any explicit method.  Using  \eqref{eq:btv},
-        \eqref{eq:btv2}, \eqref{eq:theorem_cond_a}, and the assumption $\bm{b}>\bm{0}$, we
-        apply Lemma \ref{Davids_lemma} to deduce that $\bm{v}=0$.
-        That implies the method has stage order two, which is not possible for
-        explicit methods \cite{Ruuth2002}.  This contradiction completes the proof.
-    
+        %\end{subequations}
+  Each of %\eqref{eq:btv} and \eqref{eq:btv2}
+  these is a strictly convex combination.
+  % (by \eqref{eq:theorem_cond_a} and $\bm{b} > 0$).
+  Jensen's inequality (with a strictly convex function, as is the case with the
+  square function here) then states $\bm{b}^T \bm{v}^2 \leq (\bm{b}^T
+  \bm{v})^2$ with equality if and only if all
+  all components of $\bm{v}$ are equal
+  %$v_i = \mu, i=1,\ldots,n$
+  \cite[Theorem 12, pg 31]{Bullen:inequalities}.
+  %Thus all components of $\bm{v}$ are equal.
+  Now $v_1 = 0$ for every explicit method so we deduce that $\bm{v}=0$.
+  That implies the method has stage order two, which is not possible for
+  explicit methods \cite{Ruuth2002}.
+  % \cite{Hairer1991_book}.
+  % Ruuth2002 is cited here but this is a well-known result.
+  This contradiction completes the proof.
 \end{proof}
+
+\begin{corollary}\label{cor:no_SSP_5}
+    Let $M$ denote an irreducible explicit Runge--Kutta method with $\sspcoef>0$.
+    Then $M$ has effective order at most four.
+\end{corollary}
+\begin{proof}
+	The proof follows immediately from Lemma~\ref{lem:positive_b} and 
+	Theorem~\ref{thm:effective_barrier}.
+\end{proof}
+
+\begin{remark}
+    It is worth noting here an additional result that 
+    follows directly from what we have proved.
+    Using Theorem~\ref{thm:effective_barrier} and \cite[Theorem~4.1]{dahlquist2006}, 
+    it follows that any irreducible explicit Runge--Kutta method with positive radius of
+    circle contractivity has effective order at most four.
+\end{remark}
+
+
