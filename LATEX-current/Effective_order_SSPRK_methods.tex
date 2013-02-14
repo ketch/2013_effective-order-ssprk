@@ -1,33 +1,34 @@
 \documentclass[10pt,a4paper,oneside]{article}
-
+%\documentclass[final]{siamltex}  % TODO: siam
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Preamble %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
 
 %%% packages %%%
-\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{amsthm}   % TODO: turn off for siam style
 \usepackage[usenames,dvipsnames]{color}
 \usepackage[dvips]{graphicx} % [pdftex]
 \usepackage{pstricks,pst-node,pst-tree}
 \usepackage{bm}
 \usepackage{multirow}
 \usepackage{multicol}
-\usepackage{enumerate,cite}
+%\usepackage{enumerate,cite}
 \usepackage{url}
 \usepackage{array}
 \usepackage{arydshln}
 \usepackage{subfig}
-\usepackage{caption} % [font=small,format=plain,labelfont=bf,up,textfont=it,up]
-\usepackage{verbatim}
-\usepackage{rotating}
+%\usepackage{caption} % [font=small,format=plain,labelfont=bf,up,textfont=it,up]
+%\usepackage{verbatim}
+%\usepackage{rotating}
 %\usepackage{slashbox}
 \usepackage{booktabs}
-\usepackage{xkeyval}
+%\usepackage{xkeyval}
 \usepackage[textsize=footnotesize]{todonotes}
 \definecolor{lightgray}{gray}{0.5}
 \definecolor{darkred}{rgb}{.6,0,0}
 \definecolor{darkblue}{rgb}{0,0,0.5}
 \usepackage[colorlinks=true,citecolor=darkblue,urlcolor=darkblue,linkcolor=darkred]{hyperref}
-\usepackage[normalem]{ulem}
+%\usepackage[normalem]{ulem}
 \usepackage{accents}
 %\usepackage[toc,page]{appendix}
 %\usepackage{diagrams}
@@ -41,19 +42,21 @@
 %\usepackage{pbox}
 
 %%% Page layout %%%
+% TODO: turn off for siam style
 \setlength{\textwidth}{160mm}   
 \setlength{\textheight}{220mm}
 \setlength{\oddsidemargin}{0mm} 
 \setlength{\evensidemargin}{-5mm}
 \setlength{\topmargin}{0mm}
 \setlength{\marginparwidth}{35mm}
-\setlength{\parindent}{5mm}
-\setlength{\footskip}{20mm}     
-\setlength\footnotesep{4mm}
+
+%\setlength{\parindent}{5mm}
+%\setlength{\footskip}{20mm}
+%\setlength\footnotesep{2mm}
 
 
 %%% Page style %%%
-\pagestyle{plain}
+%\pagestyle{plain}
 
 %%% New commands %%%
 \newcommand{\sspcoef}{\mathcal{C}}
@@ -78,9 +81,9 @@
 \newcommand{\yianniscomment}[1]{\textcolor{OliveGreen}{\\\textbf{\footnotesize #1}\\}}
 
 %%% Renew commands %%%
-\renewcommand{\newline}{\vspace{10pt}}
-\renewcommand{\comment}[1]{\textcolor{gray}{\\#1\\}}
-\renewcommand{\indent}{\hspace{15pt}}
+%\renewcommand{\newline}{\vspace{10pt}}
+%\renewcommand{\comment}[1]{\textcolor{gray}{\\#1\\}}
+%\renewcommand{\indent}{\hspace{15pt}}
 
 %%% New theorems %%%
 \newtheorem{theorem}{Theorem}[section]
@@ -90,14 +93,19 @@
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{result}[theorem]{Result}
+% TODO: turn off above but leave this for siam style
 \newtheorem{remark}[theorem]{Remark}
 
 %%% Miscellaneous %%%
-\numberwithin{theorem}{section}
-\numberwithin{equation}{section}
-\numberwithin{table}{section}
-\numberwithin{figure}{section}
-\newcolumntype{M}[1]{>{\vspace{2pt}\centering\hspace{0pt}\vspace{2pt}}m{#1}}
+% \numberwithin{theorem}{section}
+% \numberwithin{equation}{section}
+% \numberwithin{table}{section}
+% \numberwithin{figure}{section}
+\newcolumntype{M}[1]{>{\vspace{0.25pt}\centering\hspace{0pt}\vspace{0.25pt}}m{#1}}
+\newcommand{\mydashrule}{%
+  \noalign{\vskip 2pt}%
+  \hdashline[2pt/3pt]%
+  \noalign{\vskip 2pt}}
 %\numberwithin{theorem}{section}
 %\numberwithin{equation}{section}
 %\numberwithin{definition}{section}
@@ -111,7 +119,7 @@
 %%% General info %%%
 \title{Strong stability preserving explicit Runge--Kutta methods of maximal effective order}
 \author{
-	Yiannis Hadjimichael\footnote{4700 King Abdullah University of Science \& Technology, 
+	Yiannis Hadjimichael\thanks{4700 King Abdullah University of Science \& Technology,
 	(KAUST), Mathematical and Computer Sciences and Engineering Division, Thuwal 23955, 
 	Saudi Arabia
 	(\url{yiannis.hadjimichael@kaust.edu.sa}, 
@@ -179,7 +187,8 @@
 	%%% Appendix and Bibliography %%%
 	%\appendix
 	%\include{AppendixA}
-	\bibliographystyle{acm} %apalike
+	\bibliographystyle{acm} % apalike
+	%\bibliographystyle{siam}  % TODO: turn on for siam style
 	\bibliography{bibliography2}
 
 \end{document}

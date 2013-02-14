@@ -42,8 +42,11 @@ derivation of the effective order conditions.
 	\begin{smalltrees}
 		\begin{tabular}{ccccccccc}
     		\cline{1-4}\cline{6-9}
+                \noalign{\vskip 2pt}
     		$i$ & tree $t_i$ & $\alpha(t_i)$ & $\gamma(t_i)$ & & $i$ & tree $t_i$ & $\alpha(t_i)$ & $\gamma(t_i)$ \\
-    		\cline{1-4}\cline{6-9} \\[-10pt]
+                \noalign{\vskip 1pt}
+    		\cline{1-4}\cline{6-9}
+                \noalign{\vskip 3pt}
     		0 & $\emptyset$ \hspace{15pt}  & 1 & 0 & & 9 & \hspace{15pt} \tree{9} & $\bm{b}^T\bm{c}^4$ & 5 \\
     		1 & \hspace{15pt} \tree{1} & $\bm{b}^T\bm{e}$ & 1 & & 10 & \tree{10} \hspace{15pt} & $\bm{b}^TC^2A\bm{c}$ & 10 \\
     		2 & \tree{2} \hspace{15pt}  & $\bm{b}^T\bm{c}$ & 2 & & 11 & \hspace{15pt} \tree{11} & $\bm{b}^TCA\bm{c}^2$ & 15 \\
@@ -144,28 +147,30 @@ with starting method $S$ and stopping method $S^{-1}$. % as $S^{-1}MS \equival{q
 \end{definition}
 
 \begin{table}
-  \setlength{\extrarowheight}{3pt}
+  \small
+  \setlength{\extrarowheight}{0.5pt}
   \centering
-  \begin{tabular}{lll}
-    \hline
-    $q$\;  &  Effective order conditions \\[2pt]
-    \hline
+  %\begin{tabular}{lp{0.37\textwidth}p{0.5\textwidth}}
+  \begin{tabular}{lp{50mm}p{65mm}}
+    \toprule
+    $q$  &  Effective order conditions \\
+    \midrule
     $1$  &
-            $\alpha_1  = 1$. \\[2pt]
-    \hdashline[2pt/3pt]
+            $\alpha_1  = 1$. \\
+    \mydashrule
     $2$  &
-            $\alpha_2  = \tfrac{1}{2}$.  \\[2pt]
-    \hdashline[2pt/3pt]
+            $\alpha_2  = \tfrac{1}{2}$. \\
+   \mydashrule
     $3$  &
             $\alpha_3  = \tfrac{1}{3} + 2\beta_2$,  \quad
-            $\alpha_4  = \tfrac{1}{6}$.  \\[2pt]
-    \hdashline[2pt/3pt]
+            $\alpha_4  = \tfrac{1}{6}$.  \\
+    \mydashrule
     $4$  &  \multicolumn{2}{l}{%
-            $\alpha_5  = \tfrac{1}{4} + 3\beta_2 + 3\beta_3$, \quad
-            $\alpha_6  = \tfrac{1}{8} + \beta_2 + \beta_3 + \beta_4$, \quad
-            $\alpha_7  = \tfrac{1}{12} +\beta_2 - \beta_3 + 2\beta_4$, \quad
-            $\alpha_8  = \tfrac{1}{24}$.}  \\[2pt]
-    \hdashline[2pt/3pt]
+            $\alpha_5  = \tfrac{1}{4} + 3\beta_2 + 3\beta_3$, \hfill
+            $\alpha_6  = \tfrac{1}{8} + \beta_2 + \beta_3 + \beta_4$, \hfill
+            $\alpha_7  = \tfrac{1}{12} +\beta_2 - \beta_3 + 2\beta_4$, \hfill
+            $\alpha_8  = \tfrac{1}{24}$.} \\
+    \mydashrule
     $5$  &
             $\alpha_9  = \tfrac{1}{5} + 4\beta_2 + 6\beta_3 + 4\beta_5$,
          &  $\alpha_{10} = \tfrac{1}{10} + \tfrac{5}{3}\beta_2 - 2\beta_2^{2} + \tfrac{5}{2}\beta_3 + \beta_4 + \beta_5 + 2\beta_6$, \\
@@ -174,8 +179,9 @@ with starting method $S$ and stopping method $S^{-1}$. % as $S^{-1}MS \equival{q
          &  \hspace*{-4pt}$\alpha_{13} = \tfrac{1}{20} + \tfrac{2}{3}\beta_2 - \beta_2^{2} + \beta_3 + \beta_4 + 2\beta_6$,
          &  $\alpha_{14} = \tfrac{1}{20} + \beta_2 + 3\beta_4 - \beta_5 + 3\beta_7$, \\
          &  \hspace*{-4pt}$\alpha_{15} = \tfrac{1}{40} + \tfrac{1}{3}\beta_2 + \tfrac{3}{2}\beta_4 - \beta_6 + \beta_7 + \beta_8$,
-         &  $\alpha_{16} = \tfrac{1}{60} + \tfrac{1}{3}\beta_2 - \tfrac{1}{2}\beta_3 + \beta_4 - \beta_7 + 2\beta_8$, \quad
+         &  $\alpha_{16} = \tfrac{1}{60} + \tfrac{1}{3}\beta_2 - \tfrac{1}{2}\beta_3 + \beta_4 - \beta_7 + 2\beta_8$, \,
             $\alpha_{17} = \tfrac{1}{120}$.\!\!\! \\
+            \bottomrule
     \end{tabular}
     \caption{Effective order five conditions on $\alpha$ (main
       method $M$) in terms of order conditions on $\beta$
@@ -245,45 +251,44 @@ $\alpha_i = 1/\gamma(t_i)$ and thus by Table~\ref{tab:effective_OCs_on_alpha} re
 %Essentially, for a given effective order $q$ if all $\beta_i$ are zero, then
 %the main method has classical order $q$.
 
+
 \begin{table}
+  \small
   \centering
+  %\setlength{\extrarowheight}{1pt}
     \begin{tabular}{M{2mm}M{2mm}M{68mm}M{67mm}}
-    		\hline
+      \toprule
         $q$ & $p$ & Order conditions for main method $M$ & Order conditions for starting method $S$ \nline
-        \hline
+      \midrule
         \multirow{1}{*}{3} & \multirow{1}{*}{2} & {\small $\alpha_1 = 1$, $\alpha_2 = \frac{1}{2}$, $\alpha_4 = \frac{1}{6}$.} & {\small $\beta_1 = 0$, $\beta_2 = - \frac{1}{6} + \frac{1}{2}\alpha_3$.}\nline
-    \hdashline[2pt/3pt]
-    %\hline
+      \mydashrule
         \multirow{3}{*}{4} & \multirow{3}{*}{2} & {\small $\alpha_1 = 1$, $\alpha_2 = \frac{1}{2}$, $\alpha_4 = \frac{1}{6}$,} & {\small $\beta_1 = 0$, $\beta_2 = - \frac{1}{6} + \frac{1}{2}\alpha_3$,}\nline
         & & {\small $\frac{1}{4} - \alpha_3 + \alpha_5 - 2\alpha_6 + \alpha_7 = 0$, $\alpha_8 = \frac{1}{24}$.} & {\small $\beta_3 = \frac{1}{12} - \frac{1}{2}\alpha_3 + \frac{1}{3}\alpha_5$, $\beta_4 = - \frac{1}{24} - \frac{1}{3}\alpha_5 + \alpha_6$.} \nline
-    \hdashline[2pt/3pt]
-    %\hline
+      \mydashrule
         \multirow{3}{*}{4} & \multirow{3}{*}{3} & {\small $\alpha_1 = 1$, $\alpha_2 = \frac{1}{2}$, $\alpha_3 = \frac{1}{3}$, $\alpha_4 = \frac{1}{6}$,} & {\small $\beta_1 = 0$, $\beta_2 = 0$, $\beta_3 = - \frac{1}{12}  + \frac{1}{3}\alpha_5$,} \nline
         & & {\small $\frac{1}{12} - \alpha_5 + 2\alpha_6 - \alpha_7 = 0$, $\alpha_8 = \frac{1}{24}$.} & {\small $\beta_4 = - \frac{1}{24} - \frac{1}{3}\alpha_5 + \alpha_6$.} \nline
-    \hdashline[2pt/3pt]
-    %\hline
+      \mydashrule
         \multirow{8}{*}{5} & \multirow{8}{*}{2} & {\small $\alpha_1 = 1$, $\alpha_2 = \frac{1}{2}$, $\alpha_4 = \frac{1}{6}$, $\alpha_8 = \frac{1}{24}$, $\alpha_{17} = \frac{1}{120}$,} & {\small $\beta_1 = 0$, $\beta_2 = - \frac{1}{6} + \frac{1}{2}\alpha_3$,} \nline
         & & {\small $\frac{1}{4} - \alpha_3 + \alpha_5 - 2\alpha_6 + \alpha_7 = 0$,} & {\small $\beta_3 = \frac{1}{12} - \frac{1}{2}\alpha_3 + \frac{1}{3}\alpha_5$, $\beta_4 = -\frac{1}{24} - \frac{1}{3}\alpha_5 + \alpha_6$} \nline
         & & {\small $\frac{1}{4}\alpha_9-\alpha_{10}+\alpha_{13}=\beta_2^{2}$, \: $\beta_2 = - \frac{1}{6} + \frac{1}{2}\alpha_3$,} & {\small $\beta_5 = -\frac{1}{120} + \frac{1}{4}\alpha_3 - \frac{1}{2}\alpha_5 + \frac{1}{4}\alpha_9$,} \nline
         & & {\small $\frac{3}{10} - \frac{3}{2}\alpha_3 + \alpha_5 + \frac{1}{2}\alpha_9 - 3\alpha_{10} + 3\alpha_{11} - \alpha_{14} = 6\beta_2^{2}$,} & {\small $\beta_6 = \frac{7}{720} + \beta_2^{2} + \frac{1}{12}\alpha_3 - \frac{1}{2}\alpha_6 - \frac{1}{8}\alpha_9 + \frac{1}{2}\alpha_{10}$,} \nline
         & & {\small $\frac{1}{15} - \frac{1}{2}\alpha_3 + \alpha_6 + \frac{1}{2}\alpha_9 - 2\alpha_{10} + \alpha_{11} + \alpha_{12} - \alpha_{15} = 2\beta_2^{2}$,} & {\small $\beta_7 = \frac{8}{45} - 2\beta_2^{2} - \frac{7}{12}\alpha_3 + \frac{1}{2}\alpha_5 - \alpha_6 + \frac{1}{4}\alpha_9 - \alpha_{10} + \alpha_{11}$,} \nline
         & & {\small $\frac{19}{60} - \alpha_3 + \alpha_5 - 2\alpha_6 + \alpha_{11} - 2\alpha_{12} + \alpha_{16} = 4\beta_2^{2}$.} & {\small $\beta_8 = -\frac{1}{120} + \beta_2^{2} + \frac{1}{8}\alpha_9 - \frac{1}{2}\alpha_{10} + \alpha_{12}$.} \nline
-    \hdashline[2pt/3pt]
-    %\hline
+      \mydashrule
         \multirow{7}{*}{5} & \multirow{7}{*}{3} & {\small $\alpha_1 = 1$, $\alpha_2 = \frac{1}{2}$, $\alpha_3 = \frac{1}{3}$, $\alpha_4 = \frac{1}{6}$, $\alpha_8 = \frac{1}{24}$,} & {\small $\beta_1 = 0$, $\beta_2 = 0$, $\beta_3 = -\frac{1}{12} + \frac{1}{3}\alpha_5$} \nline
         & & {\small $\alpha_{17} = \frac{1}{120}$, $\frac{1}{12} - \alpha_5 + 2\alpha_6 - \alpha_7 = 0$,} & {\small $\beta_4 = -\frac{1}{24} - \frac{1}{3}\alpha_5 + \alpha_6$,} \nline
         & & {\small $\frac{1}{4}\alpha_9 - \alpha_{10} + \alpha_{13} = 0$,} & {\small $\beta_5 = \frac{3}{40} - \frac{1}{2}\alpha_5 + \frac{1}{4}\alpha_9$,} \nline
         & & {\small $\frac{1}{5} - \alpha_5 - \frac{1}{2}\alpha_9 + 3\alpha_{10} - 3\alpha_{11} + \alpha_{14} = 0$,} & {\small $\beta_6 = \frac{3}{80} - \frac{1}{2}\alpha_6 - \frac{1}{8}\alpha_9 + \frac{1}{2}\alpha_{10}$,} \nline
         & & {\small $\frac{1}{10} - \alpha_6 - \frac{1}{2}\alpha_9 + 2\alpha_{10} - \alpha_{11} - \alpha_{12} + \alpha_{15} = 0$,} & {\small $\beta_7 = -\frac{1}{60} + \frac{1}{2}\alpha_5 - \alpha_6 + \frac{1}{4}\alpha_9 - \alpha_{10} + \alpha_{11}$,} \nline
         & & {\small $\frac{1}{60} - \alpha_5 + 2\alpha_6 - \alpha_{11} + 2\alpha_{12} - \alpha_{16} = 0$.} & {\small $\beta_8 = -\frac{1}{120} + \frac{1}{8}\alpha_9 - \frac{1}{2}\alpha_{10} + \alpha_{12}$.} \nline
-    \hdashline[2pt/3pt]
-    %\hline
+      \mydashrule
         \multirow{7}{*}{5} & \multirow{7}{*}{4} & {\small $\alpha_1 = 1$, $\alpha_2 = \frac{1}{2}$, $\alpha_3 = \frac{1}{3}$, $\alpha_4 = \frac{1}{6}$, $\alpha_5 = \frac{1}{4}$,} & {\small $\beta_1 = 0$, $\beta_2 = 0$,} \nline
         & & {\small $\alpha_6 = \frac{1}{8}$, $\alpha_7 = \frac{1}{12}$, $\alpha_8 = \frac{1}{24}$, $\alpha_{17} = \frac{1}{120}$,} & {\small $\beta_3 = 0$, $\beta_4 = 0$,} \nline
         & & {\small $\frac{1}{4}\alpha_9 - \alpha_{10} + \alpha_{13} = 0$,} & {\small $\beta_5 = -\frac{1}{20} + \frac{1}{4}\alpha_9$,} \nline
         & & {\small $\frac{1}{20} + \frac{1}{2}\alpha_9 - 3\alpha_{10} + 3\alpha_{11} - \alpha_{14} = 0$,} & {\small $\beta_6 = -\frac{1}{40} - \frac{1}{8}\alpha_9 + \frac{1}{2}\alpha_{10}$,} \nline
         & & {\small $\frac{1}{40} + \frac{1}{2}\alpha_9 - 2\alpha_{10} + \alpha_{11} + \alpha_{12} - \alpha_{15} = 0$,} & {\small $\beta_7 = -\frac{1}{60} + \frac{1}{4}\alpha_9 - \alpha_{10} + \alpha_{11}$,} \nline
         & & {\small $\frac{1}{60} - \alpha_{11} + 2\alpha_{12} - \alpha_{16} = 0$.} & {\small $\beta_8 = -\frac{1}{120} + \frac{1}{8}\alpha_9 - \frac{1}{2}\alpha_{10} + \alpha_{12}$.} \nline
+        \bottomrule
     \end{tabular}
     \caption{Effective order $q$, classical order $p$ conditions on $ \alpha $ and $ \beta $ for the main and starting methods, $M$ and $S$ respectively.}
     \label{tab:effective_OCs}

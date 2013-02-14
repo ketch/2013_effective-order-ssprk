@@ -33,10 +33,10 @@ Figure~\ref{fig:conv_study} on a logarithmic scale.
 \begin{figure}
 	\centering
      \subfloat[ESSPRK($s,3,2$)]{\label{fig:conv_study_a}
-     \includegraphics[width=0.48\textwidth]{Pictures/convergence_3_order}}
-   \quad
+     \includegraphics[width=0.45\textwidth]{Pictures/convergence_3_order}}
+   \qquad
      \subfloat[ESSPRK($s,4,2$)]{\label{fig:conv_study_b}
-    \includegraphics[width=0.48\textwidth]{Pictures/convergence_4_order}}
+    \includegraphics[width=0.45\textwidth]{Pictures/convergence_4_order}}
     \caption{Convergence study for the van der Pol system using $TM^{n-2}R$ 
     Runge--Kutta schemes when (a) $M$
     is an ESSPRK($s,3,2$) method and (b) $ M $ is an ESSPRK($s,4,2$) method.}
@@ -100,9 +100,10 @@ numerical solution.
 \begin{figure}
     \centering
     \subfloat[$\sigma = 0.88$]{\label{fig:burgers_cont_a}
-      \includegraphics[width=0.48\textwidth]{Pictures/burgers_cont}}\;
+      \includegraphics[width=0.45\textwidth]{Pictures/burgers_cont}}
+    \qquad
     \subfloat[$\sigma = 1.60$]{\label{fig:burgers_cont_b}
-      \includegraphics[width=0.48\textwidth]{Pictures/burgers_cont_no_tvd}}
+      \includegraphics[width=0.45\textwidth]{Pictures/burgers_cont_no_tvd}}
     \caption{Solution of Burgers' equation at the final time with continuous initial data, using a
     $TM^{n-2}R$ scheme, where $M$ is the optimal ESSPRK($4,4,2$).
     The time-step used is $\Dt = \sigma{\Dt}_{\text{FE}}$:
@@ -150,9 +151,10 @@ oscillations when $\sigma$ is larger than the SSP coefficient.
 \begin{figure}
     \centering
     \subfloat[$\sigma = 1.95$]{\label{fig:burgers_discont_a}
-      \includegraphics[width=0.48\textwidth]{Pictures/burgers_discont}}\;
+      \includegraphics[width=0.45\textwidth]{Pictures/burgers_discont}}
+    \qquad
     \subfloat[$\sigma = 2.15$]{\label{fig:burgers_discont_b}
-      \includegraphics[width=0.48\textwidth]{Pictures/burgers_discont_no_tvd}}
+      \includegraphics[width=0.45\textwidth]{Pictures/burgers_discont_no_tvd}}
     \caption{Solution of Burgers' equation at the final time with discontinuous initial data, using a
     $TM^{n-2}R$ scheme, where $M$ is ESSPRK($5,4,2$) method.
     The time-step used is $\Dt = \sigma{\Dt}_{\text{FE}}$:
@@ -182,18 +184,19 @@ predicted by the theory.
 
 \begin{table}
     \centering
-    \begin{tabular}{ccc@{\hspace{5pt}} c@{\hspace{5pt}} c@{\hspace{5pt}} c@{\hspace{5pt}} c@{\hspace{5pt}} c@{\hspace{5pt}} c@{\hspace{5pt}} c@{\hspace{5pt}} c@{\hspace{5pt}}}
-        \hline
+    \begin{tabular}{c@{\hspace{5pt}}c@{\hspace{5pt}}c@{\hspace{5pt}} c@{\hspace{5pt}} c@{\hspace{5pt}} c@{\hspace{5pt}} c@{\hspace{5pt}} c@{\hspace{5pt}} c@{\hspace{5pt}} c@{\hspace{5pt}} c@{\hspace{5pt}}}
+        \toprule
         %\multicolumn{2}{|c|}{\backslashbox{\hspace{2pt}\vspace{1pt}$q\,,\,p$}{\vspace{-5.5pt}$s$}} & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ & $11$ \\
         \multirow{2}{*}{$q$} &
-        \multirow{2}{*}{\;\;$p$\;\;}
+        \multirow{2}{*}{\;$p$\;}
                &   \multicolumn{9}{c}{stages $s$} \\
-            \cline{3-11}
+            \cmidrule{3-11}
         &      &   $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ & $11$ \\
-        \hline
+        \midrule
         $3$ & $2$ & \small$1.04(4\%)$ & \small$2.00(0\%)$ & \small$2.65(0\%)$ & \small$3.52(0\%)$ & \small$4.29 (0\%)$ & \small$5.11(0\%)$ & \small$6.00(0\%)$ & \small$6.79(0\%)$ & \small$7.63(0\%)$\\
         $4$ & $2$ & \small$-$ & \small$1.07(22\%)$ & \small$1.98(2\%)$ & \small$2.69(2\%)$ & \small$3.56(1\%)$ & \small$4.33(1\%)$ & \small$5.16(1\%)$ & \small$6.05(1\%)$ & \small$6.84(1\%)$ \\
         $4$ & $3$ & \small$-$ & \small$1.05(35\%)$ & \small$1.89(3\%)$ & \small$2.63(2\%)$ & \small$3.53(1\%)$ & \small$4.31(1\%)$ & \small$5.16(1\%)$ & \small$6.04(1\%)$ & \small$6.85(1\%)$ \\
+        \bottomrule
     \end{tabular}
     \caption{Maximum observed coefficients exhibiting the TVD property on 
     the Burgers' equation example with discontinuous data \eqref{eq:burgers_discont_IC}.
