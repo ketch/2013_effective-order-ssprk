@@ -45,7 +45,6 @@ non-increasing (in time) in some norm, semi-norm, or convex functional; i.e.,
 \begin{align}\label{eq:forwardEuler}
     \|\bm{u} + \Dt\bm{F}(\bm{u})\| \le \|\bm{u}\|, \quad \text{for all } \bm{u} \text{ and for } 0 \le \Dt \le \DtFE.
 \end{align}
-Note that $\DtFE$ is a property of $\bm{F}$ (and is independent of $\bm{u}$).
 If this is the case, then an SSP method also generates a solution whose norm is
 non-increasing in time, under a modified time-step restriction.
 \begin{definition}[Strong Stability Preserving]
@@ -61,6 +60,8 @@ non-increasing in time, under a modified time-step restriction.
 	\end{align*}
 \end{definition}
 
+Note that $\DtFE$ is a property of the spatial discretization $\bm{F}$
+and is independent of $\bm{u}$.
 The SSP coefficient $\sspcoef$ is a property of the particular
 time-stepping method and quantifies the allowable time step size relative 
 to that of the forward Euler method.
