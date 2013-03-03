@@ -111,7 +111,7 @@ In the cases of three and four stages, we are able to determine exact coefficien
 families of optimal methods of effective order three.
 \begin{theorem}\label{thm:ESSPRK(3,3,2)}
 	A family of optimal three-stage, effective order three SSP Runge--Kutta 
-	methods of classical order two, with SSP coefficient $\sspcoef=1$, is given by
+	methods of classical order two, with SSP coefficient $\sspcoef_{3,3,2} = 1$, is given by
     \begin{displaymath}
     		\begin{split}
     			\bm{Y}_1 &= \bm{u}^n, \\
@@ -126,7 +126,7 @@ families of optimal methods of effective order three.
 \end{theorem}
 \begin{theorem}\label{thm:ESSPRK(4,3,2)}
 	A family of optimal four-stage, effective order three SSP Runge--Kutta 
-	methods of classical order two, with SSP coefficient $\sspcoef=2$ is given by
+	methods of classical order two, with SSP coefficient $\sspcoef_{4,3,2} = 2$ is given by
     \begin{displaymath}
     		\begin{split}
     			\bm{Y}_1 &= \bm{u}^n, \\
@@ -142,7 +142,7 @@ families of optimal methods of effective order three.
 \begin{proof}
 	In either theorem, feasibility can be verified by direct calculation of the 
 	conditions in problem~\eqref{eq:SSP_opt}. Optimality follows because 
-	$\sspcoef=\clin$.
+	$\sspcoef_{s,3,2} = \sspcoef^{\textnormal{lin}}_{s,3}$.
 \end{proof}
 
 Theorem~\ref{thm:ESSPRK(3,3,2)} gives a \emph{family} of three-stage 
@@ -184,13 +184,13 @@ In the particular case of four-stage methods we have the following:% result:
 Additionally, we find two families of methods with effective order four, 
 for which $\ceff$ asymptotically approaches unity.
 The families consist of second order methods with $s = n^2+1$ stages and 
-SSP coefficient $\sspcoef = n^2-n$.
-They are optimal since $\sspcoef = \sspcoef^{\textnormal{lin}}_{4,2}$ 
+SSP coefficient $\sspcoef_{s,4,2} = n^2-n$.
+They are optimal since $\sspcoef_{s,4,2}  = \sspcoef^{\textnormal{lin}}_{s,4}$ 
 \cite[Theorem~5.2(c)]{Kraaijevanger1986}.
 It is convenient to express the coefficients in the modified Shu--Osher form
 \cite{Gottlieb2011a}
 \begin{align*}
-	\bm{Y}_i &= v_i\bm{u}^n + \sum_{j=1}^{i-1}(\alpha_{ij}\bm{Y}_j + \Dt\beta_{ij}\bm{F}(\bm{Y}_j)), \; 1 \leq i \leq s+1 \\
+	\bm{Y}_i &= v_i\bm{u}^n + \sum_{j=1}^{i-1}\bigl(\alpha_{ij}\bm{Y}_j + \Dt\beta_{ij}\bm{F}(\bm{Y}_j)\bigr), \; 1 \leq i \leq s+1 \\
 	\bm{u}^{n+1} &= \bm{Y}_{s+1},
 \end{align*}
 because of the sparsity of the matrices $\alpha, \beta \in \mathbb{R}^{(s+1)\times s}$
