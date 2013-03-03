@@ -77,6 +77,13 @@ of $\sspcoef_{s,q,p}$ {\em a priori} for the cases $q=3$ (for any $s$) and
 for $q=4,s=10$, since in those cases we have $\sspcoef_{s,q}=\clin$.
 
 \begin{table}
+\caption{Effective SSP coefficients $ \ceff = \sspcoef/s$ of the best known
+      %explicit effective order
+      ESSPRK($s,q,p$) methods.
+    		Entries in bold achieve the bound $\clin$ given by the linear SSP coefficient and are therefore optimal. 
+    		If no positive $\sspcoef$ can be found, we use ``$-$'' to indicate non-existence. 
+    		The optimal fourth-order linear SSP coefficients are $\sspcoef^{\textnormal{lin}}_{4,4}=0.25$,
+    		$\sspcoef^{\textnormal{lin}}_{5,4}=0.40$ and $\sspcoef^{\textnormal{lin}}_{6,4}=0.44$.}
     \centering
     \begin{tabular}{ccccccccccccc}
         \toprule
@@ -94,13 +101,6 @@ for $q=4,s=10$, since in those cases we have $\sspcoef_{s,q}=\clin$.
         $4$ & $3$ & $-$ & $-$ & $-$ & $0.19$ & $0.37$ & $0.43$ & $\bf 0.50$ & $\bf 0.54$ & $\bf 0.57$ & $\bf 0.60$ & $\bf 0.62$ \\
         \bottomrule
     \end{tabular}
-    \caption{Effective SSP coefficients $ \ceff = \sspcoef/s$ of the best known
-      %explicit effective order
-      ESSPRK($s,q,p$) methods.
-    		Entries in bold achieve the bound $\clin$ given by the linear SSP coefficient and are therefore optimal. 
-    		If no positive $\sspcoef$ can be found, we use ``$-$'' to indicate non-existence. 
-    		The optimal fourth-order linear SSP coefficients are $\sspcoef^{\textnormal{lin}}_{4,4}=0.25$,
-    		$\sspcoef^{\textnormal{lin}}_{5,4}=0.40$ and $\sspcoef^{\textnormal{lin}}_{6,4}=0.44$.}
     \label{tab:eff_SSP_coeff}
 \end{table}
 
@@ -268,6 +268,11 @@ conditions.
 
 
 \begin{table}
+  	\caption{Order conditions on $\rho$ and $\tau$ up to effective order four for starting
+  		and stopping methods $R$ and $T$, respectively.
+  		The upper block represents the effective order three conditions.
+         As in Table~\ref{tab:effective_OCs_on_alpha} and Table~\ref{tab:effective_OCs} we assume 
+         $\beta_1 = 0$.}
 	\centering
 	\begin{tabular}{lcl}
 		\toprule
@@ -286,11 +291,6 @@ conditions.
                 \\
                 \bottomrule
   	\end{tabular}
-  	\caption{Order conditions on $\rho$ and $\tau$ up to effective order four for starting
-  		and stopping methods $R$ and $T$, respectively.
-  		The upper block represents the effective order three conditions.
-         As in Table~\ref{tab:effective_OCs_on_alpha} and Table~\ref{tab:effective_OCs} we assume 
-         $\beta_1 = 0$.}
   	\label{tab:rho_tau_OCs}
 \end{table}
 
@@ -370,6 +370,9 @@ stopping method to obtain them.  Furthermore, changing step-size would require f
 %, and then the starting method to start up again if the stepsize where to change.
 
 \begin{table}
+    \caption{ESSPRK(4,4,2): an effective order four SSPRK method with
+      four stages and classical order two with its associated starting
+      and stopping methods.}
     \setlength{\tabcolsep}{2pt}
     %\centering
     \footnotesize
@@ -404,13 +407,13 @@ stopping method to obtain them.  Furthermore, changing step-size would require f
              & $0.307865440399752$ & $0.171863794704750$ & $0.233603236964822$ & $0.286667527930676$
         \end{tabular}
     }
-    \caption{ESSPRK(4,4,2): an effective order four SSPRK method with
-      four stages and classical order two with its associated starting
-      and stopping methods.}
     \label{tab:ESSPRK(4,4,2)_scheme}
 \end{table}
 
 \begin{table}
+    \caption{ESSPRK(4,4,3): an effective order four SSPRK method with
+      four stages and classical order three with its associated starting
+      and stopping methods.}
     \setlength{\tabcolsep}{2pt}
     %\centering
     \footnotesize
@@ -445,8 +448,5 @@ stopping method to obtain them.  Furthermore, changing step-size would require f
              & $0.203508169408374$ & $0.096469758967330$ & $0.321630956102914$ & $0.378391115521382$
         \end{tabular}
     }
-    \caption{ESSPRK(4,4,3): an effective order four SSPRK method with
-      four stages and classical order three with its associated starting
-      and stopping methods.}
     \label{tab:ESSPRK(4,4,3)_scheme}
 \end{table}
