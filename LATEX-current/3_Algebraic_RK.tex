@@ -18,7 +18,7 @@ order $p < q$.
 We then say $M$ has \emph{effective order} $q$.
 
 When the method $P$ is used for $n$ steps,
-$P^n = (S^{-1}MS)^n = (S^{-1}MS) \cdots (S^{-1}MS) (S^{-1}MS),$
+$$P^n = (S^{-1}MS)^n = (S^{-1}MS) \cdots (S^{-1}MS) (S^{-1}MS),$$
 it turns out that only $M$ need be used repeatedly, as in
 $S^{-1} M^n S$,
 because %, as suggested by the $S^{-1}$ notation,
@@ -55,22 +55,15 @@ derivation of the effective order conditions.
     		5 & \hspace{15pt} \tree{5} & $\bm{b}^T\bm{c}^3$ & 4 & & 14 & \tree{14} \hspace{15pt} & $\bm{b}^TA\bm{c}^3$ & 20 \\
     		6 & \tree{6} \hspace{15pt}  & $\bm{b}^TCA\bm{c}$ & 8 & & 15 & \hspace{15pt} \tree{15} & $\bm{b}^TACA\bm{c}$ & 40 \\
     		7 & \hspace{15pt} \tree{7} & $\bm{b}^TA\bm{c}^2$ & 12 & & 16 & \tree{16} \hspace{15pt} & $\bm{b}^TA^2\bm{c}^2$ & 60 \\
-    		8 & \tree{8} \hspace{15pt}  & $\bm{b}^TA^2\bm{c}$ & 24 & & 17 & \hspace{15pt} \tree{17} & $\bm{b}^TA^3\bm{c}$ & 120 \\
+    		8 & \tree{8} \hspace{15pt}  & $\bm{b}^TA^2\bm{c}$ & 24 & & 17 & \hspace{15pt} \tree{17} & $\bm{b}^TA^3\bm{c}$ & 120 \nline
+		\noalign{\vskip 3pt}    		
+    		\cline{1-4}\cline{6-9}
   		\end{tabular}
   \end{smalltrees}
-  \caption{Elementary weights $\alpha(t_i)$ of trees $t_i$ up to order five for a
-  		Runge--Kutta method with Butcher tableau $(A,\bm{b},\bm{c})$. 
-  		Here $C$ is a diagonal matrix with components 
-  		$c_{i} = \sum_{j=1}^{i-1} a_{ij}$ and exponents of vectors 
-  		represent component exponentiation.
-  		By convention $\alpha_0 = \alpha(t_{0}) = 1$, where $t_{0}$ 
-  		denotes the empty tree.}
-  \label{tab:elementary_weights}
+	\label{tab:elementary_weights}
 \end{table}
 
-\subsection{The algebraic representation of Runge--Kutta methods}\label{subsec:Algebraic_representation}
-
-In Butcher's algebraic theory, irreducible Runge--Kutta methods
+According to Butcher's algebraic theory, irreducible Runge--Kutta methods
 are placed in one-to-one correspondence with elements of a group
 $G$, consisting of real-valued functions on the set of rooted trees \cite[Theorem~384A]{Butcher2008_book}.
 A Runge--Kutta method corresponds to the map that takes each rooted tree $t$
