@@ -25,7 +25,7 @@
 %	\large{(SINUM manuscript \#088420)}}
 \title{Revision of SINUM manuscript \#088420}
 \author{Yiannis Hadjimichael, Colin B.~Macdonald, David I.~Ketcheson \\ and  James.~H.~Verner}
-
+\date{}
 \maketitle
 
 The authors thank the reviewers for their constructive comments.
@@ -33,7 +33,7 @@ We have revised the paper according to the comments and suggestions.
 During our revisions, we discovered a pattern for the coefficients of some effective order four, 
 classical order two SSP methods.
 These are included in a Section~5.1.3.
-We also simplified the proof in Section 4.
+We also simplified the proof of Theorem~4.2 in Section~4.
 Responses to the comments of the reviewers have been included below.
 \vspace{30pt}
 
@@ -140,7 +140,7 @@ elementary weight $\bm{b}^T \bm{c}^4$.''
 %with the index $i$ in Table 3.1",
 %as mentioned.
 %Examples and relevant tables in the first part of this section are omitted. 
-On page 6, below Table 3.3 we added a phrase to explain how the table is used in practice:
+On page 6, line 7 we added a phrase to explain how the table is used in practice:
 ``For a specified classical and effective order, these are the equality constraints
 $\Phi(K)$ in the optimization problem (2.5) for method $M$"
 
@@ -164,7 +164,7 @@ Thanks for the comment. We stated this with Remark~3.2 in Section~3.2:
 ``The effective order conditions of the main method for the ``tall" trees 
 $t_1, t_2, t_4, t_8, t_{17}, \dots$ match the classical order conditions
 and these are precisely the order conditions for linear problems.
-This follows from inductive application of the product operation (3.1)
+This follows from inductive application of the group product 
 on the tall trees. 
 Therefore, methods of effective order $q$ have classical order at least $q$ 
 for linear problems.''
@@ -200,29 +200,32 @@ $I \neq \emptyset$ because $v_1 = 0$ and $\beta_2 \neq 0$.
 The explanation of why $v_1 = 0$ should be included
 here.}
 
-The explanation why $v_1 \neq 0$ is now after set $I$ is defined. The text reads:
+Lemma~4.2 has been omitted since the proof of Theorem~4.2 is now simplified.
 
-``Let the set $J = \{i : v_i = \beta_2\}$. 
-Note that $v_1 = 0$ because the first row of matrix $A$ is identically zero.
-Since $\beta_2 \neq 0$ and $ \bm{v} \neq \bm{0}$, the set $J$ is not empty.
-Then (4.4) yields \dots".
-
-Note that set $I$ is changed to $J$.
+%The explanation why $v_1 \neq 0$ is now after set $I$ is defined. The text reads:
+%
+%``Let the set $J = \{i : v_i = \beta_2\}$. 
+%Note that $v_1 = 0$ because the first row of matrix $A$ is identically zero.
+%Since $\beta_2 \neq 0$ and $ \bm{v} \neq \bm{0}$, the set $J$ is not empty.
+%Then (4.4) yields \dots".
+%
+%Note that set $I$ is changed to $J$.
 	
 \remark{9}{
 Proof of Lemma~4.2, Case 3: The authors should explain, that, as $v_1 = 0$, the 
 indexes $i,j$ are in $\{2,\dots,s\}$.}
 
-Lemma~4.2, Case 3 has been changed to:
-
-``Since $\bm{b} > \bm{0}$, (4.6) implies that $\bm{w}$ contains both positive 
-and negative elements. 
-Furthermore, $v_1=0$ for any explicit method, thus $w_1=0$.
-Then, we can choose $i, j \in \{2, \dots, s\}$ such that $w_i < 0 < w_j$.
-By (4.3) $v_i\ne 0$, $v_j\ne 0$, and $v_i\ne v_j$.
-Application of Lemma~4.5 reveals that all $v_k$ for 
-$k \in\{1,2,\dots,s\}$ must be equal except for one, which is a contradiction
-since $v_1 = 0$."
+Similarly with Remark~8, the Lemma~4.2 has been omitted.
+%Lemma~4.2, Case 3 has been changed to:
+%
+%``Since $\bm{b} > \bm{0}$, (4.6) implies that $\bm{w}$ contains both positive 
+%and negative elements. 
+%Furthermore, $v_1=0$ for any explicit method, thus $w_1=0$.
+%Then, we can choose $i, j \in \{2, \dots, s\}$ such that $w_i < 0 < w_j$.
+%By (4.3) $v_i\ne 0$, $v_j\ne 0$, and $v_i\ne v_j$.
+%Application of Lemma~4.5 reveals that all $v_k$ for 
+%$k \in\{1,2,\dots,s\}$ must be equal except for one, which is a contradiction
+%since $v_1 = 0$."
 
 \remark{10}{
 The authors should explain the inequality $\sspcoef_{s,q,p} \leq \clin$ in formula (5.1). 
@@ -244,13 +247,13 @@ $\sspcoef_{s,q,p} \leq \clin$ to hold and we now say so before the inequalities 
 ``From Remark~3.2 and the fact that the ESSPRK($s,q,p$) methods 
 form a super class of the SSPRK($s,q$) methods, we have \dots"
 
-\pagebreak
-
 \remark{11}{
 Legend in Table 5.1: Please, include the value of $\sspcoef^{\textnormal{lin}}_{6,4}$.}
 
 We now explicitly stated that $\sspcoef^{\textnormal{lin}}_{6,4}=0.44$.
 \vspace{40pt}
+
+\pagebreak
 
 \noindent \textbf{\large Minor remarks:}
 
@@ -275,7 +278,7 @@ Equations (2.4): Please, explain that $I$ is the identity matrix. Observe that $
 denote the identity matrix and certain set in the proof of Lemma~4.2 (Case 2).}
 
 We defined that $I$ is the $s \times s$ identity matrix in (2.4).
-In the proof of Theorem~4.2, we also changed the set $I$ to $J$ to remove this ambiguity.
+%In the proof of Theorem~4.2, we also changed the set $I$ to $J$ to remove this ambiguity.
 
 \remark{4}{
 Table 5.2, first row: I think is better to write $\tau(t) = (\alpha\beta^{-1})(t)$.}
