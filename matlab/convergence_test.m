@@ -48,14 +48,14 @@ save('Data/error.mat','err1','err2','err3','err4','h')
 fig = figure(1); clf;
 p = loglog(h, (2*h).^effective_order, 'r--', h, err1, 'b*-', h, err2, ...
     'bo-', h, err3,'bx-', h, err4,'bs-');
-set(p, 'MarkerSize', 8);
-hc = get(fig,'children'); set(hc, 'FontSize', 14);
+set(p, 'MarkerSize', 10);
+hc = get(fig,'children'); set(hc, 'FontSize', 16);
 leg = legend('String',{order,stages1,stages2,stages3,stages4});
-set(leg,'Location','SouthEast','FontSize',20,'Interpreter','latex');
+set(leg,'Location','SouthEast','FontSize',22,'Interpreter','latex');
 h = get(leg,'Position'); h(3) = 0.02+h(3); h(1) = -0.02+h(1);
 set(leg,'Position',h);
-xlabel('$\Delta t$','FontSize',20,'Interpreter','latex');
-ylabel('$|error|$','FontSize',20,'Interpreter','latex');
+xlabel('$\Delta t$','FontSize',22,'Interpreter','latex');
+ylabel('$\|error\|_\infty$','FontSize',22,'Interpreter','latex');
 hold on
 
 file = sprintf('Figures/convergence_%d_order.eps',effective_order);

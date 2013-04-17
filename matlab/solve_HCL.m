@@ -251,12 +251,12 @@ end
 %setaxis = [.95 1.65 0.997 1.0005];
 fig = figure(2); clf;
 plot(x, y,'r*-');
-hc = get(fig,'children'); set(hc, 'fontsize', 14);
+hc = get(fig,'children'); set(hc, 'fontsize', 16);
 title(['$$t =\; $$' num2str(t),'$$\qquad TV =\; $$' ... 
-    num2str(tvnorm(y))],'FontSize',16,'Interpreter','latex');
+    num2str(tvnorm(y))],'FontSize',18,'Interpreter','latex');
 axis(setaxis);
-xlabel('$$x$$','FontSize',20,'Interpreter','latex');
-ylabel('$$u$$','FontSize',20,'Interpreter','latex');
+xlabel('$$x$$','FontSize',22,'Interpreter','latex');
+ylabel('$$u$$','FontSize',22,'Interpreter','latex');
 
 %% Save to file
 
