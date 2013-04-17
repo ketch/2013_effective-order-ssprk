@@ -3,6 +3,8 @@
 %% 2. Turn off all lines in preamble excpet macros, title and author 
 %% 3. Turn on section about keywords, ACM and pagestyle
 %% 4. Change bibliography style
+%% 5. In "The effective order of RK methods" section turn on order conditions table
+%% 6. In  "Optimal ESSPRK methods" section turn on the two tables for ESSPRK(4,4,2) and ESSPRK(4,4,3)
 %% Required files for SIAM class: siamltex.cls, siamltex.sty, siam10.clo, subeqn.clo, siam.bst
 %% available from http://www.siam.org/journals/auth-info.php 
 
@@ -50,7 +52,7 @@
 %\usepackage{cm-super}
 %\usepackage{ifthen}
 %\usepackage{maplestd2e}
-%\usepackage[numbered]{mcode}1
+%\usepackage[numbered]{mcode}
 %\usepackage{epsfig}
 %\usepackage{calc}
 %\usepackage{pbox}
@@ -90,10 +92,10 @@
 
 %%% General info %%%
 \title{Strong stability preserving explicit Runge--Kutta methods of maximal effective order
-%		\thanks{Received by the editors July 7, 2012; 
-%		accepted for publication (in revised form) ; 
-%		published electronically }
-}
+		\thanks{Received by the editors July 7, 2012; 
+		accepted for publication (in revised form) April 8, 2013; 
+		published electronically }
+}%
 \author{
         Yiannis Hadjimichael\thanks{Computer, Electrical and Mathematical Sciences and 
         Engineering Division, King Abdullah University of Science \& Technology (KAUST), 
@@ -115,7 +117,7 @@
         Burnaby, British Columbia, V5A\,1S6, Canada
         (\url{jverner@pims.math.ca}).
         The work of this author was supported by Simon Fraser University.}
-}
+}%
 \date{}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Main document %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -145,7 +147,7 @@
 		%%% Turn on the following for siam style %%%
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %		\begin{keywords} 
-%			strong stability preserving, monotonicity, effective order, Runge–Kutta methods, time integration
+%			strong stability preserving, monotonicity, effective order, Runge–-Kutta methods, time integration
 %		\end{keywords}
 %
 %		\begin{AMS}
@@ -155,7 +157,7 @@
 %		\pagestyle{myheadings}
 %		\thispagestyle{plain}
 %		\markboth{Y.~HADJIMICHAEL, C.~B. MACDONALD, D.~I. KETCHESON AND J.~H. VERNER}
-%		{SSPRK METHODS OF MAXIMAL EFFECTIVE ORDER}
+%		{EXPLICIT SSPRK METHODS OF MAXIMAL EFFECTIVE ORDER}
 		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 		
         %%% Main body %%%
@@ -167,16 +169,17 @@
         \input{6_Numerics}
         \input{7_Conclusion}
 
-        \section*{Acknowledgments}{
+        \section*{Acknowledgments}{%
                 The authors would like to thank the anonymous referees for their helpful 
                 and valuable suggestions on the paper.
-        }
-
+                \vspace*{20pt}
+         }%
+		
         %%% Appendix and Bibliography %%%
         %\appendix
-        %\include{AppendixA}
+        %\include{AppendixA}	          
         \bibliographystyle{acm} % other style: apalike
         %\bibliographystyle{siam}  % turn on for siam style
         \bibliography{bibliography2}
-
+		
 \end{document}
