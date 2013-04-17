@@ -1,5 +1,4 @@
 \section{The effective order of Runge--Kutta methods}\label{sec:Algebraic_RK}
-
 The definition, construction, and application of methods with an
 effective order of accuracy relies on the use of starting and stopping
 methods.
@@ -50,11 +49,11 @@ derivation of the effective order conditions.
 	\centering
 	\begin{smalltrees}
 		\begin{tabular}{ccccccccc}
-    		\cline{1-4}\cline{6-9}
+    		\cmidrule[\heavyrulewidth]{1-4}\cmidrule[\heavyrulewidth]{6-9}
                 \noalign{\vskip 2pt}
     		$i$ & tree $t_i$ & $\alpha(t_i)$ & $\gamma(t_i)$ & & $i$ & tree $t_i$ & $\alpha(t_i)$ & $\gamma(t_i)$ \\
                 \noalign{\vskip 1pt}
-    		\cline{1-4}\cline{6-9}
+    		\cmidrule[\lightrulewidth]{1-4}\cmidrule[\lightrulewidth]{6-9}
                 \noalign{\vskip 3pt}
     		0 & $\emptyset$ \hspace{15pt}  & 1 & 0 & & 9 & \hspace{15pt} \tree{9} & $\bm{b}^T\bm{c}^4$ & 5 \\
     		1 & \hspace{15pt} \tree{1} & $\bm{b}^T\bm{e}$ & 1 & & 10 & \tree{10} \hspace{15pt} & $\bm{b}^TC^2A\bm{c}$ & 10 \\
@@ -66,7 +65,7 @@ derivation of the effective order conditions.
     		7 & \hspace{15pt} \tree{7} & $\bm{b}^TA\bm{c}^2$ & 12 & & 16 & \tree{16} \hspace{15pt} & $\bm{b}^TA^2\bm{c}^2$ & 60 \\
     		8 & \tree{8} \hspace{15pt}  & $\bm{b}^TA^2\bm{c}$ & 24 & & 17 & \hspace{15pt} \tree{17} & $\bm{b}^TA^3\bm{c}$ & 120 \nline
 		\noalign{\vskip 3pt}    		
-    		\cline{1-4}\cline{6-9}
+    		\cmidrule[\heavyrulewidth]{1-4}\cmidrule[\heavyrulewidth]{6-9}
   		\end{tabular}
   \end{smalltrees}
 	\label{tab:elementary_weights}
@@ -252,6 +251,9 @@ $\alpha_i = 1/\gamma(t_i)$ and thus by Table~\ref{tab:effective_OCs_on_alpha} re
 %Essentially, for a given effective order $q$ if all $\beta_i$ are zero, then
 %the main method has classical order $q$.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Turn OFF the following for siam style %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{table}
     \caption{Effective order $q$, classical order $p$ conditions on $ \alpha $ and $ \beta $ for the main and starting methods, $M$ and $S$ respectively.}
   \small
@@ -293,7 +295,11 @@ $\alpha_i = 1/\gamma(t_i)$ and thus by Table~\ref{tab:effective_OCs_on_alpha} re
     \end{tabular}
     \label{tab:effective_OCs}
 \end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Turn ON the following for siam style %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\begin{table}
 %	\caption{Effective order $q$, classical order $p$ conditions on $ \alpha $ and $ \beta $ for the main and starting methods, $M$ and $S$ respectively.}
 %	\small
@@ -337,8 +343,10 @@ $\alpha_i = 1/\gamma(t_i)$ and thus by Table~\ref{tab:effective_OCs_on_alpha} re
 %         & {\small $\frac{1}{60} - \alpha_{11} + 2\alpha_{12} - \alpha_{16} = 0$.} & {\small $\beta_8 = -\frac{1}{120} + \frac{1}{8}\alpha_9 - \frac{1}{2}\alpha_{10} + \alpha_{12}$.} \nline
 %        \bottomrule
 %    \end{tabular}
+%    \vspace{2pt}
 %	\label{tab:effective_OCs}
 %\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Tables~\ref{tab:effective_OCs_on_alpha} and~\ref{tab:effective_OCs}
 both assume that $\beta_1=0$ (i.e., the starting and stopping methods
@@ -353,7 +361,6 @@ $\beta_1 \neq 0$.
 %(for which $\beta_1 \neq 0$), then $M$ is also effective order $p$
 %with another equivalent pair of starting and stopping methods which do have
 %$\beta_1=0$.
-
 
 
 
