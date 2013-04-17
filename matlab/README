@@ -1,15 +1,15 @@
 The main computation is done in the source directory and the code is called by the files:
 
 1. solve_HCL.m : Solves HCL problems - currently advection, burgers and buckley-leverett. See the beginning of the code for instructions.
-2. compute_dtFE_exp.m: Computes experimental dt_FE for the 1st order upwind and second order TVD spatial discretizations (with 3 different limiters for now)
+2. compute_dtFE.m: Computes dt_FE for the 1st order upwind and second order TVD spatial discretizations (with 3 different limiters for now)
 3. observed_ssp_coef.m: Finds the maximal coefficient for an ESSPRK method for which solution remains monotonically decreasing.
 4. table_obs_SSP_coef.m: Creates table for observed maximal coefficients.
 5. test_method.m: Test the desired order for an ESSPRK method
 6. convergence_test.m: Convergence test on various scalar and systems of odes.
 7. create_methods.m: Creates all methods.
 8. create_method.m: Creates an ESSPRK method.
-9. save_method_to_file.m: Saves method to a text file - for shapclaw.
-10. table_of_method_coeff.m: Creates latex code for the coefficients of a method.
+9. save_method_to_file.m: Saves method to a text file - for shapclaw
+10. table_of_method_coeff.m: Creates table with a method's coefficients in latex format.
 
 
 
