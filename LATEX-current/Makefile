@@ -1,5 +1,8 @@
 BN=Effective_order_SSPRK_methods
 
+## SINUM version ##
+FV=ExSSPRK_effective_order-siam
+
 all:
 	latex $(BN).tex
 	bibtex ${BN}
@@ -27,4 +30,38 @@ clean:
 	rm -f ${BN}.ind
 	rm -f ${BN}.out
 	rm -f ${BN}.ps
+
+sinum:
+
+	latex $(FV).tex
+	bibtex ${FV}
+	latex ${FV}.tex
+	latex ${FV}.tex
+	dvips ${FV}.dvi -o
+	ps2pdf ${FV}.ps
+
+sinum-quick:
+
+	latex ${FV}.tex
+	dvips ${FV}.dvi -o
+	ps2pdf ${FV}.ps
+
+sinum-clean:
+
+	rm -f ${FV}.toc
+	rm -f ${FV}.dvi
+	rm -f ${FV}.lof
+	rm -f ${FV}.lot
+	rm -f ${FV}.aux
+	rm -f ${FV}.bbl
+	rm -f ${FV}.blg
+	rm -f ${FV}.idx
+	rm -f ${FV}.ilg
+	rm -f ${FV}.log
+	rm -f ${FV}.ind
+	rm -f ${FV}.out
+	rm -f ${FV}.ps
+
+
+
 
