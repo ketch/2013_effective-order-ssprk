@@ -2,7 +2,7 @@
 %% siamltex.sty, siam.bst
 %% available from http://www.siam.org/journals/auth-info.php 
 
-\documentclass{siamltex}  % SIAM class: use [final] to view lines that extend past the margin
+\documentclass[final]{siamltex}  % SIAM class: ommit [final] to view lines that extend past the margin
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Preamble %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
 
@@ -761,8 +761,12 @@ This is discussed in the next section.
 The definition, construction, and application of methods with an
 effective order of accuracy relies on the use of starting and stopping
 methods.
-Specifically, we consider a \emph{starting method} $S$, a \emph{main method} $M$, 
-and a \emph{stopping method} $S^{-1}$.
+%The successive application of these methods results in a scheme that attains
+%higher order of accuracy than the order of its consisting methods.
+Specifically, we consider a \emph{starting method} $S$, a \emph{main
+  method} $M$, and a \emph{stopping method} $S^{-1}$.
+%: i.e., the inverse of $S$ which
+%annihilates the work of the starting method (up to order $q$).
 The successive use of these three methods results in a method $P =
 S^{-1}MS$, which denotes the application of method $S$, followed by
 method $M$, followed by method $S^{-1}$.
@@ -775,7 +779,8 @@ When the method $P$ is used for $n$ steps,
 $$P^n = (S^{-1}MS)^n = (S^{-1}MS) \cdots (S^{-1}MS) (S^{-1}MS),$$
 it turns out that only $M$ need be used repeatedly, as in
 $S^{-1} M^n S$,
-because $S S^{-1}$ leaves the solution unchanged up to order $q$.
+because %, as suggested by the $S^{-1}$ notation,
+$S S^{-1}$ leaves the solution unchanged up to order $q$.
 The starting method introduces a perturbation to the solution,
 followed by $n$ time steps of the main method $M$, and finally the
 stopping method is used to correct the solution.
@@ -787,8 +792,8 @@ The effective order of a Runge--Kutta method is defined in an abstract
 algebraic context introduced by Butcher \cite{Butcher1969} and developed 
 further in \cite{Butcher1972, Hairer1974, Butcher1996, Butcher1998} and 
 others.
-We follow the book \cite{Butcher2008_book} in our derivation of the effective 
-order conditions.
+We follow the book \cite{Butcher2008_book} in our %description and
+derivation of the effective order conditions.
 
 \subsection{The algebraic representation of Runge--Kutta methods}\label{subsec:Algebraic_representation}
 
@@ -830,6 +835,8 @@ are placed in one-to-one correspondence with elements of a group
 $G$, consisting of real-valued functions on the set of rooted trees \cite[Theorem~384A]{Butcher2008_book}.
 A Runge--Kutta method corresponds to the map that takes each rooted tree $t$
 to the corresponding elementary weight $\Phi(t)$ of that Runge--Kutta method.
+%Each elementary weight is an expression $\Phi(t)$ on a rooted tree
+%$t$ \cite{Butcher2008_book}.
 Table~\ref{tab:elementary_weights} lists the elementary weights for trees of
 up to degree five; a general recursive formula can be found in
 \cite[Definition~312A]{Butcher2008_book}.
@@ -838,9 +845,12 @@ throughout the remainder of this work; thus $t_9$ refers to the tree with
 elementary weight $\bm{b}^T \bm{c}^4$.
 For a function $\alpha \in G$ we write the values of the
 elementary weights as $\alpha_{i} = \alpha(t_{i})$ for tree $t_{i}$.
+%By convention $\alpha_0 = \alpha(t_{0}) = 1$, where $t_{0}$ denotes the empty tree.
+%For example $\alpha_1 = \bm{b}^T\bm{e}$, $\alpha_2 = \bm{b}^T\bm{c}$ and so on.
 A special element of the group $E \in G$ corresponds to the
 (hypothetical) method that evolves the solution exactly.
 The values of $E(t)$ are denoted $1/\gamma(t)$ \cite{Butcher2008_book}
+%, where $\gamma(t)$ denotes the density of tree $t$ \cite{Butcher2008_book}
 and the values of $\gamma(t)$ are included in
 Table~\ref{tab:elementary_weights}.
 Classical order conditions are obtained by comparing the elementary weights 
@@ -848,6 +858,7 @@ of a method with these values.
 
 Let $\alpha, \beta \in G$ correspond to Runge--Kutta methods $M_1$ and $M_2$
 respectively.
+%A multiplicative group operation $\alpha\beta$ can be defined
 The application of method $M_1$ followed by method $M_2$ corresponds to
 the multiplicative group operation $\alpha\beta$.\footnote{We write
 	$M_2M_1$ to mean the application of $M_1$
@@ -858,6 +869,14 @@ the multiplicative group operation $\alpha\beta$.\footnote{We write
 	to match the convention in \cite{Butcher2008_book}.}
 This product is defined by partitioning the input tree and computing
 over the resulting forest \cite[\S~383]{Butcher2008_book}.
+%It is expressed by
+%\begin{equation}\label{eq:Group_operation}
+%       (\alpha\beta)(t) = \sum_{w \lhd t} \biggl(\prod_{v \in t \setminus w} \alpha(v)\beta(w)\biggr),
+%\end{equation}
+%where $w \lhd t$ indicates a subtree of $t$ which includes the
+%root of $t$ and $w \setminus t$ indicates the forest induced
+%by removing $w$ from $t$ \cite{Butcher2008_book}.
+%Multiplicity in choosing $w$ must also be accounted for.
 
 Two Runge--Kutta methods $M_1$ and $M_2$, are equivalent up to order
 $p$ if their corresponding elements in $G$, $\alpha$ and $\beta$, satisfy
@@ -865,12 +884,13 @@ $\alpha(t) = \beta(t)$, for every tree $t$ with $r(t) \leq p$,
 where $r(t)$ denotes the order of the tree (number of vertices).
 We denote this equivalence relation by
 $$M_1 \equival{p} M_2.$$
+%(although this notation is not used in \cite{Butcher2008_book}.)
 In this sense, methods have inverses: the product of $\alpha^{-1}$ and
 $\alpha$ must match the identity method up to order $p$.
 Note that inverse methods up to order $p$ are not unique and inverse 
 methods of explicit methods need not be implicit.
 We can then define the effective order of accuracy of a method $M$
-with starting method $S$ and stopping method $S^{-1}$.
+with starting method $S$ and stopping method $S^{-1}$. % as $S^{-1}MS \equival{q} E$.
 \begin{definition}\cite[\S~389]{Butcher2008_book}\label{def:Effective_order}
   Suppose $M$ is a Runge--Kutta method with corresponding $\alpha \in G$.
   Then the method $M$ is of effective order $q$ if there exist methods
@@ -899,9 +919,10 @@ with starting method $S$ and stopping method $S^{-1}$.
   \small
   \setlength{\extrarowheight}{0.5pt}
   \centering
+  %\begin{tabular}{lp{0.37\textwidth}p{0.5\textwidth}}
   \begin{tabular}{p{2mm}p{51mm}p{64mm}}
     \toprule
-    $q$  &  Effective order conditions \\
+    $q$  & Effective order conditions \\
     \mymidrule
     $1$  &
             $\alpha_1  = 1$. \\
@@ -919,7 +940,7 @@ with starting method $S$ and stopping method $S^{-1}$.
             $\alpha_7  = \tfrac{1}{12} +\beta_2 - \beta_3 + 2\beta_4$, \hfill
             $\alpha_8  = \tfrac{1}{24}$.} \\
     \mydashrule
-    $5$  &
+    \multirow{4}{*}{$5$}  &
             $\alpha_9  = \tfrac{1}{5} + 4\beta_2 + 6\beta_3 + 4\beta_5$,
          &  \hspace*{-3pt}$\alpha_{10} = \tfrac{1}{10} + \tfrac{5}{3}\beta_2 - 2\beta_2^{2} + \tfrac{5}{2}\beta_3 + \beta_4 + \beta_5 + 2\beta_6$, \nline
          &  $\alpha_{11} = \tfrac{1}{15} + \tfrac{4}{3}\beta_2 + \tfrac{1}{2}\beta_3 + 2\beta_4 + 2\beta_6 + \beta_7$, 
@@ -939,9 +960,9 @@ and those of the starting and stopping methods must satisfy a set of
 algebraic conditions.
 These \emph{effective order conditions} can be found
 by rewriting \eqref{eq:Effective_order_1} as
-$(\beta\alpha)(t) = (E\beta)(t)$ and applying the group product operation.
-For trees up to order five these are tabulated in Table~\ref{tab:effective_OCs_on_alpha} 
-(and also in \cite[\S~389]{Butcher2008_book}).
+$(\beta\alpha)(t) = (E\beta)(t)$  %, for all trees with $r(t) \leq q$
+and applying the group product operation.
+For trees up to order five these are tabulated in Table~\ref{tab:effective_OCs_on_alpha} (and also in \cite[\S~389]{Butcher2008_book}).
 In general, the effective order conditions allow more degrees of
 freedom for method design than do the classical order conditions.
 Note that the effective order conditions match the classical order conditions up to
@@ -955,6 +976,9 @@ second order.
 	Therefore, methods of effective order $q$ have classical order at least $q$ 
 	for linear problems.
 \end{remark}
+
+
+%Finally, we use the abbreviation RK($s$,$q$,$p$) for an $s$-stage Runge-Kutta method of effective order $q$ and classical order $p$.
 
 \subsubsection{Order conditions of the main and starting methods}\label{subsubsec:Main_starting_conditions}
 As recommended in \cite{Butcher2008_book},
@@ -976,55 +1000,57 @@ Constructing the main method $M$ then determines the $\alpha$ values
 and we obtain a set of order conditions on $\beta$ (for that
 particular choice of $M$).  These are given in the right-half of
 Table~\ref{tab:effective_OCs}.
+%The order conditions for the starting method $S$ are also given in the table.
 We can also find the order conditions on $S^{-1}$ in terms of the
 $\beta_i$ (see \cite[Table~386(III)]{Butcher2008_book}).
 We note that increasing the classical order of the main method requires 
 $\alpha_i = 1/\gamma(t_i)$ and thus by Table~\ref{tab:effective_OCs_on_alpha} requires more of the $\beta_i$ to be zero.
+%The classical order of the main method $M$ is increased by setting $\beta_i$
+%to zero.
+%Essentially, for a given effective order $q$ if all $\beta_i$ are zero, then
+%the main method has classical order $q$.
 
 \begin{table}
-	\caption{Effective order $q$, classical order $p$ conditions on $ \alpha $ and $ \beta $ for the main and starting methods, $M$ and $S$ respectively.}
-	\small
-	\centering
-    \begin{tabular}{>{\hspace*{-4pt}}m{5mm}>{\hspace*{-3pt}}m{58mm}>{\hspace*{-2pt}}m{54mm}}
+    \caption{Effective order $q$, classical order $p$ conditions on $ \alpha $ and $ \beta $ for the main and starting methods, $M$ and $S$ respectively.}
+  \small
+  \centering
+  %\setlength{\extrarowheight}{1pt}
+  \resizebox{\textwidth}{!}{
+    \begin{tabular}{L{1.0mm}L{1.0mm}M{68mm}M{67mm}}
       \toprule
-        $q$ \: $p$ & Order conditions for main method $M$ & Order conditions for starting method $S$ \nline
-      \mymidrule
-        \multirow{1}{*}{3 \; 2}  & {\small $\alpha_1 = 1$, \: $\alpha_2 = \frac{1}{2}$, \: $\alpha_4 = \frac{1}{6}$.} & {\small $\beta_1 = 0$, \: $\beta_2 = - \frac{1}{6} + \frac{1}{2}\alpha_3$.} \\
+        $q$ & $p$ & Order conditions for main method $M$ & Order conditions for starting method $S$ \nline
+      \midrule
+        \multirow{1}{*}{$3$} & \multirow{1}{*}{$2$} & {\small $\alpha_1 = 1$, $\alpha_2 = \frac{1}{2}$, $\alpha_4 = \frac{1}{6}$.} & {\small $\beta_1 = 0$, $\beta_2 = - \frac{1}{6} + \frac{1}{2}\alpha_3$.}\nline
       \mydashrule
-        \multirow{3}{*}{4 \: 2}  & {\small  $\alpha_1 = 1$, \: $\alpha_2 = \frac{1}{2}$, \: $\alpha_4 = \frac{1}{6}$,} & {\small $\beta_1 = 0$, \: $\beta_2 = - \frac{1}{6} + \frac{1}{2}\alpha_3$,}\nline
-         & {\small $\frac{1}{4} - \alpha_3 + \alpha_5 - 2\alpha_6 + \alpha_7 = 0$,} & {\small $\beta_3 = \frac{1}{12} - \frac{1}{2}\alpha_3 + \frac{1}{3}\alpha_5$,} \nline
-         & {\small $\alpha_8 = \frac{1}{24}$.} & {\small $\beta_4 = - \frac{1}{24} - \frac{1}{3}\alpha_5 + \alpha_6$.} \\
+        \multirow{3}{*}{$4$} & \multirow{3}{*}{$2$} & {\small $\alpha_1 = 1$, $\alpha_2 = \frac{1}{2}$, $\alpha_4 = \frac{1}{6}$,} & {\small $\beta_1 = 0$, $\beta_2 = - \frac{1}{6} + \frac{1}{2}\alpha_3$,}\nline
+        & & {\small $\frac{1}{4} - \alpha_3 + \alpha_5 - 2\alpha_6 + \alpha_7 = 0$, $\alpha_8 = \frac{1}{24}$.} & {\small $\beta_3 = \frac{1}{12} - \frac{1}{2}\alpha_3 + \frac{1}{3}\alpha_5$, $\beta_4 = - \frac{1}{24} - \frac{1}{3}\alpha_5 + \alpha_6$.} \nline
       \mydashrule
-        \multirow{2}{*}{4 \: 3} & {\small $\alpha_1 = 1$, \: $\alpha_2 = \frac{1}{2}$, \: $\alpha_3 = \frac{1}{3}$, \:  $\alpha_4 = \frac{1}{6}$,} & {\small $\beta_1 = 0$, \: $\beta_2 = 0$, \: $\beta_3 = - \frac{1}{12}  + \frac{1}{3}\alpha_5$,} \\
-         & {\small $\frac{1}{12} - \alpha_5 + 2\alpha_6 - \alpha_7 = 0$, \: $\alpha_8 = \frac{1}{24}$.} & {\small $\beta_4 = - \frac{1}{24} - \frac{1}{3}\alpha_5 + \alpha_6$.} \\
+        \multirow{3}{*}{$4$} & \multirow{3}{*}{$3$} & {\small $\alpha_1 = 1$, $\alpha_2 = \frac{1}{2}$, $\alpha_3 = \frac{1}{3}$, $\alpha_4 = \frac{1}{6}$,} & {\small $\beta_1 = 0$, $\beta_2 = 0$, $\beta_3 = - \frac{1}{12}  + \frac{1}{3}\alpha_5$,} \nline
+        & & {\small $\frac{1}{12} - \alpha_5 + 2\alpha_6 - \alpha_7 = 0$, $\alpha_8 = \frac{1}{24}$.} & {\small $\beta_4 = - \frac{1}{24} - \frac{1}{3}\alpha_5 + \alpha_6$.} \nline
       \mydashrule
-        \multirow{10}{*}{5 \: 2} & {\small $\alpha_1 = 1$, \: $\alpha_2 = \frac{1}{2}$, \: $\alpha_4 = \frac{1}{6}$,}  & {\small $\beta_1 = 0$, \: $\beta_2 = - \frac{1}{6} + \frac{1}{2}\alpha_3$,} \nline
-        & {\small $\alpha_8 = \frac{1}{24}$, \: $\alpha_{17} = \frac{1}{120}$,} & {\small $\beta_3 = \frac{1}{12} - \frac{1}{2}\alpha_3 + \frac{1}{3}\alpha_5$,} \nline
-         & {\small $\frac{1}{4} - \alpha_3 + \alpha_5 - 2\alpha_6 + \alpha_7 = 0$,} & {\small $\beta_4 = -\frac{1}{24} - \frac{1}{3}\alpha_5 + \alpha_6$,} \nline
-         & {\small $\beta_2^{2} = \frac{1}{4}\alpha_9-\alpha_{10}+\alpha_{13}$, \: $\beta_2 = - \frac{1}{6} + \frac{1}{2}\alpha_3$,} & {\small $\beta_5 = -\frac{1}{120} + \frac{1}{4}\alpha_3 - \frac{1}{2}\alpha_5 + \frac{1}{4}\alpha_9$,} \nline
-         & {\small $6\beta_2^{2} = \frac{3}{10} - \frac{3}{2}\alpha_3 + \alpha_5 + \frac{1}{2}\alpha_9 - 3\alpha_{10} + 3\alpha_{11} $} & {\small $\beta_6 = \frac{7}{720} + \beta_2^{2} + \frac{1}{12}\alpha_3 - \frac{1}{2}\alpha_6 - \frac{1}{8}\alpha_9$} \nline
-         & \hspace*{20pt} {\small $- \alpha_{14}$,} & \hspace*{15pt} {\small $+ \frac{1}{2}\alpha_{10}$,} \nline
-         & {\small $2\beta_2^{2} = \frac{1}{15} - \frac{1}{2}\alpha_3 + \alpha_6 + \frac{1}{2}\alpha_9 - 2\alpha_{10} + \alpha_{11}$} & {\small $\beta_7 = \frac{8}{45} - 2\beta_2^{2} - \frac{7}{12}\alpha_3 + \frac{1}{2}\alpha_5 - \alpha_6$} \nline
-         & \hspace*{20pt} {\small $+ \alpha_{12} - \alpha_{15}$,} & \hspace*{15pt} {\small $+ \frac{1}{4}\alpha_9 - \alpha_{10} + \alpha_{11}$,} \nline
-         & {\small $4\beta_2^{2} = \frac{19}{60} - \alpha_3 + \alpha_5 - 2\alpha_6 + \alpha_{11} - 2\alpha_{12} + \alpha_{16}$.} & {\small $\beta_8 = -\frac{1}{120} + \beta_2^{2} + \frac{1}{8}\alpha_9 - \frac{1}{2}\alpha_{10} + \alpha_{12}$.}  \\
+        \multirow{8}{*}{$5$} & \multirow{8}{*}{$2$} & {\small $\alpha_1 = 1$, $\alpha_2 = \frac{1}{2}$, $\alpha_4 = \frac{1}{6}$, $\alpha_8 = \frac{1}{24}$, $\alpha_{17} = \frac{1}{120}$,} & {\small $\beta_1 = 0$, $\beta_2 = - \frac{1}{6} + \frac{1}{2}\alpha_3$,} \nline
+        & & {\small $\frac{1}{4} - \alpha_3 + \alpha_5 - 2\alpha_6 + \alpha_7 = 0$,} & {\small $\beta_3 = \frac{1}{12} - \frac{1}{2}\alpha_3 + \frac{1}{3}\alpha_5$, $\beta_4 = -\frac{1}{24} - \frac{1}{3}\alpha_5 + \alpha_6$} \nline
+        & & {\small $\frac{1}{4}\alpha_9-\alpha_{10}+\alpha_{13}=\beta_2^{2}$, \: $\beta_2 = - \frac{1}{6} + \frac{1}{2}\alpha_3$,} & {\small $\beta_5 = -\frac{1}{120} + \frac{1}{4}\alpha_3 - \frac{1}{2}\alpha_5 + \frac{1}{4}\alpha_9$,} \nline
+        & & {\small $\frac{3}{10} - \frac{3}{2}\alpha_3 + \alpha_5 + \frac{1}{2}\alpha_9 - 3\alpha_{10} + 3\alpha_{11} - \alpha_{14} = 6\beta_2^{2}$,} & {\small $\beta_6 = \frac{7}{720} + \beta_2^{2} + \frac{1}{12}\alpha_3 - \frac{1}{2}\alpha_6 - \frac{1}{8}\alpha_9 + \frac{1}{2}\alpha_{10}$,} \nline
+        & & {\small $\frac{1}{15} - \frac{1}{2}\alpha_3 + \alpha_6 + \frac{1}{2}\alpha_9 - 2\alpha_{10} + \alpha_{11} + \alpha_{12} - \alpha_{15} = 2\beta_2^{2}$,} & {\small $\beta_7 = \frac{8}{45} - 2\beta_2^{2} - \frac{7}{12}\alpha_3 + \frac{1}{2}\alpha_5 - \alpha_6 + \frac{1}{4}\alpha_9 - \alpha_{10} + \alpha_{11}$,} \nline
+        & & {\small $\frac{19}{60} - \alpha_3 + \alpha_5 - 2\alpha_6 + \alpha_{11} - 2\alpha_{12} + \alpha_{16} = 4\beta_2^{2}$.} & {\small $\beta_8 = -\frac{1}{120} + \beta_2^{2} + \frac{1}{8}\alpha_9 - \frac{1}{2}\alpha_{10} + \alpha_{12}$.} \nline
       \mydashrule
-        \multirow{7}{*}{5 \: 3} & {\small $\alpha_1 = 1$, $\alpha_2 = \frac{1}{2}$, $\alpha_3 = \frac{1}{3}$, $\alpha_4 = \frac{1}{6}$, $\alpha_8 = \frac{1}{24}$,} & {\small $\beta_1 = 0$, \: $\beta_2 = 0$, \: $\beta_3 = -\frac{1}{12} + \frac{1}{3}\alpha_5$} \nline
-         & {\small $\alpha_{17} = \frac{1}{120}$, \: $\frac{1}{12} - \alpha_5 + 2\alpha_6 - \alpha_7 = 0$,} & {\small $\beta_4 = -\frac{1}{24} - \frac{1}{3}\alpha_5 + \alpha_6$,} \nline
-         & {\small $\frac{1}{4}\alpha_9 - \alpha_{10} + \alpha_{13} = 0$,} & {\small $\beta_5 = \frac{3}{40} - \frac{1}{2}\alpha_5 + \frac{1}{4}\alpha_9$,} \nline
-         & {\small $\frac{1}{5} - \alpha_5 - \frac{1}{2}\alpha_9 + 3\alpha_{10} - 3\alpha_{11} + \alpha_{14} = 0$,} & {\small $\beta_6 = \frac{3}{80} - \frac{1}{2}\alpha_6 - \frac{1}{8}\alpha_9 + \frac{1}{2}\alpha_{10}$,} \nline
-         & {\small $\frac{1}{10} - \alpha_6 - \frac{1}{2}\alpha_9 + 2\alpha_{10} - \alpha_{11} - \alpha_{12} + \alpha_{15} = 0$,} & {\small $\beta_7 = -\frac{1}{60} + \frac{1}{2}\alpha_5 - \alpha_6 + \frac{1}{4}\alpha_9 - \alpha_{10} + \alpha_{11}$,} \nline
-         & {\small $\frac{1}{60} - \alpha_5 + 2\alpha_6 - \alpha_{11} + 2\alpha_{12} - \alpha_{16} = 0$.} & {\small $\beta_8 = -\frac{1}{120} + \frac{1}{8}\alpha_9 - \frac{1}{2}\alpha_{10} + \alpha_{12}$.} \nline
+        \multirow{7}{*}{5} & \multirow{7}{*}{3} & {\small $\alpha_1 = 1$, $\alpha_2 = \frac{1}{2}$, $\alpha_3 = \frac{1}{3}$, $\alpha_4 = \frac{1}{6}$, $\alpha_8 = \frac{1}{24}$,} & {\small $\beta_1 = 0$, $\beta_2 = 0$, $\beta_3 = -\frac{1}{12} + \frac{1}{3}\alpha_5$} \nline
+        & & {\small $\alpha_{17} = \frac{1}{120}$, $\frac{1}{12} - \alpha_5 + 2\alpha_6 - \alpha_7 = 0$,} & {\small $\beta_4 = -\frac{1}{24} - \frac{1}{3}\alpha_5 + \alpha_6$,} \nline
+        & & {\small $\frac{1}{4}\alpha_9 - \alpha_{10} + \alpha_{13} = 0$,} & {\small $\beta_5 = \frac{3}{40} - \frac{1}{2}\alpha_5 + \frac{1}{4}\alpha_9$,} \nline
+        & & {\small $\frac{1}{5} - \alpha_5 - \frac{1}{2}\alpha_9 + 3\alpha_{10} - 3\alpha_{11} + \alpha_{14} = 0$,} & {\small $\beta_6 = \frac{3}{80} - \frac{1}{2}\alpha_6 - \frac{1}{8}\alpha_9 + \frac{1}{2}\alpha_{10}$,} \nline
+        & & {\small $\frac{1}{10} - \alpha_6 - \frac{1}{2}\alpha_9 + 2\alpha_{10} - \alpha_{11} - \alpha_{12} + \alpha_{15} = 0$,} & {\small $\beta_7 = -\frac{1}{60} + \frac{1}{2}\alpha_5 - \alpha_6 + \frac{1}{4}\alpha_9 - \alpha_{10} + \alpha_{11}$,} \nline
+        & & {\small $\frac{1}{60} - \alpha_5 + 2\alpha_6 - \alpha_{11} + 2\alpha_{12} - \alpha_{16} = 0$.} & {\small $\beta_8 = -\frac{1}{120} + \frac{1}{8}\alpha_9 - \frac{1}{2}\alpha_{10} + \alpha_{12}$.} \nline
       \mydashrule
-        \multirow{7}{*}{5 \: 4} & {\small $\alpha_1 = 1$, $\alpha_2 = \frac{1}{2}$, $\alpha_3 = \frac{1}{3}$, $\alpha_4 = \frac{1}{6}$, $\alpha_5 = \frac{1}{4}$,} & {\small $\beta_1 = 0$, \: $\beta_2 = 0$,} \nline
-         & {\small $\alpha_6 = \frac{1}{8}$, \: $\alpha_7 = \frac{1}{12}$, \: $\alpha_8 = \frac{1}{24}$, \: $\alpha_{17} = \frac{1}{120}$,} & {\small $\beta_3 = 0$, \: $\beta_4 = 0$,} \nline
-         & {\small $\frac{1}{4}\alpha_9 - \alpha_{10} + \alpha_{13} = 0$,} & {\small $\beta_5 = -\frac{1}{20} + \frac{1}{4}\alpha_9$,} \nline
-         & {\small $\frac{1}{20} + \frac{1}{2}\alpha_9 - 3\alpha_{10} + 3\alpha_{11} - \alpha_{14} = 0$,} & {\small $\beta_6 = -\frac{1}{40} - \frac{1}{8}\alpha_9 + \frac{1}{2}\alpha_{10}$,} \nline
-         & {\small $\frac{1}{40} + \frac{1}{2}\alpha_9 - 2\alpha_{10} + \alpha_{11} + \alpha_{12} - \alpha_{15} = 0$,} & {\small $\beta_7 = -\frac{1}{60} + \frac{1}{4}\alpha_9 - \alpha_{10} + \alpha_{11}$,} \nline
-         & {\small $\frac{1}{60} - \alpha_{11} + 2\alpha_{12} - \alpha_{16} = 0$.} & {\small $\beta_8 = -\frac{1}{120} + \frac{1}{8}\alpha_9 - \frac{1}{2}\alpha_{10} + \alpha_{12}$.} \nline
+        \multirow{7}{*}{5} & \multirow{7}{*}{4} & {\small $\alpha_1 = 1$, $\alpha_2 = \frac{1}{2}$, $\alpha_3 = \frac{1}{3}$, $\alpha_4 = \frac{1}{6}$, $\alpha_5 = \frac{1}{4}$,} & {\small $\beta_1 = 0$, $\beta_2 = 0$,} \nline
+        & & {\small $\alpha_6 = \frac{1}{8}$, $\alpha_7 = \frac{1}{12}$, $\alpha_8 = \frac{1}{24}$, $\alpha_{17} = \frac{1}{120}$,} & {\small $\beta_3 = 0$, $\beta_4 = 0$,} \nline
+        & & {\small $\frac{1}{4}\alpha_9 - \alpha_{10} + \alpha_{13} = 0$,} & {\small $\beta_5 = -\frac{1}{20} + \frac{1}{4}\alpha_9$,} \nline
+        & & {\small $\frac{1}{20} + \frac{1}{2}\alpha_9 - 3\alpha_{10} + 3\alpha_{11} - \alpha_{14} = 0$,} & {\small $\beta_6 = -\frac{1}{40} - \frac{1}{8}\alpha_9 + \frac{1}{2}\alpha_{10}$,} \nline
+        & & {\small $\frac{1}{40} + \frac{1}{2}\alpha_9 - 2\alpha_{10} + \alpha_{11} + \alpha_{12} - \alpha_{15} = 0$,} & {\small $\beta_7 = -\frac{1}{60} + \frac{1}{4}\alpha_9 - \alpha_{10} + \alpha_{11}$,} \nline
+        & & {\small $\frac{1}{60} - \alpha_{11} + 2\alpha_{12} - \alpha_{16} = 0$.} & {\small $\beta_8 = -\frac{1}{120} + \frac{1}{8}\alpha_9 - \frac{1}{2}\alpha_{10} + \alpha_{12}$.} \nline
         \bottomrule
-    \end{tabular}
-    \vspace{2pt}
-	\label{tab:effective_OCs}
+    \end{tabular}}
+    \label{tab:effective_OCs}
 \end{table}
 
 Tables~\ref{tab:effective_OCs_on_alpha} and~\ref{tab:effective_OCs}
@@ -1035,6 +1061,11 @@ assumption is without loss of generality following \cite[Lemma
 starting procedures with $\beta_1 = 0$ for which the main method has 
 effective order $q$, whenever this holds for a starting method with 
 $\beta_1 \neq 0$.
+%the proof of which shows that if a method $M$
+%has effective order $p$ with particular starting and stopping methods
+%(for which $\beta_1 \neq 0$), then $M$ is also effective order $p$
+%with another equivalent pair of starting and stopping methods which do have
+%$\beta_1=0$.
 
 
 \section{Explicit SSP Runge--Kutta methods have effective order at most four}\label{sec:ExRK_barrier}
@@ -1513,10 +1544,10 @@ Figure~\ref{fig:conv_study} on a logarithmic scale.
 \begin{figure}
 	\centering
      \subfloat[ESSPRK($s,3,2$)]{\label{fig:conv_study_a}
-     \includegraphics[width=0.46\textwidth]{pictures/convergence_3_order}}
+     \includegraphics[width=0.46\textwidth]{Pictures/convergence_3_order}}
    \qquad
      \subfloat[ESSPRK($s,4,2$)]{\label{fig:conv_study_b}
-    \includegraphics[width=0.46\textwidth]{pictures/convergence_4_order}}
+    \includegraphics[width=0.46\textwidth]{Pictures/convergence_4_order}}
     \caption{Convergence study for the van der Pol system using $TM^{n-2}R$ 
     Runge--Kutta schemes when (a) $M$
     is an ESSPRK($s,3,2$) method and (b) $ M $ is an ESSPRK($s,4,2$) method.}
@@ -1571,10 +1602,10 @@ numerical solution.
 \begin{figure}
     \centering
     \subfloat[$\sigma = 0.88$]{\label{fig:burgers_cont_a}
-      \includegraphics[width=0.46\textwidth]{pictures/burgers_cont}}
+      \includegraphics[width=0.46\textwidth]{Pictures/burgers_cont}}
     \qquad
     \subfloat[$\sigma = 1.60$]{\label{fig:burgers_cont_b}
-      \includegraphics[width=0.46\textwidth]{pictures/burgers_cont_no_tvd}}
+      \includegraphics[width=0.46\textwidth]{Pictures/burgers_cont_no_tvd}}
     \caption{Solution of Burgers' equation at the final time with continuous initial data, using a
     $TM^{n-2}R$ scheme, where $M$ is the optimal ESSPRK($4,4,2$).
     The time-step used is $\Dt = \sigma{\Dt}_{\text{FE}}$:
@@ -1617,10 +1648,10 @@ oscillations when $\sigma$ is larger than the SSP coefficient.
 \begin{figure}
     \centering
     \subfloat[$\sigma = 1.95$]{\label{fig:burgers_discont_a}
-      \includegraphics[width=0.46\textwidth]{pictures/burgers_discont}}
+      \includegraphics[width=0.46\textwidth]{Pictures/burgers_discont}}
     \qquad
     \subfloat[$\sigma = 2.15$]{\label{fig:burgers_discont_b}
-      \includegraphics[width=0.46\textwidth]{pictures/burgers_discont_no_tvd}}
+      \includegraphics[width=0.46\textwidth]{Pictures/burgers_discont_no_tvd}}
     \caption{Solution of Burgers' equation at the final time with discontinuous initial data, using a
     $TM^{n-2}R$ scheme, where $M$ is ESSPRK($5,4,2$) method.
     The time-step used is $\Dt = \sigma{\Dt}_{\text{FE}}$:
